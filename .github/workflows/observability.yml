@@ -67,6 +67,8 @@ jobs:
           npx playwright test --config playwright-monitoring.config.js
       - name: Sync initial GitOps application
         run: |
+          # Monitoring evidence is captured. Phase out its memory before Argo CD.
+          helm uninstall monitoring -n monitoring --wait --timeout 3m
           kubectl create namespace argocd
           kubectl apply -n argocd --server-side -f https://raw.githubusercontent.com/argoproj/argo-cd/v3.5.5/manifests/install.yaml
           kubectl rollout status deployment/argocd-server -n argocd --timeout=300s
