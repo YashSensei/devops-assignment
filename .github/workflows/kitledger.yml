@@ -14,6 +14,20 @@ jobs:
   quality:
     runs-on: ubuntu-latest
     timeout-minutes: 15
+    services:
+      postgres:
+        image: postgres:17-alpine
+        env:
+          POSTGRES_USER: kitledger
+          POSTGRES_DB: kitledger_test
+          # Disposable loopback-only test DB, never the application database.
+          POSTGRES_HOST_AUTH_METHOD: trust
+        ports: ['127.0.0.1:5432:5432']
+        options: >-
+          --health-cmd "pg_isready -U kitledger -d kitledger_test"
+          --health-interval 3s --health-timeout 3s --health-retries 20
+    env:
+      TEST_POSTGRES_URL: postgresql+psycopg://kitledger@127.0.0.1:5432/kitledger_test
     steps:
       - uses: actions/checkout@v4
         with: {fetch-depth: 0}
@@ -152,6 +166,7 @@ jobs:
         env:
           APP_URL: http://kitledger.local:3000
           METRICS_URL: http://127.0.0.1:8000/metrics
+          EVIDENCE_DIR: ../../evidence/browser
         run: |
           npm ci
           npx playwright install --with-deps chromium

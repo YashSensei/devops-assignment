@@ -44,7 +44,7 @@ An advisory lock serializes migrations across backend replicas.
 | POST /api/loans/{id}/return | Return once, retaining history |
 | GET /api/summary | Database-backed counts |
 | GET /health | Process liveness |
-| GET /ready | Database connectivity and equipment-schema readiness |
+| GET /ready | Database connectivity and complete equipment/loan-schema readiness |
 | GET /metrics | Request counters/latency with bounded route labels |
 
 ## Local start and stop
@@ -89,10 +89,17 @@ bandit -r app -ll
 pip-audit -r requirements.txt
 ```
 
-There are 23 API tests across health/readiness, equipment, loans, returns and
-summary. Tests create isolated SQLite databases, including migrations/reopen
-persistence checks; they never clear production data. PostgreSQL is separately
-exercised by the real Kubernetes browser workflow.
+API tests cover health/readiness, equipment, loans, returns, summary, stale edits,
+foreign keys, error metrics and migration/reopen persistence. SQLite tests use
+isolated files. CI also runs real concurrent PostgreSQL requests and simultaneous
+migrations in individually owned test schemas, never clearing production data.
+Without TEST_POSTGRES_URL those concurrency tests explicitly skip. PostgreSQL is
+also exercised by the Kubernetes browser workflow. See [review](../REVIEW.md).
+
+Equipment PUT requests must include the version returned by GET. A stale version
+returns 409 instead of overwriting another edit; refresh and reconcile changes.
+Migration 0002 adds the version without deleting existing equipment. Deploy the
+matching frontend/backend together and reload older open browser tabs.
 
 From frontend, after starting the isolated demo:
 
@@ -109,6 +116,8 @@ invalid/duplicate requests, reload persistence, filters, unused-asset deletion
 and mobile layout. It intentionally preserves loan history. Never target a
 production dataset. APP_URL selects the demo URL; PLAYWRIGHT_CHANNEL=chrome
 can select an installed Chrome for testing in a fresh isolated context.
+Local screenshots now go to ignored test-results/evidence; only CI sets
+EVIDENCE_DIR to its artifact directory, preserving committed historical captures.
 
 Supplemental local browser evidence used an explicitly selected SQLite file
 after Docker failed. It is not labelled PostgreSQL or Kubernetes evidence.

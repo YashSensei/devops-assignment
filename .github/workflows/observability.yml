@@ -7,7 +7,7 @@ on:
         required: true
         default: 78c9dc0a78584735c8c96be11b79697fc2036075
       verify_gitops:
-        description: Also run the coordinated two-to-three-replica GitOps exercise
+        description: Replay the committed two-to-three-replica GitOps change and self-healing
         type: boolean
         default: true
 permissions:
@@ -19,8 +19,12 @@ jobs:
     timeout-minutes: 40
     env:
       IMAGE_TAG: ${{ inputs.image_tag }}
+      # This repository's authentic two-replica revision, not a moving main ref.
+      INITIAL_GITOPS_REVISION: 8aebd24bfce59815f98598ef6f1ed0e1e96c1613
     steps:
       - uses: actions/checkout@v4
+      - name: Validate immutable application image tag
+        run: '[[ "$IMAGE_TAG" =~ ^[0-9a-f]{40}$ ]]'
       - uses: docker/login-action@v3
         with:
           registry: ghcr.io
@@ -78,6 +82,7 @@ jobs:
           kubectl apply -n argocd --server-side -f https://raw.githubusercontent.com/argoproj/argo-cd/v3.5.5/manifests/install.yaml
           kubectl rollout status deployment/argocd-server -n argocd --timeout=300s
           kubectl apply -f submissions/20-monitoring-gitops/application.yaml
+          kubectl patch application coursework-gitops -n argocd --type merge -p "{\"spec\":{\"source\":{\"targetRevision\":\"$INITIAL_GITOPS_REVISION\"}}}"
           for i in $(seq 1 60); do
             ready="$(kubectl get deployment lending-info -n coursework-gitops -o jsonpath='{.status.readyReplicas}' 2>/dev/null || true)"
             [ "$ready" != 2 ] || break
@@ -85,16 +90,20 @@ jobs:
           done
           test "$ready" = 2
           kubectl get applications -n argocd -o wide | tee evidence/observability/argocd-initial.txt
-      - name: Wait for the committed replica change and verify self-healing
+      - name: Replay the committed replica change and verify self-healing
         if: inputs.verify_gitops
         run: |
+          kubectl patch application coursework-gitops -n argocd --type merge -p "{\"spec\":{\"source\":{\"targetRevision\":\"$GITHUB_SHA\"}}}"
+          kubectl annotate application coursework-gitops -n argocd argocd.argoproj.io/refresh=hard --overwrite
           for i in $(seq 1 96); do
             desired="$(kubectl get deployment lending-info -n coursework-gitops -o jsonpath='{.spec.replicas}')"
-            [ "$desired" != 3 ] || break
+            revision="$(kubectl get application coursework-gitops -n argocd -o jsonpath='{.status.sync.revision}')"
+            if [ "$desired" = 3 ] && [ "$revision" = "$GITHUB_SHA" ]; then break; fi
             sleep 5
           done
           test "$desired" = 3
           kubectl rollout status deployment/lending-info -n coursework-gitops --timeout=120s
+          test "$(kubectl get application coursework-gitops -n argocd -o jsonpath='{.status.sync.revision}')" = "$GITHUB_SHA"
           kubectl get applications -n argocd -o yaml > evidence/observability/argocd-git-change.yaml
           kubectl scale deployment lending-info -n coursework-gitops --replicas=1
           kubectl get deployment lending-info -n coursework-gitops | tee evidence/observability/drift-before.txt

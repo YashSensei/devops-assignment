@@ -13,14 +13,18 @@ class EquipmentInput(BaseModel):
     notes: str = Field(default="", max_length=500)
 
 
-class EquipmentOutput(EquipmentInput):
+class EquipmentUpdate(EquipmentInput):
+    version: int = Field(gt=0)
+
+
+class EquipmentOutput(EquipmentUpdate):
     id: int
     available: bool
 
 
 class LoanInput(BaseModel):
     model_config = ConfigDict(str_strip_whitespace=True, extra="forbid")
-    equipment_id: int = Field(gt=0)
+    equipment_id: int = Field(gt=0, le=2_147_483_647)
     borrower: str = Field(min_length=2, max_length=100)
     purpose: str = Field(min_length=3, max_length=200)
     due_on: date

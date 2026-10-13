@@ -1,9 +1,9 @@
 import os
 import time
 from datetime import date, timedelta
-from typing import Literal
+from typing import Annotated, Literal
 
-from fastapi import FastAPI, HTTPException, Query
+from fastapi import FastAPI, HTTPException, Path, Query
 from prometheus_client import (
     CONTENT_TYPE_LATEST,
     CollectorRegistry,
@@ -13,11 +13,21 @@ from prometheus_client import (
 )
 from sqlalchemy import func, select, text
 from sqlalchemy.exc import IntegrityError, SQLAlchemyError
+from sqlalchemy.orm.exc import StaleDataError
 from starlette.responses import Response
 
 from .db import database
 from .models import Equipment, Loan
-from .schemas import EquipmentInput, EquipmentOutput, LoanInput, LoanOutput, ReturnInput
+from .schemas import (
+    EquipmentInput,
+    EquipmentOutput,
+    EquipmentUpdate,
+    LoanInput,
+    LoanOutput,
+    ReturnInput,
+)
+
+RecordID = Annotated[int, Path(gt=0, le=2_147_483_647)]
 
 
 def create_app(database_url=None):
@@ -45,12 +55,30 @@ def create_app(database_url=None):
     @api.middleware("http")
     async def observe(request, call_next):
         started = time.perf_counter()
-        response = await call_next(request)
-        route = getattr(request.scope.get("route"), "path", "unmatched")
-        if route != "/metrics":
-            requests.labels(request.method, route, str(response.status_code)).inc()
-            duration.labels(route).observe(time.perf_counter() - started)
-        return response
+        status = 500
+        try:
+            response = await call_next(request)
+            status = response.status_code
+            return response
+        finally:
+            route = getattr(request.scope.get("route"), "path", "unmatched")
+            if route != "/metrics":
+                method = (
+                    request.method
+                    if request.method
+                    in {
+                        "GET",
+                        "POST",
+                        "PUT",
+                        "DELETE",
+                        "PATCH",
+                        "HEAD",
+                        "OPTIONS",
+                    }
+                    else "OTHER"
+                )
+                requests.labels(method, route, str(status)).inc()
+                duration.labels(route).observe(time.perf_counter() - started)
 
     def asset_or_404(db, asset_id, lock=False):
         statement = select(Equipment).where(Equipment.id == asset_id)
@@ -63,12 +91,17 @@ def create_app(database_url=None):
 
     def active_loan(db, asset_id):
         return db.scalar(
-            select(Loan.id).where(
-                Loan.equipment_id == asset_id, Loan.returned_on.is_(None)
-            )
+            select(Loan.id).where(Loan.equipment_id == asset_id, Loan.returned_on.is_(None))
         )
 
-    def equipment_json(db, asset):
+    loan_exists = (
+        select(Loan.id)
+        .where(Loan.equipment_id == Equipment.id, Loan.returned_on.is_(None))
+        .exists()
+    )
+    is_available = (Equipment.condition == "ready") & ~loan_exists
+
+    def equipment_json(db, asset, available=None):
         return {
             "id": asset.id,
             "asset_tag": asset.asset_tag,
@@ -76,12 +109,15 @@ def create_app(database_url=None):
             "category": asset.category,
             "condition": asset.condition,
             "notes": asset.notes,
-            "available": asset.condition == "ready"
-            and active_loan(db, asset.id) is None,
+            "version": asset.version,
+            "available": available
+            if available is not None
+            else (asset.condition == "ready" and active_loan(db, asset.id) is None),
         }
 
-    def loan_json(db, loan):
-        asset = asset_or_404(db, loan.equipment_id)
+    def loan_json(db, loan, asset=None):
+        if asset is None:
+            asset = asset_or_404(db, loan.equipment_id)
         status = (
             "returned"
             if loan.returned_on
@@ -100,14 +136,19 @@ def create_app(database_url=None):
             "status": status,
         }
 
-    def commit(db):
+    def commit(db, serialize=lambda: None):
         try:
+            db.flush()
+            # Build the response while locks still protect this transaction's state.
+            result = serialize()
             db.commit()
+            return result
+        except StaleDataError as exc:
+            db.rollback()
+            raise HTTPException(409, "Equipment changed; refresh before retrying") from exc
         except IntegrityError as exc:
             db.rollback()
-            raise HTTPException(
-                409, "Duplicate asset tag or conflicting active loan"
-            ) from exc
+            raise HTTPException(409, "Duplicate asset tag or conflicting active loan") from exc
 
     @api.get("/health")
     def health():
@@ -118,7 +159,8 @@ def create_app(database_url=None):
         try:
             with sessions() as db:
                 db.execute(text("SELECT 1"))
-                db.execute(select(Equipment.id).limit(1))
+                db.execute(select(Equipment).limit(1))
+                db.execute(select(Loan).limit(1))
         except SQLAlchemyError as exc:
             raise HTTPException(503, "Database or schema is unavailable") from exc
         return {"status": "ready"}
@@ -135,7 +177,7 @@ def create_app(database_url=None):
         available: bool | None = None,
     ):
         with sessions() as db:
-            statement = select(Equipment).order_by(Equipment.asset_tag)
+            statement = select(Equipment, is_available).order_by(Equipment.asset_tag)
             if q:
                 statement = statement.where(
                     Equipment.name.icontains(q, autoescape=True)
@@ -145,15 +187,12 @@ def create_app(database_url=None):
                 statement = statement.where(Equipment.category == category)
             if condition:
                 statement = statement.where(Equipment.condition == condition)
-            items = [equipment_json(db, item) for item in db.scalars(statement)]
-            return (
-                items
-                if available is None
-                else [item for item in items if item["available"] == available]
-            )
+            if available is not None:
+                statement = statement.where(is_available == available)
+            return [equipment_json(db, item, ready) for item, ready in db.execute(statement)]
 
     @api.get("/api/equipment/{asset_id}", response_model=EquipmentOutput)
-    def get_equipment(asset_id: int):
+    def get_equipment(asset_id: RecordID):
         with sessions() as db:
             return equipment_json(db, asset_or_404(db, asset_id))
 
@@ -162,30 +201,26 @@ def create_app(database_url=None):
         with sessions() as db:
             asset = Equipment(**payload.model_dump())
             db.add(asset)
-            commit(db)
-            return equipment_json(db, asset)
+            return commit(db, lambda: equipment_json(db, asset))
 
     @api.put("/api/equipment/{asset_id}", response_model=EquipmentOutput)
-    def update_equipment(asset_id: int, payload: EquipmentInput):
+    def update_equipment(asset_id: RecordID, payload: EquipmentUpdate):
         with sessions() as db:
             asset = asset_or_404(db, asset_id, lock=True)
+            if asset.version != payload.version:
+                raise HTTPException(409, "Equipment changed; refresh before retrying")
             if payload.condition != "ready" and active_loan(db, asset_id) is not None:
-                raise HTTPException(
-                    409, "Return the active loan before maintenance or retirement"
-                )
-            for key, value in payload.model_dump().items():
+                raise HTTPException(409, "Return the active loan before maintenance or retirement")
+            for key, value in payload.model_dump(exclude={"version"}).items():
                 setattr(asset, key, value)
-            commit(db)
-            return equipment_json(db, asset)
+            return commit(db, lambda: equipment_json(db, asset))
 
     @api.delete("/api/equipment/{asset_id}", status_code=204)
-    def delete_equipment(asset_id: int):
+    def delete_equipment(asset_id: RecordID):
         with sessions() as db:
             asset = asset_or_404(db, asset_id, lock=True)
             if db.scalar(select(Loan.id).where(Loan.equipment_id == asset_id).limit(1)):
-                raise HTTPException(
-                    409, "Equipment with loan history must be retired, not deleted"
-                )
+                raise HTTPException(409, "Equipment with loan history must be retired, not deleted")
             db.delete(asset)
             commit(db)
         return Response(status_code=204)
@@ -193,23 +228,23 @@ def create_app(database_url=None):
     @api.get("/api/loans", response_model=list[LoanOutput])
     def list_loans(status: Literal["active", "overdue", "returned"] | None = None):
         with sessions() as db:
-            items = [
-                loan_json(db, item)
-                for item in db.scalars(select(Loan).order_by(Loan.id.desc()))
-            ]
-            return (
-                items
-                if status is None
-                else [item for item in items if item["status"] == status]
-            )
+            statement = select(Loan, Equipment).join(Equipment).order_by(Loan.id.desc())
+            if status == "returned":
+                statement = statement.where(Loan.returned_on.is_not(None))
+            elif status is not None:
+                statement = statement.where(Loan.returned_on.is_(None))
+                statement = statement.where(
+                    Loan.due_on < date.today()
+                    if status == "overdue"
+                    else Loan.due_on >= date.today()
+                )
+            return [loan_json(db, loan, asset) for loan, asset in db.execute(statement)]
 
     @api.post("/api/loans", response_model=LoanOutput, status_code=201)
     def checkout(payload: LoanInput):
         today = date.today()
         if not today <= payload.due_on <= today + timedelta(days=30):
-            raise HTTPException(
-                422, "Due date must be today through 30 days from today"
-            )
+            raise HTTPException(422, "Due date must be today through 30 days from today")
         with sessions() as db:
             asset = asset_or_404(db, payload.equipment_id, lock=True)
             if asset.condition != "ready":
@@ -218,11 +253,11 @@ def create_app(database_url=None):
                 raise HTTPException(409, "Equipment is already checked out")
             loan = Loan(**payload.model_dump(), checked_out_on=today)
             db.add(loan)
-            commit(db)
-            return loan_json(db, loan)
+            asset.version += 1
+            return commit(db, lambda: loan_json(db, loan, asset))
 
     @api.post("/api/loans/{loan_id}/return", response_model=LoanOutput)
-    def return_equipment(loan_id: int, payload: ReturnInput):
+    def return_equipment(loan_id: RecordID, payload: ReturnInput):
         with sessions() as db:
             loan = db.scalar(select(Loan).where(Loan.id == loan_id).with_for_update())
             if loan is None:
@@ -232,31 +267,26 @@ def create_app(database_url=None):
             asset = asset_or_404(db, loan.equipment_id, lock=True)
             loan.returned_on = date.today()
             asset.condition = payload.condition
-            commit(db)
-            return loan_json(db, loan)
+            asset.version += 1
+            return commit(db, lambda: loan_json(db, loan, asset))
 
     @api.get("/api/summary")
     def summary():
         with sessions() as db:
-            assets = [
-                equipment_json(db, item) for item in db.scalars(select(Equipment))
-            ]
-            return {
-                "total": len(assets),
-                "available": sum(item["available"] for item in assets),
-                "maintenance": sum(
-                    item["condition"] == "maintenance" for item in assets
+
+            def count(model, *conditions):
+                return select(func.count()).select_from(model).where(*conditions).scalar_subquery()
+
+            # All counters observe a single SQL statement snapshot, even during returns.
+            statement = select(
+                count(Equipment).label("total"),
+                count(Equipment, is_available).label("available"),
+                count(Equipment, Equipment.condition == "maintenance").label("maintenance"),
+                count(Loan, Loan.returned_on.is_(None)).label("on_loan"),
+                count(Loan, Loan.returned_on.is_(None), Loan.due_on < date.today()).label(
+                    "overdue"
                 ),
-                "on_loan": db.scalar(
-                    select(func.count())
-                    .select_from(Loan)
-                    .where(Loan.returned_on.is_(None))
-                ),
-                "overdue": db.scalar(
-                    select(func.count())
-                    .select_from(Loan)
-                    .where(Loan.returned_on.is_(None), Loan.due_on < date.today())
-                ),
-            }
+            )
+            return dict(db.execute(statement).mappings().one())
 
     return api

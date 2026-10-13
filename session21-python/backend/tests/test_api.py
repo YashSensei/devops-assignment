@@ -68,9 +68,7 @@ def test_invalid_equipment(client, field, value):
 
 
 def test_update_and_delete_unused_equipment(client, asset):
-    payload = {
-        key: value for key, value in asset.items() if key not in ("id", "available")
-    }
+    payload = {key: value for key, value in asset.items() if key not in ("id", "available")}
     payload["name"] = "Camera with lens"
     url = f"/api/equipment/{asset['id']}"
     assert client.put(url, json=payload).json()["name"] == "Camera with lens"
@@ -86,30 +84,23 @@ def test_checkout_and_double_booking(client, asset):
 
 @pytest.mark.parametrize("days", [-1, 31])
 def test_loan_date_window(client, asset, days):
-    assert (
-        borrow(
-            client, asset, due_on=str(date.today() + timedelta(days=days))
-        ).status_code
-        == 422
-    )
+    assert borrow(client, asset, due_on=str(date.today() + timedelta(days=days))).status_code == 422
 
 
 def test_cannot_loan_maintenance_or_retired(client, asset):
-    payload = {
-        key: value for key, value in asset.items() if key not in ("id", "available")
-    }
+    payload = {key: value for key, value in asset.items() if key not in ("id", "available")}
     for condition in ("maintenance", "retired"):
-        client.put(
+        response = client.put(
             f"/api/equipment/{asset['id']}", json=payload | {"condition": condition}
         )
+        assert response.status_code == 200
+        payload["version"] = response.json()["version"]
         assert borrow(client, asset).status_code == 409
 
 
 def test_cannot_change_condition_during_loan(client, asset):
     borrow(client, asset)
-    payload = {
-        key: value for key, value in asset.items() if key not in ("id", "available")
-    }
+    payload = {key: value for key, value in asset.items() if key not in ("id", "available")}
     assert (
         client.put(
             f"/api/equipment/{asset['id']}", json=payload | {"condition": "maintenance"}
@@ -156,10 +147,7 @@ def test_overdue_is_derived_from_actual_dates(client, asset):
 
 
 def test_filters_and_summary(client, asset):
-    assert (
-        len(client.get("/api/equipment?q=studio&category=Camera&available=true").json())
-        == 1
-    )
+    assert len(client.get("/api/equipment?q=studio&category=Camera&available=true").json()) == 1
     assert client.get("/api/equipment?q=unknown").json() == []
     borrow(client, asset)
     assert client.get("/api/equipment?available=true").json() == []
@@ -189,9 +177,7 @@ def test_saved_state_survives_new_app_instance(client, asset):
     engine = client.app.state.engine
     app = create_app(str(engine.url))
     with TestClient(app) as fresh:
-        assert (
-            fresh.get(f"/api/equipment/{asset['id']}").json()["name"] == "Studio camera"
-        )
+        assert fresh.get(f"/api/equipment/{asset['id']}").json()["name"] == "Studio camera"
     app.state.engine.dispose()
 
 

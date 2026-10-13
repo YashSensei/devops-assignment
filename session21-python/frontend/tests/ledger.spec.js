@@ -1,4 +1,8 @@
 import {test,expect} from '@playwright/test';
+import {join} from 'node:path';
+
+// Local reruns must never overwrite committed historical evidence.
+const capture = name => join(process.env.EVIDENCE_DIR || 'test-results/evidence', name);
 
 test('equipment lifecycle, loan rules, persistence, filters, and mobile layout',async({page})=>{
   const tag='E2E-'+Date.now();
@@ -28,7 +32,7 @@ test('equipment lifecycle, loan rules, persistence, filters, and mobile layout',
   await page.getByRole('button',{name:/Loan register/}).click();
   await page.getByRole('searchbox').fill(tag);
   await expect(page.getByText('Sound recording workshop',{exact:true})).toBeVisible();
-  await page.screenshot({path:'../../evidence/browser/desktop-loan.png',fullPage:true});
+  await page.screenshot({path:capture('desktop-loan.png'),fullPage:true});
   await page.getByRole('button',{name:'Record return ↙',exact:true}).click();
   await page.getByLabel('Returned condition').selectOption('maintenance');
   await page.getByRole('button',{name:'Save return',exact:true}).click();
@@ -46,7 +50,7 @@ test('equipment lifecycle, loan rules, persistence, filters, and mobile layout',
   await page.setViewportSize({width:390,height:844});
   await page.reload();
   await expect(page.getByRole('button',{name:'＋ Add equipment',exact:true})).toBeVisible();
-  await page.screenshot({path:'../../evidence/browser/mobile-library.png',fullPage:true});
+  await page.screenshot({path:capture('mobile-library.png'),fullPage:true});
   const bounds=await page.evaluate(()=>({scroll:document.documentElement.scrollWidth,viewport:innerWidth}));
   expect(bounds.scroll).toBeLessThanOrEqual(bounds.viewport);
   await page.getByRole('button',{name:'＋ Add equipment',exact:true}).click();
@@ -64,6 +68,6 @@ test('equipment lifecycle, loan rules, persistence, filters, and mobile layout',
     const metrics=await page.context().newPage();
     await metrics.goto(process.env.METRICS_URL);
     await expect(metrics.locator('body')).toContainText('kitledger_http_requests_total');
-    await metrics.screenshot({path:'../../evidence/browser/metrics.png',fullPage:true});
+    await metrics.screenshot({path:capture('metrics.png'),fullPage:true});
   }
 });

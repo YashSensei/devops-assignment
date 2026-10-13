@@ -3,7 +3,7 @@ on:
   workflow_dispatch:
   push:
     branches: [main]
-    paths: ['session2-linux/**', 'session3-shell-scripting/**', 'session4-networking/**', 'session5-git-github/**', 'session6-7-docker/**', '.github/workflows/foundations.yml']
+    paths: ['session2-linux/**', 'session3-shell-scripting/**', 'session4-networking/**', 'session5-git-github/**', 'session6-7-docker/**', 'session8-docker-networking-volume/**', '.github/workflows/foundations.yml']
 permissions:
   contents: read
 jobs:
