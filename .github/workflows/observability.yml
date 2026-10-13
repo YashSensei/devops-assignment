@@ -5,7 +5,7 @@ on:
       image_tag:
         description: Full commit SHA from a green KitLedger image pipeline
         required: true
-        default: 316fb8c
+        default: 78c9dc0a78584735c8c96be11b79697fc2036075
 permissions:
   contents: read
   packages: read
@@ -98,6 +98,14 @@ jobs:
           test "$desired" = 3
           kubectl rollout status deployment/lending-info -n coursework-gitops --timeout=120s
           kubectl get deployment lending-info -n coursework-gitops | tee evidence/observability/drift-healed.txt
+      - name: Preserve monitoring diagnostics
+        if: always()
+        run: |
+          mkdir -p evidence/observability
+          kubectl get pods -A -o wide > evidence/observability/pods.txt 2>&1 || true
+          kubectl get events -A --sort-by=.lastTimestamp > evidence/observability/events.txt 2>&1 || true
+          kubectl describe pods -n monitoring > evidence/observability/monitoring-describe.txt 2>&1 || true
+          kubectl logs -n monitoring -l app.kubernetes.io/name=grafana --all-containers --prefix --tail=150 > evidence/observability/grafana.log 2>&1 || true
       - uses: actions/upload-artifact@v4
         if: always()
         with:
