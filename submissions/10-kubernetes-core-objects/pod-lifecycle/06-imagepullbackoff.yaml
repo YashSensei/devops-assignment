@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: lifecycle-06-imagepullbackoff
+  labels: {exercise: lifecycle}
+spec:
+  restartPolicy: Always
+  containers:
+    - name: app
+      image: nginx:kitledger-missing-tag

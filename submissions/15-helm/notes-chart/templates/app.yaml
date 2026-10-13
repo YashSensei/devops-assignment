@@ -1,0 +1,30 @@
+apiVersion: v1
+kind: ConfigMap
+metadata: {name: "{{ .Release.Name }}-config"}
+data:
+  ENVIRONMENT: {{ .Values.environment | quote }}
+  APP_NAME: Notes
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata: {name: "{{ .Release.Name }}"}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector: {matchLabels: {app: "{{ .Release.Name }}"}}
+  template:
+    metadata: {labels: {app: "{{ .Release.Name }}"}}
+    spec:
+      containers:
+        - name: notes
+          image: {{ .Values.image }}
+          envFrom:
+            - configMapRef: {name: "{{ .Release.Name }}-config"}
+          ports: [{containerPort: 80}]
+---
+apiVersion: v1
+kind: Service
+metadata: {name: "{{ .Release.Name }}"}
+spec:
+  type: NodePort
+  selector: {app: "{{ .Release.Name }}"}
+  ports: [{port: 80, targetPort: 80, nodePort: 30090}]

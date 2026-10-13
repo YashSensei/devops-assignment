@@ -1,0 +1,33 @@
+apiVersion: v1
+kind: ConfigMap
+metadata: {name: coursework-config}
+data: {ENVIRONMENT: development, MAX_BOOKING_DAYS: "30"}
+---
+apiVersion: v1
+kind: Pod
+metadata: {name: config-reader}
+spec:
+  containers:
+    - name: reader
+      image: alpine:3.22
+      command: [sh, -c, "sleep 3600"]
+      envFrom:
+        - configMapRef: {name: coursework-config}
+      env:
+        - name: DEMO_SECRET
+          valueFrom:
+            secretKeyRef: {name: coursework-secret, key: password}
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata: {name: coursework}
+spec:
+  ingressClassName: nginx
+  rules:
+    - host: coursework.local
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service: {name: web, port: {number: 80}}

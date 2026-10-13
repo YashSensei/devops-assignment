@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: lifecycle-05-crashloopbackoff
+  labels: {exercise: lifecycle}
+spec:
+  restartPolicy: Always
+  containers:
+    - name: app
+      image: alpine:3.22
+      command: ["sh","-c","exit 1"]

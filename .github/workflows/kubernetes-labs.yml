@@ -1,0 +1,43 @@
+name: Kubernetes coursework labs
+on:
+  workflow_dispatch:
+permissions: {contents: read}
+jobs:
+  minikube-labs:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up disposable Linux Minikube
+        run: |
+          curl -fsSL https://github.com/kubernetes/minikube/releases/download/v1.39.0/minikube-linux-amd64 -o minikube
+          sudo install minikube /usr/local/bin/minikube
+          curl -fsSL https://get.helm.sh/helm-v4.3.0-linux-amd64.tar.gz | tar xz
+          sudo install linux-amd64/helm /usr/local/bin/helm
+          minikube start -p coursework --driver=docker --memory=4096 --cpus=2
+          minikube -p coursework addons enable ingress
+          minikube -p coursework addons enable metrics-server
+          minikube status -p coursework
+          kubectl get nodes -o wide
+          kubectl create namespace coursework
+      - name: Execute and retain each session independently
+        run: |
+          mkdir -p evidence/kubernetes
+          failed=0
+          for lab in 10-kubernetes-core-objects 11-kubernetes-services 12-kubernetes-config-ingress 13-storage-hpa-probes 14-troubleshooting 15-helm; do
+            set +e
+            bash "submissions/$lab/verify.sh" > "evidence/kubernetes/$lab.log" 2>&1
+            code=$?
+            set -e
+            echo "$lab exit=$code" | tee -a evidence/kubernetes/results.txt
+            if [ "$code" != 0 ]; then failed=1; fi
+          done
+          exit "$failed"
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: kubernetes-coursework-evidence
+          path: evidence/kubernetes
+      - name: Remove disposable cluster
+        if: always()
+        run: minikube delete -p coursework

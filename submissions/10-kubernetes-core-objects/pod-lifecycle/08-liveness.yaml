@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: lifecycle-08-liveness
+  labels: {exercise: lifecycle}
+spec:
+  restartPolicy: Always
+  containers:
+    - name: app
+      image: nginx:stable-alpine
+      livenessProbe:
+        httpGet: {path: /, port: 80}
+        periodSeconds: 3
