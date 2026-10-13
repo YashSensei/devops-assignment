@@ -1,0 +1,21 @@
+title = "KitLedger defaults with narrowly scoped Kubernetes checksum exceptions"
+
+[extend]
+useDefault = true
+
+[[rules]]
+id = "generic-api-key"
+
+[[rules.allowlists]]
+description = "Prometheus discovery metadata contains a SHA-256 Secret checksum, not its contents"
+condition = "AND"
+regexTarget = "match"
+paths = ['''^evidence/ci/(monitoring|gitops)-[0-9]+/evidence/observability/(browser-verified-)?targets\.json$''']
+regexes = ['''^__meta_kubernetes_pod_annotation_checksum_secret["\\]*:\s*["\\]*[0-9a-f]{64}["\\]*$''']
+
+[[rules.allowlists]]
+description = "An exact kubectl describe annotation line containing only a SHA-256 checksum"
+condition = "AND"
+regexTarget = "line"
+paths = ['''^evidence/ci/monitoring-[0-9]+/evidence/observability/monitoring-describe\.txt$''']
+regexes = ['''^\s*checksum/secret:\s+[0-9a-f]{64}\s*$''']

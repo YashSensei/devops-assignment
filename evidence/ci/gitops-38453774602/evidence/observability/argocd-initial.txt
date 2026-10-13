@@ -1,0 +1,2 @@
+NAME                SYNC STATUS   HEALTH STATUS   REVISION                                   PROJECT
+coursework-gitops   Synced        Healthy         8aebd24bfce59815f98598ef6f1ed0e1e96c1613   default

@@ -1,0 +1,19 @@
+NAMESPACE     NAME                                                   READY   STATUS    RESTARTS        AGE     IP             NODE            NOMINATED NODE   READINESS GATES
+kitledger     backend-5555cfbcd9-gdq9b                               1/1     Running   2 (2m59s ago)   3m4s    10.244.0.3     observability   <none>           <none>
+kitledger     backend-5555cfbcd9-jw8d2                               1/1     Running   2 (2m59s ago)   3m4s    10.244.0.5     observability   <none>           <none>
+kitledger     frontend-6b44ff566b-4mjs8                              1/1     Running   0               3m4s    10.244.0.6     observability   <none>           <none>
+kitledger     frontend-6b44ff566b-gnkjq                              1/1     Running   0               3m4s    10.244.0.4     observability   <none>           <none>
+kitledger     postgres-0                                             1/1     Running   0               3m4s    10.244.0.7     observability   <none>           <none>
+kube-system   coredns-559f6c778d-f5qrp                               1/1     Running   0               3m19s   10.244.0.2     observability   <none>           <none>
+kube-system   etcd-observability                                     1/1     Running   0               3m25s   192.168.49.2   observability   <none>           <none>
+kube-system   kindnet-c8sv8                                          1/1     Running   0               3m19s   192.168.49.2   observability   <none>           <none>
+kube-system   kube-apiserver-observability                           1/1     Running   0               3m25s   192.168.49.2   observability   <none>           <none>
+kube-system   kube-controller-manager-observability                  1/1     Running   0               3m25s   192.168.49.2   observability   <none>           <none>
+kube-system   kube-proxy-4ktzw                                       1/1     Running   0               3m19s   192.168.49.2   observability   <none>           <none>
+kube-system   kube-scheduler-observability                           1/1     Running   0               3m25s   192.168.49.2   observability   <none>           <none>
+kube-system   storage-provisioner                                    1/1     Running   0               3m24s   192.168.49.2   observability   <none>           <none>
+monitoring    monitoring-grafana-696b6d448c-wjhxx                    3/3     Running   0               2m30s   10.244.0.11    observability   <none>           <none>
+monitoring    monitoring-kube-prometheus-operator-6458848b98-fs9ns   1/1     Running   0               2m30s   10.244.0.10    observability   <none>           <none>
+monitoring    monitoring-kube-state-metrics-78fd56fc4b-jcqpk         1/1     Running   0               2m30s   10.244.0.9     observability   <none>           <none>
+monitoring    monitoring-prometheus-node-exporter-694dn              1/1     Running   0               2m30s   192.168.49.2   observability   <none>           <none>
+monitoring    prometheus-monitoring-kube-prometheus-prometheus-0     2/2     Running   0               2m26s   10.244.0.12    observability   <none>           <none>

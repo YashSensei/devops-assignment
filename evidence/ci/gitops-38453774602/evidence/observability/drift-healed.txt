@@ -1,0 +1,2 @@
+NAME           READY   UP-TO-DATE   AVAILABLE   AGE
+lending-info   3/3     3            3           6m2s

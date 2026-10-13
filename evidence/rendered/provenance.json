@@ -1,0 +1,34 @@
+[
+  {
+    "name": "pytest",
+    "source": "evidence/runs/20261013T181937583957Z-pytest.json",
+    "source_sha256": "8d0d5ec43fdb99e2e4124dd8e3c3a0cc1449297861856cbbd48cfb751b43f2e5",
+    "hash_format": "LF-normalized UTF-8 source",
+    "rendered_at": "2026-10-13T19:35:49.878Z",
+    "kind": "rendered historical transcript, not native capture"
+  },
+  {
+    "name": "trivy-backend",
+    "source": "evidence/runs/20261013T190529979724Z-capstone-ci-38450469520.json",
+    "source_sha256": "bfa1dfe0f44dcd1252f0184ac0d524cd1a78faf884c10439cb23ccd8ebda2ed3",
+    "hash_format": "LF-normalized UTF-8 source",
+    "rendered_at": "2026-10-13T19:35:50.151Z",
+    "kind": "rendered historical transcript, not native capture"
+  },
+  {
+    "name": "trivy-frontend",
+    "source": "evidence/runs/20261013T190529979724Z-capstone-ci-38450469520.json",
+    "source_sha256": "bfa1dfe0f44dcd1252f0184ac0d524cd1a78faf884c10439cb23ccd8ebda2ed3",
+    "hash_format": "LF-normalized UTF-8 source",
+    "rendered_at": "2026-10-13T19:35:50.369Z",
+    "kind": "rendered historical transcript, not native capture"
+  },
+  {
+    "name": "kubernetes",
+    "source": "evidence/ci/capstone-38450469520/evidence/ci/kubernetes.txt",
+    "source_sha256": "fd0f64062d0e73ea4e9ed7f2fa29e21bf479407405d18c837f14cbf611631ead",
+    "hash_format": "LF-normalized UTF-8 source",
+    "rendered_at": "2026-10-13T19:35:50.575Z",
+    "kind": "rendered historical transcript, not native capture"
+  }
+]

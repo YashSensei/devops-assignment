@@ -37,6 +37,8 @@ architecture, tests, Kubernetes, troubleshooting and scoped cleanup.
   mobile workflow. Supplemental local SQLite evidence is labelled separately.
 - Linux/systemd, networking and Git exercises on disposable Linux runners; six
   Hello World images, the multi-stage image, and Docker network/volume lab.
+- Real Prometheus scraping, populated Grafana, Git-driven replica change and Argo
+  self-healing in disposable clusters, followed by verified teardown.
 - Terraform init/fmt/validate for three projects, not AWS deployments.
 
 The [evidence index](evidence/README.md) identifies exact runs and remaining gaps.
@@ -65,6 +67,6 @@ Secrets, databases, Terraform state/plans and caches are excluded from Git.
 Security gates remain enabled; clean scans are not proof of perfect security.
 
 CI clusters are temporary and cleaned up; there is no permanent hosted website.
-GHCR publication is verified, but anonymous visibility/instructor pull access
-still needs checking. The [presentation outline](session21-python/PRESENTATION.md)
+GHCR publication and anonymous registry access are verified; public package
+screenshots show full SHA tags. The [presentation outline](session21-python/PRESENTATION.md)
 and automated recordings do not represent a student-delivered presentation.

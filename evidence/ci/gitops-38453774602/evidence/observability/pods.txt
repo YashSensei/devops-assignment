@@ -1,0 +1,24 @@
+NAMESPACE           NAME                                                READY   STATUS    RESTARTS        AGE     IP             NODE            NOMINATED NODE   READINESS GATES
+argocd              argocd-application-controller-0                     1/1     Running   0               6m43s   10.244.0.18    observability   <none>           <none>
+argocd              argocd-applicationset-controller-66d7f7865d-jgqgv   1/1     Running   0               6m43s   10.244.0.14    observability   <none>           <none>
+argocd              argocd-dex-server-6d8ddc4748-5qkk5                  1/1     Running   0               6m43s   10.244.0.19    observability   <none>           <none>
+argocd              argocd-notifications-controller-6bdf867f45-lvv7s    1/1     Running   0               6m43s   10.244.0.20    observability   <none>           <none>
+argocd              argocd-redis-5fbd54c8cc-vqmrq                       1/1     Running   0               6m43s   10.244.0.15    observability   <none>           <none>
+argocd              argocd-repo-server-66875c66b4-rvg6b                 1/1     Running   0               6m43s   10.244.0.16    observability   <none>           <none>
+argocd              argocd-server-7f85776b5c-b7h6v                      1/1     Running   0               6m43s   10.244.0.17    observability   <none>           <none>
+coursework-gitops   lending-info-6d7765845-462z7                        1/1     Running   0               6m2s    10.244.0.22    observability   <none>           <none>
+coursework-gitops   lending-info-6d7765845-hp2tl                        1/1     Running   0               5s      10.244.0.24    observability   <none>           <none>
+coursework-gitops   lending-info-6d7765845-sfcxk                        1/1     Running   0               5s      10.244.0.25    observability   <none>           <none>
+kitledger           backend-5555cfbcd9-8dxvr                            1/1     Running   2 (9m16s ago)   9m23s   10.244.0.4     observability   <none>           <none>
+kitledger           backend-5555cfbcd9-vtrvm                            1/1     Running   2 (9m16s ago)   9m23s   10.244.0.6     observability   <none>           <none>
+kitledger           frontend-6b44ff566b-44cdt                           1/1     Running   0               9m23s   10.244.0.5     observability   <none>           <none>
+kitledger           frontend-6b44ff566b-fn5hz                           1/1     Running   0               9m23s   10.244.0.3     observability   <none>           <none>
+kitledger           postgres-0                                          1/1     Running   0               9m23s   10.244.0.7     observability   <none>           <none>
+kube-system         coredns-559f6c778d-jz7n2                            1/1     Running   0               9m45s   10.244.0.2     observability   <none>           <none>
+kube-system         etcd-observability                                  1/1     Running   0               9m51s   192.168.49.2   observability   <none>           <none>
+kube-system         kindnet-wr5xs                                       1/1     Running   0               9m45s   192.168.49.2   observability   <none>           <none>
+kube-system         kube-apiserver-observability                        1/1     Running   0               9m51s   192.168.49.2   observability   <none>           <none>
+kube-system         kube-controller-manager-observability               1/1     Running   0               9m51s   192.168.49.2   observability   <none>           <none>
+kube-system         kube-proxy-shhtm                                    1/1     Running   0               9m45s   192.168.49.2   observability   <none>           <none>
+kube-system         kube-scheduler-observability                        1/1     Running   0               9m52s   192.168.49.2   observability   <none>           <none>
+kube-system         storage-provisioner                                 1/1     Running   0               9m50s   192.168.49.2   observability   <none>           <none>

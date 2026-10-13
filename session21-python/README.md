@@ -126,12 +126,14 @@ publication; real Helm deployment/browser tests; artifacts and cluster cleanup.
   Both application containers run non-root.
 - Initial image findings were fixed by changing the backend base and removing
   unused runtime packaging tools. No security gate was disabled.
-- GHCR publication succeeds; anonymous visibility/instructor pull access is
-  unverified. Build from source or arrange package access.
+- GHCR publication and anonymous registry manifests are verified. Public
+  package screenshots in the evidence index show full SHA tags.
 
 Scan output is in linked Actions jobs. Clean scans depend on current advisory
 databases and do not prove absence of design flaws. The application has no user
 authentication, authorization or TLS; restrict its exposure to a controlled lab.
+See [the narrow Kubernetes checksum exception](../SECURITY-SCANS.md) for the
+reviewed Gitleaks false-positive handling; all default rules remain enabled.
 
 ## Kubernetes and Helm
 
@@ -163,8 +165,12 @@ linked in the audit.
 monitoring/ supplies Prometheus/Grafana values and the app dashboard; gitops/
 supplies the capstone Argo Application. The separate Session 20 workload
 demonstrates Git-driven replicas/drift repair without competing with CI's Helm
-owner. Actual monitoring/GitOps results are in the evidence index; configuration
-alone is not proof of populated panels or reconciliation.
+owner. [Monitoring](https://github.com/YashSensei/devops-assignment/actions/runs/38456443849)
+passed with two UP backend targets, positive query results and visibly populated
+Grafana panels. [GitOps](https://github.com/YashSensei/devops-assignment/actions/runs/38453774602)
+verified a committed 2-to-3 replica change and live 1-to-3 drift recovery.
+Both temporary environments were removed. The evidence index preserves the earlier
+OOM, startup and insufficient screenshot-wait failures separately.
 
 terraform/ describes VPC, two public subnets, EKS/node group, IAM and storage
 driver permissions with a safe example and tracked provider lockfile. Sessions
@@ -195,5 +201,5 @@ See [dated evidence](../evidence/README.md), [submission links](../SUBMISSION-GU
 and [exact audit](../ASSIGNMENT-COMPLETION.md). Automated recordings are real tests,
 not a student presentation. Yash must understand the implementation, narrate and
 demonstrate a visible commit → green CI → updated deployment, address missing
-screenshots/access and obtain acceptance of environment/cloud omissions.
+screenshots and obtain acceptance of environment/cloud omissions.
 The form has not been submitted. CI teardown leaves no permanent hosted website.

@@ -1,0 +1,19 @@
+NAMESPACE     NAME                                                   READY   STATUS             RESTARTS        AGE     IP             NODE            NOMINATED NODE   READINESS GATES
+kitledger     backend-6cff9f59cb-jtnhd                               1/1     Running            2 (8m39s ago)   8m44s   10.244.0.5     observability   <none>           <none>
+kitledger     backend-6cff9f59cb-vlrk4                               1/1     Running            2 (8m39s ago)   8m44s   10.244.0.3     observability   <none>           <none>
+kitledger     frontend-5c56df57f-7ndpv                               1/1     Running            0               8m44s   10.244.0.6     observability   <none>           <none>
+kitledger     frontend-5c56df57f-tk8w6                               1/1     Running            0               8m44s   10.244.0.4     observability   <none>           <none>
+kitledger     postgres-0                                             1/1     Running            0               8m44s   10.244.0.7     observability   <none>           <none>
+kube-system   coredns-559f6c778d-gvtdd                               1/1     Running            0               8m58s   10.244.0.2     observability   <none>           <none>
+kube-system   etcd-observability                                     1/1     Running            0               9m5s    192.168.49.2   observability   <none>           <none>
+kube-system   kindnet-t6tlm                                          1/1     Running            0               8m58s   192.168.49.2   observability   <none>           <none>
+kube-system   kube-apiserver-observability                           1/1     Running            0               9m6s    192.168.49.2   observability   <none>           <none>
+kube-system   kube-controller-manager-observability                  1/1     Running            0               9m5s    192.168.49.2   observability   <none>           <none>
+kube-system   kube-proxy-xd92n                                       1/1     Running            0               8m58s   192.168.49.2   observability   <none>           <none>
+kube-system   kube-scheduler-observability                           1/1     Running            0               9m5s    192.168.49.2   observability   <none>           <none>
+kube-system   storage-provisioner                                    1/1     Running            0               9m3s    192.168.49.2   observability   <none>           <none>
+monitoring    monitoring-grafana-7f5fcc6d65-vj69w                    2/3     CrashLoopBackOff   6 (28s ago)     8m1s    10.244.0.11    observability   <none>           <none>
+monitoring    monitoring-kube-prometheus-operator-6458848b98-z85dn   1/1     Running            0               8m1s    10.244.0.10    observability   <none>           <none>
+monitoring    monitoring-kube-state-metrics-78fd56fc4b-dfm8x         1/1     Running            0               8m1s    10.244.0.9     observability   <none>           <none>
+monitoring    monitoring-prometheus-node-exporter-j8rrn              1/1     Running            0               8m1s    192.168.49.2   observability   <none>           <none>
+monitoring    prometheus-monitoring-kube-prometheus-prometheus-0     2/2     Running            0               7m54s   10.244.0.12    observability   <none>           <none>

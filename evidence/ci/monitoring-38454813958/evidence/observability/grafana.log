@@ -1,0 +1,235 @@
+[pod/monitoring-grafana-64544577b-hqkz8/grafana-sc-datasources] {"time": "2026-10-13T19:27:58.341644+00:00", "level": "INFO", "msg": "Starting collector"}
+[pod/monitoring-grafana-64544577b-hqkz8/grafana-sc-datasources] {"time": "2026-10-13T19:27:58.342170+00:00", "level": "INFO", "msg": "No folder annotation was provided, defaulting to k8s-sidecar-target-directory"}
+[pod/monitoring-grafana-64544577b-hqkz8/grafana-sc-datasources] {"time": "2026-10-13T19:27:58.342350+00:00", "level": "INFO", "msg": "Loading incluster config..."}
+[pod/monitoring-grafana-64544577b-hqkz8/grafana-sc-datasources] {"time": "2026-10-13T19:27:58.342505+00:00", "level": "WARNING", "msg": "IPv6 not available, falling back to IPv4 for the health server"}
+[pod/monitoring-grafana-64544577b-hqkz8/grafana-sc-datasources] Exception in thread Thread-1 (run):
+[pod/monitoring-grafana-64544577b-hqkz8/grafana-sc-datasources] {"time": "2026-10-13T19:27:58.343483+00:00", "level": "INFO", "msg": "Unique filenames will not be enforced."}
+[pod/monitoring-grafana-64544577b-hqkz8/grafana-sc-datasources] {"time": "2026-10-13T19:27:58.343556+00:00", "level": "INFO", "msg": "5xx response content will not be enabled."}
+[pod/monitoring-grafana-64544577b-hqkz8/grafana-sc-datasources] {"time": "2026-10-13T19:27:58.343755+00:00", "level": "INFO", "msg": "Performing initial list-based sync before starting watch."}
+[pod/monitoring-grafana-64544577b-hqkz8/grafana-sc-datasources] {"time": "2026-10-13T19:27:58.343820+00:00", "level": "INFO", "msg": "Loading incluster config..."}
+[pod/monitoring-grafana-64544577b-hqkz8/grafana-sc-datasources] {"time": "2026-10-13T19:27:58.344567+00:00", "level": "INFO", "msg": "Performing list-based sync on secret resources: {'namespace': 'monitoring'}"}
+[pod/monitoring-grafana-64544577b-hqkz8/grafana-sc-datasources] Traceback (most recent call last):
+[pod/monitoring-grafana-64544577b-hqkz8/grafana-sc-datasources]   File "/app/.venv/lib/python3.14/site-packages/healthz.py", line 179, in _create_health_http_server
+[pod/monitoring-grafana-64544577b-hqkz8/grafana-sc-datasources]     return ThreadingHTTPServer(("", health_port), HealthHandler)
+[pod/monitoring-grafana-64544577b-hqkz8/grafana-sc-datasources]   File "/usr/local/lib/python3.14/socketserver.py", line 457, in __init__
+[pod/monitoring-grafana-64544577b-hqkz8/grafana-sc-datasources]     self.server_bind()
+[pod/monitoring-grafana-64544577b-hqkz8/grafana-sc-datasources]     ~~~~~~~~~~~~~~~~^^
+[pod/monitoring-grafana-64544577b-hqkz8/grafana-sc-datasources]   File "/usr/local/lib/python3.14/http/server.py", line 148, in server_bind
+[pod/monitoring-grafana-64544577b-hqkz8/grafana-sc-datasources]     socketserver.TCPServer.server_bind(self)
+[pod/monitoring-grafana-64544577b-hqkz8/grafana-sc-datasources]     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^
+[pod/monitoring-grafana-64544577b-hqkz8/grafana-sc-datasources]   File "/usr/local/lib/python3.14/socketserver.py", line 478, in server_bind
+[pod/monitoring-grafana-64544577b-hqkz8/grafana-sc-datasources]     self.socket.bind(self.server_address)
+[pod/monitoring-grafana-64544577b-hqkz8/grafana-sc-datasources]     ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^
+[pod/monitoring-grafana-64544577b-hqkz8/grafana-sc-datasources] OSError: [Errno 98] Address in use
+[pod/monitoring-grafana-64544577b-hqkz8/grafana-sc-datasources] 
+[pod/monitoring-grafana-64544577b-hqkz8/grafana-sc-datasources] During handling of the above exception, another exception occurred:
+[pod/monitoring-grafana-64544577b-hqkz8/grafana-sc-datasources] 
+[pod/monitoring-grafana-64544577b-hqkz8/grafana-sc-datasources] Traceback (most recent call last):
+[pod/monitoring-grafana-64544577b-hqkz8/grafana-sc-datasources]   File "/usr/local/lib/python3.14/threading.py", line 1082, in _bootstrap_inner
+[pod/monitoring-grafana-64544577b-hqkz8/grafana-sc-datasources]     self._context.run(self.run)
+[pod/monitoring-grafana-64544577b-hqkz8/grafana-sc-datasources]     ~~~~~~~~~~~~~~~~~^^^^^^^^^^
+[pod/monitoring-grafana-64544577b-hqkz8/grafana-sc-datasources]   File "/usr/local/lib/python3.14/threading.py", line 1024, in run
+[pod/monitoring-grafana-64544577b-hqkz8/grafana-sc-datasources]     self._target(*self._args, **self._kwargs)
+[pod/monitoring-grafana-64544577b-hqkz8/grafana-sc-datasources]     ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[pod/monitoring-grafana-64544577b-hqkz8/grafana-sc-datasources]   File "/app/.venv/lib/python3.14/site-packages/healthz.py", line 209, in run
+[pod/monitoring-grafana-64544577b-hqkz8/grafana-sc-datasources]     server = _create_health_http_server(health_port)
+[pod/monitoring-grafana-64544577b-hqkz8/grafana-sc-datasources]   File "/app/.venv/lib/python3.14/site-packages/healthz.py", line 183, in _create_health_http_server
+[pod/monitoring-grafana-64544577b-hqkz8/grafana-sc-datasources]     return ThreadingHTTPServer(("", health_port), HealthHandler)
+[pod/monitoring-grafana-64544577b-hqkz8/grafana-sc-datasources]   File "/usr/local/lib/python3.14/socketserver.py", line 457, in __init__
+[pod/monitoring-grafana-64544577b-hqkz8/grafana-sc-datasources]     self.server_bind()
+[pod/monitoring-grafana-64544577b-hqkz8/grafana-sc-datasources]     ~~~~~~~~~~~~~~~~^^
+[pod/monitoring-grafana-64544577b-hqkz8/grafana-sc-datasources]   File "/usr/local/lib/python3.14/http/server.py", line 148, in server_bind
+[pod/monitoring-grafana-64544577b-hqkz8/grafana-sc-datasources]     socketserver.TCPServer.server_bind(self)
+[pod/monitoring-grafana-64544577b-hqkz8/grafana-sc-datasources]     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^
+[pod/monitoring-grafana-64544577b-hqkz8/grafana-sc-datasources]   File "/usr/local/lib/python3.14/socketserver.py", line 478, in server_bind
+[pod/monitoring-grafana-64544577b-hqkz8/grafana-sc-datasources]     self.socket.bind(self.server_address)
+[pod/monitoring-grafana-64544577b-hqkz8/grafana-sc-datasources]     ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^
+[pod/monitoring-grafana-64544577b-hqkz8/grafana-sc-datasources] OSError: [Errno 98] Address in use
+[pod/monitoring-grafana-64544577b-hqkz8/grafana-sc-datasources] {"time": "2026-10-13T19:27:58.351552+00:00", "level": "INFO", "msg": "Loading incluster config..."}
+[pod/monitoring-grafana-64544577b-hqkz8/grafana-sc-datasources] {"time": "2026-10-13T19:27:58.352055+00:00", "level": "INFO", "msg": "Performing list-based sync on configmap resources: {'namespace': 'monitoring'}"}
+[pod/monitoring-grafana-64544577b-hqkz8/grafana-sc-datasources] {"time": "2026-10-13T19:27:58.355871+00:00", "level": "INFO", "msg": "Writing /etc/grafana/provisioning/datasources/datasource.yaml (ascii)"}
+[pod/monitoring-grafana-64544577b-hqkz8/grafana-sc-datasources] {"time": "2026-10-13T19:27:58.357100+00:00", "level": "WARNING", "msg": "Retrying (Retry(total=4, connect=9, read=5, redirect=None, status=None)) after connection broken by 'NewConnectionError(\"HTTPConnection(host='localhost', port=3000): Failed to establish a new connection: [Errno 111] Connection refused\")': /api/admin/provisioning/datasources/reload"}
+[pod/monitoring-grafana-64544577b-hqkz8/grafana-sc-datasources] {"time": "2026-10-13T19:28:00.557557+00:00", "level": "WARNING", "msg": "Retrying (Retry(total=3, connect=8, read=5, redirect=None, status=None)) after connection broken by 'NewConnectionError(\"HTTPConnection(host='localhost', port=3000): Failed to establish a new connection: [Errno 111] Connection refused\")': /api/admin/provisioning/datasources/reload"}
+[pod/monitoring-grafana-64544577b-hqkz8/grafana-sc-datasources] {"time": "2026-10-13T19:28:04.958444+00:00", "level": "WARNING", "msg": "Retrying (Retry(total=2, connect=7, read=5, redirect=None, status=None)) after connection broken by 'NewConnectionError(\"HTTPConnection(host='localhost', port=3000): Failed to establish a new connection: [Errno 111] Connection refused\")': /api/admin/provisioning/datasources/reload"}
+[pod/monitoring-grafana-64544577b-hqkz8/grafana-sc-datasources] {"time": "2026-10-13T19:28:13.759416+00:00", "level": "WARNING", "msg": "Retrying (Retry(total=1, connect=6, read=5, redirect=None, status=None)) after connection broken by 'NewConnectionError(\"HTTPConnection(host='localhost', port=3000): Failed to establish a new connection: [Errno 111] Connection refused\")': /api/admin/provisioning/datasources/reload"}
+[pod/monitoring-grafana-64544577b-hqkz8/grafana-sc-datasources] {"time": "2026-10-13T19:28:31.360321+00:00", "level": "WARNING", "msg": "Retrying (Retry(total=0, connect=5, read=5, redirect=None, status=None)) after connection broken by 'NewConnectionError(\"HTTPConnection(host='localhost', port=3000): Failed to establish a new connection: [Errno 111] Connection refused\")': /api/admin/provisioning/datasources/reload"}
+[pod/monitoring-grafana-64544577b-hqkz8/grafana-sc-datasources] {"time": "2026-10-13T19:28:31.378185+00:00", "level": "INFO", "msg": "None sent to http://localhost:3000/api/admin/provisioning/datasources/reload. Response: 200 OK {\"message\":\"Datasources config reloaded\"}"}
+[pod/monitoring-grafana-64544577b-hqkz8/grafana-sc-datasources] {"time": "2026-10-13T19:28:31.378294+00:00", "level": "INFO", "msg": "Initial sync complete, sidecar is ready."}
+[pod/monitoring-grafana-64544577b-hqkz8/grafana-sc-datasources] {"time": "2026-10-13T19:28:31.378523+00:00", "level": "INFO", "msg": "Loading incluster config..."}
+[pod/monitoring-grafana-64544577b-hqkz8/grafana-sc-datasources] {"time": "2026-10-13T19:28:31.378824+00:00", "level": "INFO", "msg": "Loading incluster config..."}
+[pod/monitoring-grafana-64544577b-hqkz8/grafana-sc-datasources] {"time": "2026-10-13T19:28:31.379426+00:00", "level": "INFO", "msg": "Loading incluster config..."}
+[pod/monitoring-grafana-64544577b-hqkz8/grafana-sc-datasources] {"time": "2026-10-13T19:28:31.379824+00:00", "level": "INFO", "msg": "Loading incluster config..."}
+[pod/monitoring-grafana-64544577b-hqkz8/grafana-sc-datasources] {"time": "2026-10-13T19:29:31.386294+00:00", "level": "INFO", "msg": "Loading incluster config..."}
+[pod/monitoring-grafana-64544577b-hqkz8/grafana-sc-datasources] {"time": "2026-10-13T19:29:31.388694+00:00", "level": "INFO", "msg": "Loading incluster config..."}
+[pod/monitoring-grafana-64544577b-hqkz8/grafana] logger=grafana-apiserver t=2026-10-13T19:28:16.341043349Z level=info msg="Adding GroupVersion preferences.grafana.app v1alpha1 to ResourceManager"
+[pod/monitoring-grafana-64544577b-hqkz8/grafana] logger=grafana-apiserver t=2026-10-13T19:28:16.341407617Z level=info msg="Adding GroupVersion collections.grafana.app v1alpha1 to ResourceManager"
+[pod/monitoring-grafana-64544577b-hqkz8/grafana] logger=grafana-apiserver t=2026-10-13T19:28:16.342975896Z level=info msg="Adding GroupVersion provisioning.grafana.app v0alpha1 to ResourceManager"
+[pod/monitoring-grafana-64544577b-hqkz8/grafana] logger=grafana-apiserver t=2026-10-13T19:28:16.343898564Z level=info msg="Adding GroupVersion provisioning.grafana.app v1beta1 to ResourceManager"
+[pod/monitoring-grafana-64544577b-hqkz8/grafana] logger=grafana-apiserver t=2026-10-13T19:28:16.34418799Z level=info msg="Adding GroupVersion userstorage.grafana.app v0alpha1 to ResourceManager"
+[pod/monitoring-grafana-64544577b-hqkz8/grafana] logger=grafana-apiserver t=2026-10-13T19:28:16.344300629Z level=info msg="Adding GroupVersion features.grafana.app v0alpha1 to ResourceManager"
+[pod/monitoring-grafana-64544577b-hqkz8/grafana] logger=grafana-apiserver t=2026-10-13T19:28:16.344696474Z level=info msg="Adding GroupVersion playlist.grafana.app v1 to ResourceManager"
+[pod/monitoring-grafana-64544577b-hqkz8/grafana] logger=grafana-apiserver t=2026-10-13T19:28:16.344916275Z level=info msg="Adding GroupVersion playlist.grafana.app v0alpha1 to ResourceManager"
+[pod/monitoring-grafana-64544577b-hqkz8/grafana] t=2026-10-13T19:28:16.344953852Z level=info caller=logger.go:214 time=2026-10-13T19:28:16.344945209Z msg="Installed APIs for app" app=playlist
+[pod/monitoring-grafana-64544577b-hqkz8/grafana] logger=grafana-apiserver t=2026-10-13T19:28:16.3455382Z level=info msg="Adding GroupVersion plugins.grafana.app v0alpha1 to ResourceManager"
+[pod/monitoring-grafana-64544577b-hqkz8/grafana] t=2026-10-13T19:28:16.345569628Z level=info caller=logger.go:214 time=2026-10-13T19:28:16.345565672Z msg="Installed APIs for app" app=plugins
+[pod/monitoring-grafana-64544577b-hqkz8/grafana] logger=grafana-apiserver t=2026-10-13T19:28:16.346032804Z level=info msg="Adding GroupVersion example.grafana.app v1alpha1 to ResourceManager"
+[pod/monitoring-grafana-64544577b-hqkz8/grafana] logger=grafana-apiserver t=2026-10-13T19:28:16.346240517Z level=info msg="Adding GroupVersion example.grafana.app v0alpha1 to ResourceManager"
+[pod/monitoring-grafana-64544577b-hqkz8/grafana] t=2026-10-13T19:28:16.346307548Z level=info caller=logger.go:214 time=2026-10-13T19:28:16.346304974Z msg="Installed APIs for app" app=example
+[pod/monitoring-grafana-64544577b-hqkz8/grafana] logger=grafana-apiserver t=2026-10-13T19:28:16.346333016Z level=info msg="Skipping API quotas.grafana.app/v0alpha1 because it has no resources."
+[pod/monitoring-grafana-64544577b-hqkz8/grafana] t=2026-10-13T19:28:16.34639551Z level=info caller=logger.go:214 time=2026-10-13T19:28:16.346393577Z msg="Installed APIs for app" app=quotas
+[pod/monitoring-grafana-64544577b-hqkz8/grafana] logger=storage.unified.migrations t=2026-10-13T19:28:16.346500488Z level=info msg="Resolved storage mode from migration log" resource=shorturls.shorturl.grafana.app mode=unified
+[pod/monitoring-grafana-64544577b-hqkz8/grafana] logger=grafana-apiserver t=2026-10-13T19:28:16.34687413Z level=info msg="Adding GroupVersion shorturl.grafana.app v1beta1 to ResourceManager"
+[pod/monitoring-grafana-64544577b-hqkz8/grafana] t=2026-10-13T19:28:16.346912227Z level=info caller=logger.go:214 time=2026-10-13T19:28:16.34690767Z msg="Installed APIs for app" app=shorturl
+[pod/monitoring-grafana-64544577b-hqkz8/grafana] t=2026-10-13T19:28:16.346988782Z level=warn caller=logger.go:224 time=2026-10-13T19:28:16.346985487Z msg="skipped registering status sub-resource that does not support dual writing" resource=alertrules.rules.alerting.grafana.app version=v0alpha1 storagePath=alertrules/status
+[pod/monitoring-grafana-64544577b-hqkz8/grafana] t=2026-10-13T19:28:16.346999308Z level=warn caller=logger.go:224 time=2026-10-13T19:28:16.346996514Z msg="skipped registering status sub-resource that does not support dual writing" resource=recordingrules.rules.alerting.grafana.app version=v0alpha1 storagePath=recordingrules/status
+[pod/monitoring-grafana-64544577b-hqkz8/grafana] logger=grafana-apiserver t=2026-10-13T19:28:16.34775826Z level=info msg="Adding GroupVersion rules.alerting.grafana.app v0alpha1 to ResourceManager"
+[pod/monitoring-grafana-64544577b-hqkz8/grafana] t=2026-10-13T19:28:16.347808455Z level=info caller=logger.go:214 time=2026-10-13T19:28:16.347806002Z msg="Installed APIs for app" app=alerting
+[pod/monitoring-grafana-64544577b-hqkz8/grafana] logger=grafana-apiserver t=2026-10-13T19:28:16.348931755Z level=info msg="Adding GroupVersion notifications.alerting.grafana.app v1beta1 to ResourceManager"
+[pod/monitoring-grafana-64544577b-hqkz8/grafana] logger=grafana-apiserver t=2026-10-13T19:28:16.349623355Z level=info msg="Adding GroupVersion notifications.alerting.grafana.app v0alpha1 to ResourceManager"
+[pod/monitoring-grafana-64544577b-hqkz8/grafana] t=2026-10-13T19:28:16.349692389Z level=info caller=logger.go:214 time=2026-10-13T19:28:16.349689334Z msg="Installed APIs for app" app=alerting-notifications
+[pod/monitoring-grafana-64544577b-hqkz8/grafana] logger=grafana-apiserver t=2026-10-13T19:28:16.350202136Z level=info msg="Adding GroupVersion advisor.grafana.app v0alpha1 to ResourceManager"
+[pod/monitoring-grafana-64544577b-hqkz8/grafana] t=2026-10-13T19:28:16.350260433Z level=info caller=logger.go:214 time=2026-10-13T19:28:16.35025811Z msg="Installed APIs for app" app=advisor
+[pod/monitoring-grafana-64544577b-hqkz8/grafana] t=2026-10-13T19:28:17.231846346Z level=info caller=logger.go:214 time=2026-10-13T19:28:17.231831955Z msg="App initialized" app=playlist
+[pod/monitoring-grafana-64544577b-hqkz8/grafana] t=2026-10-13T19:28:17.231997213Z level=info caller=logger.go:214 time=2026-10-13T19:28:17.231993678Z msg="App initialized" app=alerting-notifications
+[pod/monitoring-grafana-64544577b-hqkz8/grafana] t=2026-10-13T19:28:17.23321856Z level=info caller=logger.go:214 time=2026-10-13T19:28:17.233213733Z msg="App initialized" app=plugins
+[pod/monitoring-grafana-64544577b-hqkz8/grafana] t=2026-10-13T19:28:17.233242476Z level=info caller=logger.go:214 time=2026-10-13T19:28:17.233239802Z msg="App initialized" app=example
+[pod/monitoring-grafana-64544577b-hqkz8/grafana] t=2026-10-13T19:28:17.233262446Z level=info caller=logger.go:214 time=2026-10-13T19:28:17.233260063Z msg="App initialized" app=quotas
+[pod/monitoring-grafana-64544577b-hqkz8/grafana] t=2026-10-13T19:28:17.233282587Z level=info caller=logger.go:214 time=2026-10-13T19:28:17.233280173Z msg="App initialized" app=shorturl
+[pod/monitoring-grafana-64544577b-hqkz8/grafana] t=2026-10-13T19:28:17.233430069Z level=info caller=logger.go:214 time=2026-10-13T19:28:17.233426814Z msg="App initialized" app=advisor
+[pod/monitoring-grafana-64544577b-hqkz8/grafana] t=2026-10-13T19:28:17.234961282Z level=info caller=logger.go:214 time=2026-10-13T19:28:17.234949624Z msg="start concurrent job driver" logger=concurrent-job-driver num_drivers=3 job_timeout=20m0s lease_renewal_interval=20s
+[pod/monitoring-grafana-64544577b-hqkz8/grafana] t=2026-10-13T19:28:17.235010235Z level=info caller=logger.go:214 time=2026-10-13T19:28:17.235002734Z msg="starting job cleanup controller" logger=job-cleanup-controller cleanup_interval=3m0s expiry=1m0s
+[pod/monitoring-grafana-64544577b-hqkz8/grafana] t=2026-10-13T19:28:17.241716757Z level=info caller=logger.go:214 time=2026-10-13T19:28:17.241706572Z msg="App initialized" app=alerting
+[pod/monitoring-grafana-64544577b-hqkz8/grafana] logger=backgroundsvcs.managerAdapter t=2026-10-13T19:28:17.2428354Z level=info msg=starting module=plugins.store
+[pod/monitoring-grafana-64544577b-hqkz8/grafana] logger=backgroundsvcs.managerAdapter t=2026-10-13T19:28:17.243099377Z level=info msg=starting module=plugin.backgroundinstaller
+[pod/monitoring-grafana-64544577b-hqkz8/grafana] logger=plugin.backgroundinstaller t=2026-10-13T19:28:17.243123403Z level=info msg="Plugins installed" plugins=[]
+[pod/monitoring-grafana-64544577b-hqkz8/grafana] logger=plugin.backgroundinstaller t=2026-10-13T19:28:17.243141571Z level=info msg="Installing plugins" plugins="[{ID:stackdriver Version: URL:} {ID:jaeger Version: URL:} {ID:grafana-postgresql-datasource Version: URL:} {ID:grafana-pyroscope-datasource Version: URL:} {ID:zipkin Version: URL:} {ID:loki Version: URL:} {ID:grafana-advisor-app Version: URL:} {ID:influxdb Version: URL:} {ID:prometheus Version: URL:} {ID:tempo Version: URL:} {ID:grafana-pyroscope-app Version: URL:} {ID:mysql Version: URL:} {ID:grafana-metricsdrilldown-app Version: URL:} {ID:elasticsearch Version: URL:} {ID:opentsdb Version: URL:} {ID:mssql Version: URL:} {ID:grafana-exploretraces-app Version: URL:} {ID:grafana-lokiexplore-app Version: URL:}]"
+[pod/monitoring-grafana-64544577b-hqkz8/grafana] logger=plugin.backgroundinstaller t=2026-10-13T19:28:17.243195401Z level=info msg="Installing plugin" pluginId=grafana-advisor-app version=
+[pod/monitoring-grafana-64544577b-hqkz8/grafana] logger=backgroundsvcs.managerAdapter t=2026-10-13T19:28:17.24496258Z level=info msg=starting module=provisioning
+[pod/monitoring-grafana-64544577b-hqkz8/grafana] logger=provisioning.datasources t=2026-10-13T19:28:17.250723014Z level=info msg="inserting datasource from configuration" name=Prometheus uid=prometheus
+[pod/monitoring-grafana-64544577b-hqkz8/grafana] logger=provisioning.datasources t=2026-10-13T19:28:17.335502523Z level=info msg="inserting datasource from configuration" name=Alertmanager uid=alertmanager
+[pod/monitoring-grafana-64544577b-hqkz8/grafana] logger=provisioning.alerting t=2026-10-13T19:28:17.340977678Z level=info msg="starting to provision alerting"
+[pod/monitoring-grafana-64544577b-hqkz8/grafana] logger=provisioning.alerting t=2026-10-13T19:28:17.340993883Z level=info msg="finished to provision alerting"
+[pod/monitoring-grafana-64544577b-hqkz8/grafana] t=2026-10-13T19:28:17.343669892Z level=info caller=logger.go:214 time=2026-10-13T19:28:17.343655901Z msg="Starting ConnectionController" logger=provisioning-connection-controller
+[pod/monitoring-grafana-64544577b-hqkz8/grafana] t=2026-10-13T19:28:17.343685165Z level=info caller=logger.go:214 time=2026-10-13T19:28:17.343681029Z msg="Starting workers" logger=provisioning-connection-controller count=1
+[pod/monitoring-grafana-64544577b-hqkz8/grafana] t=2026-10-13T19:28:17.343693167Z level=info caller=logger.go:214 time=2026-10-13T19:28:17.343691615Z msg="Started workers" logger=provisioning-connection-controller
+[pod/monitoring-grafana-64544577b-hqkz8/grafana] t=2026-10-13T19:28:17.343918276Z level=info caller=logger.go:214 time=2026-10-13T19:28:17.343912697Z msg="Starting RepositoryController" logger=provisioning-repository-controller
+[pod/monitoring-grafana-64544577b-hqkz8/grafana] t=2026-10-13T19:28:17.343927359Z level=info caller=logger.go:214 time=2026-10-13T19:28:17.343925577Z msg="Starting workers" logger=provisioning-repository-controller count=1
+[pod/monitoring-grafana-64544577b-hqkz8/grafana] t=2026-10-13T19:28:17.343932757Z level=info caller=logger.go:214 time=2026-10-13T19:28:17.343931405Z msg="Started workers" logger=provisioning-repository-controller
+[pod/monitoring-grafana-64544577b-hqkz8/grafana] logger=bleve-backend namespace=default group=dashboard.grafana.app resource=dashboards reason=search t=2026-10-13T19:28:17.362310627Z level=info msg="Building index using memory"
+[pod/monitoring-grafana-64544577b-hqkz8/grafana] logger=bleve-backend namespace=default group=dashboard.grafana.app resource=dashboards reason=search t=2026-10-13T19:28:17.362664128Z level=info msg="Finished building index" elapsed=284.699µs listRV=1791919695629011
+[pod/monitoring-grafana-64544577b-hqkz8/grafana] logger=bleve-backend namespace=default group=dashboard.grafana.app resource=dashboards reason=search t=2026-10-13T19:28:17.362680373Z level=info msg="Storing index in cache" key="{Namespace:default Group:dashboard.grafana.app Resource:dashboards}" expiration=2026-10-13T19:38:17.3626788Z
+[pod/monitoring-grafana-64544577b-hqkz8/grafana] logger=provisioning.dashboard t=2026-10-13T19:28:17.36413469Z level=info msg="starting to provision dashboards"
+[pod/monitoring-grafana-64544577b-hqkz8/grafana] logger=provisioning.dashboard t=2026-10-13T19:28:17.364701252Z level=info msg="finished to provision dashboards"
+[pod/monitoring-grafana-64544577b-hqkz8/grafana] logger=backgroundsvcs.managerAdapter t=2026-10-13T19:28:17.36563732Z level=info msg=starting module=*updatemanager.GrafanaService
+[pod/monitoring-grafana-64544577b-hqkz8/grafana] logger=backgroundsvcs.managerAdapter t=2026-10-13T19:28:17.365645597Z level=info msg=starting module=*metric.Service
+[pod/monitoring-grafana-64544577b-hqkz8/grafana] logger=backgroundsvcs.managerAdapter t=2026-10-13T19:28:17.365781692Z level=info msg=starting module=*authimpl.UserAuthTokenService
+[pod/monitoring-grafana-64544577b-hqkz8/grafana] logger=backgroundsvcs.managerAdapter t=2026-10-13T19:28:17.365837251Z level=info msg=starting module=*rendering.RenderingService
+[pod/monitoring-grafana-64544577b-hqkz8/grafana] logger=backgroundsvcs.managerAdapter t=2026-10-13T19:28:17.365858814Z level=info msg=starting module=*updatemanager.PluginsService
+[pod/monitoring-grafana-64544577b-hqkz8/grafana] logger=backgroundsvcs.managerAdapter t=2026-10-13T19:28:17.365983271Z level=info msg=starting module=*dualwrite.ZanzanaReconciler
+[pod/monitoring-grafana-64544577b-hqkz8/grafana] logger=backgroundsvcs.managerAdapter t=2026-10-13T19:28:17.36600254Z level=info msg=starting module=*live.GrafanaLive
+[pod/monitoring-grafana-64544577b-hqkz8/grafana] logger=backgroundsvcs.managerAdapter t=2026-10-13T19:28:17.366031734Z level=info msg=starting module=*migrations.SecretMigrationProviderImpl
+[pod/monitoring-grafana-64544577b-hqkz8/grafana] logger=backgroundsvcs.managerAdapter t=2026-10-13T19:28:17.366111257Z level=info msg=starting module=*appregistry.Service
+[pod/monitoring-grafana-64544577b-hqkz8/grafana] logger=app-registry t=2026-10-13T19:28:17.366133221Z level=info msg="app registry initialized"
+[pod/monitoring-grafana-64544577b-hqkz8/grafana] logger=backgroundsvcs.managerAdapter t=2026-10-13T19:28:17.366142044Z level=info msg=starting module=*supportbundlesimpl.Service
+[pod/monitoring-grafana-64544577b-hqkz8/grafana] logger=sqlstore.transactions t=2026-10-13T19:28:17.366230052Z level=info msg="Database locked, sleeping then retrying" error="database is locked (5) (SQLITE_BUSY)" retry=0 sleep=1.093437ms
+[pod/monitoring-grafana-64544577b-hqkz8/grafana] logger=backgroundsvcs.managerAdapter t=2026-10-13T19:28:17.366245345Z level=info msg=starting module=*notifications.NotificationService
+[pod/monitoring-grafana-64544577b-hqkz8/grafana] logger=backgroundsvcs.managerAdapter t=2026-10-13T19:28:17.366267829Z level=info msg=starting module=*metrics.InternalMetricsService
+[pod/monitoring-grafana-64544577b-hqkz8/grafana] logger=backgroundsvcs.managerAdapter t=2026-10-13T19:28:17.366275801Z level=info msg=starting module=*pushhttp.Gateway
+[pod/monitoring-grafana-64544577b-hqkz8/grafana] logger=backgroundsvcs.managerAdapter t=2026-10-13T19:28:17.366283202Z level=info msg=starting module=*anonimpl.AnonDeviceService
+[pod/monitoring-grafana-64544577b-hqkz8/grafana] logger=backgroundsvcs.managerAdapter t=2026-10-13T19:28:17.366292896Z level=info msg=starting module=*store.standardStorageService
+[pod/monitoring-grafana-64544577b-hqkz8/grafana] logger=grafanaStorageLogger t=2026-10-13T19:28:17.366304484Z level=info msg="Storage starting"
+[pod/monitoring-grafana-64544577b-hqkz8/grafana] logger=backgroundsvcs.managerAdapter t=2026-10-13T19:28:17.366309301Z level=info msg=starting module=*service.DashboardUpdater
+[pod/monitoring-grafana-64544577b-hqkz8/grafana] logger=backgroundsvcs.managerAdapter t=2026-10-13T19:28:17.366383302Z level=info msg=starting module=*dynamic.KeyRetriever
+[pod/monitoring-grafana-64544577b-hqkz8/grafana] logger=backgroundsvcs.managerAdapter t=2026-10-13T19:28:17.366470213Z level=info msg=starting module=*pluginexternal.Service
+[pod/monitoring-grafana-64544577b-hqkz8/grafana] logger=backgroundsvcs.managerAdapter t=2026-10-13T19:28:17.366483633Z level=info msg=starting module=*garbagecollectionworker.Worker
+[pod/monitoring-grafana-64544577b-hqkz8/grafana] logger=backgroundsvcs.managerAdapter t=2026-10-13T19:28:17.366498315Z level=info msg=starting module=*api.HTTPServer
+[pod/monitoring-grafana-64544577b-hqkz8/grafana] logger=backgroundsvcs.managerAdapter t=2026-10-13T19:28:17.365637996Z level=info msg=starting module=*ngalert.AlertNG
+[pod/monitoring-grafana-64544577b-hqkz8/grafana] logger=ngalert t=2026-10-13T19:28:17.36679353Z level=info msg="Primary node, alert rule evaluation enabled"
+[pod/monitoring-grafana-64544577b-hqkz8/grafana] logger=ngalert.state.manager t=2026-10-13T19:28:17.36681358Z level=info msg="Warming state cache for startup"
+[pod/monitoring-grafana-64544577b-hqkz8/grafana] logger=backgroundsvcs.managerAdapter t=2026-10-13T19:28:17.366924701Z level=info msg=starting module=*angulardetectorsprovider.Dynamic
+[pod/monitoring-grafana-64544577b-hqkz8/grafana] logger=backgroundsvcs.managerAdapter t=2026-10-13T19:28:17.423739276Z level=info msg=starting module=*cleanup.CleanUpService
+[pod/monitoring-grafana-64544577b-hqkz8/grafana] logger=backgroundsvcs.managerAdapter t=2026-10-13T19:28:17.423849071Z level=info msg=starting module=*service.UsageStats
+[pod/monitoring-grafana-64544577b-hqkz8/grafana] logger=http.server t=2026-10-13T19:28:17.424076213Z level=info msg="HTTP Server Listen" address=[::]:3000 protocol=http subUrl= socket=
+[pod/monitoring-grafana-64544577b-hqkz8/grafana] logger=backgroundsvcs.managerAdapter t=2026-10-13T19:28:17.42421155Z level=info msg=starting module=*manager.SecretsService
+[pod/monitoring-grafana-64544577b-hqkz8/grafana] logger=backgroundsvcs.managerAdapter t=2026-10-13T19:28:17.424245291Z level=info msg=starting module=*authz.EmbeddedZanzanaService
+[pod/monitoring-grafana-64544577b-hqkz8/grafana] logger=backgroundsvcs.managerAdapter t=2026-10-13T19:28:17.424259012Z level=info msg=starting module=*remotecache.RemoteCache
+[pod/monitoring-grafana-64544577b-hqkz8/grafana] logger=backgroundsvcs.managerAdapter t=2026-10-13T19:28:17.424275687Z level=info msg=starting module=*loginattemptimpl.Service
+[pod/monitoring-grafana-64544577b-hqkz8/grafana] logger=backgroundsvcs.managerAdapter t=2026-10-13T19:28:17.424294275Z level=info msg=starting module=*ssosettingsimpl.Service
+[pod/monitoring-grafana-64544577b-hqkz8/grafana] logger=backgroundsvcs.managerAdapter t=2026-10-13T19:28:17.424306233Z level=info msg=starting module=*service.DashboardServiceImpl
+[pod/monitoring-grafana-64544577b-hqkz8/grafana] logger=backgroundsvcs.managerAdapter t=2026-10-13T19:28:17.424327825Z level=info msg=starting module=*statscollector.Service
+[pod/monitoring-grafana-64544577b-hqkz8/grafana] logger=backgroundsvcs.managerAdapter t=2026-10-13T19:28:17.42435088Z level=info msg=starting module=*manager.ServiceAccountsService
+[pod/monitoring-grafana-64544577b-hqkz8/grafana] logger=ngalert.multiorg.alertmanager t=2026-10-13T19:28:17.424463435Z level=info msg="Starting MultiOrg Alertmanager"
+[pod/monitoring-grafana-64544577b-hqkz8/grafana] logger=backgroundsvcs.managerAdapter t=2026-10-13T19:28:17.425056587Z level=info msg="All modules healthy"
+[pod/monitoring-grafana-64544577b-hqkz8/grafana] logger=sqlstore.transactions t=2026-10-13T19:28:17.465485449Z level=info msg="Database locked, sleeping then retrying" error="database is locked (5) (SQLITE_BUSY)" retry=0 sleep=33.543523ms
+[pod/monitoring-grafana-64544577b-hqkz8/grafana] logger=ngalert.state.manager t=2026-10-13T19:28:17.471357666Z level=info msg="State cache has been initialized" rules=0 states=0 duration=104.544206ms
+[pod/monitoring-grafana-64544577b-hqkz8/grafana] logger=ngalert.scheduler t=2026-10-13T19:28:17.471379378Z level=info msg="Starting scheduler" tickInterval=10s maxAttempts=3
+[pod/monitoring-grafana-64544577b-hqkz8/grafana] logger=ngalert.scheduler t=2026-10-13T19:28:17.471406489Z level=info msg=starting component=ticker first_tick=2026-10-13T19:28:20Z
+[pod/monitoring-grafana-64544577b-hqkz8/grafana] logger=grafana.update.checker t=2026-10-13T19:28:17.483907028Z level=info msg="Update check succeeded" duration=118.252231ms
+[pod/monitoring-grafana-64544577b-hqkz8/grafana] logger=plugins.update.checker t=2026-10-13T19:28:17.503482743Z level=info msg="Update check succeeded" duration=137.614074ms
+[pod/monitoring-grafana-64544577b-hqkz8/grafana] logger=plugins.update.checker t=2026-10-13T19:28:17.503502303Z level=info msg="flag evaluation succeeded" flag="{Value:false EvaluationDetails:{FlagKey:pluginsAutoUpdate FlagType:bool ResolutionDetail:{Variant:default Reason:STATIC ErrorCode: ErrorMessage: FlagMetadata:map[]}}}" details="{Value:false EvaluationDetails:{FlagKey:pluginsAutoUpdate FlagType:bool ResolutionDetail:{Variant:default Reason:STATIC ErrorCode: ErrorMessage: FlagMetadata:map[]}}}"
+[pod/monitoring-grafana-64544577b-hqkz8/grafana] logger=plugin.angulardetectorsprovider.dynamic t=2026-10-13T19:28:17.543200565Z level=info msg="Patterns update finished" duration=71.262637ms
+[pod/monitoring-grafana-64544577b-hqkz8/grafana] logger=plugin.installer t=2026-10-13T19:28:17.702995644Z level=info msg="Installing plugin" pluginId=grafana-advisor-app version=
+[pod/monitoring-grafana-64544577b-hqkz8/grafana] logger=installer.fs t=2026-10-13T19:28:17.711982973Z level=info msg="Downloaded and extracted grafana-advisor-app v1.1.0 zip successfully to /var/lib/grafana/plugins/grafana-advisor-app"
+[pod/monitoring-grafana-64544577b-hqkz8/grafana] logger=plugins.registration t=2026-10-13T19:28:17.719754192Z level=info msg="Plugin registered" pluginId=grafana-advisor-app
+[pod/monitoring-grafana-64544577b-hqkz8/grafana] logger=plugin.backgroundinstaller t=2026-10-13T19:28:17.719770537Z level=info msg="Plugin successfully installed" pluginId=grafana-advisor-app version= duration=476.565822ms
+[pod/monitoring-grafana-64544577b-hqkz8/grafana] logger=plugin.backgroundinstaller t=2026-10-13T19:28:17.719790216Z level=info msg="Installing plugin" pluginId=grafana-pyroscope-app version=
+[pod/monitoring-grafana-64544577b-hqkz8/grafana] logger=plugin.installer t=2026-10-13T19:28:17.941122561Z level=info msg="Installing plugin" pluginId=grafana-pyroscope-app version=
+[pod/monitoring-grafana-64544577b-hqkz8/grafana] logger=installer.fs t=2026-10-13T19:28:18.028941626Z level=info msg="Downloaded and extracted grafana-pyroscope-app v3.0.0 zip successfully to /var/lib/grafana/plugins/grafana-pyroscope-app"
+[pod/monitoring-grafana-64544577b-hqkz8/grafana] logger=plugins.registration t=2026-10-13T19:28:18.043484301Z level=info msg="Plugin registered" pluginId=grafana-pyroscope-app
+[pod/monitoring-grafana-64544577b-hqkz8/grafana] logger=plugin.backgroundinstaller t=2026-10-13T19:28:18.043497631Z level=info msg="Plugin successfully installed" pluginId=grafana-pyroscope-app version= duration=323.703609ms
+[pod/monitoring-grafana-64544577b-hqkz8/grafana] logger=plugin.backgroundinstaller t=2026-10-13T19:28:18.043519263Z level=info msg="Installing plugin" pluginId=grafana-metricsdrilldown-app version=
+[pod/monitoring-grafana-64544577b-hqkz8/grafana] logger=plugin.installer t=2026-10-13T19:28:18.730709619Z level=info msg="Installing plugin" pluginId=grafana-metricsdrilldown-app version=
+[pod/monitoring-grafana-64544577b-hqkz8/grafana] logger=installer.fs t=2026-10-13T19:28:19.139939443Z level=info msg="Downloaded and extracted grafana-metricsdrilldown-app v3.0.0 zip successfully to /var/lib/grafana/plugins/grafana-metricsdrilldown-app"
+[pod/monitoring-grafana-64544577b-hqkz8/grafana] logger=plugins.registration t=2026-10-13T19:28:19.153571749Z level=info msg="Plugin registered" pluginId=grafana-metricsdrilldown-app
+[pod/monitoring-grafana-64544577b-hqkz8/grafana] logger=plugin.backgroundinstaller t=2026-10-13T19:28:19.153589275Z level=info msg="Plugin successfully installed" pluginId=grafana-metricsdrilldown-app version= duration=1.110061279s
+[pod/monitoring-grafana-64544577b-hqkz8/grafana] logger=plugin.backgroundinstaller t=2026-10-13T19:28:19.153619731Z level=info msg="Installing plugin" pluginId=grafana-exploretraces-app version=
+[pod/monitoring-grafana-64544577b-hqkz8/grafana] logger=plugin.installer t=2026-10-13T19:28:19.363756802Z level=info msg="Installing plugin" pluginId=grafana-exploretraces-app version=
+[pod/monitoring-grafana-64544577b-hqkz8/grafana] logger=installer.fs t=2026-10-13T19:28:19.432864542Z level=info msg="Downloaded and extracted grafana-exploretraces-app v3.0.0 zip successfully to /var/lib/grafana/plugins/grafana-exploretraces-app"
+[pod/monitoring-grafana-64544577b-hqkz8/grafana] logger=plugins.registration t=2026-10-13T19:28:19.450824887Z level=info msg="Plugin registered" pluginId=grafana-exploretraces-app
+[pod/monitoring-grafana-64544577b-hqkz8/grafana] logger=plugin.backgroundinstaller t=2026-10-13T19:28:19.45083983Z level=info msg="Plugin successfully installed" pluginId=grafana-exploretraces-app version= duration=297.212497ms
+[pod/monitoring-grafana-64544577b-hqkz8/grafana] logger=plugin.backgroundinstaller t=2026-10-13T19:28:19.450858618Z level=info msg="Installing plugin" pluginId=grafana-lokiexplore-app version=
+[pod/monitoring-grafana-64544577b-hqkz8/grafana] logger=plugin.installer t=2026-10-13T19:28:20.125992609Z level=info msg="Installing plugin" pluginId=grafana-lokiexplore-app version=
+[pod/monitoring-grafana-64544577b-hqkz8/grafana] logger=installer.fs t=2026-10-13T19:28:20.330009821Z level=info msg="Downloaded and extracted grafana-lokiexplore-app v3.0.0 zip successfully to /var/lib/grafana/plugins/grafana-lokiexplore-app"
+[pod/monitoring-grafana-64544577b-hqkz8/grafana] logger=plugins.registration t=2026-10-13T19:28:20.351883032Z level=info msg="Plugin registered" pluginId=grafana-lokiexplore-app
+[pod/monitoring-grafana-64544577b-hqkz8/grafana] logger=plugin.backgroundinstaller t=2026-10-13T19:28:20.351902501Z level=info msg="Plugin successfully installed" pluginId=grafana-lokiexplore-app version= duration=901.03516ms
+[pod/monitoring-grafana-64544577b-hqkz8/grafana] logger=provisioning.dashboard t=2026-10-13T19:28:27.34844259Z level=info msg="starting to provision dashboards"
+[pod/monitoring-grafana-64544577b-hqkz8/grafana] logger=provisioning.dashboard t=2026-10-13T19:28:27.36356433Z level=info msg="finished to provision dashboards"
+[pod/monitoring-grafana-64544577b-hqkz8/grafana] logger=bleve-backend namespace=default group=provisioning.grafana.app resource=repositories reason=getStats t=2026-10-13T19:29:12.432935225Z level=info msg="Building index using memory"
+[pod/monitoring-grafana-64544577b-hqkz8/grafana] logger=bleve-backend namespace=default group=provisioning.grafana.app resource=repositories reason=getStats t=2026-10-13T19:29:12.433313164Z level=info msg="Finished building index" elapsed=331.829µs listRV=1
+[pod/monitoring-grafana-64544577b-hqkz8/grafana] logger=bleve-backend namespace=default group=provisioning.grafana.app resource=repositories reason=getStats t=2026-10-13T19:29:12.433326854Z level=info msg="Storing index in cache" key="{Namespace:default Group:provisioning.grafana.app Resource:repositories}" expiration=2026-10-13T19:39:12.433326183Z
+[pod/monitoring-grafana-64544577b-hqkz8/grafana] logger=bleve-backend namespace=default group=playlist.grafana.app resource=playlists reason=getStats t=2026-10-13T19:29:12.433732925Z level=info msg="Building index using memory"
+[pod/monitoring-grafana-64544577b-hqkz8/grafana] logger=bleve-backend namespace=default group=playlist.grafana.app resource=playlists reason=getStats t=2026-10-13T19:29:12.433959406Z level=info msg="Finished building index" elapsed=201.083µs listRV=1
+[pod/monitoring-grafana-64544577b-hqkz8/grafana] logger=bleve-backend namespace=default group=playlist.grafana.app resource=playlists reason=getStats t=2026-10-13T19:29:12.433968529Z level=info msg="Storing index in cache" key="{Namespace:default Group:playlist.grafana.app Resource:playlists}" expiration=2026-10-13T19:39:12.433967157Z
+[pod/monitoring-grafana-64544577b-hqkz8/grafana] logger=bleve-backend namespace=default group=folder.grafana.app resource=folders reason=getStats t=2026-10-13T19:29:12.434275732Z level=info msg="Building index using memory"
+[pod/monitoring-grafana-64544577b-hqkz8/grafana] logger=bleve-backend namespace=default group=folder.grafana.app resource=folders reason=getStats t=2026-10-13T19:29:12.434531126Z level=info msg="Finished building index" elapsed=230.317µs listRV=1791919695628005
+[pod/monitoring-grafana-64544577b-hqkz8/grafana] logger=bleve-backend namespace=default group=folder.grafana.app resource=folders reason=getStats t=2026-10-13T19:29:12.43454067Z level=info msg="Storing index in cache" key="{Namespace:default Group:folder.grafana.app Resource:folders}" expiration=2026-10-13T19:39:12.434539839Z
+[pod/monitoring-grafana-64544577b-hqkz8/grafana] logger=infra.usagestats t=2026-10-13T19:29:12.435207654Z level=info msg="Usage stats are ready to report"
+[pod/monitoring-grafana-64544577b-hqkz8/grafana] logger=context userId=1 orgId=1 uname=admin t=2026-10-13T19:30:18.176621935Z level=info msg="Request Completed" method=GET path=/api/live/ws status=-1 remote_addr=127.0.0.1 time_ms=1 duration=1.998877ms size=0 referer= handler=/api/live/ws status_source=server
+[pod/monitoring-grafana-64544577b-hqkz8/grafana] logger=context userId=1 orgId=1 uname=admin t=2026-10-13T19:30:19.109414149Z level=info msg="Request Completed" method=GET path=/api/live/ws status=-1 remote_addr=127.0.0.1 time_ms=2 duration=2.322069ms size=0 referer= handler=/api/live/ws status_source=server
+[pod/monitoring-grafana-64544577b-hqkz8/grafana] logger=live t=2026-10-13T19:30:19.580725731Z level=info msg="Initialized channel handler" channel=grafana/dashboard/uid/kitledger address=grafana/dashboard/uid/kitledger
+[pod/monitoring-grafana-64544577b-hqkz8/grafana] logger=plugin.prometheus t=2026-10-13T19:30:19.870649999Z level=info msg="Plugin Request Completed" uname=admin duration=3.083163ms endpoint=queryData pluginVersion=13.2.3 statusSource=plugin dsName=Prometheus dsUid=prometheus pluginId=prometheus status=ok
+[pod/monitoring-grafana-64544577b-hqkz8/grafana] logger=plugin.prometheus t=2026-10-13T19:30:19.870687145Z level=info msg="Plugin Request Completed" duration=3.419448ms pluginId=prometheus pluginVersion=13.2.3 status=ok uname=admin dsName=Prometheus dsUid=prometheus endpoint=queryData statusSource=plugin
+[pod/monitoring-grafana-64544577b-hqkz8/grafana] logger=plugin.prometheus t=2026-10-13T19:30:19.871205875Z level=info msg="Plugin Request Completed" statusSource=plugin dsName=Prometheus duration=3.396074ms pluginId=prometheus pluginVersion=13.2.3 uname=admin dsUid=prometheus endpoint=queryData status=ok
+[pod/monitoring-grafana-64544577b-hqkz8/grafana] logger=plugin.prometheus t=2026-10-13T19:30:19.871473248Z level=info msg="Plugin Request Completed" dsUid=prometheus endpoint=queryData pluginId=prometheus pluginVersion=13.2.3 status=ok dsName=Prometheus duration=3.997538ms statusSource=plugin uname=admin
+[pod/monitoring-grafana-64544577b-hqkz8/grafana-sc-dashboard] {"time": "2026-10-13T19:27:58.294239+00:00", "level": "INFO", "msg": "Starting collector"}
+[pod/monitoring-grafana-64544577b-hqkz8/grafana-sc-dashboard] {"time": "2026-10-13T19:27:58.294840+00:00", "level": "INFO", "msg": "No folder annotation was provided, defaulting to k8s-sidecar-target-directory"}
+[pod/monitoring-grafana-64544577b-hqkz8/grafana-sc-dashboard] {"time": "2026-10-13T19:27:58.295079+00:00", "level": "INFO", "msg": "Loading incluster config..."}
+[pod/monitoring-grafana-64544577b-hqkz8/grafana-sc-dashboard] {"time": "2026-10-13T19:27:58.295303+00:00", "level": "INFO", "msg": "Starting health server on port 8080"}
+[pod/monitoring-grafana-64544577b-hqkz8/grafana-sc-dashboard] {"time": "2026-10-13T19:27:58.295858+00:00", "level": "INFO", "msg": "Unique filenames will not be enforced."}
+[pod/monitoring-grafana-64544577b-hqkz8/grafana-sc-dashboard] {"time": "2026-10-13T19:27:58.295913+00:00", "level": "INFO", "msg": "5xx response content will not be enabled."}
+[pod/monitoring-grafana-64544577b-hqkz8/grafana-sc-dashboard] {"time": "2026-10-13T19:27:58.296004+00:00", "level": "INFO", "msg": "Performing initial list-based sync before starting watch."}
+[pod/monitoring-grafana-64544577b-hqkz8/grafana-sc-dashboard] {"time": "2026-10-13T19:27:58.296068+00:00", "level": "INFO", "msg": "Loading incluster config..."}
+[pod/monitoring-grafana-64544577b-hqkz8/grafana-sc-dashboard] {"time": "2026-10-13T19:27:58.296517+00:00", "level": "INFO", "msg": "Performing list-based sync on secret resources: {}"}
+[pod/monitoring-grafana-64544577b-hqkz8/grafana-sc-dashboard] {"time": "2026-10-13T19:27:58.303958+00:00", "level": "INFO", "msg": "Loading incluster config..."}
+[pod/monitoring-grafana-64544577b-hqkz8/grafana-sc-dashboard] {"time": "2026-10-13T19:27:58.304464+00:00", "level": "INFO", "msg": "Performing list-based sync on configmap resources: {}"}
+[pod/monitoring-grafana-64544577b-hqkz8/grafana-sc-dashboard] {"time": "2026-10-13T19:27:58.308902+00:00", "level": "INFO", "msg": "Initial sync complete, sidecar is ready."}
+[pod/monitoring-grafana-64544577b-hqkz8/grafana-sc-dashboard] {"time": "2026-10-13T19:27:58.309121+00:00", "level": "INFO", "msg": "Loading incluster config..."}
+[pod/monitoring-grafana-64544577b-hqkz8/grafana-sc-dashboard] {"time": "2026-10-13T19:27:58.309392+00:00", "level": "INFO", "msg": "Loading incluster config..."}
+[pod/monitoring-grafana-64544577b-hqkz8/grafana-sc-dashboard] {"time": "2026-10-13T19:27:58.309954+00:00", "level": "INFO", "msg": "Loading incluster config..."}
+[pod/monitoring-grafana-64544577b-hqkz8/grafana-sc-dashboard] {"time": "2026-10-13T19:27:58.311313+00:00", "level": "INFO", "msg": "Loading incluster config..."}
+[pod/monitoring-grafana-64544577b-hqkz8/grafana-sc-dashboard] {"time": "2026-10-13T19:28:27.319330+00:00", "level": "INFO", "msg": "Writing /tmp/dashboards/kitledger.json (ascii)"}
+[pod/monitoring-grafana-64544577b-hqkz8/grafana-sc-dashboard] {"time": "2026-10-13T19:28:27.374468+00:00", "level": "INFO", "msg": "None sent to http://localhost:3000/api/admin/provisioning/dashboards/reload. Response: 200 OK {\"message\":\"Dashboards config reloaded\"}"}
+[pod/monitoring-grafana-64544577b-hqkz8/grafana-sc-dashboard] {"time": "2026-10-13T19:28:58.317246+00:00", "level": "INFO", "msg": "Loading incluster config..."}
+[pod/monitoring-grafana-64544577b-hqkz8/grafana-sc-dashboard] {"time": "2026-10-13T19:28:58.317653+00:00", "level": "INFO", "msg": "Loading incluster config..."}
+[pod/monitoring-grafana-64544577b-hqkz8/grafana-sc-dashboard] {"time": "2026-10-13T19:29:58.323296+00:00", "level": "INFO", "msg": "Loading incluster config..."}
+[pod/monitoring-grafana-64544577b-hqkz8/grafana-sc-dashboard] {"time": "2026-10-13T19:29:58.323687+00:00", "level": "INFO", "msg": "Loading incluster config..."}

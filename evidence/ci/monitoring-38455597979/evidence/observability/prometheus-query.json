@@ -1,0 +1,139 @@
+{
+  "scoped": {
+    "status": "success",
+    "data": {
+      "resultType": "vector",
+      "result": [
+        {
+          "metric": {},
+          "value": [
+            1791920158.133,
+            "193"
+          ]
+        }
+      ]
+    }
+  },
+  "unscoped": {
+    "status": "success",
+    "data": {
+      "resultType": "vector",
+      "result": [
+        {
+          "metric": {
+            "__name__": "kitledger_http_requests_total",
+            "container": "backend",
+            "endpoint": "http",
+            "instance": "10.244.0.3:8000",
+            "job": "backend",
+            "method": "GET",
+            "namespace": "kitledger",
+            "pod": "backend-5555cfbcd9-rd65d",
+            "route": "/health",
+            "service": "backend",
+            "status": "200"
+          },
+          "value": [
+            1791920158.138,
+            "15"
+          ]
+        },
+        {
+          "metric": {
+            "__name__": "kitledger_http_requests_total",
+            "container": "backend",
+            "endpoint": "http",
+            "instance": "10.244.0.3:8000",
+            "job": "backend",
+            "method": "GET",
+            "namespace": "kitledger",
+            "pod": "backend-5555cfbcd9-rd65d",
+            "route": "/ready",
+            "service": "backend",
+            "status": "200"
+          },
+          "value": [
+            1791920158.138,
+            "30"
+          ]
+        },
+        {
+          "metric": {
+            "__name__": "kitledger_http_requests_total",
+            "container": "backend",
+            "endpoint": "http",
+            "instance": "10.244.0.4:8000",
+            "job": "backend",
+            "method": "GET",
+            "namespace": "kitledger",
+            "pod": "backend-5555cfbcd9-gc7jd",
+            "route": "/health",
+            "service": "backend",
+            "status": "200"
+          },
+          "value": [
+            1791920158.138,
+            "16"
+          ]
+        },
+        {
+          "metric": {
+            "__name__": "kitledger_http_requests_total",
+            "container": "backend",
+            "endpoint": "http",
+            "instance": "10.244.0.4:8000",
+            "job": "backend",
+            "method": "GET",
+            "namespace": "kitledger",
+            "pod": "backend-5555cfbcd9-gc7jd",
+            "route": "/ready",
+            "service": "backend",
+            "status": "200"
+          },
+          "value": [
+            1791920158.138,
+            "31"
+          ]
+        },
+        {
+          "metric": {
+            "__name__": "kitledger_http_requests_total",
+            "container": "backend",
+            "endpoint": "http",
+            "instance": "10.244.0.4:8000",
+            "job": "backend",
+            "method": "GET",
+            "namespace": "kitledger",
+            "pod": "backend-5555cfbcd9-gc7jd",
+            "route": "/api/summary",
+            "service": "backend",
+            "status": "200"
+          },
+          "value": [
+            1791920158.138,
+            "1"
+          ]
+        },
+        {
+          "metric": {
+            "__name__": "kitledger_http_requests_total",
+            "container": "backend",
+            "endpoint": "http",
+            "instance": "10.244.0.4:8000",
+            "job": "backend",
+            "method": "GET",
+            "namespace": "kitledger",
+            "pod": "backend-5555cfbcd9-gc7jd",
+            "route": "/api/equipment",
+            "service": "backend",
+            "status": "200"
+          },
+          "value": [
+            1791920158.138,
+            "100"
+          ]
+        }
+      ]
+    }
+  }
+}

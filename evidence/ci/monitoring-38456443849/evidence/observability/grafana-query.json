@@ -1,0 +1,1156 @@
+[
+  {
+    "request": {
+      "queries": [
+        {
+          "refId": "A",
+          "hide": false,
+          "expr": "sum(rate(kitledger_http_requests_total{namespace=\"kitledger\",status=~\"5..\"}[2m])) or vector(0)",
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
+          "exemplar": false,
+          "requestId": "4A",
+          "utcOffsetSec": 0,
+          "interval": "",
+          "legendFormat": "",
+          "datasourceId": 1,
+          "intervalMs": 30000,
+          "maxDataPoints": 507
+        }
+      ],
+      "from": "1791919636518",
+      "to": "1791920536518"
+    },
+    "response": {
+      "results": {
+        "A": {
+          "status": 200,
+          "frames": [
+            {
+              "schema": {
+                "refId": "A",
+                "meta": {
+                  "type": "timeseries-multi",
+                  "typeVersion": [
+                    0,
+                    1
+                  ],
+                  "custom": {
+                    "calculatedMinStep": 30000,
+                    "resultType": "matrix"
+                  },
+                  "executedQueryString": "Expr: sum(rate(kitledger_http_requests_total{namespace=\"kitledger\",status=~\"5..\"}[2m])) or vector(0)\nStep: 30s"
+                },
+                "fields": [
+                  {
+                    "name": "Time",
+                    "type": "time",
+                    "typeInfo": {
+                      "frame": "time.Time"
+                    },
+                    "config": {
+                      "interval": 30000
+                    }
+                  },
+                  {
+                    "name": "Value",
+                    "type": "number",
+                    "typeInfo": {
+                      "frame": "float64"
+                    },
+                    "labels": {},
+                    "config": {
+                      "displayNameFromDS": "sum(rate(kitledger_http_requests_total{namespace=\"kitledger\",status=~\"5..\"}[2m])) or vector(0)"
+                    }
+                  }
+                ]
+              },
+              "data": {
+                "values": [
+                  [
+                    1791919620000,
+                    1791919650000,
+                    1791919680000,
+                    1791919710000,
+                    1791919740000,
+                    1791919770000,
+                    1791919800000,
+                    1791919830000,
+                    1791919860000,
+                    1791919890000,
+                    1791919920000,
+                    1791919950000,
+                    1791919980000,
+                    1791920010000,
+                    1791920040000,
+                    1791920070000,
+                    1791920100000,
+                    1791920130000,
+                    1791920160000,
+                    1791920190000,
+                    1791920220000,
+                    1791920250000,
+                    1791920280000,
+                    1791920310000,
+                    1791920340000,
+                    1791920370000,
+                    1791920400000,
+                    1791920430000,
+                    1791920460000,
+                    1791920490000,
+                    1791920520000
+                  ],
+                  [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ]
+                ]
+              }
+            }
+          ]
+        }
+      }
+    }
+  },
+  {
+    "request": {
+      "queries": [
+        {
+          "refId": "A",
+          "hide": false,
+          "expr": "sum by (route) (rate(kitledger_http_requests_total{namespace=\"kitledger\"}[2m]))",
+          "legendFormat": "{{route}}",
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
+          "exemplar": false,
+          "requestId": "1A",
+          "utcOffsetSec": 0,
+          "interval": "",
+          "datasourceId": 1,
+          "intervalMs": 30000,
+          "maxDataPoints": 507
+        }
+      ],
+      "from": "1791919636518",
+      "to": "1791920536518"
+    },
+    "response": {
+      "results": {
+        "A": {
+          "status": 200,
+          "frames": [
+            {
+              "schema": {
+                "refId": "A",
+                "meta": {
+                  "typeVersion": [
+                    0,
+                    0
+                  ],
+                  "custom": {
+                    "calculatedMinStep": 30000
+                  },
+                  "executedQueryString": "Expr: sum by (route) (rate(kitledger_http_requests_total{namespace=\"kitledger\"}[2m]))\nStep: 30s"
+                },
+                "fields": []
+              },
+              "data": {
+                "values": []
+              }
+            }
+          ]
+        }
+      }
+    }
+  },
+  {
+    "request": {
+      "queries": [
+        {
+          "refId": "A",
+          "hide": false,
+          "expr": "sum(kitledger_http_requests_total{namespace=\"kitledger\"})",
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
+          "exemplar": false,
+          "requestId": "2A",
+          "utcOffsetSec": 0,
+          "interval": "",
+          "legendFormat": "",
+          "datasourceId": 1,
+          "intervalMs": 30000,
+          "maxDataPoints": 507
+        }
+      ],
+      "from": "1791919636518",
+      "to": "1791920536518"
+    },
+    "response": {
+      "results": {
+        "A": {
+          "status": 200,
+          "frames": [
+            {
+              "schema": {
+                "refId": "A",
+                "meta": {
+                  "typeVersion": [
+                    0,
+                    0
+                  ],
+                  "custom": {
+                    "calculatedMinStep": 30000
+                  },
+                  "executedQueryString": "Expr: sum(kitledger_http_requests_total{namespace=\"kitledger\"})\nStep: 30s"
+                },
+                "fields": []
+              },
+              "data": {
+                "values": []
+              }
+            }
+          ]
+        }
+      }
+    }
+  },
+  {
+    "request": {
+      "queries": [
+        {
+          "refId": "A",
+          "hide": false,
+          "expr": "histogram_quantile(0.95,sum by(le)(rate(kitledger_http_duration_seconds_bucket{namespace=\"kitledger\"}[2m])))",
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
+          "exemplar": false,
+          "requestId": "3A",
+          "utcOffsetSec": 0,
+          "interval": "",
+          "legendFormat": "",
+          "datasourceId": 1,
+          "intervalMs": 30000,
+          "maxDataPoints": 507
+        }
+      ],
+      "from": "1791919636518",
+      "to": "1791920536518"
+    },
+    "response": {
+      "results": {
+        "A": {
+          "status": 200,
+          "frames": [
+            {
+              "schema": {
+                "refId": "A",
+                "meta": {
+                  "typeVersion": [
+                    0,
+                    0
+                  ],
+                  "custom": {
+                    "calculatedMinStep": 30000
+                  },
+                  "executedQueryString": "Expr: histogram_quantile(0.95,sum by(le)(rate(kitledger_http_duration_seconds_bucket{namespace=\"kitledger\"}[2m])))\nStep: 30s"
+                },
+                "fields": []
+              },
+              "data": {
+                "values": []
+              }
+            }
+          ]
+        }
+      }
+    }
+  },
+  {
+    "request": {
+      "queries": [
+        {
+          "refId": "A",
+          "hide": false,
+          "expr": "sum by (route) (rate(kitledger_http_requests_total{namespace=\"kitledger\"}[2m]))",
+          "legendFormat": "{{route}}",
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
+          "exemplar": false,
+          "requestId": "1A",
+          "utcOffsetSec": 0,
+          "interval": "",
+          "datasourceId": 1,
+          "intervalMs": 30000,
+          "maxDataPoints": 507
+        }
+      ],
+      "from": "1791919646577",
+      "to": "1791920546577"
+    },
+    "response": {
+      "results": {
+        "A": {
+          "status": 200,
+          "frames": [
+            {
+              "schema": {
+                "refId": "A",
+                "meta": {
+                  "typeVersion": [
+                    0,
+                    0
+                  ],
+                  "custom": {
+                    "calculatedMinStep": 30000
+                  },
+                  "executedQueryString": "Expr: sum by (route) (rate(kitledger_http_requests_total{namespace=\"kitledger\"}[2m]))\nStep: 30s"
+                },
+                "fields": []
+              },
+              "data": {
+                "values": []
+              }
+            }
+          ]
+        }
+      }
+    }
+  },
+  {
+    "request": {
+      "queries": [
+        {
+          "refId": "A",
+          "hide": false,
+          "expr": "sum(kitledger_http_requests_total{namespace=\"kitledger\"})",
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
+          "exemplar": false,
+          "requestId": "2A",
+          "utcOffsetSec": 0,
+          "interval": "",
+          "legendFormat": "",
+          "datasourceId": 1,
+          "intervalMs": 30000,
+          "maxDataPoints": 507
+        }
+      ],
+      "from": "1791919646577",
+      "to": "1791920546577"
+    },
+    "response": {
+      "results": {
+        "A": {
+          "status": 200,
+          "frames": [
+            {
+              "schema": {
+                "refId": "A",
+                "meta": {
+                  "typeVersion": [
+                    0,
+                    0
+                  ],
+                  "custom": {
+                    "calculatedMinStep": 30000
+                  },
+                  "executedQueryString": "Expr: sum(kitledger_http_requests_total{namespace=\"kitledger\"})\nStep: 30s"
+                },
+                "fields": []
+              },
+              "data": {
+                "values": []
+              }
+            }
+          ]
+        }
+      }
+    }
+  },
+  {
+    "request": {
+      "queries": [
+        {
+          "refId": "A",
+          "hide": false,
+          "expr": "sum(rate(kitledger_http_requests_total{namespace=\"kitledger\",status=~\"5..\"}[2m])) or vector(0)",
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
+          "exemplar": false,
+          "requestId": "4A",
+          "utcOffsetSec": 0,
+          "interval": "",
+          "legendFormat": "",
+          "datasourceId": 1,
+          "intervalMs": 30000,
+          "maxDataPoints": 507
+        }
+      ],
+      "from": "1791919646577",
+      "to": "1791920546577"
+    },
+    "response": {
+      "results": {
+        "A": {
+          "status": 200,
+          "frames": [
+            {
+              "schema": {
+                "refId": "A",
+                "meta": {
+                  "type": "timeseries-multi",
+                  "typeVersion": [
+                    0,
+                    1
+                  ],
+                  "custom": {
+                    "calculatedMinStep": 30000,
+                    "resultType": "matrix"
+                  },
+                  "executedQueryString": "Expr: sum(rate(kitledger_http_requests_total{namespace=\"kitledger\",status=~\"5..\"}[2m])) or vector(0)\nStep: 30s"
+                },
+                "fields": [
+                  {
+                    "name": "Time",
+                    "type": "time",
+                    "typeInfo": {
+                      "frame": "time.Time"
+                    },
+                    "config": {
+                      "interval": 30000
+                    }
+                  },
+                  {
+                    "name": "Value",
+                    "type": "number",
+                    "typeInfo": {
+                      "frame": "float64"
+                    },
+                    "labels": {},
+                    "config": {
+                      "displayNameFromDS": "sum(rate(kitledger_http_requests_total{namespace=\"kitledger\",status=~\"5..\"}[2m])) or vector(0)"
+                    }
+                  }
+                ]
+              },
+              "data": {
+                "values": [
+                  [
+                    1791919620000,
+                    1791919650000,
+                    1791919680000,
+                    1791919710000,
+                    1791919740000,
+                    1791919770000,
+                    1791919800000,
+                    1791919830000,
+                    1791919860000,
+                    1791919890000,
+                    1791919920000,
+                    1791919950000,
+                    1791919980000,
+                    1791920010000,
+                    1791920040000,
+                    1791920070000,
+                    1791920100000,
+                    1791920130000,
+                    1791920160000,
+                    1791920190000,
+                    1791920220000,
+                    1791920250000,
+                    1791920280000,
+                    1791920310000,
+                    1791920340000,
+                    1791920370000,
+                    1791920400000,
+                    1791920430000,
+                    1791920460000,
+                    1791920490000,
+                    1791920520000
+                  ],
+                  [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ]
+                ]
+              }
+            }
+          ]
+        }
+      }
+    }
+  },
+  {
+    "request": {
+      "queries": [
+        {
+          "refId": "A",
+          "hide": false,
+          "expr": "histogram_quantile(0.95,sum by(le)(rate(kitledger_http_duration_seconds_bucket{namespace=\"kitledger\"}[2m])))",
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
+          "exemplar": false,
+          "requestId": "3A",
+          "utcOffsetSec": 0,
+          "interval": "",
+          "legendFormat": "",
+          "datasourceId": 1,
+          "intervalMs": 30000,
+          "maxDataPoints": 507
+        }
+      ],
+      "from": "1791919646577",
+      "to": "1791920546577"
+    },
+    "response": {
+      "results": {
+        "A": {
+          "status": 200,
+          "frames": [
+            {
+              "schema": {
+                "refId": "A",
+                "meta": {
+                  "typeVersion": [
+                    0,
+                    0
+                  ],
+                  "custom": {
+                    "calculatedMinStep": 30000
+                  },
+                  "executedQueryString": "Expr: histogram_quantile(0.95,sum by(le)(rate(kitledger_http_duration_seconds_bucket{namespace=\"kitledger\"}[2m])))\nStep: 30s"
+                },
+                "fields": []
+              },
+              "data": {
+                "values": []
+              }
+            }
+          ]
+        }
+      }
+    }
+  },
+  {
+    "request": {
+      "queries": [
+        {
+          "refId": "A",
+          "hide": false,
+          "expr": "sum by (route) (rate(kitledger_http_requests_total{namespace=\"kitledger\"}[2m]))",
+          "legendFormat": "{{route}}",
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
+          "exemplar": false,
+          "requestId": "1A",
+          "utcOffsetSec": 0,
+          "interval": "",
+          "datasourceId": 1,
+          "intervalMs": 30000,
+          "maxDataPoints": 507
+        }
+      ],
+      "from": "1791919656577",
+      "to": "1791920556577"
+    },
+    "response": {
+      "results": {
+        "A": {
+          "status": 200,
+          "frames": [
+            {
+              "schema": {
+                "refId": "A",
+                "meta": {
+                  "type": "timeseries-multi",
+                  "typeVersion": [
+                    0,
+                    1
+                  ],
+                  "custom": {
+                    "calculatedMinStep": 30000,
+                    "resultType": "matrix"
+                  },
+                  "executedQueryString": "Expr: sum by (route) (rate(kitledger_http_requests_total{namespace=\"kitledger\"}[2m]))\nStep: 30s"
+                },
+                "fields": [
+                  {
+                    "name": "Time",
+                    "type": "time",
+                    "typeInfo": {
+                      "frame": "time.Time"
+                    },
+                    "config": {
+                      "interval": 30000
+                    }
+                  },
+                  {
+                    "name": "Value",
+                    "type": "number",
+                    "typeInfo": {
+                      "frame": "float64"
+                    },
+                    "labels": {
+                      "route": "/api/equipment"
+                    },
+                    "config": {
+                      "displayNameFromDS": "/api/equipment"
+                    }
+                  }
+                ]
+              },
+              "data": {
+                "values": [
+                  [
+                    1791920550000
+                  ],
+                  [
+                    0
+                  ]
+                ]
+              }
+            },
+            {
+              "schema": {
+                "refId": "A",
+                "meta": {
+                  "type": "timeseries-multi",
+                  "typeVersion": [
+                    0,
+                    1
+                  ],
+                  "custom": {
+                    "resultType": "matrix"
+                  }
+                },
+                "fields": [
+                  {
+                    "name": "Time",
+                    "type": "time",
+                    "typeInfo": {
+                      "frame": "time.Time"
+                    },
+                    "config": {
+                      "interval": 30000
+                    }
+                  },
+                  {
+                    "name": "Value",
+                    "type": "number",
+                    "typeInfo": {
+                      "frame": "float64"
+                    },
+                    "labels": {
+                      "route": "/api/summary"
+                    },
+                    "config": {
+                      "displayNameFromDS": "/api/summary"
+                    }
+                  }
+                ]
+              },
+              "data": {
+                "values": [
+                  [
+                    1791920550000
+                  ],
+                  [
+                    0
+                  ]
+                ]
+              }
+            },
+            {
+              "schema": {
+                "refId": "A",
+                "meta": {
+                  "type": "timeseries-multi",
+                  "typeVersion": [
+                    0,
+                    1
+                  ],
+                  "custom": {
+                    "resultType": "matrix"
+                  }
+                },
+                "fields": [
+                  {
+                    "name": "Time",
+                    "type": "time",
+                    "typeInfo": {
+                      "frame": "time.Time"
+                    },
+                    "config": {
+                      "interval": 30000
+                    }
+                  },
+                  {
+                    "name": "Value",
+                    "type": "number",
+                    "typeInfo": {
+                      "frame": "float64"
+                    },
+                    "labels": {
+                      "route": "/health"
+                    },
+                    "config": {
+                      "displayNameFromDS": "/health"
+                    }
+                  }
+                ]
+              },
+              "data": {
+                "values": [
+                  [
+                    1791920550000
+                  ],
+                  [
+                    0.034812777777777776
+                  ]
+                ]
+              }
+            },
+            {
+              "schema": {
+                "refId": "A",
+                "meta": {
+                  "type": "timeseries-multi",
+                  "typeVersion": [
+                    0,
+                    1
+                  ],
+                  "custom": {
+                    "resultType": "matrix"
+                  }
+                },
+                "fields": [
+                  {
+                    "name": "Time",
+                    "type": "time",
+                    "typeInfo": {
+                      "frame": "time.Time"
+                    },
+                    "config": {
+                      "interval": 30000
+                    }
+                  },
+                  {
+                    "name": "Value",
+                    "type": "number",
+                    "typeInfo": {
+                      "frame": "float64"
+                    },
+                    "labels": {
+                      "route": "/ready"
+                    },
+                    "config": {
+                      "displayNameFromDS": "/ready"
+                    }
+                  }
+                ]
+              },
+              "data": {
+                "values": [
+                  [
+                    1791920550000
+                  ],
+                  [
+                    0.10443833333333333
+                  ]
+                ]
+              }
+            }
+          ]
+        }
+      }
+    }
+  },
+  {
+    "request": {
+      "queries": [
+        {
+          "refId": "A",
+          "hide": false,
+          "expr": "sum(kitledger_http_requests_total{namespace=\"kitledger\"})",
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
+          "exemplar": false,
+          "requestId": "2A",
+          "utcOffsetSec": 0,
+          "interval": "",
+          "legendFormat": "",
+          "datasourceId": 1,
+          "intervalMs": 30000,
+          "maxDataPoints": 507
+        }
+      ],
+      "from": "1791919656577",
+      "to": "1791920556577"
+    },
+    "response": {
+      "results": {
+        "A": {
+          "status": 200,
+          "frames": [
+            {
+              "schema": {
+                "refId": "A",
+                "meta": {
+                  "type": "timeseries-multi",
+                  "typeVersion": [
+                    0,
+                    1
+                  ],
+                  "custom": {
+                    "calculatedMinStep": 30000,
+                    "resultType": "matrix"
+                  },
+                  "executedQueryString": "Expr: sum(kitledger_http_requests_total{namespace=\"kitledger\"})\nStep: 30s"
+                },
+                "fields": [
+                  {
+                    "name": "Time",
+                    "type": "time",
+                    "typeInfo": {
+                      "frame": "time.Time"
+                    },
+                    "config": {
+                      "interval": 30000
+                    }
+                  },
+                  {
+                    "name": "Value",
+                    "type": "number",
+                    "typeInfo": {
+                      "frame": "float64"
+                    },
+                    "labels": {},
+                    "config": {
+                      "displayNameFromDS": "sum(kitledger_http_requests_total{namespace=\"kitledger\"})"
+                    }
+                  }
+                ]
+              },
+              "data": {
+                "values": [
+                  [
+                    1791920550000
+                  ],
+                  [
+                    193
+                  ]
+                ]
+              }
+            }
+          ]
+        }
+      }
+    }
+  },
+  {
+    "request": {
+      "queries": [
+        {
+          "refId": "A",
+          "hide": false,
+          "expr": "histogram_quantile(0.95,sum by(le)(rate(kitledger_http_duration_seconds_bucket{namespace=\"kitledger\"}[2m])))",
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
+          "exemplar": false,
+          "requestId": "3A",
+          "utcOffsetSec": 0,
+          "interval": "",
+          "legendFormat": "",
+          "datasourceId": 1,
+          "intervalMs": 30000,
+          "maxDataPoints": 507
+        }
+      ],
+      "from": "1791919656577",
+      "to": "1791920556577"
+    },
+    "response": {
+      "results": {
+        "A": {
+          "status": 200,
+          "frames": [
+            {
+              "schema": {
+                "refId": "A",
+                "meta": {
+                  "type": "timeseries-multi",
+                  "typeVersion": [
+                    0,
+                    1
+                  ],
+                  "custom": {
+                    "calculatedMinStep": 30000,
+                    "resultType": "matrix"
+                  },
+                  "executedQueryString": "Expr: histogram_quantile(0.95,sum by(le)(rate(kitledger_http_duration_seconds_bucket{namespace=\"kitledger\"}[2m])))\nStep: 30s"
+                },
+                "fields": [
+                  {
+                    "name": "Time",
+                    "type": "time",
+                    "typeInfo": {
+                      "frame": "time.Time"
+                    },
+                    "config": {
+                      "interval": 30000
+                    }
+                  },
+                  {
+                    "name": "Value",
+                    "type": "number",
+                    "typeInfo": {
+                      "frame": "float64"
+                    },
+                    "labels": {},
+                    "config": {
+                      "displayNameFromDS": "histogram_quantile(0.95,sum by(le)(rate(kitledger_http_duration_seconds_bucket{namespace=\"kitledger\"}[2m])))"
+                    }
+                  }
+                ]
+              },
+              "data": {
+                "values": [
+                  [
+                    1791920550000
+                  ],
+                  [
+                    0.00475
+                  ]
+                ]
+              }
+            }
+          ]
+        }
+      }
+    }
+  },
+  {
+    "request": {
+      "queries": [
+        {
+          "refId": "A",
+          "hide": false,
+          "expr": "sum(rate(kitledger_http_requests_total{namespace=\"kitledger\",status=~\"5..\"}[2m])) or vector(0)",
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
+          "exemplar": false,
+          "requestId": "4A",
+          "utcOffsetSec": 0,
+          "interval": "",
+          "legendFormat": "",
+          "datasourceId": 1,
+          "intervalMs": 30000,
+          "maxDataPoints": 507
+        }
+      ],
+      "from": "1791919656577",
+      "to": "1791920556577"
+    },
+    "response": {
+      "results": {
+        "A": {
+          "status": 200,
+          "frames": [
+            {
+              "schema": {
+                "refId": "A",
+                "meta": {
+                  "type": "timeseries-multi",
+                  "typeVersion": [
+                    0,
+                    1
+                  ],
+                  "custom": {
+                    "calculatedMinStep": 30000,
+                    "resultType": "matrix"
+                  },
+                  "executedQueryString": "Expr: sum(rate(kitledger_http_requests_total{namespace=\"kitledger\",status=~\"5..\"}[2m])) or vector(0)\nStep: 30s"
+                },
+                "fields": [
+                  {
+                    "name": "Time",
+                    "type": "time",
+                    "typeInfo": {
+                      "frame": "time.Time"
+                    },
+                    "config": {
+                      "interval": 30000
+                    }
+                  },
+                  {
+                    "name": "Value",
+                    "type": "number",
+                    "typeInfo": {
+                      "frame": "float64"
+                    },
+                    "labels": {},
+                    "config": {
+                      "displayNameFromDS": "sum(rate(kitledger_http_requests_total{namespace=\"kitledger\",status=~\"5..\"}[2m])) or vector(0)"
+                    }
+                  }
+                ]
+              },
+              "data": {
+                "values": [
+                  [
+                    1791919650000,
+                    1791919680000,
+                    1791919710000,
+                    1791919740000,
+                    1791919770000,
+                    1791919800000,
+                    1791919830000,
+                    1791919860000,
+                    1791919890000,
+                    1791919920000,
+                    1791919950000,
+                    1791919980000,
+                    1791920010000,
+                    1791920040000,
+                    1791920070000,
+                    1791920100000,
+                    1791920130000,
+                    1791920160000,
+                    1791920190000,
+                    1791920220000,
+                    1791920250000,
+                    1791920280000,
+                    1791920310000,
+                    1791920340000,
+                    1791920370000,
+                    1791920400000,
+                    1791920430000,
+                    1791920460000,
+                    1791920490000,
+                    1791920520000,
+                    1791920550000
+                  ],
+                  [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ]
+                ]
+              }
+            }
+          ]
+        }
+      }
+    }
+  }
+]

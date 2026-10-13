@@ -1,0 +1,88 @@
+# HELP kitledger_http_requests_total HTTP requests
+# TYPE kitledger_http_requests_total counter
+kitledger_http_requests_total{method="GET",route="/health",status="200"} 6.0
+kitledger_http_requests_total{method="GET",route="/ready",status="200"} 11.0
+kitledger_http_requests_total{method="GET",route="/api/summary",status="200"} 1.0
+kitledger_http_requests_total{method="GET",route="/api/equipment",status="200"} 100.0
+# HELP kitledger_http_requests_created HTTP requests
+# TYPE kitledger_http_requests_created gauge
+kitledger_http_requests_created{method="GET",route="/health",status="200"} 1.7919196582064703e+09
+kitledger_http_requests_created{method="GET",route="/ready",status="200"} 1.7919196582361827e+09
+kitledger_http_requests_created{method="GET",route="/api/summary",status="200"} 1.7919197093687263e+09
+kitledger_http_requests_created{method="GET",route="/api/equipment",status="200"} 1.7919197093800073e+09
+# HELP kitledger_http_duration_seconds Request latency
+# TYPE kitledger_http_duration_seconds histogram
+kitledger_http_duration_seconds_bucket{le="0.005",route="/health"} 6.0
+kitledger_http_duration_seconds_bucket{le="0.01",route="/health"} 6.0
+kitledger_http_duration_seconds_bucket{le="0.025",route="/health"} 6.0
+kitledger_http_duration_seconds_bucket{le="0.05",route="/health"} 6.0
+kitledger_http_duration_seconds_bucket{le="0.075",route="/health"} 6.0
+kitledger_http_duration_seconds_bucket{le="0.1",route="/health"} 6.0
+kitledger_http_duration_seconds_bucket{le="0.25",route="/health"} 6.0
+kitledger_http_duration_seconds_bucket{le="0.5",route="/health"} 6.0
+kitledger_http_duration_seconds_bucket{le="0.75",route="/health"} 6.0
+kitledger_http_duration_seconds_bucket{le="1.0",route="/health"} 6.0
+kitledger_http_duration_seconds_bucket{le="2.5",route="/health"} 6.0
+kitledger_http_duration_seconds_bucket{le="5.0",route="/health"} 6.0
+kitledger_http_duration_seconds_bucket{le="7.5",route="/health"} 6.0
+kitledger_http_duration_seconds_bucket{le="10.0",route="/health"} 6.0
+kitledger_http_duration_seconds_bucket{le="+Inf",route="/health"} 6.0
+kitledger_http_duration_seconds_count{route="/health"} 6.0
+kitledger_http_duration_seconds_sum{route="/health"} 0.0036827689999654467
+kitledger_http_duration_seconds_bucket{le="0.005",route="/ready"} 10.0
+kitledger_http_duration_seconds_bucket{le="0.01",route="/ready"} 10.0
+kitledger_http_duration_seconds_bucket{le="0.025",route="/ready"} 10.0
+kitledger_http_duration_seconds_bucket{le="0.05",route="/ready"} 11.0
+kitledger_http_duration_seconds_bucket{le="0.075",route="/ready"} 11.0
+kitledger_http_duration_seconds_bucket{le="0.1",route="/ready"} 11.0
+kitledger_http_duration_seconds_bucket{le="0.25",route="/ready"} 11.0
+kitledger_http_duration_seconds_bucket{le="0.5",route="/ready"} 11.0
+kitledger_http_duration_seconds_bucket{le="0.75",route="/ready"} 11.0
+kitledger_http_duration_seconds_bucket{le="1.0",route="/ready"} 11.0
+kitledger_http_duration_seconds_bucket{le="2.5",route="/ready"} 11.0
+kitledger_http_duration_seconds_bucket{le="5.0",route="/ready"} 11.0
+kitledger_http_duration_seconds_bucket{le="7.5",route="/ready"} 11.0
+kitledger_http_duration_seconds_bucket{le="10.0",route="/ready"} 11.0
+kitledger_http_duration_seconds_bucket{le="+Inf",route="/ready"} 11.0
+kitledger_http_duration_seconds_count{route="/ready"} 11.0
+kitledger_http_duration_seconds_sum{route="/ready"} 0.04705065200002423
+kitledger_http_duration_seconds_bucket{le="0.005",route="/api/summary"} 0.0
+kitledger_http_duration_seconds_bucket{le="0.01",route="/api/summary"} 1.0
+kitledger_http_duration_seconds_bucket{le="0.025",route="/api/summary"} 1.0
+kitledger_http_duration_seconds_bucket{le="0.05",route="/api/summary"} 1.0
+kitledger_http_duration_seconds_bucket{le="0.075",route="/api/summary"} 1.0
+kitledger_http_duration_seconds_bucket{le="0.1",route="/api/summary"} 1.0
+kitledger_http_duration_seconds_bucket{le="0.25",route="/api/summary"} 1.0
+kitledger_http_duration_seconds_bucket{le="0.5",route="/api/summary"} 1.0
+kitledger_http_duration_seconds_bucket{le="0.75",route="/api/summary"} 1.0
+kitledger_http_duration_seconds_bucket{le="1.0",route="/api/summary"} 1.0
+kitledger_http_duration_seconds_bucket{le="2.5",route="/api/summary"} 1.0
+kitledger_http_duration_seconds_bucket{le="5.0",route="/api/summary"} 1.0
+kitledger_http_duration_seconds_bucket{le="7.5",route="/api/summary"} 1.0
+kitledger_http_duration_seconds_bucket{le="10.0",route="/api/summary"} 1.0
+kitledger_http_duration_seconds_bucket{le="+Inf",route="/api/summary"} 1.0
+kitledger_http_duration_seconds_count{route="/api/summary"} 1.0
+kitledger_http_duration_seconds_sum{route="/api/summary"} 0.006046636000007766
+kitledger_http_duration_seconds_bucket{le="0.005",route="/api/equipment"} 100.0
+kitledger_http_duration_seconds_bucket{le="0.01",route="/api/equipment"} 100.0
+kitledger_http_duration_seconds_bucket{le="0.025",route="/api/equipment"} 100.0
+kitledger_http_duration_seconds_bucket{le="0.05",route="/api/equipment"} 100.0
+kitledger_http_duration_seconds_bucket{le="0.075",route="/api/equipment"} 100.0
+kitledger_http_duration_seconds_bucket{le="0.1",route="/api/equipment"} 100.0
+kitledger_http_duration_seconds_bucket{le="0.25",route="/api/equipment"} 100.0
+kitledger_http_duration_seconds_bucket{le="0.5",route="/api/equipment"} 100.0
+kitledger_http_duration_seconds_bucket{le="0.75",route="/api/equipment"} 100.0
+kitledger_http_duration_seconds_bucket{le="1.0",route="/api/equipment"} 100.0
+kitledger_http_duration_seconds_bucket{le="2.5",route="/api/equipment"} 100.0
+kitledger_http_duration_seconds_bucket{le="5.0",route="/api/equipment"} 100.0
+kitledger_http_duration_seconds_bucket{le="7.5",route="/api/equipment"} 100.0
+kitledger_http_duration_seconds_bucket{le="10.0",route="/api/equipment"} 100.0
+kitledger_http_duration_seconds_bucket{le="+Inf",route="/api/equipment"} 100.0
+kitledger_http_duration_seconds_count{route="/api/equipment"} 100.0
+kitledger_http_duration_seconds_sum{route="/api/equipment"} 0.10614162800010263
+# HELP kitledger_http_duration_seconds_created Request latency
+# TYPE kitledger_http_duration_seconds_created gauge
+kitledger_http_duration_seconds_created{route="/health"} 1.7919196582064922e+09
+kitledger_http_duration_seconds_created{route="/ready"} 1.7919196582362032e+09
+kitledger_http_duration_seconds_created{route="/api/summary"} 1.7919197093687432e+09
+kitledger_http_duration_seconds_created{route="/api/equipment"} 1.7919197093800218e+09

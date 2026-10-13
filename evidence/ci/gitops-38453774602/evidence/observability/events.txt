@@ -1,0 +1,288 @@
+NAMESPACE           LAST SEEN   TYPE      REASON                    OBJECT                                                         MESSAGE
+default             9m44s       Normal    Starting                  node/observability                                             
+default             9m56s       Normal    Starting                  node/observability                                             Starting kubelet.
+default             9m56s       Normal    NodeHasSufficientMemory   node/observability                                             Node observability status is now: NodeHasSufficientMemory
+default             9m56s       Normal    NodeHasNoDiskPressure     node/observability                                             Node observability status is now: NodeHasNoDiskPressure
+default             9m56s       Normal    NodeHasSufficientPID      node/observability                                             Node observability status is now: NodeHasSufficientPID
+default             9m56s       Normal    NodeAllocatableEnforced   node/observability                                             Updated Node Allocatable limit across pods
+kube-system         9m55s       Normal    Started                   pod/kube-apiserver-observability                               Container started
+kube-system         9m55s       Normal    Created                   pod/kube-apiserver-observability                               Container created
+kube-system         9m55s       Normal    Created                   pod/kube-scheduler-observability                               Container created
+kube-system         9m55s       Normal    Pulled                    pod/kube-scheduler-observability                               Container image "registry.k8s.io/kube-scheduler:v1.37.0" already present on machine and can be accessed by the pod
+kube-system         9m55s       Normal    Started                   pod/etcd-observability                                         Container started
+kube-system         9m55s       Normal    Created                   pod/etcd-observability                                         Container created
+kube-system         9m55s       Normal    Pulled                    pod/kube-apiserver-observability                               Container image "registry.k8s.io/kube-apiserver:v1.37.0" already present on machine and can be accessed by the pod
+kube-system         9m55s       Normal    Pulled                    pod/etcd-observability                                         Container image "registry.k8s.io/etcd:3.7.0-0" already present on machine and can be accessed by the pod
+kube-system         9m55s       Normal    Started                   pod/kube-scheduler-observability                               Container started
+kube-system         9m55s       Normal    Started                   pod/kube-controller-manager-observability                      Container started
+kube-system         9m55s       Normal    Created                   pod/kube-controller-manager-observability                      Container created
+kube-system         9m55s       Normal    Pulled                    pod/kube-controller-manager-observability                      Container image "registry.k8s.io/kube-controller-manager:v1.37.0" already present on machine and can be accessed by the pod
+default             9m51s       Normal    NodeHasNoDiskPressure     node/observability                                             Node observability status is now: NodeHasNoDiskPressure
+default             9m51s       Normal    NodeHasSufficientMemory   node/observability                                             Node observability status is now: NodeHasSufficientMemory
+default             9m51s       Normal    NodeHasSufficientPID      node/observability                                             Node observability status is now: NodeHasSufficientPID
+default             9m51s       Normal    Starting                  node/observability                                             Starting kubelet.
+default             9m51s       Normal    NodeAllocatableEnforced   node/observability                                             Updated Node Allocatable limit across pods
+kube-system         9m50s       Warning   Unhealthy                 pod/kube-scheduler-observability                               Readiness probe failed: HTTP probe failed with statuscode: 500
+kube-system         9m50s       Warning   FailedScheduling          pod/storage-provisioner                                        0/1 nodes are available: 1 node(s) had untolerated taint(s). preemption: 0/1 nodes are available: 1 Preemption is not helpful for scheduling.
+default             9m46s       Normal    RegisteredNode            node/observability                                             Node observability event: Registered Node observability in Controller
+kube-system         9m45s       Normal    Scheduled                 pod/kube-proxy-shhtm                                           Successfully assigned kube-system/kube-proxy-shhtm to observability
+kube-system         9m45s       Normal    Scheduled                 pod/kindnet-wr5xs                                              Successfully assigned kube-system/kindnet-wr5xs to observability
+kube-system         9m45s       Normal    Pulling                   pod/kindnet-wr5xs                                              Pulling image "docker.io/kindest/kindnetd:v20260820-69b56db7"
+kube-system         9m45s       Normal    SuccessfulCreate          daemonset/kindnet                                              Created pod: kindnet-wr5xs
+kube-system         9m45s       Warning   FailedScheduling          pod/coredns-559f6c778d-jz7n2                                   0/1 nodes are available: 1 node(s) had untolerated taint(s). preemption: 0/1 nodes are available: 1 Preemption is not helpful for scheduling.
+kube-system         9m45s       Normal    ScalingReplicaSet         deployment/coredns                                             Scaled up replica set coredns-559f6c778d from 0 to 1
+kube-system         9m45s       Normal    SuccessfulCreate          replicaset/coredns-559f6c778d                                  Created pod: coredns-559f6c778d-jz7n2
+kube-system         9m45s       Normal    Pulled                    pod/kube-proxy-shhtm                                           Container image "registry.k8s.io/kube-proxy:v1.37.0" already present on machine and can be accessed by the pod
+kube-system         9m45s       Normal    Created                   pod/kube-proxy-shhtm                                           Container created
+kube-system         9m45s       Normal    Started                   pod/kube-proxy-shhtm                                           Container started
+kube-system         9m45s       Normal    SuccessfulCreate          daemonset/kube-proxy                                           Created pod: kube-proxy-shhtm
+kube-system         9m42s       Normal    Created                   pod/kindnet-wr5xs                                              Container created
+kube-system         9m42s       Normal    Pulled                    pod/kindnet-wr5xs                                              Successfully pulled image "docker.io/kindest/kindnetd:v20260820-69b56db7" in 2.072s (2.072s including waiting). Image size: 39744255 bytes.
+kube-system         9m42s       Normal    Started                   pod/kindnet-wr5xs                                              Container started
+default             9m32s       Normal    NodeReady                 node/observability                                             Node observability status is now: NodeReady
+kube-system         9m32s       Normal    Created                   pod/storage-provisioner                                        Container created
+kube-system         9m32s       Normal    Scheduled                 pod/coredns-559f6c778d-jz7n2                                   Successfully assigned kube-system/coredns-559f6c778d-jz7n2 to observability
+kube-system         9m32s       Normal    Pulled                    pod/storage-provisioner                                        Container image "gcr.io/k8s-minikube/storage-provisioner:v5" already present on machine and can be accessed by the pod
+kube-system         9m32s       Normal    Scheduled                 pod/storage-provisioner                                        Successfully assigned kube-system/storage-provisioner to observability
+kube-system         9m31s       Normal    Created                   pod/coredns-559f6c778d-jz7n2                                   Container created
+kube-system         9m31s       Normal    LeaderElection            endpoints/k8s.io-minikube-hostpath                             observability_13fd3978-98c2-4167-9c4e-b5d35284808e became leader
+kube-system         9m31s       Warning   Unhealthy                 pod/coredns-559f6c778d-jz7n2                                   Readiness probe failed: Get "http://10.244.0.2:8181/ready": dial tcp 10.244.0.2:8181: connect: connection refused
+kube-system         9m31s       Normal    Started                   pod/coredns-559f6c778d-jz7n2                                   Container started
+kube-system         9m31s       Normal    Pulled                    pod/coredns-559f6c778d-jz7n2                                   Container image "registry.k8s.io/coredns/coredns:v1.14.6" already present on machine and can be accessed by the pod
+kube-system         9m31s       Normal    Started                   pod/storage-provisioner                                        Container started
+kitledger           9m23s       Normal    SuccessfulCreate          replicaset/backend-5555cfbcd9                                  Created pod: backend-5555cfbcd9-vtrvm
+kitledger           9m23s       Normal    Scheduled                 pod/frontend-6b44ff566b-fn5hz                                  Successfully assigned kitledger/frontend-6b44ff566b-fn5hz to observability
+kitledger           9m23s       Normal    ExternalProvisioning      persistentvolumeclaim/data-postgres-0                          Waiting for a volume to be created either by the external provisioner 'k8s.io/minikube-hostpath' or manually by the system administrator. If volume creation is delayed, please verify that the provisioner is running and correctly registered.
+kitledger           9m23s       Normal    ScalingReplicaSet         deployment/backend                                             Scaled up replica set backend-5555cfbcd9 from 0 to 2
+kitledger           9m23s       Normal    ProvisioningSucceeded     persistentvolumeclaim/data-postgres-0                          Successfully provisioned volume pvc-990c3d58-4cb9-4006-8b78-1ceafc17141f
+kitledger           9m23s       Normal    SuccessfulCreate          replicaset/backend-5555cfbcd9                                  Created pod: backend-5555cfbcd9-8dxvr
+kitledger           9m23s       Normal    SuccessfulCreate          replicaset/frontend-6b44ff566b                                 Created pod: frontend-6b44ff566b-44cdt
+kitledger           9m23s       Normal    ScalingReplicaSet         deployment/frontend                                            Scaled up replica set frontend-6b44ff566b from 0 to 2
+kitledger           9m23s       Warning   FailedScheduling          pod/postgres-0                                                 0/1 nodes are available: pod has unbound immediate PersistentVolumeClaims. not found
+kitledger           9m23s       Normal    Scheduled                 pod/postgres-0                                                 Successfully assigned kitledger/postgres-0 to observability
+kitledger           9m23s       Normal    SuccessfulCreate          statefulset/postgres                                           Create Pod postgres-0 in StatefulSet postgres successful
+kitledger           9m23s       Normal    Scheduled                 pod/backend-5555cfbcd9-vtrvm                                   Successfully assigned kitledger/backend-5555cfbcd9-vtrvm to observability
+kitledger           9m23s       Normal    SuccessfulCreate          statefulset/postgres                                           Create Claim data-postgres-0 Pod postgres-0 in StatefulSet postgres success
+kitledger           9m23s       Normal    Pulling                   pod/frontend-6b44ff566b-fn5hz                                  Pulling image "busybox:1.37"
+kitledger           9m23s       Normal    SuccessfulCreate          replicaset/frontend-6b44ff566b                                 Created pod: frontend-6b44ff566b-fn5hz
+kitledger           9m23s       Normal    Pulling                   pod/postgres-0                                                 Pulling image "postgres:17-alpine"
+kitledger           9m23s       Normal    Provisioning              persistentvolumeclaim/data-postgres-0                          External provisioner is provisioning volume for claim "kitledger/data-postgres-0"
+kitledger           9m23s       Normal    Scheduled                 pod/backend-5555cfbcd9-8dxvr                                   Successfully assigned kitledger/backend-5555cfbcd9-8dxvr to observability
+kitledger           9m23s       Normal    Scheduled                 pod/frontend-6b44ff566b-44cdt                                  Successfully assigned kitledger/frontend-6b44ff566b-44cdt to observability
+kitledger           9m23s       Normal    Pulling                   pod/frontend-6b44ff566b-44cdt                                  Pulling image "busybox:1.37"
+kitledger           9m22s       Normal    Created                   pod/frontend-6b44ff566b-44cdt                                  Container created
+kitledger           9m22s       Normal    Pulled                    pod/frontend-6b44ff566b-44cdt                                  Successfully pulled image "busybox:1.37" in 1.512s (1.512s including waiting). Image size: 2222118 bytes.
+kitledger           9m21s       Normal    Pulled                    pod/frontend-6b44ff566b-fn5hz                                  Successfully pulled image "busybox:1.37" in 387ms (1.897s including waiting). Image size: 2222118 bytes.
+kitledger           9m21s       Normal    Started                   pod/frontend-6b44ff566b-44cdt                                  Container started
+kitledger           9m21s       Normal    Started                   pod/frontend-6b44ff566b-fn5hz                                  Container started
+kitledger           9m21s       Normal    Created                   pod/frontend-6b44ff566b-fn5hz                                  Container created
+kitledger           9m17s       Normal    Created                   pod/postgres-0                                                 Container created
+kitledger           9m17s       Normal    Pulled                    pod/postgres-0                                                 Successfully pulled image "postgres:17-alpine" in 3.861s (5.456s including waiting). Image size: 117212703 bytes.
+kitledger           9m17s       Normal    Started                   pod/postgres-0                                                 Container started
+kitledger           9m16s       Warning   Unhealthy                 pod/postgres-0                                                 Readiness probe failed: /var/run/postgresql:5432 - no response
+kitledger           9m13s       Warning   BackOff                   pod/backend-5555cfbcd9-8dxvr                                   Back-off restarting failed container backend in pod backend-5555cfbcd9-8dxvr_kitledger(3ed98691-e34d-4f7b-ace9-4e340a9184cc)
+kitledger           9m12s       Warning   BackOff                   pod/backend-5555cfbcd9-vtrvm                                   Back-off restarting failed container backend in pod backend-5555cfbcd9-vtrvm_kitledger(529f4e18-58ac-4080-aafb-0c0695fb064f)
+kitledger           9m4s        Normal    Started                   pod/backend-5555cfbcd9-vtrvm                                   Container started
+kitledger           9m4s        Normal    Pulled                    pod/backend-5555cfbcd9-vtrvm                                   Container image "ghcr.io/yashsensei/kitledger-backend:60c78265ac7f1db7fb2ddbe3b877584fd5a13e5d" already present on machine and can be accessed by the pod
+kitledger           9m4s        Normal    Created                   pod/backend-5555cfbcd9-vtrvm                                   Container created
+kitledger           9m2s        Normal    Created                   pod/backend-5555cfbcd9-8dxvr                                   Container created
+kitledger           9m2s        Warning   Unhealthy                 pod/backend-5555cfbcd9-vtrvm                                   Startup probe failed: Get "http://10.244.0.6:8000/health": dial tcp 10.244.0.6:8000: connect: connection refused
+kitledger           9m2s        Normal    Pulled                    pod/backend-5555cfbcd9-8dxvr                                   Container image "ghcr.io/yashsensei/kitledger-backend:60c78265ac7f1db7fb2ddbe3b877584fd5a13e5d" already present on machine and can be accessed by the pod
+kitledger           9m2s        Normal    Started                   pod/backend-5555cfbcd9-8dxvr                                   Container started
+kitledger           8m59s       Warning   Unhealthy                 pod/backend-5555cfbcd9-8dxvr                                   Startup probe failed: Get "http://10.244.0.4:8000/health": dial tcp 10.244.0.4:8000: connect: connection refused
+kitledger           8m58s       Normal    Started                   pod/frontend-6b44ff566b-44cdt                                  Container started
+kitledger           8m58s       Normal    Pulled                    pod/frontend-6b44ff566b-44cdt                                  Container image "ghcr.io/yashsensei/kitledger-frontend:60c78265ac7f1db7fb2ddbe3b877584fd5a13e5d" already present on machine and can be accessed by the pod
+kitledger           8m58s       Normal    Created                   pod/frontend-6b44ff566b-44cdt                                  Container created
+kitledger           8m58s       Warning   Unhealthy                 pod/frontend-6b44ff566b-44cdt                                  Readiness probe failed: Get "http://10.244.0.5:8080/": dial tcp 10.244.0.5:8080: connect: connection refused
+kitledger           8m57s       Normal    Created                   pod/frontend-6b44ff566b-fn5hz                                  Container created
+kitledger           8m57s       Normal    Started                   pod/frontend-6b44ff566b-fn5hz                                  Container started
+kitledger           8m57s       Warning   Unhealthy                 pod/frontend-6b44ff566b-fn5hz                                  Readiness probe failed: Get "http://10.244.0.3:8080/": dial tcp 10.244.0.3:8080: connect: connection refused
+kitledger           8m57s       Normal    Pulled                    pod/frontend-6b44ff566b-fn5hz                                  Container image "ghcr.io/yashsensei/kitledger-frontend:60c78265ac7f1db7fb2ddbe3b877584fd5a13e5d" already present on machine and can be accessed by the pod
+monitoring          8m50s       Normal    SuccessfulCreate          job/monitoring-kube-prometheus-admission-create                Created pod: monitoring-kube-prometheus-admission-create-xdwcp
+monitoring          8m50s       Normal    Pulling                   pod/monitoring-kube-prometheus-admission-create-xdwcp          Pulling image "ghcr.io/jkroepke/kube-webhook-certgen:1.8.9"
+monitoring          8m50s       Normal    Scheduled                 pod/monitoring-kube-prometheus-admission-create-xdwcp          Successfully assigned monitoring/monitoring-kube-prometheus-admission-create-xdwcp to observability
+monitoring          8m48s       Normal    Started                   pod/monitoring-kube-prometheus-admission-create-xdwcp          Container started
+monitoring          8m48s       Normal    Created                   pod/monitoring-kube-prometheus-admission-create-xdwcp          Container created
+monitoring          8m48s       Normal    Pulled                    pod/monitoring-kube-prometheus-admission-create-xdwcp          Successfully pulled image "ghcr.io/jkroepke/kube-webhook-certgen:1.8.9" in 1.721s (1.721s including waiting). Image size: 9485580 bytes.
+monitoring          8m45s       Normal    Completed                 job/monitoring-kube-prometheus-admission-create                Job completed
+monitoring          8m44s       Normal    SuccessfulCreate          replicaset/monitoring-kube-prometheus-operator-6458848b98      Created pod: monitoring-kube-prometheus-operator-6458848b98-wv2b2
+monitoring          8m44s       Normal    Scheduled                 pod/monitoring-kube-state-metrics-78fd56fc4b-nq5gb             Successfully assigned monitoring/monitoring-kube-state-metrics-78fd56fc4b-nq5gb to observability
+monitoring          8m44s       Normal    Pulling                   pod/monitoring-grafana-b559cd96f-8ksj4                         Pulling image "quay.io/kiwigrid/k8s-sidecar:2.14.1"
+monitoring          8m44s       Normal    SuccessfulCreate          daemonset/monitoring-prometheus-node-exporter                  Created pod: monitoring-prometheus-node-exporter-m8thw
+monitoring          8m44s       Normal    Pulling                   pod/monitoring-prometheus-node-exporter-m8thw                  Pulling image "quay.io/prometheus/node-exporter:v1.12.1-distroless"
+monitoring          8m44s       Normal    Scheduled                 pod/monitoring-prometheus-node-exporter-m8thw                  Successfully assigned monitoring/monitoring-prometheus-node-exporter-m8thw to observability
+monitoring          8m44s       Normal    ScalingReplicaSet         deployment/monitoring-kube-state-metrics                       Scaled up replica set monitoring-kube-state-metrics-78fd56fc4b from 0 to 1
+monitoring          8m44s       Normal    SuccessfulCreate          replicaset/monitoring-kube-state-metrics-78fd56fc4b            Created pod: monitoring-kube-state-metrics-78fd56fc4b-nq5gb
+monitoring          8m44s       Normal    Pulling                   pod/monitoring-kube-state-metrics-78fd56fc4b-nq5gb             Pulling image "registry.k8s.io/kube-state-metrics/kube-state-metrics:v2.20.0"
+monitoring          8m44s       Normal    Scheduled                 pod/monitoring-grafana-b559cd96f-8ksj4                         Successfully assigned monitoring/monitoring-grafana-b559cd96f-8ksj4 to observability
+monitoring          8m44s       Normal    SuccessfulCreate          replicaset/monitoring-grafana-b559cd96f                        Created pod: monitoring-grafana-b559cd96f-8ksj4
+monitoring          8m44s       Normal    ScalingReplicaSet         deployment/monitoring-grafana                                  Scaled up replica set monitoring-grafana-b559cd96f from 0 to 1
+monitoring          8m44s       Normal    Scheduled                 pod/monitoring-kube-prometheus-operator-6458848b98-wv2b2       Successfully assigned monitoring/monitoring-kube-prometheus-operator-6458848b98-wv2b2 to observability
+monitoring          8m44s       Normal    Pulling                   pod/monitoring-kube-prometheus-operator-6458848b98-wv2b2       Pulling image "quay.io/prometheus-operator/prometheus-operator:v0.94.1"
+monitoring          8m44s       Normal    ScalingReplicaSet         deployment/monitoring-kube-prometheus-operator                 Scaled up replica set monitoring-kube-prometheus-operator-6458848b98 from 0 to 1
+monitoring          8m42s       Normal    Pulled                    pod/monitoring-prometheus-node-exporter-m8thw                  Successfully pulled image "quay.io/prometheus/node-exporter:v1.12.1-distroless" in 1.751s (1.751s including waiting). Image size: 13123706 bytes.
+monitoring          8m42s       Warning   Unhealthy                 pod/monitoring-prometheus-node-exporter-m8thw                  Readiness probe failed: Get "http://192.168.49.2:9100/": dial tcp 192.168.49.2:9100: connect: connection refused
+monitoring          8m42s       Normal    Started                   pod/monitoring-prometheus-node-exporter-m8thw                  Container started
+monitoring          8m42s       Normal    Created                   pod/monitoring-prometheus-node-exporter-m8thw                  Container created
+monitoring          8m41s       Normal    Pulled                    pod/monitoring-kube-state-metrics-78fd56fc4b-nq5gb             Successfully pulled image "registry.k8s.io/kube-state-metrics/kube-state-metrics:v2.20.0" in 1.623s (3.296s including waiting). Image size: 19261896 bytes.
+monitoring          8m41s       Normal    Created                   pod/monitoring-kube-state-metrics-78fd56fc4b-nq5gb             Container created
+monitoring          8m41s       Normal    Started                   pod/monitoring-kube-state-metrics-78fd56fc4b-nq5gb             Container started
+monitoring          8m39s       Normal    Started                   pod/monitoring-kube-prometheus-operator-6458848b98-wv2b2       Container started
+monitoring          8m39s       Warning   Unhealthy                 pod/monitoring-kube-prometheus-operator-6458848b98-wv2b2       Readiness probe failed: Get "https://10.244.0.10:10250/healthz": dial tcp 10.244.0.10:10250: connect: connection refused
+monitoring          8m39s       Normal    Pulled                    pod/monitoring-kube-prometheus-operator-6458848b98-wv2b2       Successfully pulled image "quay.io/prometheus-operator/prometheus-operator:v0.94.1" in 1.823s (5.108s including waiting). Image size: 22572616 bytes.
+monitoring          8m39s       Normal    Created                   pod/monitoring-kube-prometheus-operator-6458848b98-wv2b2       Container created
+monitoring          8m38s       Normal    Scheduled                 pod/prometheus-monitoring-kube-prometheus-prometheus-0         Successfully assigned monitoring/prometheus-monitoring-kube-prometheus-prometheus-0 to observability
+monitoring          8m38s       Normal    Pulling                   pod/prometheus-monitoring-kube-prometheus-prometheus-0         Pulling image "quay.io/prometheus-operator/prometheus-config-reloader:v0.94.1"
+monitoring          8m38s       Normal    SuccessfulCreate          statefulset/prometheus-monitoring-kube-prometheus-prometheus   Create Pod prometheus-monitoring-kube-prometheus-prometheus-0 in StatefulSet prometheus-monitoring-kube-prometheus-prometheus successful
+monitoring          8m36s       Normal    Pulling                   pod/monitoring-grafana-b559cd96f-8ksj4                         Pulling image "docker.io/grafana/grafana:13.2.4-distroless"
+monitoring          8m36s       Normal    Created                   pod/monitoring-grafana-b559cd96f-8ksj4                         Container created
+monitoring          8m36s       Normal    Started                   pod/monitoring-grafana-b559cd96f-8ksj4                         Container started
+monitoring          8m36s       Normal    Pulled                    pod/monitoring-grafana-b559cd96f-8ksj4                         Successfully pulled image "quay.io/kiwigrid/k8s-sidecar:2.14.1" in 2.573s (7.661s including waiting). Image size: 29200776 bytes.
+monitoring          8m36s       Normal    Created                   pod/monitoring-grafana-b559cd96f-8ksj4                         Container created
+monitoring          8m36s       Normal    Pulled                    pod/monitoring-grafana-b559cd96f-8ksj4                         Container image "quay.io/kiwigrid/k8s-sidecar:2.14.1" already present on machine and can be accessed by the pod
+monitoring          8m36s       Normal    Started                   pod/monitoring-grafana-b559cd96f-8ksj4                         Container started
+monitoring          8m34s       Normal    Pulled                    pod/prometheus-monitoring-kube-prometheus-prometheus-0         Successfully pulled image "quay.io/prometheus-operator/prometheus-config-reloader:v0.94.1" in 1.725s (3.368s including waiting). Image size: 14893664 bytes.
+monitoring          8m34s       Normal    Created                   pod/prometheus-monitoring-kube-prometheus-prometheus-0         Container created
+monitoring          8m34s       Normal    Started                   pod/prometheus-monitoring-kube-prometheus-prometheus-0         Container started
+monitoring          8m33s       Normal    Pulling                   pod/prometheus-monitoring-kube-prometheus-prometheus-0         Pulling image "quay.io/prometheus/prometheus:v3.15.0-distroless"
+monitoring          8m23s       Normal    Created                   pod/monitoring-grafana-b559cd96f-8ksj4                         Container created
+monitoring          8m23s       Normal    Started                   pod/monitoring-grafana-b559cd96f-8ksj4                         Container started
+monitoring          8m23s       Normal    Pulled                    pod/monitoring-grafana-b559cd96f-8ksj4                         Successfully pulled image "docker.io/grafana/grafana:13.2.4-distroless" in 11.33s (12.901s including waiting). Image size: 464079275 bytes.
+monitoring          8m22s       Warning   Unhealthy                 pod/monitoring-grafana-b559cd96f-8ksj4                         Readiness probe failed: Get "http://10.244.0.11:3000/api/health": dial tcp 10.244.0.11:3000: connect: connection refused
+monitoring          8m19s       Normal    Pulled                    pod/prometheus-monitoring-kube-prometheus-prometheus-0         Successfully pulled image "quay.io/prometheus/prometheus:v3.15.0-distroless" in 4.099s (14.11s including waiting). Image size: 113793870 bytes.
+monitoring          8m19s       Normal    Started                   pod/prometheus-monitoring-kube-prometheus-prometheus-0         Container started
+monitoring          8m19s       Normal    Pulled                    pod/prometheus-monitoring-kube-prometheus-prometheus-0         Container image "quay.io/prometheus-operator/prometheus-config-reloader:v0.94.1" already present on machine and can be accessed by the pod
+monitoring          8m19s       Normal    Created                   pod/prometheus-monitoring-kube-prometheus-prometheus-0         Container created
+monitoring          8m19s       Normal    Created                   pod/prometheus-monitoring-kube-prometheus-prometheus-0         Container created
+monitoring          8m19s       Normal    Started                   pod/prometheus-monitoring-kube-prometheus-prometheus-0         Container started
+monitoring          8m11s       Normal    SuccessfulCreate          job/monitoring-kube-prometheus-admission-patch                 Created pod: monitoring-kube-prometheus-admission-patch-97bxg
+monitoring          8m11s       Normal    Scheduled                 pod/monitoring-kube-prometheus-admission-patch-97bxg           Successfully assigned monitoring/monitoring-kube-prometheus-admission-patch-97bxg to observability
+monitoring          8m10s       Normal    Created                   pod/monitoring-kube-prometheus-admission-patch-97bxg           Container created
+monitoring          8m10s       Normal    Started                   pod/monitoring-kube-prometheus-admission-patch-97bxg           Container started
+monitoring          8m10s       Normal    Pulled                    pod/monitoring-kube-prometheus-admission-patch-97bxg           Container image "ghcr.io/jkroepke/kube-webhook-certgen:1.8.9" already present on machine and can be accessed by the pod
+monitoring          8m8s        Normal    Completed                 job/monitoring-kube-prometheus-admission-patch                 Job completed
+monitoring          6m46s       Normal    Killing                   pod/monitoring-grafana-b559cd96f-8ksj4                         Stopping container grafana-sc-datasources
+monitoring          6m46s       Normal    Killing                   pod/monitoring-kube-prometheus-operator-6458848b98-wv2b2       Stopping container kube-prometheus-stack
+monitoring          6m46s       Normal    Killing                   pod/monitoring-kube-state-metrics-78fd56fc4b-nq5gb             Stopping container kube-state-metrics
+monitoring          6m46s       Normal    Killing                   pod/monitoring-prometheus-node-exporter-m8thw                  Stopping container node-exporter
+monitoring          6m46s       Normal    Killing                   pod/monitoring-grafana-b559cd96f-8ksj4                         Stopping container grafana-sc-dashboard
+monitoring          6m46s       Normal    Killing                   pod/monitoring-grafana-b559cd96f-8ksj4                         Stopping container grafana
+monitoring          6m45s       Normal    Killing                   pod/prometheus-monitoring-kube-prometheus-prometheus-0         Stopping container config-reloader
+monitoring          6m45s       Normal    Killing                   pod/prometheus-monitoring-kube-prometheus-prometheus-0         Stopping container prometheus
+argocd              6m43s       Normal    Scheduled                 pod/argocd-application-controller-0                            Successfully assigned argocd/argocd-application-controller-0 to observability
+argocd              6m43s       Normal    Pulling                   pod/argocd-applicationset-controller-66d7f7865d-jgqgv          Pulling image "quay.io/argoproj/argocd:v3.5.5"
+argocd              6m43s       Normal    ScalingReplicaSet         deployment/argocd-redis                                        Scaled up replica set argocd-redis-5fbd54c8cc from 0 to 1
+argocd              6m43s       Normal    SuccessfulCreate          replicaset/argocd-server-7f85776b5c                            Created pod: argocd-server-7f85776b5c-b7h6v
+argocd              6m43s       Normal    ScalingReplicaSet         deployment/argocd-repo-server                                  Scaled up replica set argocd-repo-server-66875c66b4 from 0 to 1
+argocd              6m43s       Normal    Scheduled                 pod/argocd-server-7f85776b5c-b7h6v                             Successfully assigned argocd/argocd-server-7f85776b5c-b7h6v to observability
+argocd              6m43s       Normal    SuccessfulCreate          replicaset/argocd-repo-server-66875c66b4                       Created pod: argocd-repo-server-66875c66b4-rvg6b
+argocd              6m43s       Normal    SuccessfulCreate          replicaset/argocd-redis-5fbd54c8cc                             Created pod: argocd-redis-5fbd54c8cc-vqmrq
+argocd              6m43s       Normal    ScalingReplicaSet         deployment/argocd-server                                       Scaled up replica set argocd-server-7f85776b5c from 0 to 1
+argocd              6m43s       Normal    SuccessfulCreate          statefulset/argocd-application-controller                      Create Pod argocd-application-controller-0 in StatefulSet argocd-application-controller successful
+argocd              6m43s       Normal    Scheduled                 pod/argocd-applicationset-controller-66d7f7865d-jgqgv          Successfully assigned argocd/argocd-applicationset-controller-66d7f7865d-jgqgv to observability
+argocd              6m43s       Normal    Scheduled                 pod/argocd-repo-server-66875c66b4-rvg6b                        Successfully assigned argocd/argocd-repo-server-66875c66b4-rvg6b to observability
+argocd              6m43s       Normal    SuccessfulCreate          replicaset/argocd-applicationset-controller-66d7f7865d         Created pod: argocd-applicationset-controller-66d7f7865d-jgqgv
+argocd              6m43s       Normal    ScalingReplicaSet         deployment/argocd-applicationset-controller                    Scaled up replica set argocd-applicationset-controller-66d7f7865d from 0 to 1
+argocd              6m43s       Normal    Scheduled                 pod/argocd-dex-server-6d8ddc4748-5qkk5                         Successfully assigned argocd/argocd-dex-server-6d8ddc4748-5qkk5 to observability
+argocd              6m43s       Normal    Scheduled                 pod/argocd-redis-5fbd54c8cc-vqmrq                              Successfully assigned argocd/argocd-redis-5fbd54c8cc-vqmrq to observability
+argocd              6m43s       Normal    ScalingReplicaSet         deployment/argocd-notifications-controller                     Scaled up replica set argocd-notifications-controller-6bdf867f45 from 0 to 1
+argocd              6m43s       Normal    SuccessfulCreate          replicaset/argocd-notifications-controller-6bdf867f45          Created pod: argocd-notifications-controller-6bdf867f45-lvv7s
+argocd              6m43s       Normal    SuccessfulCreate          replicaset/argocd-dex-server-6d8ddc4748                        Created pod: argocd-dex-server-6d8ddc4748-5qkk5
+argocd              6m43s       Normal    ScalingReplicaSet         deployment/argocd-dex-server                                   Scaled up replica set argocd-dex-server-6d8ddc4748 from 0 to 1
+argocd              6m43s       Normal    Scheduled                 pod/argocd-notifications-controller-6bdf867f45-lvv7s           Successfully assigned argocd/argocd-notifications-controller-6bdf867f45-lvv7s to observability
+argocd              6m42s       Normal    Pulling                   pod/argocd-notifications-controller-6bdf867f45-lvv7s           Pulling image "quay.io/argoproj/argocd:v3.5.5"
+argocd              6m42s       Normal    Pulling                   pod/argocd-server-7f85776b5c-b7h6v                             Pulling image "quay.io/argoproj/argocd:v3.5.5"
+argocd              6m42s       Normal    Pulling                   pod/argocd-repo-server-66875c66b4-rvg6b                        Pulling image "quay.io/argoproj/argocd:v3.5.5"
+argocd              6m42s       Normal    Pulling                   pod/argocd-redis-5fbd54c8cc-vqmrq                              Pulling image "quay.io/argoproj/argocd:v3.5.5"
+argocd              6m42s       Normal    Pulling                   pod/argocd-dex-server-6d8ddc4748-5qkk5                         Pulling image "quay.io/argoproj/argocd:v3.5.5"
+argocd              6m42s       Normal    Pulling                   pod/argocd-application-controller-0                            Pulling image "quay.io/argoproj/argocd:v3.5.5"
+argocd              6m37s       Normal    Created                   pod/argocd-applicationset-controller-66d7f7865d-jgqgv          Container created
+argocd              6m37s       Normal    Pulled                    pod/argocd-applicationset-controller-66d7f7865d-jgqgv          Successfully pulled image "quay.io/argoproj/argocd:v3.5.5" in 5.985s (5.986s including waiting). Image size: 221565168 bytes.
+argocd              6m36s       Normal    Pulled                    pod/argocd-server-7f85776b5c-b7h6v                             Successfully pulled image "quay.io/argoproj/argocd:v3.5.5" in 223ms (6.642s including waiting). Image size: 221565168 bytes.
+argocd              6m36s       Normal    Started                   pod/argocd-redis-5fbd54c8cc-vqmrq                              Container started
+argocd              6m36s       Normal    Started                   pod/argocd-applicationset-controller-66d7f7865d-jgqgv          Container started
+argocd              6m36s       Normal    Created                   pod/argocd-server-7f85776b5c-b7h6v                             Container created
+argocd              6m36s       Normal    Started                   pod/argocd-server-7f85776b5c-b7h6v                             Container started
+argocd              6m36s       Normal    Pulled                    pod/argocd-redis-5fbd54c8cc-vqmrq                              Successfully pulled image "quay.io/argoproj/argocd:v3.5.5" in 671ms (6.485s including waiting). Image size: 221565168 bytes.
+argocd              6m36s       Normal    Created                   pod/argocd-redis-5fbd54c8cc-vqmrq                              Container created
+argocd              6m35s       Normal    Pulled                    pod/argocd-application-controller-0                            Successfully pulled image "quay.io/argoproj/argocd:v3.5.5" in 225ms (6.913s including waiting). Image size: 221565168 bytes.
+argocd              6m35s       Normal    Pulled                    pod/argocd-repo-server-66875c66b4-rvg6b                        Successfully pulled image "quay.io/argoproj/argocd:v3.5.5" in 250ms (7.158s including waiting). Image size: 221565168 bytes.
+argocd              6m35s       Normal    Created                   pod/argocd-dex-server-6d8ddc4748-5qkk5                         Container created
+argocd              6m35s       Normal    Started                   pod/argocd-dex-server-6d8ddc4748-5qkk5                         Container started
+argocd              6m35s       Normal    Pulling                   pod/argocd-redis-5fbd54c8cc-vqmrq                              Pulling image "public.ecr.aws/docker/library/redis:8.2.3-alpine"
+argocd              6m35s       Normal    Started                   pod/argocd-repo-server-66875c66b4-rvg6b                        Container started
+argocd              6m35s       Normal    Started                   pod/argocd-application-controller-0                            Container started
+argocd              6m35s       Normal    Created                   pod/argocd-application-controller-0                            Container created
+argocd              6m35s       Normal    Pulled                    pod/argocd-notifications-controller-6bdf867f45-lvv7s           Successfully pulled image "quay.io/argoproj/argocd:v3.5.5" in 186ms (7.33s including waiting). Image size: 221565168 bytes.
+argocd              6m35s       Normal    Started                   pod/argocd-notifications-controller-6bdf867f45-lvv7s           Container started
+argocd              6m35s       Normal    Pulled                    pod/argocd-dex-server-6d8ddc4748-5qkk5                         Successfully pulled image "quay.io/argoproj/argocd:v3.5.5" in 172ms (6.705s including waiting). Image size: 221565168 bytes.
+argocd              6m35s       Normal    Created                   pod/argocd-repo-server-66875c66b4-rvg6b                        Container created
+argocd              6m35s       Normal    Created                   pod/argocd-notifications-controller-6bdf867f45-lvv7s           Container created
+argocd              6m34s       Normal    Pulling                   pod/argocd-dex-server-6d8ddc4748-5qkk5                         Pulling image "ghcr.io/dexidp/dex:v2.45.1"
+argocd              6m33s       Normal    Pulling                   pod/argocd-repo-server-66875c66b4-rvg6b                        Pulling image "quay.io/argoproj/argocd:v3.5.5"
+argocd              6m32s       Normal    Started                   pod/argocd-redis-5fbd54c8cc-vqmrq                              Container started
+argocd              6m32s       Normal    Created                   pod/argocd-redis-5fbd54c8cc-vqmrq                              Container created
+argocd              6m32s       Normal    Pulled                    pod/argocd-redis-5fbd54c8cc-vqmrq                              Successfully pulled image "public.ecr.aws/docker/library/redis:8.2.3-alpine" in 2.436s (2.436s including waiting). Image size: 27510315 bytes.
+argocd              6m30s       Normal    Started                   pod/argocd-dex-server-6d8ddc4748-5qkk5                         Container started
+argocd              6m30s       Normal    Started                   pod/argocd-repo-server-66875c66b4-rvg6b                        Container started
+argocd              6m30s       Normal    Created                   pod/argocd-repo-server-66875c66b4-rvg6b                        Container created
+argocd              6m30s       Normal    Pulled                    pod/argocd-repo-server-66875c66b4-rvg6b                        Successfully pulled image "quay.io/argoproj/argocd:v3.5.5" in 207ms (3.134s including waiting). Image size: 221565168 bytes.
+argocd              6m30s       Normal    Created                   pod/argocd-dex-server-6d8ddc4748-5qkk5                         Container created
+argocd              6m30s       Normal    Pulled                    pod/argocd-dex-server-6d8ddc4748-5qkk5                         Successfully pulled image "ghcr.io/dexidp/dex:v2.45.1" in 2.498s (3.932s including waiting). Image size: 48093166 bytes.
+argocd              6m2s        Normal    ResourceUpdated           application/coursework-gitops                                  Updated health status: Missing -> Healthy
+coursework-gitops   6m2s        Normal    ScalingReplicaSet         deployment/lending-info                                        Scaled up replica set lending-info-6d7765845 from 0 to 2
+coursework-gitops   6m2s        Normal    SuccessfulCreate          replicaset/lending-info-6d7765845                              Created pod: lending-info-6d7765845-vvr8h
+argocd              6m2s        Normal    ResourceUpdated           application/coursework-gitops                                  Updated health status:  -> Missing
+argocd              6m2s        Normal    ResourceUpdated           application/coursework-gitops                                  Updated sync status:  -> OutOfSync
+argocd              6m2s        Normal    OperationStarted          application/coursework-gitops                                  Initiated automated sync to '8aebd24bfce59815f98598ef6f1ed0e1e96c1613'
+coursework-gitops   6m1s        Normal    Scheduled                 pod/lending-info-6d7765845-vvr8h                               Successfully assigned coursework-gitops/lending-info-6d7765845-vvr8h to observability
+argocd              6m1s        Normal    ResourceUpdated           application/coursework-gitops                                  Updated health status: Healthy -> Progressing
+coursework-gitops   6m1s        Normal    Pulling                   pod/lending-info-6d7765845-vvr8h                               Pulling image "nginx:stable-alpine"
+coursework-gitops   6m1s        Normal    Pulling                   pod/lending-info-6d7765845-462z7                               Pulling image "nginx:stable-alpine"
+coursework-gitops   6m1s        Normal    Scheduled                 pod/lending-info-6d7765845-462z7                               Successfully assigned coursework-gitops/lending-info-6d7765845-462z7 to observability
+argocd              6m1s        Normal    OperationCompleted        application/coursework-gitops                                  Sync operation to 8aebd24bfce59815f98598ef6f1ed0e1e96c1613 succeeded
+argocd              6m1s        Normal    ResourceUpdated           application/coursework-gitops                                  Updated sync status: OutOfSync -> Synced
+coursework-gitops   6m1s        Normal    SuccessfulCreate          replicaset/lending-info-6d7765845                              Created pod: lending-info-6d7765845-462z7
+coursework-gitops   5m59s       Normal    Created                   pod/lending-info-6d7765845-462z7                               Container created
+coursework-gitops   5m59s       Normal    Pulled                    pod/lending-info-6d7765845-462z7                               Successfully pulled image "nginx:stable-alpine" in 382ms (2.316s including waiting). Image size: 26098628 bytes.
+coursework-gitops   5m59s       Normal    Pulled                    pod/lending-info-6d7765845-vvr8h                               Successfully pulled image "nginx:stable-alpine" in 1.952s (1.952s including waiting). Image size: 26098628 bytes.
+coursework-gitops   5m59s       Normal    Created                   pod/lending-info-6d7765845-vvr8h                               Container created
+coursework-gitops   5m59s       Normal    Started                   pod/lending-info-6d7765845-vvr8h                               Container started
+argocd              5m58s       Normal    ResourceUpdated           application/coursework-gitops                                  Updated health status: Progressing -> Healthy
+coursework-gitops   5m58s       Normal    Started                   pod/lending-info-6d7765845-462z7                               Container started
+argocd              9s          Normal    OperationStarted          application/coursework-gitops                                  Initiated automated sync to '534e3a0798dd0a8fa641b58ba5653403bb64e131'
+argocd              9s          Normal    OperationStarted          application/coursework-gitops                                  Initiated automated sync to '534e3a0798dd0a8fa641b58ba5653403bb64e131'
+coursework-gitops   9s          Normal    ScalingReplicaSet         deployment/lending-info                                        Scaled up replica set lending-info-6d7765845 from 2 to 3
+coursework-gitops   9s          Normal    Scheduled                 pod/lending-info-6d7765845-9kt4l                               Successfully assigned coursework-gitops/lending-info-6d7765845-9kt4l to observability
+argocd              9s          Normal    OperationCompleted        application/coursework-gitops                                  Partial sync operation to 534e3a0798dd0a8fa641b58ba5653403bb64e131 succeeded
+argocd              9s          Normal    ResourceUpdated           application/coursework-gitops                                  Updated health status: Healthy -> Progressing
+argocd              9s          Normal    ResourceUpdated           application/coursework-gitops                                  Updated sync status: OutOfSync -> Synced
+coursework-gitops   9s          Normal    SuccessfulCreate          replicaset/lending-info-6d7765845                              Created pod: lending-info-6d7765845-9kt4l
+argocd              9s          Normal    OperationCompleted        application/coursework-gitops                                  Sync operation to 534e3a0798dd0a8fa641b58ba5653403bb64e131 succeeded
+argocd              9s          Normal    ResourceUpdated           application/coursework-gitops                                  Updated sync status: Synced -> OutOfSync
+coursework-gitops   8s          Normal    Started                   pod/lending-info-6d7765845-9kt4l                               Container started
+coursework-gitops   8s          Normal    Created                   pod/lending-info-6d7765845-9kt4l                               Container created
+coursework-gitops   8s          Normal    Pulled                    pod/lending-info-6d7765845-9kt4l                               Container image "nginx:stable-alpine" already present on machine and can be accessed by the pod
+argocd              8s          Normal    ResourceUpdated           application/coursework-gitops                                  Updated health status: Progressing -> Healthy
+coursework-gitops   6s          Normal    ScalingReplicaSet         deployment/lending-info                                        Scaled down replica set lending-info-6d7765845 from 3 to 1
+argocd              5s          Normal    ResourceUpdated           application/coursework-gitops                                  Updated sync status: Synced -> OutOfSync
+coursework-gitops   5s          Normal    Scheduled                 pod/lending-info-6d7765845-sfcxk                               Successfully assigned coursework-gitops/lending-info-6d7765845-sfcxk to observability
+argocd              5s          Normal    OperationCompleted        application/coursework-gitops                                  Partial sync operation to 534e3a0798dd0a8fa641b58ba5653403bb64e131 succeeded
+argocd              5s          Normal    ResourceUpdated           application/coursework-gitops                                  Updated sync status: OutOfSync -> Synced
+argocd              5s          Normal    ResourceUpdated           application/coursework-gitops                                  Updated health status: Healthy -> Progressing
+coursework-gitops   5s          Normal    ScalingReplicaSet         deployment/lending-info                                        Scaled up replica set lending-info-6d7765845 from 1 to 3
+coursework-gitops   5s          Normal    Killing                   pod/lending-info-6d7765845-9kt4l                               Stopping container web
+coursework-gitops   5s          Normal    Scheduled                 pod/lending-info-6d7765845-hp2tl                               Successfully assigned coursework-gitops/lending-info-6d7765845-hp2tl to observability
+coursework-gitops   5s          Normal    SuccessfulCreate          replicaset/lending-info-6d7765845                              Created pod: lending-info-6d7765845-sfcxk
+coursework-gitops   5s          Normal    SuccessfulCreate          replicaset/lending-info-6d7765845                              Created pod: lending-info-6d7765845-hp2tl
+coursework-gitops   5s          Normal    SuccessfulDelete          replicaset/lending-info-6d7765845                              Deleted pod: lending-info-6d7765845-vvr8h
+argocd              5s          Normal    OperationStarted          application/coursework-gitops                                  Initiated automated sync to '534e3a0798dd0a8fa641b58ba5653403bb64e131'
+coursework-gitops   5s          Normal    SuccessfulDelete          replicaset/lending-info-6d7765845                              Deleted pod: lending-info-6d7765845-9kt4l
+coursework-gitops   5s          Normal    Killing                   pod/lending-info-6d7765845-vvr8h                               Stopping container web
+coursework-gitops   4s          Normal    Started                   pod/lending-info-6d7765845-sfcxk                               Container started
+coursework-gitops   4s          Normal    Created                   pod/lending-info-6d7765845-sfcxk                               Container created
+coursework-gitops   4s          Normal    Pulled                    pod/lending-info-6d7765845-sfcxk                               Container image "nginx:stable-alpine" already present on machine and can be accessed by the pod
+coursework-gitops   4s          Normal    Started                   pod/lending-info-6d7765845-hp2tl                               Container started
+coursework-gitops   4s          Normal    Created                   pod/lending-info-6d7765845-hp2tl                               Container created
+coursework-gitops   4s          Normal    Pulled                    pod/lending-info-6d7765845-hp2tl                               Container image "nginx:stable-alpine" already present on machine and can be accessed by the pod
+argocd              4s          Normal    ResourceUpdated           application/coursework-gitops                                  Updated health status: Progressing -> Healthy

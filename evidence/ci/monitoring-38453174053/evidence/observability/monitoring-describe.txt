@@ -1,0 +1,557 @@
+Name:             monitoring-grafana-7ff995c484-lrz5l
+Namespace:        monitoring
+Priority:         0
+Service Account:  monitoring-grafana
+Node:             observability/192.168.49.2
+Start Time:       Tue, 13 Oct 2026 19:15:14 +0000
+Labels:           app.kubernetes.io/instance=monitoring
+                  app.kubernetes.io/name=grafana
+                  app.kubernetes.io/version=13.2.4
+                  helm.sh/chart=grafana-13.5.1
+                  pod-template-hash=7ff995c484
+Annotations:      checksum/config: 457c16ae5fdf9a6ab84c8aeadd5b7e2ca3e10c8b2f0e8c50a2cb40fe8ac9adf3
+                  checksum/sc-dashboard-provider-config: e70bf6a851099d385178a76de9757bb0bef8299da6d8443602590e44f05fdf24
+                  checksum/secret: efc0488d45ef02679eef0f4067e9a80d462f49fd0351a95963edab1c20753c07
+                  kubectl.kubernetes.io/default-container: grafana
+Status:           Running
+IP:               10.244.0.11
+IPs:
+  IP:           10.244.0.11
+Controlled By:  ReplicaSet/monitoring-grafana-7ff995c484
+Containers:
+  grafana-sc-dashboard:
+    Container ID:    containerd://5626ab45e1e984bb08de6a548680e84f2759d331e190e08c265e4caa190c9dae
+    Image:           quay.io/kiwigrid/k8s-sidecar:2.14.1
+    Image ID:        quay.io/kiwigrid/k8s-sidecar@sha256:092dbe0c335fba9af414a27630ca68f34df6185784fa847d9954187e69dbfdd7
+    Port:            <none>
+    Host Port:       <none>
+    SeccompProfile:  RuntimeDefault
+    State:           Running
+      Started:       Tue, 13 Oct 2026 19:15:20 +0000
+    Ready:           True
+    Restart Count:   0
+    Environment:
+      METHOD:        WATCH
+      LABEL:         grafana_dashboard
+      LABEL_VALUE:   1
+      FOLDER:        /tmp/dashboards
+      RESOURCE:      both
+      NAMESPACE:     ALL
+      REQ_USERNAME:  <set to the key 'admin-user' in secret 'monitoring-grafana'>      Optional: false
+      REQ_PASSWORD:  <set to the key 'admin-password' in secret 'monitoring-grafana'>  Optional: false
+      REQ_URL:       http://localhost:3000/api/admin/provisioning/dashboards/reload
+      REQ_METHOD:    POST
+    Mounts:
+      /tmp/dashboards from sc-dashboard-volume (rw)
+      /var/run/secrets/kubernetes.io/serviceaccount from kube-api-access-w2r67 (ro)
+  grafana-sc-datasources:
+    Container ID:    containerd://a86efcd453e28d0946879ab673d58e19db51e611a5860fae5b84671b1c5db6b5
+    Image:           quay.io/kiwigrid/k8s-sidecar:2.14.1
+    Image ID:        quay.io/kiwigrid/k8s-sidecar@sha256:092dbe0c335fba9af414a27630ca68f34df6185784fa847d9954187e69dbfdd7
+    Port:            <none>
+    Host Port:       <none>
+    SeccompProfile:  RuntimeDefault
+    State:           Running
+      Started:       Tue, 13 Oct 2026 19:15:20 +0000
+    Ready:           True
+    Restart Count:   0
+    Environment:
+      METHOD:        WATCH
+      LABEL:         grafana_datasource
+      LABEL_VALUE:   1
+      FOLDER:        /etc/grafana/provisioning/datasources
+      RESOURCE:      both
+      REQ_USERNAME:  <set to the key 'admin-user' in secret 'monitoring-grafana'>      Optional: false
+      REQ_PASSWORD:  <set to the key 'admin-password' in secret 'monitoring-grafana'>  Optional: false
+      REQ_URL:       http://localhost:3000/api/admin/provisioning/datasources/reload
+      REQ_METHOD:    POST
+    Mounts:
+      /etc/grafana/provisioning/datasources from sc-datasources-volume (rw)
+      /var/run/secrets/kubernetes.io/serviceaccount from kube-api-access-w2r67 (ro)
+  grafana:
+    Container ID:    containerd://46821b08e89741b5dd1f2ff7ad4b25ec0e53e546b7729339d6c52b72a4b00531
+    Image:           docker.io/grafana/grafana:13.2.4-distroless
+    Image ID:        docker.io/grafana/grafana@sha256:ae3d3add290adbe6a88412229f5d76fd7bb82743050881698642d3d62f277e35
+    Ports:           3000/TCP (grafana), 9094/TCP (gossip-tcp), 9094/UDP (gossip-udp), 6060/TCP (profiling)
+    Host Ports:      0/TCP (grafana), 0/TCP (gossip-tcp), 0/UDP (gossip-udp), 0/TCP (profiling)
+    SeccompProfile:  RuntimeDefault
+    State:           Running
+      Started:       Tue, 13 Oct 2026 19:15:36 +0000
+    Ready:           True
+    Restart Count:   0
+    Limits:
+      cpu:     500m
+      memory:  768Mi
+    Requests:
+      cpu:      100m
+      memory:   256Mi
+    Liveness:   http-get http://:grafana/api/health delay=60s timeout=30s period=10s successThreshold=1 failureThreshold=10
+    Readiness:  http-get http://:grafana/api/health delay=0s timeout=1s period=10s successThreshold=1 failureThreshold=3
+    Environment:
+      POD_IP:                          (v1:status.podIP)
+      GF_SECURITY_ADMIN_USER:         <set to the key 'admin-user' in secret 'monitoring-grafana'>      Optional: false
+      GF_SECURITY_ADMIN_PASSWORD:     <set to the key 'admin-password' in secret 'monitoring-grafana'>  Optional: false
+      GF_PATHS_DATA:                  /var/lib/grafana/
+      GF_PATHS_LOGS:                  /var/log/grafana
+      GF_PATHS_PLUGINS:               /var/lib/grafana/plugins
+      GF_PATHS_PROVISIONING:          /etc/grafana/provisioning
+      GF_UNIFIED_STORAGE_INDEX_PATH:  /var/lib/grafana-search/bleve
+      GOMEMLIMIT:                     691MiB
+    Mounts:
+      /etc/grafana/grafana.ini from config (rw,path="grafana.ini")
+      /etc/grafana/provisioning/dashboards/sc-dashboardproviders.yaml from sc-dashboard-provider (rw,path="provider.yaml")
+      /etc/grafana/provisioning/datasources from sc-datasources-volume (rw)
+      /tmp from tmp (rw)
+      /tmp/dashboards from sc-dashboard-volume (rw)
+      /var/lib/grafana from storage (rw)
+      /var/lib/grafana-search from search (rw)
+      /var/run/secrets/kubernetes.io/serviceaccount from kube-api-access-w2r67 (ro)
+Conditions:
+  Type                        Status
+  PodReadyToStartContainers   True 
+  Initialized                 True 
+  Ready                       True 
+  ContainersReady             True 
+  PodScheduled                True 
+Volumes:
+  tmp:
+    Type:       EmptyDir (a temporary directory that shares a pod's lifetime)
+    Medium:     
+    SizeLimit:  <unset>
+  config:
+    Type:      ConfigMap (a volume populated by a ConfigMap)
+    Name:      monitoring-grafana
+    Optional:  false
+  storage:
+    Type:       EmptyDir (a temporary directory that shares a pod's lifetime)
+    Medium:     
+    SizeLimit:  <unset>
+  search:
+    Type:       EmptyDir (a temporary directory that shares a pod's lifetime)
+    Medium:     
+    SizeLimit:  <unset>
+  sc-dashboard-volume:
+    Type:       EmptyDir (a temporary directory that shares a pod's lifetime)
+    Medium:     
+    SizeLimit:  <unset>
+  sc-dashboard-provider:
+    Type:      ConfigMap (a volume populated by a ConfigMap)
+    Name:      monitoring-grafana-config-dashboards
+    Optional:  false
+  sc-datasources-volume:
+    Type:       EmptyDir (a temporary directory that shares a pod's lifetime)
+    Medium:     
+    SizeLimit:  <unset>
+  kube-api-access-w2r67:
+    Type:                    Projected (a volume that contains injected data from multiple sources)
+    TokenExpirationSeconds:  3607
+    ConfigMapName:           kube-root-ca.crt
+    Optional:                false
+    DownwardAPI:             true
+QoS Class:                   Burstable
+Node-Selectors:              <none>
+Tolerations:                 node.kubernetes.io/not-ready:NoExecute op=Exists for 300s
+                             node.kubernetes.io/unreachable:NoExecute op=Exists for 300s
+
+
+Name:             monitoring-kube-prometheus-operator-6458848b98-d8p9g
+Namespace:        monitoring
+Priority:         0
+Service Account:  monitoring-kube-prometheus-operator
+Node:             observability/192.168.49.2
+Start Time:       Tue, 13 Oct 2026 19:15:14 +0000
+Labels:           app=kube-prometheus-stack-operator
+                  app.kubernetes.io/component=prometheus-operator
+                  app.kubernetes.io/instance=monitoring
+                  app.kubernetes.io/managed-by=Helm
+                  app.kubernetes.io/name=kube-prometheus-stack-prometheus-operator
+                  app.kubernetes.io/part-of=kube-prometheus-stack
+                  app.kubernetes.io/version=92.3.1
+                  chart=kube-prometheus-stack-92.3.1
+                  heritage=Helm
+                  pod-template-hash=6458848b98
+                  release=monitoring
+Annotations:      <none>
+Status:           Running
+SeccompProfile:   RuntimeDefault
+IP:               10.244.0.10
+IPs:
+  IP:           10.244.0.10
+Controlled By:  ReplicaSet/monitoring-kube-prometheus-operator-6458848b98
+Containers:
+  kube-prometheus-stack:
+    Container ID:  containerd://3f2a02e1f5834364a10f84aa4dcf9bbffc3e52cec3ac1049bc45963939312d8d
+    Image:         quay.io/prometheus-operator/prometheus-operator:v0.94.1
+    Image ID:      quay.io/prometheus-operator/prometheus-operator@sha256:7c88d4e7bae63bd8d0f8da986054337c23b4472fa8d3c6817f5bc4b8407a2d6a
+    Port:          10250/TCP (https)
+    Host Port:     0/TCP (https)
+    Args:
+      --kubelet-service=kube-system/monitoring-kube-prometheus-kubelet
+      --kubelet-endpoints=true
+      --kubelet-endpointslice=false
+      --localhost=127.0.0.1
+      --prometheus-config-reloader=quay.io/prometheus-operator/prometheus-config-reloader:v0.94.1
+      --config-reloader-cpu-request=0
+      --config-reloader-cpu-limit=0
+      --config-reloader-memory-request=0
+      --config-reloader-memory-limit=0
+      --thanos-default-base-image=quay.io/thanos/thanos:v0.42.4
+      --secret-field-selector=type!=kubernetes.io/dockercfg,type!=helm.sh/release.v1
+      --web.enable-tls=true
+      --web.cert-file=/cert/cert
+      --web.key-file=/cert/key
+      --web.listen-address=:10250
+      --web.tls-min-version=VersionTLS13
+    State:          Running
+      Started:      Tue, 13 Oct 2026 19:15:17 +0000
+    Ready:          True
+    Restart Count:  0
+    Liveness:       http-get https://:https/healthz delay=0s timeout=1s period=10s successThreshold=1 failureThreshold=3
+    Readiness:      http-get https://:https/healthz delay=0s timeout=1s period=10s successThreshold=1 failureThreshold=3
+    Environment:
+      GOGC:  30
+    Mounts:
+      /cert from tls-secret (ro)
+      /var/run/secrets/kubernetes.io/serviceaccount from kube-api-access-dhwbk (ro)
+Conditions:
+  Type                        Status
+  PodReadyToStartContainers   True 
+  Initialized                 True 
+  Ready                       True 
+  ContainersReady             True 
+  PodScheduled                True 
+Volumes:
+  tls-secret:
+    Type:        Secret (a volume populated by a Secret)
+    SecretName:  monitoring-kube-prometheus-admission
+    Optional:    false
+  kube-api-access-dhwbk:
+    Type:                    Projected (a volume that contains injected data from multiple sources)
+    TokenExpirationSeconds:  3607
+    ConfigMapName:           kube-root-ca.crt
+    Optional:                false
+    DownwardAPI:             true
+QoS Class:                   BestEffort
+Node-Selectors:              kubernetes.io/os=linux
+Tolerations:                 node.kubernetes.io/not-ready:NoExecute op=Exists for 300s
+                             node.kubernetes.io/unreachable:NoExecute op=Exists for 300s
+
+
+Name:             monitoring-kube-state-metrics-78fd56fc4b-ljmmd
+Namespace:        monitoring
+Priority:         0
+Service Account:  monitoring-kube-state-metrics
+Node:             observability/192.168.49.2
+Start Time:       Tue, 13 Oct 2026 19:15:14 +0000
+Labels:           app.kubernetes.io/component=metrics
+                  app.kubernetes.io/instance=monitoring
+                  app.kubernetes.io/managed-by=Helm
+                  app.kubernetes.io/name=kube-state-metrics
+                  app.kubernetes.io/part-of=kube-state-metrics
+                  app.kubernetes.io/version=2.20.0
+                  pod-template-hash=78fd56fc4b
+                  release=monitoring
+Annotations:      <none>
+Status:           Running
+SeccompProfile:   RuntimeDefault
+IP:               10.244.0.9
+IPs:
+  IP:           10.244.0.9
+Controlled By:  ReplicaSet/monitoring-kube-state-metrics-78fd56fc4b
+Containers:
+  kube-state-metrics:
+    Container ID:  containerd://8942de36945572394f64c82f2b24c612a4f737fe7716c2c3bd6acf3145b06acb
+    Image:         registry.k8s.io/kube-state-metrics/kube-state-metrics:v2.20.0
+    Image ID:      registry.k8s.io/kube-state-metrics/kube-state-metrics@sha256:42cfe3723a5f058171c627537fb57a3ea0f26e4380fa18555a95cb1a1b4cfc5b
+    Ports:         8080/TCP (http), 8081/TCP (metrics)
+    Host Ports:    0/TCP (http), 0/TCP (metrics)
+    Args:
+      --port=8080
+      --resources=certificatesigningrequests,configmaps,cronjobs,daemonsets,deployments,endpointslices,horizontalpodautoscalers,ingresses,jobs,leases,limitranges,mutatingwebhookconfigurations,namespaces,networkpolicies,nodes,persistentvolumeclaims,persistentvolumes,poddisruptionbudgets,pods,replicasets,replicationcontrollers,resourcequotas,secrets,services,statefulsets,storageclasses,validatingwebhookconfigurations,volumeattachments
+    State:          Running
+      Started:      Tue, 13 Oct 2026 19:15:22 +0000
+    Ready:          True
+    Restart Count:  0
+    Liveness:       http-get http://:http/livez delay=5s timeout=5s period=10s successThreshold=1 failureThreshold=3
+    Readiness:      http-get http://:metrics/readyz delay=5s timeout=5s period=10s successThreshold=1 failureThreshold=3
+    Environment:    <none>
+    Mounts:
+      /var/run/secrets/kubernetes.io/serviceaccount from kube-api-access-dxt9w (ro)
+Conditions:
+  Type                        Status
+  PodReadyToStartContainers   True 
+  Initialized                 True 
+  Ready                       True 
+  ContainersReady             True 
+  PodScheduled                True 
+Volumes:
+  kube-api-access-dxt9w:
+    Type:                    Projected (a volume that contains injected data from multiple sources)
+    TokenExpirationSeconds:  3607
+    ConfigMapName:           kube-root-ca.crt
+    Optional:                false
+    DownwardAPI:             true
+QoS Class:                   BestEffort
+Node-Selectors:              <none>
+Tolerations:                 node.kubernetes.io/not-ready:NoExecute op=Exists for 300s
+                             node.kubernetes.io/unreachable:NoExecute op=Exists for 300s
+
+
+Name:             monitoring-prometheus-node-exporter-6h8wm
+Namespace:        monitoring
+Priority:         0
+Service Account:  monitoring-prometheus-node-exporter
+Node:             observability/192.168.49.2
+Start Time:       Tue, 13 Oct 2026 19:15:14 +0000
+Labels:           app.kubernetes.io/component=metrics
+                  app.kubernetes.io/instance=monitoring
+                  app.kubernetes.io/managed-by=Helm
+                  app.kubernetes.io/name=prometheus-node-exporter
+                  app.kubernetes.io/part-of=prometheus-node-exporter
+                  app.kubernetes.io/version=1.12.1
+                  controller-revision-hash=7fcdb888c4
+                  jobLabel=node-exporter
+                  pod-template-generation=1
+                  release=monitoring
+Annotations:      cluster-autoscaler.kubernetes.io/safe-to-evict: true
+Status:           Running
+IP:               192.168.49.2
+IPs:
+  IP:           192.168.49.2
+Controlled By:  DaemonSet/monitoring-prometheus-node-exporter
+Containers:
+  node-exporter:
+    Container ID:  containerd://7594465b64e7a55a13b211f03ce1ad1bb1f9c7e1a1aca007c34382f5ad92b3aa
+    Image:         quay.io/prometheus/node-exporter:v1.12.1-distroless
+    Image ID:      quay.io/prometheus/node-exporter@sha256:8c9bac11973b94b59be88d6e11fee4429aa743c8846cdc75d65b18db33f6a106
+    Port:          9100/TCP (http-metrics)
+    Host Port:     9100/TCP (http-metrics)
+    Args:
+      --path.procfs=/host/proc
+      --path.sysfs=/host/sys
+      --path.rootfs=/host/root
+      --path.udev.data=/host/root/run/udev/data
+      --web.listen-address=[$(HOST_IP)]:9100
+      --collector.filesystem.mount-points-exclude=^/(dev|proc|sys|run/containerd/.+|var/lib/docker/.+|var/lib/kubelet/.+)($|/)
+      --collector.filesystem.fs-types-exclude=^(autofs|binfmt_misc|bpf|cgroup2?|configfs|debugfs|devpts|devtmpfs|fusectl|hugetlbfs|iso9660|mqueue|nsfs|overlay|proc|procfs|pstore|rpc_pipefs|securityfs|selinuxfs|squashfs|sysfs|tracefs|erofs)$
+    State:          Running
+      Started:      Tue, 13 Oct 2026 19:15:16 +0000
+    Ready:          True
+    Restart Count:  0
+    Liveness:       http-get http://:http-metrics/ delay=0s timeout=1s period=10s successThreshold=1 failureThreshold=3
+    Readiness:      http-get http://:http-metrics/ delay=0s timeout=1s period=10s successThreshold=1 failureThreshold=3
+    Environment:
+      HOST_IP:  0.0.0.0
+    Mounts:
+      /host/proc from proc (ro)
+      /host/root from root (ro)
+      /host/sys from sys (ro)
+Conditions:
+  Type                        Status
+  PodReadyToStartContainers   True 
+  Initialized                 True 
+  Ready                       True 
+  ContainersReady             True 
+  PodScheduled                True 
+Volumes:
+  proc:
+    Type:          HostPath (bare host directory volume)
+    Path:          /proc
+    HostPathType:  
+  sys:
+    Type:          HostPath (bare host directory volume)
+    Path:          /sys
+    HostPathType:  
+  root:
+    Type:          HostPath (bare host directory volume)
+    Path:          /
+    HostPathType:  
+QoS Class:         BestEffort
+Node-Selectors:    kubernetes.io/os=linux
+Tolerations:       :NoSchedule op=Exists
+                   node.kubernetes.io/disk-pressure:NoSchedule op=Exists
+                   node.kubernetes.io/memory-pressure:NoSchedule op=Exists
+                   node.kubernetes.io/network-unavailable:NoSchedule op=Exists
+                   node.kubernetes.io/not-ready:NoExecute op=Exists
+                   node.kubernetes.io/pid-pressure:NoSchedule op=Exists
+                   node.kubernetes.io/unreachable:NoExecute op=Exists
+                   node.kubernetes.io/unschedulable:NoSchedule op=Exists
+
+
+Name:             prometheus-monitoring-kube-prometheus-prometheus-0
+Namespace:        monitoring
+Priority:         0
+Service Account:  monitoring-kube-prometheus-prometheus
+Node:             observability/192.168.49.2
+Start Time:       Tue, 13 Oct 2026 19:15:19 +0000
+Labels:           app.kubernetes.io/instance=monitoring-kube-prometheus-prometheus
+                  app.kubernetes.io/managed-by=prometheus-operator
+                  app.kubernetes.io/name=prometheus
+                  app.kubernetes.io/version=3.15.0-distroless
+                  apps.kubernetes.io/pod-index=0
+                  controller-revision-hash=prometheus-monitoring-kube-prometheus-prometheus-79cff79655
+                  operator.prometheus.io/name=monitoring-kube-prometheus-prometheus
+                  operator.prometheus.io/shard=0
+                  prometheus=monitoring-kube-prometheus-prometheus
+                  statefulset.kubernetes.io/pod-name=prometheus-monitoring-kube-prometheus-prometheus-0
+Annotations:      kubectl.kubernetes.io/default-container: prometheus
+Status:           Running
+SeccompProfile:   RuntimeDefault
+IP:               10.244.0.12
+IPs:
+  IP:           10.244.0.12
+Controlled By:  StatefulSet/prometheus-monitoring-kube-prometheus-prometheus
+Init Containers:
+  init-config-reloader:
+    Container ID:  containerd://9c60bee029a467d9e3a5e9d7c1a1a103ce7bc0bc6a392a457db04eea2dcb1e6a
+    Image:         quay.io/prometheus-operator/prometheus-config-reloader:v0.94.1
+    Image ID:      quay.io/prometheus-operator/prometheus-config-reloader@sha256:06b52bd4dbe3ed6dd5905aadaf8b9987d9da4c31d37bb86deaadae68cee2d26b
+    Port:          8081/TCP (reloader-init)
+    Host Port:     0/TCP (reloader-init)
+    Command:
+      /bin/prometheus-config-reloader
+    Args:
+      --watch-interval=0
+      --listen-address=:8081
+      --config-file=/etc/prometheus/config/prometheus.yaml.gz
+      --config-envsubst-file=/etc/prometheus/config_out/prometheus.env.yaml
+      --watched-dir=/etc/prometheus/rules/prometheus-monitoring-kube-prometheus-prometheus-rulefiles-0
+      --watched-dir=/etc/prometheus/rules/prometheus-monitoring-kube-prometheus-prometheus-rulefiles-1
+      --watched-dir=/etc/prometheus/rules/prometheus-monitoring-kube-prometheus-prometheus-rulefiles-2
+      --watched-dir=/etc/prometheus/config
+    State:          Terminated
+      Reason:       Completed
+      Exit Code:    0
+      Started:      Tue, 13 Oct 2026 19:15:23 +0000
+      Finished:     Tue, 13 Oct 2026 19:15:23 +0000
+    Ready:          True
+    Restart Count:  0
+    Environment:
+      POD_NAME:  prometheus-monitoring-kube-prometheus-prometheus-0 (v1:metadata.name)
+      SHARD:     0
+    Mounts:
+      /etc/prometheus/config from config (rw)
+      /etc/prometheus/config_out from config-out (rw)
+      /etc/prometheus/rules/prometheus-monitoring-kube-prometheus-prometheus-rulefiles-0 from prometheus-monitoring-kube-prometheus-prometheus-rulefiles-0 (rw)
+      /etc/prometheus/rules/prometheus-monitoring-kube-prometheus-prometheus-rulefiles-1 from prometheus-monitoring-kube-prometheus-prometheus-rulefiles-1 (rw)
+      /etc/prometheus/rules/prometheus-monitoring-kube-prometheus-prometheus-rulefiles-2 from prometheus-monitoring-kube-prometheus-prometheus-rulefiles-2 (rw)
+      /var/run/secrets/kubernetes.io/serviceaccount from kube-api-access-8t8w8 (ro)
+Containers:
+  prometheus:
+    Container ID:  containerd://eb4c2499f0edc512cc888be8e8c0596bd20723946860e6f9f5b8544beb4d8d57
+    Image:         quay.io/prometheus/prometheus:v3.15.0-distroless
+    Image ID:      quay.io/prometheus/prometheus@sha256:b2a413d5a03ea6a76782a508d1c7947440bba3b973931a25676e278431891b01
+    Port:          9090/TCP (http-web)
+    Host Port:     0/TCP (http-web)
+    Args:
+      --config.file=/etc/prometheus/config_out/prometheus.env.yaml
+      --web.enable-lifecycle
+      --web.external-url=http://monitoring-kube-prometheus-prometheus.monitoring:9090
+      --web.route-prefix=/
+      --storage.tsdb.path=/prometheus
+      --storage.tsdb.wal-compression
+      --web.config.file=/etc/prometheus/web_config/web-config.yaml
+    State:          Running
+      Started:      Tue, 13 Oct 2026 19:15:39 +0000
+    Ready:          True
+    Restart Count:  0
+    Limits:
+      cpu:     500m
+      memory:  768Mi
+    Requests:
+      cpu:        100m
+      memory:     256Mi
+    Liveness:     http-get http://:http-web/-/healthy delay=0s timeout=3s period=5s successThreshold=1 failureThreshold=6
+    Readiness:    http-get http://:http-web/-/ready delay=0s timeout=3s period=5s successThreshold=1 failureThreshold=3
+    Startup:      http-get http://:http-web/-/ready delay=0s timeout=3s period=15s successThreshold=1 failureThreshold=60
+    Environment:  <none>
+    Mounts:
+      /etc/prometheus/certs from tls-assets (ro)
+      /etc/prometheus/config_out from config-out (ro)
+      /etc/prometheus/rules/prometheus-monitoring-kube-prometheus-prometheus-rulefiles-0 from prometheus-monitoring-kube-prometheus-prometheus-rulefiles-0 (ro)
+      /etc/prometheus/rules/prometheus-monitoring-kube-prometheus-prometheus-rulefiles-1 from prometheus-monitoring-kube-prometheus-prometheus-rulefiles-1 (ro)
+      /etc/prometheus/rules/prometheus-monitoring-kube-prometheus-prometheus-rulefiles-2 from prometheus-monitoring-kube-prometheus-prometheus-rulefiles-2 (ro)
+      /etc/prometheus/web_config/web-config.yaml from web-config (ro,path="web-config.yaml")
+      /prometheus from prometheus-monitoring-kube-prometheus-prometheus-db (rw)
+      /var/run/secrets/kubernetes.io/serviceaccount from kube-api-access-8t8w8 (ro)
+  config-reloader:
+    Container ID:  containerd://e7386657c5cdbdb4557d25f65c7f1031ff6e12979785eb968437ea744a9b8eea
+    Image:         quay.io/prometheus-operator/prometheus-config-reloader:v0.94.1
+    Image ID:      quay.io/prometheus-operator/prometheus-config-reloader@sha256:06b52bd4dbe3ed6dd5905aadaf8b9987d9da4c31d37bb86deaadae68cee2d26b
+    Port:          8080/TCP (reloader-web)
+    Host Port:     0/TCP (reloader-web)
+    Command:
+      /bin/prometheus-config-reloader
+    Args:
+      --listen-address=:8080
+      --reload-url=http://127.0.0.1:9090/-/reload
+      --config-file=/etc/prometheus/config/prometheus.yaml.gz
+      --config-envsubst-file=/etc/prometheus/config_out/prometheus.env.yaml
+      --watched-dir=/etc/prometheus/rules/prometheus-monitoring-kube-prometheus-prometheus-rulefiles-0
+      --watched-dir=/etc/prometheus/rules/prometheus-monitoring-kube-prometheus-prometheus-rulefiles-1
+      --watched-dir=/etc/prometheus/rules/prometheus-monitoring-kube-prometheus-prometheus-rulefiles-2
+      --watched-dir=/etc/prometheus/config
+    State:          Running
+      Started:      Tue, 13 Oct 2026 19:15:39 +0000
+    Ready:          True
+    Restart Count:  0
+    Environment:
+      POD_NAME:  prometheus-monitoring-kube-prometheus-prometheus-0 (v1:metadata.name)
+      SHARD:     0
+    Mounts:
+      /etc/prometheus/config from config (rw)
+      /etc/prometheus/config_out from config-out (rw)
+      /etc/prometheus/rules/prometheus-monitoring-kube-prometheus-prometheus-rulefiles-0 from prometheus-monitoring-kube-prometheus-prometheus-rulefiles-0 (rw)
+      /etc/prometheus/rules/prometheus-monitoring-kube-prometheus-prometheus-rulefiles-1 from prometheus-monitoring-kube-prometheus-prometheus-rulefiles-1 (rw)
+      /etc/prometheus/rules/prometheus-monitoring-kube-prometheus-prometheus-rulefiles-2 from prometheus-monitoring-kube-prometheus-prometheus-rulefiles-2 (rw)
+      /var/run/secrets/kubernetes.io/serviceaccount from kube-api-access-8t8w8 (ro)
+Conditions:
+  Type                        Status
+  PodReadyToStartContainers   True 
+  Initialized                 True 
+  Ready                       True 
+  ContainersReady             True 
+  PodScheduled                True 
+Volumes:
+  config:
+    Type:        Secret (a volume populated by a Secret)
+    SecretName:  prometheus-monitoring-kube-prometheus-prometheus
+    Optional:    false
+  tls-assets:
+    Type:        Projected (a volume that contains injected data from multiple sources)
+    SecretName:  prometheus-monitoring-kube-prometheus-prometheus-tls-assets-0
+    Optional:    false
+  config-out:
+    Type:       EmptyDir (a temporary directory that shares a pod's lifetime)
+    Medium:     Memory
+    SizeLimit:  <unset>
+  prometheus-monitoring-kube-prometheus-prometheus-rulefiles-0:
+    Type:      ConfigMap (a volume populated by a ConfigMap)
+    Name:      prometheus-monitoring-kube-prometheus-prometheus-rulefiles-0
+    Optional:  true
+  prometheus-monitoring-kube-prometheus-prometheus-rulefiles-1:
+    Type:      ConfigMap (a volume populated by a ConfigMap)
+    Name:      prometheus-monitoring-kube-prometheus-prometheus-rulefiles-1
+    Optional:  true
+  prometheus-monitoring-kube-prometheus-prometheus-rulefiles-2:
+    Type:      ConfigMap (a volume populated by a ConfigMap)
+    Name:      prometheus-monitoring-kube-prometheus-prometheus-rulefiles-2
+    Optional:  true
+  web-config:
+    Type:        Secret (a volume populated by a Secret)
+    SecretName:  prometheus-monitoring-kube-prometheus-prometheus-web-config
+    Optional:    false
+  prometheus-monitoring-kube-prometheus-prometheus-db:
+    Type:       EmptyDir (a temporary directory that shares a pod's lifetime)
+    Medium:     
+    SizeLimit:  <unset>
+  kube-api-access-8t8w8:
+    Type:                    Projected (a volume that contains injected data from multiple sources)
+    TokenExpirationSeconds:  3607
+    ConfigMapName:           kube-root-ca.crt
+    Optional:                false
+    DownwardAPI:             true
+QoS Class:                   Burstable
+Node-Selectors:              kubernetes.io/os=linux
+Tolerations:                 node.kubernetes.io/not-ready:NoExecute op=Exists for 300s
+                             node.kubernetes.io/unreachable:NoExecute op=Exists for 300s

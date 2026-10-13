@@ -1,0 +1,28 @@
+{
+  "results": {
+    "A": {
+      "status": 200,
+      "frames": [
+        {
+          "schema": {
+            "refId": "A",
+            "meta": {
+              "typeVersion": [
+                0,
+                0
+              ],
+              "custom": {
+                "calculatedMinStep": 30000
+              },
+              "executedQueryString": "Expr: sum by (route) (rate(kitledger_http_requests_total{namespace=\"kitledger\"}[2m]))\nStep: 30s"
+            },
+            "fields": []
+          },
+          "data": {
+            "values": []
+          }
+        }
+      ]
+    }
+  }
+}

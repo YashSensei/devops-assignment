@@ -43,14 +43,18 @@ README paths, not directory URLs or placeholders.
 - [Green PostgreSQL / Ingress / browser / security / image pipeline](https://github.com/YashSensei/devops-assignment/actions/runs/38450469520).
 - [Green Linux, Git and Docker lab run](https://github.com/YashSensei/devops-assignment/actions/runs/38450248504).
 - [Green Kubernetes Sessions 10–15 run](https://github.com/YashSensei/devops-assignment/actions/runs/38450245721).
+- [Verified GitOps commit and self-healing](https://github.com/YashSensei/devops-assignment/actions/runs/38453774602); [populated monitoring verification](https://github.com/YashSensei/devops-assignment/actions/runs/38456443849).
 - [Desktop Ingress screenshot](evidence/ci/capstone-38450469520/evidence/browser/desktop-loan.png),
   [mobile](evidence/ci/capstone-38450469520/evidence/browser/mobile-library.png),
   [metrics](evidence/ci/capstone-38450469520/evidence/browser/metrics.png).
 - [Recordings and run metadata](evidence/README.md); [presentation outline](session21-python/PRESENTATION.md).
+- [Labelled rendered test/security/resource transcripts](evidence/rendered/README.md),
+  supplemental to the original logs and actual browser screenshots.
 - Images: ghcr.io/yashsensei/kitledger-backend and
   ghcr.io/yashsensei/kitledger-frontend, tagged with full commit SHAs.
-  [Owner packages page](https://github.com/YashSensei?tab=packages).
-  Publication passed; anonymous package access/screenshots are not yet verified.
+  [Backend package](https://github.com/users/YashSensei/packages/container/package/kitledger-backend) and
+  [frontend package](https://github.com/users/YashSensei/packages/container/package/kitledger-frontend).
+  Public pages, SHA tags and anonymous registry manifests verified; [screenshots](evidence/github).
 
 Later documentation commits may be newer than these historical evidence runs.
 The Actions page identifies the run and exact revision; never assume an old
@@ -61,7 +65,8 @@ in the handoff and available directly in GitHub.
 
 1. Review the audit honestly. AWS deployment is omitted at your request and
    some screenshot/presentation requirements remain unmet.
-2. Open all README links without owner-only privileges. Check package access.
+2. All 20 README URLs and public package pages were verified without owner privileges;
+   recheck before submitting in case access changes.
 3. Sign into the form with the student account; enter the student email above.
 4. Match each shuffled field's session number to this table and paste its full URL.
 5. Deliver the narrated presentation and visible commit/CI/deployment update;

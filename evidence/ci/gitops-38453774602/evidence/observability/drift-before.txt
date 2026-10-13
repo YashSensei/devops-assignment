@@ -1,0 +1,2 @@
+NAME           READY   UP-TO-DATE   AVAILABLE   AGE
+lending-info   1/1     1            1           5m57s

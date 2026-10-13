@@ -1,0 +1,142 @@
+NAMESPACE     LAST SEEN   TYPE      REASON                    OBJECT                                                         MESSAGE
+default       8m57s       Normal    Starting                  node/observability                                             
+default       9m5s        Normal    NodeAllocatableEnforced   node/observability                                             Updated Node Allocatable limit across pods
+default       9m5s        Normal    NodeHasSufficientMemory   node/observability                                             Node observability status is now: NodeHasSufficientMemory
+default       9m5s        Normal    NodeHasNoDiskPressure     node/observability                                             Node observability status is now: NodeHasNoDiskPressure
+default       9m5s        Normal    NodeHasSufficientPID      node/observability                                             Node observability status is now: NodeHasSufficientPID
+default       9m5s        Normal    Starting                  node/observability                                             Starting kubelet.
+kube-system   9m4s        Warning   Unhealthy                 pod/kube-scheduler-observability                               Readiness probe failed: HTTP probe failed with statuscode: 500
+kube-system   9m3s        Warning   FailedScheduling          pod/storage-provisioner                                        0/1 nodes are available: 1 node(s) had untolerated taint(s). preemption: 0/1 nodes are available: 1 Preemption is not helpful for scheduling.
+default       9m          Normal    RegisteredNode            node/observability                                             Node observability event: Registered Node observability in Controller
+kube-system   8m59s       Normal    ScalingReplicaSet         deployment/coredns                                             Scaled up replica set coredns-559f6c778d from 0 to 1
+kube-system   8m58s       Normal    Scheduled                 pod/kindnet-t6tlm                                              Successfully assigned kube-system/kindnet-t6tlm to observability
+kube-system   8m58s       Normal    Pulling                   pod/kindnet-t6tlm                                              Pulling image "docker.io/kindest/kindnetd:v20260820-69b56db7"
+kube-system   8m58s       Warning   FailedScheduling          pod/coredns-559f6c778d-gvtdd                                   0/1 nodes are available: 1 node(s) had untolerated taint(s). preemption: 0/1 nodes are available: 1 Preemption is not helpful for scheduling.
+kube-system   8m58s       Normal    SuccessfulCreate          replicaset/coredns-559f6c778d                                  Created pod: coredns-559f6c778d-gvtdd
+kube-system   8m58s       Normal    SuccessfulCreate          daemonset/kube-proxy                                           Created pod: kube-proxy-xd92n
+kube-system   8m58s       Normal    Started                   pod/kube-proxy-xd92n                                           Container started
+kube-system   8m58s       Normal    Created                   pod/kube-proxy-xd92n                                           Container created
+kube-system   8m58s       Normal    Pulled                    pod/kube-proxy-xd92n                                           Container image "registry.k8s.io/kube-proxy:v1.37.0" already present on machine and can be accessed by the pod
+kube-system   8m58s       Normal    Scheduled                 pod/kube-proxy-xd92n                                           Successfully assigned kube-system/kube-proxy-xd92n to observability
+kube-system   8m58s       Normal    SuccessfulCreate          daemonset/kindnet                                              Created pod: kindnet-t6tlm
+kube-system   8m57s       Normal    Created                   pod/kindnet-t6tlm                                              Container created
+kube-system   8m57s       Normal    Pulled                    pod/kindnet-t6tlm                                              Successfully pulled image "docker.io/kindest/kindnetd:v20260820-69b56db7" in 1.218s (1.218s including waiting). Image size: 39744255 bytes.
+kube-system   8m56s       Normal    Started                   pod/kindnet-t6tlm                                              Container started
+kube-system   8m46s       Normal    Created                   pod/storage-provisioner                                        Container created
+kube-system   8m46s       Normal    Started                   pod/storage-provisioner                                        Container started
+kube-system   8m46s       Normal    LeaderElection            endpoints/k8s.io-minikube-hostpath                             observability_5e34fa64-5954-411f-9ad4-4b6efebe8b27 became leader
+default       8m46s       Normal    NodeReady                 node/observability                                             Node observability status is now: NodeReady
+kube-system   8m46s       Normal    Scheduled                 pod/storage-provisioner                                        Successfully assigned kube-system/storage-provisioner to observability
+kube-system   8m46s       Warning   Unhealthy                 pod/coredns-559f6c778d-gvtdd                                   Readiness probe failed: Get "http://10.244.0.2:8181/ready": dial tcp 10.244.0.2:8181: connect: connection refused
+kube-system   8m46s       Normal    Started                   pod/coredns-559f6c778d-gvtdd                                   Container started
+kube-system   8m46s       Normal    Created                   pod/coredns-559f6c778d-gvtdd                                   Container created
+kube-system   8m46s       Normal    Pulled                    pod/coredns-559f6c778d-gvtdd                                   Container image "registry.k8s.io/coredns/coredns:v1.14.6" already present on machine and can be accessed by the pod
+kube-system   8m46s       Normal    Scheduled                 pod/coredns-559f6c778d-gvtdd                                   Successfully assigned kube-system/coredns-559f6c778d-gvtdd to observability
+kube-system   8m46s       Normal    Pulled                    pod/storage-provisioner                                        Container image "gcr.io/k8s-minikube/storage-provisioner:v5" already present on machine and can be accessed by the pod
+kitledger     8m44s       Normal    Pulling                   pod/frontend-5c56df57f-tk8w6                                   Pulling image "busybox:1.37"
+kitledger     8m44s       Normal    SuccessfulCreate          statefulset/postgres                                           Create Claim data-postgres-0 Pod postgres-0 in StatefulSet postgres success
+kitledger     8m44s       Normal    Scheduled                 pod/frontend-5c56df57f-tk8w6                                   Successfully assigned kitledger/frontend-5c56df57f-tk8w6 to observability
+kitledger     8m44s       Normal    Scheduled                 pod/backend-6cff9f59cb-jtnhd                                   Successfully assigned kitledger/backend-6cff9f59cb-jtnhd to observability
+kitledger     8m44s       Normal    Scheduled                 pod/backend-6cff9f59cb-vlrk4                                   Successfully assigned kitledger/backend-6cff9f59cb-vlrk4 to observability
+kitledger     8m44s       Normal    SuccessfulCreate          replicaset/backend-6cff9f59cb                                  Created pod: backend-6cff9f59cb-vlrk4
+kitledger     8m44s       Normal    SuccessfulCreate          replicaset/backend-6cff9f59cb                                  Created pod: backend-6cff9f59cb-jtnhd
+kitledger     8m44s       Normal    ScalingReplicaSet         deployment/backend                                             Scaled up replica set backend-6cff9f59cb from 0 to 2
+kitledger     8m44s       Normal    ExternalProvisioning      persistentvolumeclaim/data-postgres-0                          Waiting for a volume to be created either by the external provisioner 'k8s.io/minikube-hostpath' or manually by the system administrator. If volume creation is delayed, please verify that the provisioner is running and correctly registered.
+kitledger     8m44s       Normal    SuccessfulCreate          replicaset/frontend-5c56df57f                                  Created pod: frontend-5c56df57f-tk8w6
+kitledger     8m44s       Normal    SuccessfulCreate          replicaset/frontend-5c56df57f                                  Created pod: frontend-5c56df57f-7ndpv
+kitledger     8m44s       Normal    ScalingReplicaSet         deployment/frontend                                            Scaled up replica set frontend-5c56df57f from 0 to 2
+kitledger     8m44s       Warning   FailedScheduling          pod/postgres-0                                                 0/1 nodes are available: pod has unbound immediate PersistentVolumeClaims. not found
+kitledger     8m44s       Normal    Scheduled                 pod/postgres-0                                                 Successfully assigned kitledger/postgres-0 to observability
+kitledger     8m44s       Normal    Provisioning              persistentvolumeclaim/data-postgres-0                          External provisioner is provisioning volume for claim "kitledger/data-postgres-0"
+kitledger     8m44s       Normal    ProvisioningSucceeded     persistentvolumeclaim/data-postgres-0                          Successfully provisioned volume pvc-463d790e-8304-4ad5-839d-0cde9e47e91e
+kitledger     8m44s       Normal    Scheduled                 pod/frontend-5c56df57f-7ndpv                                   Successfully assigned kitledger/frontend-5c56df57f-7ndpv to observability
+kitledger     8m44s       Normal    Pulling                   pod/frontend-5c56df57f-7ndpv                                   Pulling image "busybox:1.37"
+kitledger     8m44s       Normal    SuccessfulCreate          statefulset/postgres                                           Create Pod postgres-0 in StatefulSet postgres successful
+kitledger     8m43s       Normal    Pulling                   pod/postgres-0                                                 Pulling image "postgres:17-alpine"
+kitledger     8m43s       Normal    Pulled                    pod/frontend-5c56df57f-7ndpv                                   Successfully pulled image "busybox:1.37" in 514ms (514ms including waiting). Image size: 2222118 bytes.
+kitledger     8m43s       Normal    Pulled                    pod/frontend-5c56df57f-tk8w6                                   Successfully pulled image "busybox:1.37" in 145ms (608ms including waiting). Image size: 2222118 bytes.
+kitledger     8m43s       Normal    Started                   pod/frontend-5c56df57f-tk8w6                                   Container started
+kitledger     8m43s       Normal    Created                   pod/frontend-5c56df57f-tk8w6                                   Container created
+kitledger     8m43s       Normal    Started                   pod/frontend-5c56df57f-7ndpv                                   Container started
+kitledger     8m43s       Normal    Created                   pod/frontend-5c56df57f-7ndpv                                   Container created
+kitledger     8m40s       Normal    Pulled                    pod/postgres-0                                                 Successfully pulled image "postgres:17-alpine" in 3.14s (3.493s including waiting). Image size: 117212703 bytes.
+kitledger     8m40s       Normal    Started                   pod/postgres-0                                                 Container started
+kitledger     8m40s       Normal    Created                   pod/postgres-0                                                 Container created
+kitledger     8m39s       Warning   Unhealthy                 pod/postgres-0                                                 Readiness probe failed: /var/run/postgresql:5432 - no response
+kitledger     8m34s       Warning   BackOff                   pod/backend-6cff9f59cb-vlrk4                                   Back-off restarting failed container backend in pod backend-6cff9f59cb-vlrk4_kitledger(50269dd5-a4b5-471d-9704-50c8fe62096b)
+kitledger     8m34s       Warning   BackOff                   pod/backend-6cff9f59cb-jtnhd                                   Back-off restarting failed container backend in pod backend-6cff9f59cb-jtnhd_kitledger(4a0fe212-7f40-436e-9c6c-cff6924eb552)
+kitledger     8m28s       Normal    Pulled                    pod/backend-6cff9f59cb-vlrk4                                   Container image "ghcr.io/yashsensei/kitledger-backend:78c9dc0a78584735c8c96be11b79697fc2036075" already present on machine and can be accessed by the pod
+kitledger     8m28s       Normal    Created                   pod/backend-6cff9f59cb-vlrk4                                   Container created
+kitledger     8m28s       Normal    Started                   pod/backend-6cff9f59cb-vlrk4                                   Container started
+kitledger     8m27s       Normal    Created                   pod/backend-6cff9f59cb-jtnhd                                   Container created
+kitledger     8m27s       Normal    Started                   pod/backend-6cff9f59cb-jtnhd                                   Container started
+kitledger     8m27s       Normal    Pulled                    pod/backend-6cff9f59cb-jtnhd                                   Container image "ghcr.io/yashsensei/kitledger-backend:78c9dc0a78584735c8c96be11b79697fc2036075" already present on machine and can be accessed by the pod
+kitledger     8m26s       Warning   Unhealthy                 pod/backend-6cff9f59cb-vlrk4                                   Startup probe failed: Get "http://10.244.0.3:8000/health": dial tcp 10.244.0.3:8000: connect: connection refused
+kitledger     8m26s       Warning   Unhealthy                 pod/backend-6cff9f59cb-jtnhd                                   Startup probe failed: Get "http://10.244.0.5:8000/health": dial tcp 10.244.0.5:8000: connect: connection refused
+kitledger     8m21s       Warning   Unhealthy                 pod/frontend-5c56df57f-7ndpv                                   Readiness probe failed: Get "http://10.244.0.6:8080/": dial tcp 10.244.0.6:8080: connect: connection refused
+kitledger     8m21s       Normal    Pulled                    pod/frontend-5c56df57f-tk8w6                                   Container image "ghcr.io/yashsensei/kitledger-frontend:78c9dc0a78584735c8c96be11b79697fc2036075" already present on machine and can be accessed by the pod
+kitledger     8m21s       Normal    Created                   pod/frontend-5c56df57f-tk8w6                                   Container created
+kitledger     8m21s       Normal    Started                   pod/frontend-5c56df57f-tk8w6                                   Container started
+kitledger     8m21s       Normal    Pulled                    pod/frontend-5c56df57f-7ndpv                                   Container image "ghcr.io/yashsensei/kitledger-frontend:78c9dc0a78584735c8c96be11b79697fc2036075" already present on machine and can be accessed by the pod
+kitledger     8m21s       Normal    Created                   pod/frontend-5c56df57f-7ndpv                                   Container created
+kitledger     8m21s       Normal    Started                   pod/frontend-5c56df57f-7ndpv                                   Container started
+monitoring    8m5s        Normal    Scheduled                 pod/monitoring-kube-prometheus-admission-create-tgsfb          Successfully assigned monitoring/monitoring-kube-prometheus-admission-create-tgsfb to observability
+monitoring    8m5s        Normal    SuccessfulCreate          job/monitoring-kube-prometheus-admission-create                Created pod: monitoring-kube-prometheus-admission-create-tgsfb
+monitoring    8m5s        Normal    Pulling                   pod/monitoring-kube-prometheus-admission-create-tgsfb          Pulling image "ghcr.io/jkroepke/kube-webhook-certgen:1.8.9"
+monitoring    8m4s        Normal    Started                   pod/monitoring-kube-prometheus-admission-create-tgsfb          Container started
+monitoring    8m4s        Normal    Created                   pod/monitoring-kube-prometheus-admission-create-tgsfb          Container created
+monitoring    8m4s        Normal    Pulled                    pod/monitoring-kube-prometheus-admission-create-tgsfb          Successfully pulled image "ghcr.io/jkroepke/kube-webhook-certgen:1.8.9" in 470ms (470ms including waiting). Image size: 9485580 bytes.
+monitoring    8m2s        Normal    Completed                 job/monitoring-kube-prometheus-admission-create                Job completed
+monitoring    8m1s        Normal    Scheduled                 pod/monitoring-kube-state-metrics-78fd56fc4b-dfm8x             Successfully assigned monitoring/monitoring-kube-state-metrics-78fd56fc4b-dfm8x to observability
+monitoring    8m1s        Normal    Pulling                   pod/monitoring-grafana-7f5fcc6d65-vj69w                        Pulling image "quay.io/kiwigrid/k8s-sidecar:2.14.1"
+monitoring    8m1s        Normal    SuccessfulCreate          daemonset/monitoring-prometheus-node-exporter                  Created pod: monitoring-prometheus-node-exporter-j8rrn
+monitoring    8m1s        Normal    ScalingReplicaSet         deployment/monitoring-kube-prometheus-operator                 Scaled up replica set monitoring-kube-prometheus-operator-6458848b98 from 0 to 1
+monitoring    8m1s        Normal    Scheduled                 pod/monitoring-grafana-7f5fcc6d65-vj69w                        Successfully assigned monitoring/monitoring-grafana-7f5fcc6d65-vj69w to observability
+monitoring    8m1s        Normal    Pulling                   pod/monitoring-kube-state-metrics-78fd56fc4b-dfm8x             Pulling image "registry.k8s.io/kube-state-metrics/kube-state-metrics:v2.20.0"
+monitoring    8m1s        Normal    Pulling                   pod/monitoring-kube-prometheus-operator-6458848b98-z85dn       Pulling image "quay.io/prometheus-operator/prometheus-operator:v0.94.1"
+monitoring    8m1s        Normal    Pulling                   pod/monitoring-prometheus-node-exporter-j8rrn                  Pulling image "quay.io/prometheus/node-exporter:v1.12.1-distroless"
+monitoring    8m1s        Normal    SuccessfulCreate          replicaset/monitoring-grafana-7f5fcc6d65                       Created pod: monitoring-grafana-7f5fcc6d65-vj69w
+monitoring    8m1s        Normal    ScalingReplicaSet         deployment/monitoring-grafana                                  Scaled up replica set monitoring-grafana-7f5fcc6d65 from 0 to 1
+monitoring    8m1s        Normal    Scheduled                 pod/monitoring-prometheus-node-exporter-j8rrn                  Successfully assigned monitoring/monitoring-prometheus-node-exporter-j8rrn to observability
+monitoring    8m1s        Normal    ScalingReplicaSet         deployment/monitoring-kube-state-metrics                       Scaled up replica set monitoring-kube-state-metrics-78fd56fc4b from 0 to 1
+monitoring    8m1s        Normal    SuccessfulCreate          replicaset/monitoring-kube-state-metrics-78fd56fc4b            Created pod: monitoring-kube-state-metrics-78fd56fc4b-dfm8x
+monitoring    8m1s        Normal    Scheduled                 pod/monitoring-kube-prometheus-operator-6458848b98-z85dn       Successfully assigned monitoring/monitoring-kube-prometheus-operator-6458848b98-z85dn to observability
+monitoring    8m1s        Normal    SuccessfulCreate          replicaset/monitoring-kube-prometheus-operator-6458848b98      Created pod: monitoring-kube-prometheus-operator-6458848b98-z85dn
+monitoring    8m          Normal    Pulled                    pod/monitoring-prometheus-node-exporter-j8rrn                  Successfully pulled image "quay.io/prometheus/node-exporter:v1.12.1-distroless" in 1.02s (1.02s including waiting). Image size: 13123706 bytes.
+monitoring    8m          Normal    Created                   pod/monitoring-prometheus-node-exporter-j8rrn                  Container created
+monitoring    8m          Normal    Started                   pod/monitoring-prometheus-node-exporter-j8rrn                  Container started
+monitoring    8m          Warning   Unhealthy                 pod/monitoring-prometheus-node-exporter-j8rrn                  Readiness probe failed: Get "http://192.168.49.2:9100/": dial tcp 192.168.49.2:9100: connect: connection refused
+monitoring    7m58s       Normal    Pulled                    pod/monitoring-kube-state-metrics-78fd56fc4b-dfm8x             Successfully pulled image "registry.k8s.io/kube-state-metrics/kube-state-metrics:v2.20.0" in 2.109s (3.126s including waiting). Image size: 19261896 bytes.
+monitoring    7m58s       Normal    Created                   pod/monitoring-kube-state-metrics-78fd56fc4b-dfm8x             Container created
+monitoring    7m58s       Normal    Started                   pod/monitoring-kube-state-metrics-78fd56fc4b-dfm8x             Container started
+monitoring    7m56s       Normal    Created                   pod/monitoring-grafana-7f5fcc6d65-vj69w                        Container created
+monitoring    7m56s       Normal    Created                   pod/monitoring-grafana-7f5fcc6d65-vj69w                        Container created
+monitoring    7m56s       Normal    Started                   pod/monitoring-grafana-7f5fcc6d65-vj69w                        Container started
+monitoring    7m56s       Normal    Pulled                    pod/monitoring-grafana-7f5fcc6d65-vj69w                        Container image "quay.io/kiwigrid/k8s-sidecar:2.14.1" already present on machine and can be accessed by the pod
+monitoring    7m56s       Normal    Started                   pod/monitoring-grafana-7f5fcc6d65-vj69w                        Container started
+monitoring    7m56s       Normal    Pulled                    pod/monitoring-grafana-7f5fcc6d65-vj69w                        Successfully pulled image "quay.io/kiwigrid/k8s-sidecar:2.14.1" in 1.539s (4.614s including waiting). Image size: 29200776 bytes.
+monitoring    7m56s       Normal    Pulling                   pod/monitoring-grafana-7f5fcc6d65-vj69w                        Pulling image "docker.io/grafana/grafana:13.2.4-distroless"
+monitoring    7m55s       Normal    Pulled                    pod/monitoring-kube-prometheus-operator-6458848b98-z85dn       Successfully pulled image "quay.io/prometheus-operator/prometheus-operator:v0.94.1" in 1.023s (5.623s including waiting). Image size: 22572616 bytes.
+monitoring    7m55s       Normal    Created                   pod/monitoring-kube-prometheus-operator-6458848b98-z85dn       Container created
+monitoring    7m55s       Normal    Started                   pod/monitoring-kube-prometheus-operator-6458848b98-z85dn       Container started
+monitoring    7m55s       Warning   Unhealthy                 pod/monitoring-kube-prometheus-operator-6458848b98-z85dn       Readiness probe failed: Get "https://10.244.0.10:10250/healthz": dial tcp 10.244.0.10:10250: connect: connection refused
+monitoring    7m54s       Normal    SuccessfulCreate          statefulset/prometheus-monitoring-kube-prometheus-prometheus   Create Pod prometheus-monitoring-kube-prometheus-prometheus-0 in StatefulSet prometheus-monitoring-kube-prometheus-prometheus successful
+monitoring    7m54s       Normal    Scheduled                 pod/prometheus-monitoring-kube-prometheus-prometheus-0         Successfully assigned monitoring/prometheus-monitoring-kube-prometheus-prometheus-0 to observability
+monitoring    7m51s       Normal    Pulling                   pod/prometheus-monitoring-kube-prometheus-prometheus-0         Pulling image "quay.io/prometheus-operator/prometheus-config-reloader:v0.94.1"
+monitoring    7m43s       Normal    Pulled                    pod/monitoring-grafana-7f5fcc6d65-vj69w                        Successfully pulled image "docker.io/grafana/grafana:13.2.4-distroless" in 11.949s (12.795s including waiting). Image size: 464079275 bytes.
+monitoring    7m41s       Normal    Started                   pod/prometheus-monitoring-kube-prometheus-prometheus-0         Container started
+monitoring    7m41s       Normal    Created                   pod/prometheus-monitoring-kube-prometheus-prometheus-0         Container created
+monitoring    7m41s       Normal    Pulled                    pod/prometheus-monitoring-kube-prometheus-prometheus-0         Successfully pulled image "quay.io/prometheus-operator/prometheus-config-reloader:v0.94.1" in 1.794s (9.99s including waiting). Image size: 14893664 bytes.
+monitoring    7m40s       Normal    Pulling                   pod/prometheus-monitoring-kube-prometheus-prometheus-0         Pulling image "quay.io/prometheus/prometheus:v3.15.0-distroless"
+monitoring    7m38s       Normal    Pulled                    pod/prometheus-monitoring-kube-prometheus-prometheus-0         Successfully pulled image "quay.io/prometheus/prometheus:v3.15.0-distroless" in 1.876s (1.876s including waiting). Image size: 113793870 bytes.
+monitoring    7m38s       Normal    Created                   pod/prometheus-monitoring-kube-prometheus-prometheus-0         Container created
+monitoring    7m38s       Normal    Started                   pod/prometheus-monitoring-kube-prometheus-prometheus-0         Container started
+monitoring    7m38s       Normal    Pulled                    pod/prometheus-monitoring-kube-prometheus-prometheus-0         Container image "quay.io/prometheus-operator/prometheus-config-reloader:v0.94.1" already present on machine and can be accessed by the pod
+monitoring    7m38s       Normal    Created                   pod/prometheus-monitoring-kube-prometheus-prometheus-0         Container created
+monitoring    7m38s       Normal    Started                   pod/prometheus-monitoring-kube-prometheus-prometheus-0         Container started
+monitoring    7m38s       Warning   Unhealthy                 pod/prometheus-monitoring-kube-prometheus-prometheus-0         Startup probe failed: Get "http://10.244.0.12:9090/-/ready": dial tcp 10.244.0.12:9090: connect: connection refused
+monitoring    5m26s       Normal    Started                   pod/monitoring-grafana-7f5fcc6d65-vj69w                        Container started
+monitoring    3m47s       Normal    Created                   pod/monitoring-grafana-7f5fcc6d65-vj69w                        Container created
+monitoring    3m47s       Warning   Unhealthy                 pod/monitoring-grafana-7f5fcc6d65-vj69w                        Readiness probe failed: Get "http://10.244.0.11:3000/api/health": dial tcp 10.244.0.11:3000: connect: connection refused
+monitoring    2m6s        Warning   BackOff                   pod/monitoring-grafana-7f5fcc6d65-vj69w                        Back-off restarting failed container grafana in pod monitoring-grafana-7f5fcc6d65-vj69w_monitoring(0fd5ddbd-6e08-4bc3-a842-294d1b9127f1)
+monitoring    39s         Normal    Pulled                    pod/monitoring-grafana-7f5fcc6d65-vj69w                        Container image "docker.io/grafana/grafana:13.2.4-distroless" already present on machine and can be accessed by the pod
