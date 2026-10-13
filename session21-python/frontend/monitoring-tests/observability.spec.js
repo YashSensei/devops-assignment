@@ -9,6 +9,14 @@ test('Prometheus targets and Grafana application dashboard',async({page,request}
     await writeFile('../../evidence/observability/browser-verified-targets.json',JSON.stringify(payload,null,2)+'\n');
     return appTargets.length>=2 && appTargets.every(t=>t.health==='up');
   },{timeout:60000,intervals:[2000,5000]}).toBe(true);
+  // Target health alone does not prove that application samples are queryable.
+  await expect.poll(async()=>{
+    const sample=await request.get('http://127.0.0.1:9090/api/v1/query',{params:{query:'sum(kitledger_http_requests_total{namespace="kitledger"})'}});
+    const sampleData=await sample.json();
+    const allSeries=await request.get('http://127.0.0.1:9090/api/v1/query',{params:{query:'kitledger_http_requests_total'}});
+    await writeFile('../../evidence/observability/prometheus-query.json',JSON.stringify({scoped:sampleData,unscoped:await allSeries.json()},null,2)+'\n');
+    return Number(sampleData.data.result[0]?.value[1]||0);
+  },{timeout:90000,intervals:[5000]}).toBeGreaterThan(0);
   await page.goto('http://127.0.0.1:9090/targets');
   await expect(page.getByText(appTargets[0].scrapePool,{exact:false}).first()).toBeVisible({timeout:30000});
   await page.screenshot({path:'../../evidence/observability/prometheus-targets.png',fullPage:true});
@@ -22,8 +30,8 @@ test('Prometheus targets and Grafana application dashboard',async({page,request}
   const dashboardQuery=page.waitForResponse(response=>response.url().includes('/api/ds/query') && response.request().method()==='POST');
   await page.goto('http://127.0.0.1:3001/d/kitledger');
   const queryData=await (await dashboardQuery).json();
-  expect(Object.values(queryData.results).some(result=>(result.frames||[]).some(frame=>frame.data.values.flat().some(value=>typeof value==='number')))).toBeTruthy();
   await writeFile('../../evidence/observability/grafana-query.json',JSON.stringify(queryData,null,2)+'\n');
+  expect(Object.values(queryData.results).some(result=>(result.frames||[]).some(frame=>frame.data.values.flat().some(value=>typeof value==='number')))).toBeTruthy();
   await expect(page.getByText('Requests served',{exact:true})).toBeVisible({timeout:30000});
   await expect(page.getByText('Requests by route',{exact:true})).toBeVisible();
   await expect(page.getByText('No data',{exact:true})).toHaveCount(0,{timeout:30000});
