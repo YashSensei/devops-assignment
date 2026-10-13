@@ -1,0 +1,14 @@
+NAME                            READY   STATUS    RESTARTS      AGE   IP            NODE           NOMINATED NODE   READINESS GATES
+pod/backend-5cb8bbdfd-26zfq     1/1     Running   2 (47s ago)   51s   10.244.0.8    kitledger-ci   <none>           <none>
+pod/backend-5cb8bbdfd-jsrhx     1/1     Running   2 (47s ago)   51s   10.244.0.7    kitledger-ci   <none>           <none>
+pod/frontend-67bdd6967c-4n8ms   1/1     Running   0             51s   10.244.0.6    kitledger-ci   <none>           <none>
+pod/frontend-67bdd6967c-jmzpg   1/1     Running   0             51s   10.244.0.9    kitledger-ci   <none>           <none>
+pod/postgres-0                  1/1     Running   0             51s   10.244.0.10   kitledger-ci   <none>           <none>
+
+NAME               TYPE        CLUSTER-IP       EXTERNAL-IP   PORT(S)    AGE   SELECTOR
+service/backend    ClusterIP   10.109.127.171   <none>        8000/TCP   51s   app=kitledger-backend
+service/frontend   ClusterIP   10.97.194.221    <none>        80/TCP     51s   app=kitledger-frontend
+service/postgres   ClusterIP   10.101.149.90    <none>        5432/TCP   51s   app=kitledger-postgres
+
+NAME                                  CLASS   HOSTS             ADDRESS        PORTS   AGE
+ingress.networking.k8s.io/kitledger   nginx   kitledger.local   192.168.49.2   80      51s

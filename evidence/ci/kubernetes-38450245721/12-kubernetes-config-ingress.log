@@ -1,0 +1,75 @@
+::add-mask::867054bed27691b65deea91793e820d5
+secret/coursework-secret created
++ kubectl apply -n coursework -f submissions/12-kubernetes-config-ingress/config.yaml
+configmap/coursework-config created
+pod/config-reader created
+ingress.networking.k8s.io/coursework created
++ kubectl wait -n coursework --for=condition=Ready pod/config-reader --timeout=120s
+pod/config-reader condition met
++ kubectl exec -n coursework config-reader -- printenv ENVIRONMENT
+development
++ kubectl exec -n coursework config-reader -- sh -c 'test -n "$DEMO_SECRET" && echo "Secret is present; value withheld"'
+Secret is present; value withheld
++ kubectl describe secret coursework-secret -n coursework
+Name:         coursework-secret
+Namespace:    coursework
+Labels:       <none>
+Annotations:  <none>
+
+Type:  Opaque
+
+Data
+====
+password:  32 bytes
++ kubectl patch configmap coursework-config -n coursework -p '{"data":{"ENVIRONMENT":"staging"}}'
+configmap/coursework-config patched
+++ kubectl exec -n coursework config-reader -- printenv ENVIRONMENT
++ test development = development
++ kubectl delete pod config-reader -n coursework
+pod "config-reader" deleted from coursework namespace
++ kubectl run config-reader -n coursework --image=alpine:3.22 --restart=Never '--overrides={"spec":{"containers":[{"name":"reader","image":"alpine:3.22","command":["sleep","3600"],"envFrom":[{"configMapRef":{"name":"coursework-config"}}]}]}}'
+pod/config-reader created
++ kubectl wait -n coursework --for=condition=Ready pod/config-reader --timeout=120s
+pod/config-reader condition met
+++ kubectl exec -n coursework config-reader -- printenv ENVIRONMENT
++ test staging = staging
++ printf 'demo-value\n'
++ base64
+ZGVtby12YWx1ZQo=
++ printf demo-value
++ base64
+ZGVtby12YWx1ZQ==
++ kubectl wait --namespace ingress-nginx --for=condition=ready pod --selector=app.kubernetes.io/component=controller --timeout=180s
+pod/ingress-nginx-controller-d7cd8c989-qcwfh condition met
+++ minikube -p coursework ip
++ curl --fail --retry 10 --retry-all-errors -H 'Host: coursework.local' http://192.168.49.2/
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0100   896  100   896    0     0   523k      0 --:--:-- --:--:-- --:--:--  875k
+<!DOCTYPE html>
+<html>
+<head>
+<title>Welcome to nginx!</title>
+<style>
+html { color-scheme: light dark; }
+body { width: 35em; margin: 0 auto;
+font-family: Tahoma, Verdana, Arial, sans-serif; }
+</style>
+</head>
+<body>
+<h1>Welcome to nginx!</h1>
+<p>If you see this page, nginx is successfully installed and working.
+Further configuration is required for the web server, reverse proxy, 
+API gateway, load balancer, content cache, or other features.</p>
+
+<p>For online documentation and support please refer to
+<a href="https://nginx.org/">nginx.org</a>.<br/>
+To engage with the community please visit
+<a href="https://community.nginx.org/">community.nginx.org</a>.<br/>
+For enterprise grade support, professional services, additional 
+security features and capabilities please refer to
+<a href="https://f5.com/nginx">f5.com/nginx</a>.</p>
+
+<p><em>Thank you for using nginx.</em></p>
+</body>
+</html>

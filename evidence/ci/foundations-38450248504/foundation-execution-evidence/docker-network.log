@@ -1,0 +1,431 @@
+::add-mask::fe02cfc8d26e35ad32d6f5dbac52cba0b9c70ebdf0994785
+ frontend Pulling 
+ backend Pulling 
+ database Pulling 
+ e2de96513ba9 Already exists 
+ e3320d02d578 Pulling fs layer 
+ 3d85d110b167 Pulling fs layer 
+ 22e5a8a110ec Pulling fs layer 
+ 6b4dfb2e8f8a Pulling fs layer 
+ 703c5424632f Pulling fs layer 
+ b335b7ac3a40 Pulling fs layer 
+ b27cf3f7c39d Pulling fs layer 
+ 703c5424632f Waiting 
+ b335b7ac3a40 Waiting 
+ b27cf3f7c39d Waiting 
+ 6b4dfb2e8f8a Waiting 
+ e896da32f635 Pulling fs layer 
+ 3527249a8025 Pulling fs layer 
+ 6b54d15c954d Pulling fs layer 
+ bf11ec3e7e56 Pulling fs layer 
+ 15ba404f5528 Pulling fs layer 
+ ad73434ffdad Pulling fs layer 
+ 81077ec0e5ac Pulling fs layer 
+ 6b54d15c954d Waiting 
+ bf11ec3e7e56 Waiting 
+ f51a9a1f0d20 Pulling fs layer 
+ 15ba404f5528 Waiting 
+ 4ba189089539 Pulling fs layer 
+ d4cc7515d7b7 Pulling fs layer 
+ ad73434ffdad Waiting 
+ 81077ec0e5ac Waiting 
+ f51a9a1f0d20 Waiting 
+ 4ba189089539 Waiting 
+ d4cc7515d7b7 Waiting 
+ 3527249a8025 Waiting 
+ e896da32f635 Waiting 
+ e2de96513ba9 Already exists 
+ e3320d02d578 Pulling fs layer 
+ 3d85d110b167 Pulling fs layer 
+ 22e5a8a110ec Pulling fs layer 
+ 6b4dfb2e8f8a Pulling fs layer 
+ 703c5424632f Pulling fs layer 
+ b335b7ac3a40 Pulling fs layer 
+ b27cf3f7c39d Pulling fs layer 
+ 6b4dfb2e8f8a Waiting 
+ b27cf3f7c39d Waiting 
+ 703c5424632f Waiting 
+ b335b7ac3a40 Waiting 
+ 3d85d110b167 Download complete 
+ 3d85d110b167 Download complete 
+ e3320d02d578 Downloading [>                                                  ]  32.17kB/1.882MB
+ 22e5a8a110ec Downloading [==================================================>]     963B/963B
+ 22e5a8a110ec Verifying Checksum 
+ 22e5a8a110ec Download complete 
+ e3320d02d578 Downloading [>                                                  ]  32.17kB/1.882MB
+ 22e5a8a110ec Downloading [==================================================>]     963B/963B
+ 22e5a8a110ec Verifying Checksum 
+ 22e5a8a110ec Download complete 
+ e3320d02d578 Verifying Checksum 
+ e3320d02d578 Download complete 
+ e3320d02d578 Extracting [>                                                  ]  32.77kB/1.882MB
+ e3320d02d578 Verifying Checksum 
+ e3320d02d578 Download complete 
+ e3320d02d578 Extracting [>                                                  ]  32.77kB/1.882MB
+ e3320d02d578 Extracting [==================================================>]  1.882MB/1.882MB
+ e3320d02d578 Extracting [==================================================>]  1.882MB/1.882MB
+ e3320d02d578 Pull complete 
+ e3320d02d578 Pull complete 
+ 3d85d110b167 Extracting [==================================================>]     626B/626B
+ 3d85d110b167 Extracting [==================================================>]     626B/626B
+ 3d85d110b167 Extracting [==================================================>]     626B/626B
+ 3d85d110b167 Extracting [==================================================>]     626B/626B
+ 3d85d110b167 Pull complete 
+ 3d85d110b167 Pull complete 
+ 22e5a8a110ec Extracting [==================================================>]     963B/963B
+ 22e5a8a110ec Extracting [==================================================>]     963B/963B
+ 22e5a8a110ec Extracting [==================================================>]     963B/963B
+ 22e5a8a110ec Extracting [==================================================>]     963B/963B
+ 22e5a8a110ec Pull complete 
+ 22e5a8a110ec Pull complete 
+ 703c5424632f Verifying Checksum 
+ 703c5424632f Download complete 
+ 703c5424632f Downloading [==================================================>]   1.21kB/1.21kB
+ 703c5424632f Verifying Checksum 
+ 703c5424632f Download complete 
+ 6b4dfb2e8f8a Downloading [==================================================>]     403B/403B
+ 6b4dfb2e8f8a Download complete 
+ 6b4dfb2e8f8a Extracting [==================================================>]     403B/403B
+ 6b4dfb2e8f8a Downloading [==================================================>]     403B/403B
+ 6b4dfb2e8f8a Verifying Checksum 
+ 6b4dfb2e8f8a Download complete 
+ 6b4dfb2e8f8a Extracting [==================================================>]     403B/403B
+ 6b4dfb2e8f8a Extracting [==================================================>]     403B/403B
+ 6b4dfb2e8f8a Extracting [==================================================>]     403B/403B
+ 6b4dfb2e8f8a Pull complete 
+ 6b4dfb2e8f8a Pull complete 
+ 703c5424632f Extracting [==================================================>]   1.21kB/1.21kB
+ 703c5424632f Extracting [==================================================>]   1.21kB/1.21kB
+ 703c5424632f Extracting [==================================================>]   1.21kB/1.21kB
+ 703c5424632f Extracting [==================================================>]   1.21kB/1.21kB
+ b335b7ac3a40 Downloading [==================================================>]  1.396kB/1.396kB
+ b335b7ac3a40 Verifying Checksum 
+ b335b7ac3a40 Download complete 
+ b335b7ac3a40 Downloading [==================================================>]  1.396kB/1.396kB
+ b335b7ac3a40 Verifying Checksum 
+ b335b7ac3a40 Download complete 
+ 703c5424632f Pull complete 
+ 703c5424632f Pull complete 
+ b335b7ac3a40 Extracting [==================================================>]  1.396kB/1.396kB
+ b335b7ac3a40 Extracting [==================================================>]  1.396kB/1.396kB
+ b335b7ac3a40 Extracting [==================================================>]  1.396kB/1.396kB
+ b335b7ac3a40 Extracting [==================================================>]  1.396kB/1.396kB
+ b335b7ac3a40 Pull complete 
+ b335b7ac3a40 Pull complete 
+ b27cf3f7c39d Downloading [>                                                  ]  212.4kB/20.34MB
+ b27cf3f7c39d Downloading [>                                                  ]  212.4kB/20.34MB
+ e896da32f635 Downloading [>                                                  ]  474.5kB/47.25MB
+ 3527249a8025 Downloading [==================================================>]     885B/885B
+ 3527249a8025 Verifying Checksum 
+ 3527249a8025 Download complete 
+ b27cf3f7c39d Verifying Checksum 
+ b27cf3f7c39d Download complete 
+ b27cf3f7c39d Verifying Checksum 
+ b27cf3f7c39d Download complete 
+ e896da32f635 Downloading [=================================>                 ]  31.83MB/47.25MB
+ b27cf3f7c39d Extracting [>                                                  ]  229.4kB/20.34MB
+ b27cf3f7c39d Extracting [>                                                  ]  229.4kB/20.34MB
+ e896da32f635 Verifying Checksum 
+ e896da32f635 Download complete 
+ e896da32f635 Extracting [>                                                  ]  491.5kB/47.25MB
+ b27cf3f7c39d Extracting [=========>                                         ]  3.899MB/20.34MB
+ b27cf3f7c39d Extracting [=========>                                         ]  3.899MB/20.34MB
+ 6b54d15c954d Downloading [=>                                                 ]  15.79kB/783.6kB
+ 6b54d15c954d Downloading [==================================================>]  783.6kB/783.6kB
+ 6b54d15c954d Verifying Checksum 
+ 6b54d15c954d Download complete 
+ bf11ec3e7e56 Downloading [>                                                  ]  64.94kB/6.192MB
+ e896da32f635 Extracting [==>                                                ]  1.966MB/47.25MB
+ b27cf3f7c39d Extracting [========================>                          ]  9.863MB/20.34MB
+ b27cf3f7c39d Extracting [========================>                          ]  9.863MB/20.34MB
+ bf11ec3e7e56 Verifying Checksum 
+ bf11ec3e7e56 Download complete 
+ 15ba404f5528 Downloading [==================================================>]  2.605kB/2.605kB
+ 15ba404f5528 Verifying Checksum 
+ 15ba404f5528 Download complete 
+ b27cf3f7c39d Extracting [=====================================>             ]  15.14MB/20.34MB
+ b27cf3f7c39d Extracting [=====================================>             ]  15.14MB/20.34MB
+ e896da32f635 Extracting [=======>                                           ]  6.881MB/47.25MB
+ ad73434ffdad Downloading [==================================================>]     334B/334B
+ ad73434ffdad Download complete 
+ 81077ec0e5ac Downloading [>                                                  ]  523.7kB/51.62MB
+ b27cf3f7c39d Extracting [==================================================>]  20.34MB/20.34MB
+ b27cf3f7c39d Extracting [==================================================>]  20.34MB/20.34MB
+ e896da32f635 Extracting [=======>                                           ]  7.373MB/47.25MB
+ f51a9a1f0d20 Downloading [==================================================>]     321B/321B
+ f51a9a1f0d20 Verifying Checksum 
+ f51a9a1f0d20 Download complete 
+ 81077ec0e5ac Downloading [=============================>                     ]  30.93MB/51.62MB
+ e896da32f635 Extracting [===========>                                       ]  10.81MB/47.25MB
+ 4ba189089539 Downloading [>                                                  ]  534.1kB/132.4MB
+ 81077ec0e5ac Verifying Checksum 
+ 81077ec0e5ac Download complete 
+ e896da32f635 Extracting [================>                                  ]  15.73MB/47.25MB
+ 4ba189089539 Downloading [===========>                                       ]  29.35MB/132.4MB
+ d4cc7515d7b7 Downloading [=================================>                 ]  3.502kB/5.225kB
+ d4cc7515d7b7 Downloading [==================================================>]  5.225kB/5.225kB
+ d4cc7515d7b7 Verifying Checksum 
+ d4cc7515d7b7 Download complete 
+ e896da32f635 Extracting [=======================>                           ]  22.12MB/47.25MB
+ 4ba189089539 Downloading [======================>                            ]  60.36MB/132.4MB
+ b27cf3f7c39d Pull complete 
+ b27cf3f7c39d Pull complete 
+ frontend Pulled 
+ backend Pulled 
+ e896da32f635 Extracting [==============================>                    ]  28.51MB/47.25MB
+ 4ba189089539 Downloading [==================================>                ]  91.35MB/132.4MB
+ e896da32f635 Extracting [==================================>                ]  32.44MB/47.25MB
+ 4ba189089539 Downloading [==============================================>    ]  123.4MB/132.4MB
+ 4ba189089539 Verifying Checksum 
+ 4ba189089539 Download complete 
+ e896da32f635 Extracting [===========================================>       ]  41.29MB/47.25MB
+ e896da32f635 Extracting [==============================================>    ]  43.75MB/47.25MB
+ e896da32f635 Extracting [==============================================>    ]  44.24MB/47.25MB
+ e896da32f635 Extracting [==================================================>]  47.25MB/47.25MB
+ e896da32f635 Pull complete 
+ 3527249a8025 Extracting [==================================================>]     885B/885B
+ 3527249a8025 Extracting [==================================================>]     885B/885B
+ 3527249a8025 Pull complete 
+ 6b54d15c954d Extracting [==>                                                ]  32.77kB/783.6kB
+ 6b54d15c954d Extracting [==================================================>]  783.6kB/783.6kB
+ 6b54d15c954d Pull complete 
+ bf11ec3e7e56 Extracting [>                                                  ]  65.54kB/6.192MB
+ bf11ec3e7e56 Extracting [====================>                              ]   2.49MB/6.192MB
+ bf11ec3e7e56 Extracting [==================================================>]  6.192MB/6.192MB
+ bf11ec3e7e56 Pull complete 
+ 15ba404f5528 Extracting [==================================================>]  2.605kB/2.605kB
+ 15ba404f5528 Extracting [==================================================>]  2.605kB/2.605kB
+ 15ba404f5528 Pull complete 
+ ad73434ffdad Extracting [==================================================>]     334B/334B
+ ad73434ffdad Extracting [==================================================>]     334B/334B
+ ad73434ffdad Pull complete 
+ 81077ec0e5ac Extracting [>                                                  ]  524.3kB/51.62MB
+ 81077ec0e5ac Extracting [========>                                          ]  8.389MB/51.62MB
+ 81077ec0e5ac Extracting [============>                                      ]  12.58MB/51.62MB
+ 81077ec0e5ac Extracting [===================>                               ]  19.92MB/51.62MB
+ 81077ec0e5ac Extracting [===========================>                       ]  28.84MB/51.62MB
+ 81077ec0e5ac Extracting [===================================>               ]   36.7MB/51.62MB
+ 81077ec0e5ac Extracting [=========================================>         ]  42.99MB/51.62MB
+ 81077ec0e5ac Extracting [===============================================>   ]  49.28MB/51.62MB
+ 81077ec0e5ac Extracting [==================================================>]  51.62MB/51.62MB
+ 81077ec0e5ac Pull complete 
+ f51a9a1f0d20 Extracting [==================================================>]     321B/321B
+ f51a9a1f0d20 Extracting [==================================================>]     321B/321B
+ f51a9a1f0d20 Pull complete 
+ 4ba189089539 Extracting [>                                                  ]  557.1kB/132.4MB
+ 4ba189089539 Extracting [===>                                               ]  8.913MB/132.4MB
+ 4ba189089539 Extracting [====>                                              ]  12.81MB/132.4MB
+ 4ba189089539 Extracting [=======>                                           ]  20.05MB/132.4MB
+ 4ba189089539 Extracting [========>                                          ]  21.73MB/132.4MB
+ 4ba189089539 Extracting [=========>                                         ]  26.18MB/132.4MB
+ 4ba189089539 Extracting [===========>                                       ]  30.08MB/132.4MB
+ 4ba189089539 Extracting [============>                                      ]  32.87MB/132.4MB
+ 4ba189089539 Extracting [=============>                                     ]  34.54MB/132.4MB
+ 4ba189089539 Extracting [=============>                                     ]  35.09MB/132.4MB
+ 4ba189089539 Extracting [=============>                                     ]  35.65MB/132.4MB
+ 4ba189089539 Extracting [=============>                                     ]  36.21MB/132.4MB
+ 4ba189089539 Extracting [=============>                                     ]  36.77MB/132.4MB
+ 4ba189089539 Extracting [==============>                                    ]  37.32MB/132.4MB
+ 4ba189089539 Extracting [==============>                                    ]  37.88MB/132.4MB
+ 4ba189089539 Extracting [==============>                                    ]  38.44MB/132.4MB
+ 4ba189089539 Extracting [==============>                                    ]  39.55MB/132.4MB
+ 4ba189089539 Extracting [===============>                                   ]  40.11MB/132.4MB
+ 4ba189089539 Extracting [===============>                                   ]  40.67MB/132.4MB
+ 4ba189089539 Extracting [===============>                                   ]  41.22MB/132.4MB
+ 4ba189089539 Extracting [===============>                                   ]  41.78MB/132.4MB
+ 4ba189089539 Extracting [===============>                                   ]  42.34MB/132.4MB
+ 4ba189089539 Extracting [================>                                  ]  42.89MB/132.4MB
+ 4ba189089539 Extracting [================>                                  ]  43.45MB/132.4MB
+ 4ba189089539 Extracting [================>                                  ]  44.01MB/132.4MB
+ 4ba189089539 Extracting [================>                                  ]  44.56MB/132.4MB
+ 4ba189089539 Extracting [=================>                                 ]  45.12MB/132.4MB
+ 4ba189089539 Extracting [=================>                                 ]  45.68MB/132.4MB
+ 4ba189089539 Extracting [=================>                                 ]  46.24MB/132.4MB
+ 4ba189089539 Extracting [=================>                                 ]  46.79MB/132.4MB
+ 4ba189089539 Extracting [=================>                                 ]  47.35MB/132.4MB
+ 4ba189089539 Extracting [==================>                                ]  47.91MB/132.4MB
+ 4ba189089539 Extracting [==================>                                ]  48.46MB/132.4MB
+ 4ba189089539 Extracting [==================>                                ]  49.02MB/132.4MB
+ 4ba189089539 Extracting [===================>                               ]  51.25MB/132.4MB
+ 4ba189089539 Extracting [===================>                               ]  51.81MB/132.4MB
+ 4ba189089539 Extracting [====================>                              ]  53.48MB/132.4MB
+ 4ba189089539 Extracting [======================>                            ]   59.6MB/132.4MB
+ 4ba189089539 Extracting [=========================>                         ]   67.4MB/132.4MB
+ 4ba189089539 Extracting [============================>                      ]  74.65MB/132.4MB
+ 4ba189089539 Extracting [===============================>                   ]  82.44MB/132.4MB
+ 4ba189089539 Extracting [==================================>                ]   90.8MB/132.4MB
+ 4ba189089539 Extracting [=====================================>             ]  99.16MB/132.4MB
+ 4ba189089539 Extracting [=========================================>         ]  108.6MB/132.4MB
+ 4ba189089539 Extracting [============================================>      ]  118.1MB/132.4MB
+ 4ba189089539 Extracting [===============================================>   ]    127MB/132.4MB
+ 4ba189089539 Extracting [==================================================>]  132.4MB/132.4MB
+ 4ba189089539 Pull complete 
+ d4cc7515d7b7 Extracting [==================================================>]  5.225kB/5.225kB
+ d4cc7515d7b7 Extracting [==================================================>]  5.225kB/5.225kB
+ d4cc7515d7b7 Pull complete 
+ database Pulled 
+ Network yash-24bcs10164-network_edge  Creating
+ Network yash-24bcs10164-network_edge  Created
+ Network yash-24bcs10164-network_isolated  Creating
+ Network yash-24bcs10164-network_isolated  Created
+ Network yash-24bcs10164-network_data  Creating
+ Network yash-24bcs10164-network_data  Created
+ Volume "yash-24bcs10164-network_mysql-data"  Creating
+ Volume "yash-24bcs10164-network_mysql-data"  Created
+ Container yash-24bcs10164-network-database-1  Creating
+ Container yash-24bcs10164-network-backend-1  Creating
+ Container yash-24bcs10164-network-frontend-1  Creating
+ Container yash-24bcs10164-network-database-1  Created
+ Container yash-24bcs10164-network-backend-1  Created
+ Container yash-24bcs10164-network-frontend-1  Created
+ Container yash-24bcs10164-network-database-1  Starting
+ Container yash-24bcs10164-network-frontend-1  Starting
+ Container yash-24bcs10164-network-backend-1  Starting
+ Container yash-24bcs10164-network-database-1  Started
+ Container yash-24bcs10164-network-backend-1  Started
+ Container yash-24bcs10164-network-frontend-1  Started
+ Container yash-24bcs10164-network-database-1  Waiting
+ Container yash-24bcs10164-network-frontend-1  Waiting
+ Container yash-24bcs10164-network-backend-1  Waiting
+ Container yash-24bcs10164-network-frontend-1  Healthy
+ Container yash-24bcs10164-network-backend-1  Healthy
+ Container yash-24bcs10164-network-database-1  Healthy
++ docker compose ps
+NAME                                 IMAGE                 COMMAND                  SERVICE    CREATED          STATUS                    PORTS
+yash-24bcs10164-network-backend-1    nginx:stable-alpine   "/docker-entrypoint.…"   backend    11 seconds ago   Up 10 seconds             80/tcp
+yash-24bcs10164-network-database-1   mysql:8.4             "docker-entrypoint.s…"   database   11 seconds ago   Up 10 seconds (healthy)   
+yash-24bcs10164-network-frontend-1   nginx:stable-alpine   "/docker-entrypoint.…"   frontend   11 seconds ago   Up 10 seconds             127.0.0.1:8180->80/tcp
++ docker network ls --filter name=yash-24bcs10164-network
+NETWORK ID     NAME                               DRIVER    SCOPE
+a23100633203   yash-24bcs10164-network_data       bridge    local
+888e59621e00   yash-24bcs10164-network_edge       bridge    local
+5a28d531893b   yash-24bcs10164-network_isolated   bridge    local
++ docker compose exec -T frontend wget -qO- http://backend:80
+Network backend - Yash Agrawal 24bcs10164+ docker compose exec -T backend nc -z -w 3 database 3306
++ docker compose exec -T frontend getent hosts database
++ docker compose exec -T database sh -c 'printf "Yash Agrawal 24bcs10164" > /var/lib/mysql/volume-proof.txt'
++ docker compose restart database
+ Container yash-24bcs10164-network-database-1  Restarting
+ Container yash-24bcs10164-network-database-1  Started
++ docker compose exec -T database cat /var/lib/mysql/volume-proof.txt
+Yash Agrawal 24bcs10164+ docker compose down
+ Container yash-24bcs10164-network-database-1  Stopping
+ Container yash-24bcs10164-network-backend-1  Stopping
+ Container yash-24bcs10164-network-frontend-1  Stopping
+ Container yash-24bcs10164-network-backend-1  Stopped
+ Container yash-24bcs10164-network-backend-1  Removing
+ Container yash-24bcs10164-network-backend-1  Removed
+ Container yash-24bcs10164-network-frontend-1  Stopped
+ Container yash-24bcs10164-network-frontend-1  Removing
+ Container yash-24bcs10164-network-frontend-1  Removed
+ Container yash-24bcs10164-network-database-1  Stopped
+ Container yash-24bcs10164-network-database-1  Removing
+ Container yash-24bcs10164-network-database-1  Removed
+ Network yash-24bcs10164-network_edge  Removing
+ Network yash-24bcs10164-network_data  Removing
+ Network yash-24bcs10164-network_isolated  Removing
+ Network yash-24bcs10164-network_edge  Removed
+ Network yash-24bcs10164-network_data  Removed
+ Network yash-24bcs10164-network_isolated  Removed
++ docker compose up -d --wait --wait-timeout 240
+ Network yash-24bcs10164-network_isolated  Creating
+ Network yash-24bcs10164-network_isolated  Created
+ Network yash-24bcs10164-network_data  Creating
+ Network yash-24bcs10164-network_data  Created
+ Network yash-24bcs10164-network_edge  Creating
+ Network yash-24bcs10164-network_edge  Created
+ Container yash-24bcs10164-network-backend-1  Creating
+ Container yash-24bcs10164-network-database-1  Creating
+ Container yash-24bcs10164-network-frontend-1  Creating
+ Container yash-24bcs10164-network-database-1  Created
+ Container yash-24bcs10164-network-frontend-1  Created
+ Container yash-24bcs10164-network-backend-1  Created
+ Container yash-24bcs10164-network-frontend-1  Starting
+ Container yash-24bcs10164-network-database-1  Starting
+ Container yash-24bcs10164-network-backend-1  Starting
+ Container yash-24bcs10164-network-database-1  Started
+ Container yash-24bcs10164-network-backend-1  Started
+ Container yash-24bcs10164-network-frontend-1  Started
+ Container yash-24bcs10164-network-database-1  Waiting
+ Container yash-24bcs10164-network-frontend-1  Waiting
+ Container yash-24bcs10164-network-backend-1  Waiting
+ Container yash-24bcs10164-network-backend-1  Healthy
+ Container yash-24bcs10164-network-frontend-1  Healthy
+ Container yash-24bcs10164-network-database-1  Healthy
++ docker compose exec -T database cat /var/lib/mysql/volume-proof.txt
+Yash Agrawal 24bcs10164+ docker compose down -v
+ Container yash-24bcs10164-network-database-1  Stopping
+ Container yash-24bcs10164-network-backend-1  Stopping
+ Container yash-24bcs10164-network-frontend-1  Stopping
+ Container yash-24bcs10164-network-backend-1  Stopped
+ Container yash-24bcs10164-network-backend-1  Removing
+ Container yash-24bcs10164-network-backend-1  Removed
+ Container yash-24bcs10164-network-frontend-1  Stopped
+ Container yash-24bcs10164-network-frontend-1  Removing
+ Container yash-24bcs10164-network-frontend-1  Removed
+ Container yash-24bcs10164-network-database-1  Stopped
+ Container yash-24bcs10164-network-database-1  Removing
+ Container yash-24bcs10164-network-database-1  Removed
+ Network yash-24bcs10164-network_edge  Removing
+ Network yash-24bcs10164-network_data  Removing
+ Volume yash-24bcs10164-network_mysql-data  Removing
+ Network yash-24bcs10164-network_isolated  Removing
+ Volume yash-24bcs10164-network_mysql-data  Removed
+ Network yash-24bcs10164-network_edge  Removed
+ Network yash-24bcs10164-network_data  Removed
+ Network yash-24bcs10164-network_isolated  Removed
+++ mktemp -d /tmp/kitledger-bind.XXXXXX
++ bind_dir=/tmp/kitledger-bind.sIskjb
++ printf 'Hello students\n'
++ chmod 755 /tmp/kitledger-bind.sIskjb
++ chmod 644 /tmp/kitledger-bind.sIskjb/index.html
++ docker run -d --name yash-24bcs10164-bind -p 127.0.0.1:8181:80 -v /tmp/kitledger-bind.sIskjb:/usr/share/nginx/html:ro nginx:stable-alpine
+943a1ea41b3faedede15c83f2922a785966005db2a2025d6bde63f8bd7c0c8e2
++ curl --retry 10 --retry-all-errors --fail http://127.0.0.1:8181/
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+curl: (56) Recv failure: Connection reset by peer
+Warning: Problem (retrying all errors). Will retry in 1 seconds. 10 retries 
+Warning: left.
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0100    15  100    15    0     0  16910      0 --:--:-- --:--:-- --:--:-- 15000
+Hello students
++ printf 'Hello students - live edit by Yash Agrawal\n'
++ curl --fail http://127.0.0.1:8181/
++ grep 'live edit'
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0100    43  100    43    0     0  52247      0 --:--:-- --:--:-- --:--:-- 43000
+Hello students - live edit by Yash Agrawal
++ docker rm -f yash-24bcs10164-bind
+yash-24bcs10164-bind
++ rm /tmp/kitledger-bind.sIskjb/index.html
++ rmdir /tmp/kitledger-bind.sIskjb
++ docker run -d --name yash-24bcs10164-host --network host httpd:2.4-alpine
+Unable to find image 'httpd:2.4-alpine' locally
+2.4-alpine: Pulling from library/httpd
+e2de96513ba9: Already exists
+269898e769d0: Already exists
+3c7c286fbbd5: Already exists
+4f4fb700ef54: Already exists
+db577887d90f: Already exists
+a61ab206ac8a: Already exists
+8e97dd6176d7: Already exists
+Digest: sha256:3440c39d8d6f54fa9ad2549e5a60c19ddd435faadc29c1ad28aa795f71888889
+Status: Downloaded newer image for httpd:2.4-alpine
+362c799f2c1f4cd8da99057282cae045377880cbd8b2312f906284fb5a418627
++ curl --retry 10 --retry-all-errors --fail http://127.0.0.1:80/
++ grep 'It works'
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+curl: (7) Failed to connect to 127.0.0.1 port 80 after 0 ms: Couldn't connect to server
+Warning: Problem (retrying all errors). Will retry in 1 seconds. 10 retries 
+Warning: left.
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0100   191  100   191    0     0   243k      0 --:--:-- --:--:-- --:--:--  186k
+<title>It works! Apache httpd</title>
+<p>It works!</p>
++ docker inspect yash-24bcs10164-host --format '{{.HostConfig.NetworkMode}}'
+host
++ docker rm -f yash-24bcs10164-host
+yash-24bcs10164-host

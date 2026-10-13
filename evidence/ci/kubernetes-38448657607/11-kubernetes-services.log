@@ -1,0 +1,87 @@
++ kubectl apply -n coursework -f submissions/11-kubernetes-services/services.yaml
+service/nodeport-web created
+service/loadbalancer-web created
+service/external-web created
+service/headless-web created
++ kubectl get svc,endpointslices -n coursework
+NAME                       TYPE           CLUSTER-IP       EXTERNAL-IP   PORT(S)        AGE
+service/colour             ClusterIP      10.107.130.104   <none>        80/TCP         27s
+service/external-web       ExternalName   <none>           example.com   <none>         0s
+service/headless-web       ClusterIP      None             <none>        80/TCP         0s
+service/loadbalancer-web   LoadBalancer   10.98.104.213    <pending>     80:30109/TCP   0s
+service/nodeport-web       NodePort       10.109.184.82    <none>        80:30088/TCP   0s
+service/web                ClusterIP      10.98.22.136     <none>        80/TCP         39s
+
+NAME                                                    ADDRESSTYPE   PORTS   ENDPOINTS                             AGE
+endpointslice.discovery.k8s.io/colour-zvm7w             IPv4          5678    10.244.0.18,10.244.0.17               27s
+endpointslice.discovery.k8s.io/headless-web-fdvxz       IPv4          80      10.244.0.21,10.244.0.20,10.244.0.22   0s
+endpointslice.discovery.k8s.io/loadbalancer-web-44s84   IPv4          80      10.244.0.20,10.244.0.21,10.244.0.22   0s
+endpointslice.discovery.k8s.io/nodeport-web-jrrzj       IPv4          80      10.244.0.21,10.244.0.20,10.244.0.22   0s
+endpointslice.discovery.k8s.io/web-vpbbx                IPv4          80      10.244.0.20,10.244.0.21,10.244.0.22   39s
++ kubectl exec -n coursework client -- wget -qO- http://web
+<!DOCTYPE html>
+<html>
+<head>
+<title>Welcome to nginx!</title>
+<style>
+html { color-scheme: light dark; }
+body { width: 35em; margin: 0 auto;
+font-family: Tahoma, Verdana, Arial, sans-serif; }
+</style>
+</head>
+<body>
+<h1>Welcome to nginx!</h1>
+<p>If you see this page, nginx is successfully installed and working.
+Further configuration is required for the web server, reverse proxy, 
+API gateway, load balancer, content cache, or other features.</p>
+
+<p>For online documentation and support please refer to
+<a href="https://nginx.org/">nginx.org</a>.<br/>
+To engage with the community please visit
+<a href="https://community.nginx.org/">community.nginx.org</a>.<br/>
+For enterprise grade support, professional services, additional 
+security features and capabilities please refer to
+<a href="https://f5.com/nginx">f5.com/nginx</a>.</p>
+
+<p><em>Thank you for using nginx.</em></p>
+</body>
+</html>
++ kubectl exec -n coursework client -- nslookup web.coursework.svc.cluster.local
+Server:		10.96.0.10
+Address:	10.96.0.10:53
+
+Name:	web.coursework.svc.cluster.local
+Address: 10.98.22.136
+
+
++ kubectl exec -n coursework client -- nslookup headless-web.coursework.svc.cluster.local
+Server:		10.96.0.10
+Address:	10.96.0.10:53
+
+
+Name:	headless-web.coursework.svc.cluster.local
+Address: 10.244.0.22
+Name:	headless-web.coursework.svc.cluster.local
+Address: 10.244.0.20
+Name:	headless-web.coursework.svc.cluster.local
+Address: 10.244.0.21
+
++ kubectl exec -n coursework client -- nslookup external-web.coursework.svc.cluster.local
+Server:		10.96.0.10
+Address:	10.96.0.10:53
+
+external-web.coursework.svc.cluster.local	canonical name = example.com
+Name:	example.com
+Address: 2606:4700:10::6814:179a
+Name:	example.com
+Address: 2606:4700:10::ac42:93f3
+
+external-web.coursework.svc.cluster.local	canonical name = example.com
+Name:	example.com
+Address: 172.66.147.243
+Name:	example.com
+Address: 104.20.23.154
+
++ kubectl exec -n coursework client -- wget -qO- http://external-web
+wget: server returned error: HTTP/1.1 403 Forbidden
+command terminated with exit code 1

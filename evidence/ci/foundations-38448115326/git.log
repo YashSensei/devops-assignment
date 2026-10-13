@@ -1,0 +1,65 @@
+++ mktemp -d /tmp/kitledger-git.XXXXXX
++ demo=/tmp/kitledger-git.tiLVal
++ cd /tmp/kitledger-git.tiLVal
++ git init -b main
+Initialized empty Git repository in /tmp/kitledger-git.tiLVal/.git/
++ git config user.name 'Yash Agrawal'
++ git config user.email yash.24bcs10164@sst.scaler.com
++ printf 'initial\n'
++ git add tracked.txt
++ git commit -m 'Create tracked demonstration file'
+[main (root-commit) adc61e4] Create tracked demonstration file
+ 1 file changed, 1 insertion(+)
+ create mode 100644 tracked.txt
++ printf 'staged change\n'
++ git add tracked.txt
++ git commit -m 'Commit explicitly staged edit'
+[main cb4a5a5] Commit explicitly staged edit
+ 1 file changed, 1 insertion(+)
++ printf 'automatic tracked change\n'
++ printf 'untracked file\n'
++ git commit -a -m 'Commit tracked edit automatically'
+[main 18de504] Commit tracked edit automatically
+ 1 file changed, 1 insertion(+)
+++ git status --porcelain new.txt
++ test '?? new.txt' = '?? new.txt'
++ git add new.txt
++ git commit -m 'Explicitly add previously untracked file'
+[main 247f424] Explicitly add previously untracked file
+ 1 file changed, 1 insertion(+)
+ create mode 100644 new.txt
++ git switch -c feature-demo
+Switched to a new branch 'feature-demo'
++ printf 'selected feature\n'
++ git add selected.txt
++ git commit -m 'Add isolated feature selected for transfer'
+[feature-demo ce11296] Add isolated feature selected for transfer
+ 1 file changed, 1 insertion(+)
+ create mode 100644 selected.txt
+++ git rev-parse HEAD
++ chosen=ce112967ac57ab91fc750af008e65fe3caea999b
++ printf 'unselected feature\n'
++ git add unselected.txt
++ git commit -m 'Add independent feature excluded from transfer'
+[feature-demo 224a4f0] Add independent feature excluded from transfer
+ 1 file changed, 1 insertion(+)
+ create mode 100644 unselected.txt
++ git switch main
+Switched to branch 'main'
++ git cherry-pick ce112967ac57ab91fc750af008e65fe3caea999b
+[main ce11296] Add isolated feature selected for transfer
+ Date: Tue Oct 13 18:38:13 2026 +0000
+ 1 file changed, 1 insertion(+)
+ create mode 100644 selected.txt
++ test -f selected.txt
++ test '!' -f unselected.txt
++ git log --all --graph --oneline --decorate
+* 224a4f0 (feature-demo) Add independent feature excluded from transfer
+* ce11296 (HEAD -> main) Add isolated feature selected for transfer
+* 247f424 Explicitly add previously untracked file
+* 18de504 Commit tracked edit automatically
+* cb4a5a5 Commit explicitly staged edit
+* adc61e4 Create tracked demonstration file
++ git status --short
++ echo 'Demo retained in disposable environment: /tmp/kitledger-git.tiLVal'
+Demo retained in disposable environment: /tmp/kitledger-git.tiLVal

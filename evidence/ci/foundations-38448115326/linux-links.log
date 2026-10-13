@@ -1,0 +1,76 @@
+++ mktemp -d /tmp/kitledger-links.XXXXXX
++ lab_dir=/tmp/kitledger-links.jsttRp
++ cd /tmp/kitledger-links.jsttRp
++ printf 'Yash Agrawal 24bcs10164\n'
++ ln original.txt hard.txt
++ ln -s original.txt soft.txt
++ ls -li original.txt hard.txt soft.txt
+9175705 -rw-r--r-- 2 runner runner 24 Oct 13 18:36 hard.txt
+9175705 -rw-r--r-- 2 runner runner 24 Oct 13 18:36 original.txt
+9175706 lrwxrwxrwx 1 runner runner 12 Oct 13 18:36 soft.txt -> original.txt
++ stat original.txt hard.txt soft.txt
+  File: original.txt
+  Size: 24        	Blocks: 8          IO Block: 4096   regular file
+Device: 259,1	Inode: 9175705     Links: 2
+Access: (0644/-rw-r--r--)  Uid: ( 1001/  runner)   Gid: ( 1001/  runner)
+Access: 2026-10-13 18:36:33.390521646 +0000
+Modify: 2026-10-13 18:36:33.391452263 +0000
+Change: 2026-10-13 18:36:33.391521648 +0000
+ Birth: 2026-10-13 18:36:33.390521646 +0000
+  File: hard.txt
+  Size: 24        	Blocks: 8          IO Block: 4096   regular file
+Device: 259,1	Inode: 9175705     Links: 2
+Access: (0644/-rw-r--r--)  Uid: ( 1001/  runner)   Gid: ( 1001/  runner)
+Access: 2026-10-13 18:36:33.390521646 +0000
+Modify: 2026-10-13 18:36:33.391452263 +0000
+Change: 2026-10-13 18:36:33.391521648 +0000
+ Birth: 2026-10-13 18:36:33.390521646 +0000
+  File: soft.txt -> original.txt
+  Size: 12        	Blocks: 0          IO Block: 4096   symbolic link
+Device: 259,1	Inode: 9175706     Links: 1
+Access: (0777/lrwxrwxrwx)  Uid: ( 1001/  runner)   Gid: ( 1001/  runner)
+Access: 2026-10-13 18:36:33.393521652 +0000
+Modify: 2026-10-13 18:36:33.392521650 +0000
+Change: 2026-10-13 18:36:33.392521650 +0000
+ Birth: 2026-10-13 18:36:33.392521650 +0000
+++ stat -c %i original.txt
+++ stat -c %i hard.txt
++ test 9175705 = 9175705
++ rm original.txt
+++ cat hard.txt
++ test 'Yash Agrawal 24bcs10164' = 'Yash Agrawal 24bcs10164'
++ test -L soft.txt
++ test '!' -e soft.txt
++ ls -li
+total 4
+9175705 -rw-r--r-- 1 runner runner 24 Oct 13 18:36 hard.txt
+9175706 lrwxrwxrwx 1 runner runner 12 Oct 13 18:36 soft.txt -> original.txt
++ pwd
+/tmp/kitledger-links.jsttRp
++ whoami
+runner
++ id
+uid=1001(runner) gid=1001(runner) groups=1001(runner),4(adm),100(users),118(docker),999(systemd-journal)
++ uname -a
+Linux runnervmmprz5 6.17.0-1022-azure #22-Ubuntu SMP Mon Jul 27 17:24:03 UTC 2026 x86_64 x86_64 x86_64 GNU/Linux
++ df -h .
+Filesystem      Size  Used Avail Use% Mounted on
+/dev/root       145G   60G   86G  41% /
++ du -sh .
+8.0K	.
++ head -n 1 hard.txt
+Yash Agrawal 24bcs10164
++ tail -n 1 hard.txt
+Yash Agrawal 24bcs10164
++ wc -l hard.txt
+1 hard.txt
++ grep -n Yash hard.txt
+1:Yash Agrawal 24bcs10164
++ find . -maxdepth 1 -type f
+./hard.txt
++ chmod 640 hard.txt
++ ls -l hard.txt
+-rw-r----- 1 runner runner 24 Oct 13 18:36 hard.txt
++ rm soft.txt hard.txt
++ cd /
++ rmdir /tmp/kitledger-links.jsttRp

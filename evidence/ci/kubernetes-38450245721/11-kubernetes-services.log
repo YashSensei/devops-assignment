@@ -1,0 +1,236 @@
++ kubectl apply -n coursework -f submissions/11-kubernetes-services/services.yaml
+service/nodeport-web created
+service/loadbalancer-web created
+service/external-web created
+service/headless-web created
++ kubectl get svc,endpointslices -n coursework
+NAME                       TYPE           CLUSTER-IP      EXTERNAL-IP   PORT(S)        AGE
+service/colour             ClusterIP      10.96.147.76    <none>        80/TCP         33s
+service/external-web       ExternalName   <none>          example.com   <none>         0s
+service/headless-web       ClusterIP      None            <none>        80/TCP         0s
+service/loadbalancer-web   LoadBalancer   10.106.67.143   <pending>     80:30911/TCP   0s
+service/nodeport-web       NodePort       10.106.84.189   <none>        80:30088/TCP   0s
+service/web                ClusterIP      10.100.249.4    <none>        80/TCP         45s
+
+NAME                                                    ADDRESSTYPE   PORTS   ENDPOINTS                                         AGE
+endpointslice.discovery.k8s.io/colour-spxxw             IPv4          5678    10.244.0.23,10.244.0.22,10.244.0.24 + 1 more...   33s
+endpointslice.discovery.k8s.io/headless-web-q4w66       IPv4          80      10.244.0.27,10.244.0.28,10.244.0.26               0s
+endpointslice.discovery.k8s.io/loadbalancer-web-nc4ph   IPv4          80      10.244.0.26,10.244.0.27,10.244.0.28               0s
+endpointslice.discovery.k8s.io/nodeport-web-gqhx8       IPv4          80      10.244.0.27,10.244.0.28,10.244.0.26               0s
+endpointslice.discovery.k8s.io/web-nl7nf                IPv4          80      10.244.0.26,10.244.0.28,10.244.0.27               45s
++ kubectl exec -n coursework client -- wget -qO- http://web
+<!DOCTYPE html>
+<html>
+<head>
+<title>Welcome to nginx!</title>
+<style>
+html { color-scheme: light dark; }
+body { width: 35em; margin: 0 auto;
+font-family: Tahoma, Verdana, Arial, sans-serif; }
+</style>
+</head>
+<body>
+<h1>Welcome to nginx!</h1>
+<p>If you see this page, nginx is successfully installed and working.
+Further configuration is required for the web server, reverse proxy, 
+API gateway, load balancer, content cache, or other features.</p>
+
+<p>For online documentation and support please refer to
+<a href="https://nginx.org/">nginx.org</a>.<br/>
+To engage with the community please visit
+<a href="https://community.nginx.org/">community.nginx.org</a>.<br/>
+For enterprise grade support, professional services, additional 
+security features and capabilities please refer to
+<a href="https://f5.com/nginx">f5.com/nginx</a>.</p>
+
+<p><em>Thank you for using nginx.</em></p>
+</body>
+</html>
++ kubectl exec -n coursework client -- nslookup web.coursework.svc.cluster.local
+Server:		10.96.0.10
+Address:	10.96.0.10:53
+
+
+Name:	web.coursework.svc.cluster.local
+Address: 10.100.249.4
+
++ kubectl exec -n coursework client -- nslookup headless-web.coursework.svc.cluster.local
+Server:		10.96.0.10
+Address:	10.96.0.10:53
+
+
+Name:	headless-web.coursework.svc.cluster.local
+Address: 10.244.0.28
+Name:	headless-web.coursework.svc.cluster.local
+Address: 10.244.0.27
+Name:	headless-web.coursework.svc.cluster.local
+Address: 10.244.0.26
+
++ kubectl exec -n coursework client -- nslookup external-web.coursework.svc.cluster.local
+Server:		10.96.0.10
+Address:	10.96.0.10:53
+
+external-web.coursework.svc.cluster.local	canonical name = example.com
+Name:	example.com
+Address: 104.20.23.154
+Name:	example.com
+Address: 172.66.147.243
+
+external-web.coursework.svc.cluster.local	canonical name = example.com
+Name:	example.com
+Address: 2606:4700:10::ac42:93f3
+Name:	example.com
+Address: 2606:4700:10::6814:179a
+
++ kubectl exec -n coursework client -- apk add --no-cache curl
+fetch https://dl-cdn.alpinelinux.org/alpine/v3.22/main/x86_64/APKINDEX.tar.gz
+fetch https://dl-cdn.alpinelinux.org/alpine/v3.22/community/x86_64/APKINDEX.tar.gz
+(1/9) Installing brotli-libs (1.1.0-r2)
+(2/9) Installing c-ares (1.34.8-r0)
+(3/9) Installing libunistring (1.3-r0)
+(4/9) Installing libidn2 (2.3.7-r0)
+(5/9) Installing nghttp2-libs (1.69.0-r0)
+(6/9) Installing libpsl (0.21.5-r3)
+(7/9) Installing zstd-libs (1.5.7-r0)
+(8/9) Installing libcurl (8.14.1-r3)
+(9/9) Installing curl (8.14.1-r3)
+Executing busybox-1.37.0-r20.trigger
+OK: 12 MiB in 25 packages
++ kubectl exec -n coursework client -- curl --fail --max-time 30 --connect-to example.com:443:external-web:443 https://example.com
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0<!doctype html><html lang=en><head><meta charset=utf-8><link rel=icon href=data:,><meta name=viewport content="width=device-width,initial-scale=1"><title>Example Domain</title><style>html{color-scheme:light dark;background:light-dark(#eee,#222)}body{font:16px/1.6 system-ui,sans-serif;max-width:26em;margin:auto;padding:25vh 2em 2em;text-align:center}</style></head><body><p>This domain is for use in documentation examples without needing permission. This is not a service; avoid relying on it for testing and monitoring purposes.</p><script src=/s.js></script></body></html>
+100   577    0   577    0     0  11980      0 --:--:-- --:--:-- --:--:-- 12276
+++ minikube -p coursework ip
++ curl --fail http://192.168.49.2:30088
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0100   896  100   896    0     0  1190k      0 --:--:-- --:--:-- --:--:--  875k
+<!DOCTYPE html>
+<html>
+<head>
+<title>Welcome to nginx!</title>
+<style>
+html { color-scheme: light dark; }
+body { width: 35em; margin: 0 auto;
+font-family: Tahoma, Verdana, Arial, sans-serif; }
+</style>
+</head>
+<body>
+<h1>Welcome to nginx!</h1>
+<p>If you see this page, nginx is successfully installed and working.
+Further configuration is required for the web server, reverse proxy, 
+API gateway, load balancer, content cache, or other features.</p>
+
+<p>For online documentation and support please refer to
+<a href="https://nginx.org/">nginx.org</a>.<br/>
+To engage with the community please visit
+<a href="https://community.nginx.org/">community.nginx.org</a>.<br/>
+For enterprise grade support, professional services, additional 
+security features and capabilities please refer to
+<a href="https://f5.com/nginx">f5.com/nginx</a>.</p>
+
+<p><em>Thank you for using nginx.</em></p>
+</body>
+</html>
++ minikube -p coursework tunnel
+++ seq 1 30
++ for i in $(seq 1 30)
+++ kubectl get svc loadbalancer-web -n coursework -o 'jsonpath={.status.loadBalancer.ingress[0].ip}'
++ lb=
++ '[' -z '' ']'
++ sleep 2
++ for i in $(seq 1 30)
+++ kubectl get svc loadbalancer-web -n coursework -o 'jsonpath={.status.loadBalancer.ingress[0].ip}'
++ lb=
++ '[' -z '' ']'
++ sleep 2
++ for i in $(seq 1 30)
+++ kubectl get svc loadbalancer-web -n coursework -o 'jsonpath={.status.loadBalancer.ingress[0].ip}'
++ lb=
++ '[' -z '' ']'
++ sleep 2
++ for i in $(seq 1 30)
+++ kubectl get svc loadbalancer-web -n coursework -o 'jsonpath={.status.loadBalancer.ingress[0].ip}'
++ lb=10.106.67.143
++ '[' -z 10.106.67.143 ']'
++ break
++ test -n 10.106.67.143
++ curl --fail http://10.106.67.143
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0100   896  100   896    0     0  1275k      0 --:--:-- --:--:-- --:--:--  875k
+<!DOCTYPE html>
+<html>
+<head>
+<title>Welcome to nginx!</title>
+<style>
+html { color-scheme: light dark; }
+body { width: 35em; margin: 0 auto;
+font-family: Tahoma, Verdana, Arial, sans-serif; }
+</style>
+</head>
+<body>
+<h1>Welcome to nginx!</h1>
+<p>If you see this page, nginx is successfully installed and working.
+Further configuration is required for the web server, reverse proxy, 
+API gateway, load balancer, content cache, or other features.</p>
+
+<p>For online documentation and support please refer to
+<a href="https://nginx.org/">nginx.org</a>.<br/>
+To engage with the community please visit
+<a href="https://community.nginx.org/">community.nginx.org</a>.<br/>
+For enterprise grade support, professional services, additional 
+security features and capabilities please refer to
+<a href="https://f5.com/nginx">f5.com/nginx</a>.</p>
+
+<p><em>Thank you for using nginx.</em></p>
+</body>
+</html>
++ kubectl get svc -n coursework
+NAME               TYPE           CLUSTER-IP      EXTERNAL-IP     PORT(S)        AGE
+colour             ClusterIP      10.96.147.76    <none>          80/TCP         40s
+external-web       ExternalName   <none>          example.com     <none>         7s
+headless-web       ClusterIP      None            <none>          80/TCP         7s
+loadbalancer-web   LoadBalancer   10.106.67.143   10.106.67.143   80:30911/TCP   7s
+nodeport-web       NodePort       10.106.84.189   <none>          80:30088/TCP   7s
+web                ClusterIP      10.100.249.4    <none>          80/TCP         52s
++ kubectl get configmap coredns -n kube-system -o yaml
+apiVersion: v1
+data:
+  Corefile: |
+    .:53 {
+        log
+        errors
+        health {
+           lameduck 5s
+        }
+        ready
+        kubernetes cluster.local in-addr.arpa ip6.arpa {
+           pods insecure
+           fallthrough in-addr.arpa ip6.arpa
+           ttl 30
+        }
+        prometheus :9153
+        hosts {
+           192.168.49.1 host.minikube.internal
+           fallthrough
+        }
+        forward . /etc/resolv.conf {
+           max_concurrent 1000
+        }
+        cache 30 {
+           disable success cluster.local
+           disable denial cluster.local
+        }
+        loop
+        reload
+        loadbalance
+    }
+kind: ConfigMap
+metadata:
+  creationTimestamp: "2026-10-13T18:52:53Z"
+  name: coredns
+  namespace: kube-system
+  resourceVersion: "284"
+  uid: 74eff0f6-644a-488d-9c17-fc6d4fb96e3d

@@ -1,0 +1,19 @@
+{
+  "timestamp_utc": "2026-10-13T18:27:27.041240+00:00",
+  "revision": "85d89bd93889582377c0b6b0d06aac7e46a99050",
+  "dirty": true,
+  "environment": "Windows-11-10.0.26200-SP0",
+  "cwd": "C:\\Users\\yasha\\OneDrive\\Desktop\\bigones\\devops-assignment",
+  "command": [
+    ".tools/minikube.exe",
+    "start",
+    "-p",
+    "kitledger-24bcs10164",
+    "--driver=docker",
+    "--cpus=2",
+    "--memory=4096",
+    "--disk-size=20g"
+  ],
+  "exit_code": 56,
+  "output": "\ud83d\ude04  [kitledger-24bcs10164] minikube v1.39.0 on Microsoft Windows 11 Home Single Language 25H2\n\n\u274c  Exiting due to DRV_UNSUPPORTED_OS: The driver 'docker' is not supported on windows/amd64\n\n"
+}

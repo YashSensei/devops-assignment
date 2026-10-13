@@ -1,6 +1,7 @@
 # AWS execution contract
 
-Status: implementation only until recorded init/validate/plan/apply evidence exists.
+Status: CI init/fmt/validate passed; AWS plan/apply/destroy not executed at the
+student's request. Below is reference guidance, not an active provisioning plan.
 The example account, region, version and CIDR are deliberately non-deployable examples.
 
 Before apply: authenticate through AWS CLI/SSO; run `aws sts get-caller-identity`;

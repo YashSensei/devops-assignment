@@ -1,0 +1,93 @@
++ test true = true
+++ ps -p 1 -o comm=
++ test systemd = systemd
+++ getent passwd kitledger-lab
+++ true
++ test -z ''
++ sudo adduser --disabled-password --gecos 'KitLedger temporary lab' kitledger-lab
+info: Adding user `kitledger-lab' ...
+info: Selecting UID/GID from range 1000 to 59999 ...
+info: Adding new group `kitledger-lab' (1002) ...
+info: Adding new user `kitledger-lab' (1002) with group `kitledger-lab (1002)' ...
+info: Creating home directory `/home/kitledger-lab' ...
+info: Copying files from `/etc/skel' ...
+info: Adding new user `kitledger-lab' to supplemental / extra groups `users' ...
+info: Adding user `kitledger-lab' to group `users' ...
++ id kitledger-lab
+uid=1002(kitledger-lab) gid=1002(kitledger-lab) groups=1002(kitledger-lab),100(users)
++ getent passwd kitledger-lab
+kitledger-lab:x:1002:1002:KitLedger temporary lab,,,:/home/kitledger-lab:/bin/bash
++ sudo deluser --remove-home kitledger-lab
+info: Looking for files to backup/remove ...
+info: Removing files ...
+info: Removing crontab ...
+info: Removing user `kitledger-lab' ...
++ getent passwd kitledger-lab
++ journalctl --version
+systemd 255 (255.4-1ubuntu8.17)
++PAM +AUDIT +SELINUX +APPARMOR +IMA +SMACK +SECCOMP +GCRYPT -GNUTLS +OPENSSL +ACL +BLKID +CURL +ELFUTILS +FIDO2 +IDN2 -IDN +IPTC +KMOD +LIBCRYPTSETUP +LIBFDISK +PCRE2 -PWQUALITY +P11KIT +QRENCODE +TPM2 +BZIP2 +LZ4 +XZ +ZLIB +ZSTD -BPF_FRAMEWORK -XKBCOMMON +UTMP +SYSVINIT default-hierarchy=unified
++ sudo journalctl -n 20 --no-pager
+Oct 13 18:38:07 runnervmmprz5 chfn[2233]: changed user 'kitledger-lab' information
+Oct 13 18:38:07 runnervmmprz5 adduser[2188]: Adding new user `kitledger-lab' to supplemental / extra groups `users' ...
+Oct 13 18:38:07 runnervmmprz5 adduser[2188]: Adding user `kitledger-lab' to group `users' ...
+Oct 13 18:38:07 runnervmmprz5 gpasswd[2242]: members of group users set by root to runner,kitledger-lab
+Oct 13 18:38:07 runnervmmprz5 sudo[2187]: pam_unix(sudo:session): session closed for user root
+Oct 13 18:38:08 runnervmmprz5 sudo[2250]:   runner : PWD=/home/runner/work/devops-assignment/devops-assignment ; USER=root ; COMMAND=/usr/sbin/deluser --remove-home kitledger-lab
+Oct 13 18:38:08 runnervmmprz5 sudo[2250]: pam_unix(sudo:session): session opened for user root(uid=0) by (uid=1001)
+Oct 13 18:38:08 runnervmmprz5 deluser[2251]: Looking for files to backup/remove ...
+Oct 13 18:38:08 runnervmmprz5 deluser[2251]: Removing files ...
+Oct 13 18:38:08 runnervmmprz5 deluser[2251]: Removing crontab ...
+Oct 13 18:38:08 runnervmmprz5 crontab[2255]: (root) LIST (kitledger-lab)
+Oct 13 18:38:08 runnervmmprz5 deluser[2251]: Removing user `kitledger-lab' ...
+Oct 13 18:38:08 runnervmmprz5 userdel[2257]: delete user 'kitledger-lab'
+Oct 13 18:38:08 runnervmmprz5 userdel[2257]: delete 'kitledger-lab' from group 'users'
+Oct 13 18:38:08 runnervmmprz5 userdel[2257]: removed group 'kitledger-lab' owned by 'kitledger-lab'
+Oct 13 18:38:08 runnervmmprz5 userdel[2257]: removed shadow group 'kitledger-lab' owned by 'kitledger-lab'
+Oct 13 18:38:08 runnervmmprz5 userdel[2257]: delete 'kitledger-lab' from shadow group 'users'
+Oct 13 18:38:08 runnervmmprz5 sudo[2250]: pam_unix(sudo:session): session closed for user root
+Oct 13 18:38:08 runnervmmprz5 sudo[2267]:   runner : PWD=/home/runner/work/devops-assignment/devops-assignment ; USER=root ; COMMAND=/usr/bin/journalctl -n 20 --no-pager
+Oct 13 18:38:08 runnervmmprz5 sudo[2267]: pam_unix(sudo:session): session opened for user root(uid=0) by (uid=1001)
++ sudo journalctl -u systemd-journald -n 20 --no-pager
+Oct 04 22:31:36 runnervmmprz5 systemd-journald[157]: Received SIGTERM from PID 1 (systemd-shutdow).
+Oct 04 22:31:36 runnervmmprz5 systemd-journald[157]: Journal stopped
+-- Boot 157999f5e1fc4a7185ce22bff77bef42 --
+Oct 13 18:36:03 runnervmmprz5 systemd-journald[157]: Collecting audit messages is disabled.
+Oct 13 18:36:03 runnervmmprz5 systemd-journald[157]: Journal started
+Oct 13 18:36:03 runnervmmprz5 systemd-journald[157]: Runtime Journal (/run/log/journal/566c0bdf92524f1b88cd2c41fc67b242) is 8.0M, max 319.7M, 311.7M free.
+Oct 13 18:36:03 runnervmmprz5 systemd-journald[157]: Time spent on flushing to /var/log/journal/566c0bdf92524f1b88cd2c41fc67b242 is 19.139ms for 557 entries.
+Oct 13 18:36:03 runnervmmprz5 systemd-journald[157]: System Journal (/var/log/journal/566c0bdf92524f1b88cd2c41fc67b242) is 27.8M, max 4.0G, 3.9G free.
+Oct 13 18:36:03 runnervmmprz5 systemd-journald[157]: Received client request to flush runtime journal.
+Oct 13 18:36:03 runnervmmprz5 systemd-journald[157]: /var/log/journal/566c0bdf92524f1b88cd2c41fc67b242/system.journal: Journal file uses a different sequence number ID, rotating.
+Oct 13 18:36:03 runnervmmprz5 systemd-journald[157]: Rotating system journal.
+Oct 13 18:36:13 runnervmmprz5 systemd-journald[157]: /var/log/journal/566c0bdf92524f1b88cd2c41fc67b242/user-1001.journal: Journal file uses a different sequence number ID, rotating.
+Oct 13 18:36:31 runnervmmprz5 systemd-journald[157]: Forwarding to syslog missed 1264 messages.
++ systemctl status systemd-journald --no-pager
+● systemd-journald.service - Journal Service
+     Loaded: loaded (/usr/lib/systemd/system/systemd-journald.service; static)
+    Drop-In: /usr/lib/systemd/system/systemd-journald.service.d
+             └─nice.conf
+     Active: active (running) since Tue 2026-10-13 18:36:03 UTC; 2min 4s ago
+TriggeredBy: ● systemd-journald-dev-log.socket
+             ● systemd-journald.socket
+             ○ systemd-journald-audit.socket
+       Docs: man:systemd-journald.service(8)
+             man:journald.conf(5)
+   Main PID: 157 (systemd-journal)
+     Status: "Processing requests..."
+      Tasks: 1 (limit: 19151)
+   FD Store: 19 (limit: 4224)
+     Memory: 27.0M (peak: 27.8M)
+        CPU: 475ms
+     CGroup: /system.slice/systemd-journald.service
+             └─157 /usr/lib/systemd/systemd-journald
+
+Oct 13 18:36:03 runnervmmprz5 systemd-journald[157]: Collecting audit messages is disabled.
+Oct 13 18:36:03 runnervmmprz5 systemd-journald[157]: Journal started
+Oct 13 18:36:03 runnervmmprz5 systemd-journald[157]: Runtime Journal (/run/log/journal/566c0bdf92524f1b88cd2c41fc67b242) is 8.0M, max 319.7M, 311.7M free.
+Oct 13 18:36:03 runnervmmprz5 systemd-journald[157]: Time spent on flushing to /var/log/journal/566c0bdf92524f1b88cd2c41fc67b242 is 19.139ms for 557 entries.
+Oct 13 18:36:03 runnervmmprz5 systemd-journald[157]: System Journal (/var/log/journal/566c0bdf92524f1b88cd2c41fc67b242) is 27.8M, max 4.0G, 3.9G free.
+Oct 13 18:36:03 runnervmmprz5 systemd-journald[157]: Received client request to flush runtime journal.
+Oct 13 18:36:03 runnervmmprz5 systemd-journald[157]: /var/log/journal/566c0bdf92524f1b88cd2c41fc67b242/system.journal: Journal file uses a different sequence number ID, rotating.
+Oct 13 18:36:03 runnervmmprz5 systemd-journald[157]: Rotating system journal.
+Oct 13 18:36:13 runnervmmprz5 systemd-journald[157]: /var/log/journal/566c0bdf92524f1b88cd2c41fc67b242/user-1001.journal: Journal file uses a different sequence number ID, rotating.
+Oct 13 18:36:31 runnervmmprz5 systemd-journald[157]: Forwarding to syslog missed 1264 messages.

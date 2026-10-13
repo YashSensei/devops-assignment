@@ -1,0 +1,1753 @@
++ kubectl get pods -n coursework -o wide
+NAME                            READY   STATUS             RESTARTS       AGE     IP            NODE         NOMINATED NODE   READINESS GATES
+blue-79bf4fbb68-686bj           1/1     Running            0              4m56s   10.244.0.25   coursework   <none>           <none>
+blue-79bf4fbb68-lq7b7           1/1     Running            0              4m59s   10.244.0.22   coursework   <none>           <none>
+blue-79bf4fbb68-w9xv9           1/1     Running            0              4m57s   10.244.0.24   coursework   <none>           <none>
+client                          1/1     Running            0              5m1s    10.244.0.19   coursework   <none>           <none>
+config-reader                   1/1     Running            0              3m51s   10.244.0.41   coursework   <none>           <none>
+green-876f7cc98-45w7d           1/1     Running            0              4m59s   10.244.0.23   coursework   <none>           <none>
+lifecycle-01-running            1/1     Running            0              4m52s   10.244.0.29   coursework   <none>           <none>
+lifecycle-02-pending            0/1     Pending            0              4m52s   <none>        <none>       <none>           <none>
+lifecycle-03-succeeded          0/1     Completed          0              4m52s   10.244.0.30   coursework   <none>           <none>
+lifecycle-04-failed             0/1     Error              0              4m52s   10.244.0.31   coursework   <none>           <none>
+lifecycle-05-crashloopbackoff   0/1     CrashLoopBackOff   5 (109s ago)   4m52s   10.244.0.32   coursework   <none>           <none>
+lifecycle-06-imagepullbackoff   0/1     ImagePullBackOff   0              4m52s   10.244.0.33   coursework   <none>           <none>
+lifecycle-07-readiness          1/1     Running            0              4m52s   10.244.0.35   coursework   <none>           <none>
+lifecycle-08-liveness           1/1     Running            0              4m52s   10.244.0.34   coursework   <none>           <none>
+lifecycle-09-startup            1/1     Running            0              4m52s   10.244.0.39   coursework   <none>           <none>
+lifecycle-10-init-container     1/1     Running            0              4m52s   10.244.0.36   coursework   <none>           <none>
+lifecycle-11-multi-container    2/2     Running            0              4m52s   10.244.0.37   coursework   <none>           <none>
+lifecycle-12-termination        1/1     Running            0              4m52s   10.244.0.38   coursework   <none>           <none>
+storage-web-5b46f8d54b-2h7q9    1/1     Running            0              3s      10.244.0.61   coursework   <none>           <none>
+storage-web-5b46f8d54b-9w2pt    1/1     Running            0              3s      10.244.0.62   coursework   <none>           <none>
+storage-web-5b46f8d54b-jd5m8    1/1     Running            0              6s      10.244.0.59   coursework   <none>           <none>
+storage-web-5b46f8d54b-rh7vx    1/1     Running            0              6s      10.244.0.60   coursework   <none>           <none>
+storage-web-5b46f8d54b-twmh8    1/1     Running            0              6s      10.244.0.58   coursework   <none>           <none>
+storage-web-6b9db6987b-g2n7n    0/1     Terminating        3 (2s ago)     33s     10.244.0.57   coursework   <none>           <none>
+web-75577cb44f-hqtmn            1/1     Running            0              4m53s   10.244.0.26   coursework   <none>           <none>
+web-75577cb44f-htrtk            1/1     Running            0              4m53s   10.244.0.27   coursework   <none>           <none>
+web-75577cb44f-mxgr4            1/1     Running            0              4m53s   10.244.0.28   coursework   <none>           <none>
++ kubectl describe deployment web -n coursework
+Name:               web
+Namespace:          coursework
+CreationTimestamp:  Tue, 13 Oct 2026 18:53:19 +0000
+Labels:             <none>
+Annotations:        deployment.kubernetes.io/revision: 4
+Selector:           app=web
+Replicas:           3 desired | 3 updated | 3 total | 3 available | 0 unavailable
+StrategyType:       Recreate
+MinReadySeconds:    0
+Pod Template:
+  Labels:  app=web
+  Containers:
+   web:
+    Image:      nginx:alpine
+    Port:       80/TCP
+    Host Port:  0/TCP
+    Limits:
+      cpu:     250m
+      memory:  64Mi
+    Requests:
+      cpu:         20m
+      memory:      32Mi
+    Environment:   <none>
+    Mounts:        <none>
+  Volumes:         <none>
+  Node-Selectors:  <none>
+  Tolerations:     <none>
+Conditions:
+  Type           Status  Reason
+  ----           ------  ------
+  Progressing    True    NewReplicaSetAvailable
+  Available      True    MinimumReplicasAvailable
+OldReplicaSets:  web-68c5dfcd67 (0/0 replicas created)
+NewReplicaSet:   web-75577cb44f (3/3 replicas created)
+Events:
+  Type    Reason             Age                   From                   Message
+  ----    ------             ----                  ----                   -------
+  Normal  ScalingReplicaSet  5m16s                 deployment-controller  Scaled up replica set web-68c5dfcd67 from 0 to 2
+  Normal  ScalingReplicaSet  5m9s                  deployment-controller  Scaled up replica set web-75577cb44f from 0 to 1
+  Normal  ScalingReplicaSet  5m7s                  deployment-controller  Scaled down replica set web-68c5dfcd67 from 3 to 2
+  Normal  ScalingReplicaSet  5m7s                  deployment-controller  Scaled up replica set web-75577cb44f from 1 to 2
+  Normal  ScalingReplicaSet  5m6s                  deployment-controller  Scaled down replica set web-68c5dfcd67 from 2 to 1
+  Normal  ScalingReplicaSet  5m6s                  deployment-controller  Scaled up replica set web-75577cb44f from 2 to 3
+  Normal  ScalingReplicaSet  5m6s                  deployment-controller  Scaled down replica set web-68c5dfcd67 from 1 to 0
+  Normal  ScalingReplicaSet  5m6s                  deployment-controller  Scaled up replica set web-68c5dfcd67 from 0 to 1
+  Normal  ScalingReplicaSet  5m5s (x2 over 5m10s)  deployment-controller  Scaled up replica set web-68c5dfcd67 from 2 to 3
+  Normal  ScalingReplicaSet  4m53s (x6 over 5m5s)  deployment-controller  (combined from similar events): Scaled up replica set web-75577cb44f from 0 to 3
++ kubectl logs deployment/web -n coursework
+Found 3 pods, using pod/web-75577cb44f-hqtmn
+/docker-entrypoint.sh: /docker-entrypoint.d/ is not empty, will attempt to perform configuration
+/docker-entrypoint.sh: Looking for shell scripts in /docker-entrypoint.d/
+/docker-entrypoint.sh: Launching /docker-entrypoint.d/10-listen-on-ipv6-by-default.sh
+10-listen-on-ipv6-by-default.sh: info: Getting the checksum of /etc/nginx/conf.d/default.conf
+10-listen-on-ipv6-by-default.sh: info: Enabled listen on IPv6 in /etc/nginx/conf.d/default.conf
+/docker-entrypoint.sh: Sourcing /docker-entrypoint.d/15-local-resolvers.envsh
+/docker-entrypoint.sh: Launching /docker-entrypoint.d/20-envsubst-on-templates.sh
+/docker-entrypoint.sh: Launching /docker-entrypoint.d/30-tune-worker-processes.sh
+/docker-entrypoint.sh: Configuration complete; ready for start up
+2026/10/13 18:53:43 [notice] 1#1: using the "epoll" event method
+2026/10/13 18:53:43 [notice] 1#1: nginx/1.31.6
+2026/10/13 18:53:43 [notice] 1#1: built by gcc 15.2.0 (Alpine 15.2.0) 
+2026/10/13 18:53:43 [notice] 1#1: OS: Linux 6.17.0-1022-azure
+2026/10/13 18:53:43 [notice] 1#1: getrlimit(RLIMIT_NOFILE): 1048576:1048576
+2026/10/13 18:53:43 [notice] 1#1: start worker processes
+2026/10/13 18:53:43 [notice] 1#1: start worker process 29
+2026/10/13 18:53:43 [notice] 1#1: start worker process 30
+2026/10/13 18:53:43 [notice] 1#1: start worker process 31
+2026/10/13 18:53:43 [notice] 1#1: start worker process 32
++ kubectl exec deployment/web -n coursework -- nginx -t
+nginx: the configuration file /etc/nginx/nginx.conf syntax is ok
+nginx: configuration file /etc/nginx/nginx.conf test is successful
++ kubectl events -n coursework
+LAST SEEN               TYPE      REASON                         OBJECT                                MESSAGE
+5m16s                   Normal    ScalingReplicaSet              Deployment/web                        Scaled up replica set web-68c5dfcd67 from 0 to 2
+5m16s                   Normal    SuccessfulCreate               ReplicaSet/web-68c5dfcd67             Created pod: web-68c5dfcd67-s2f5r
+5m16s                   Normal    SuccessfulCreate               ReplicaSet/web-68c5dfcd67             Created pod: web-68c5dfcd67-hjhcf
+5m16s                   Normal    Scheduled                      Pod/web-68c5dfcd67-s2f5r              Successfully assigned coursework/web-68c5dfcd67-s2f5r to coursework
+5m16s                   Normal    Scheduled                      Pod/web-68c5dfcd67-hjhcf              Successfully assigned coursework/web-68c5dfcd67-hjhcf to coursework
+5m15s                   Normal    Pulling                        Pod/web-68c5dfcd67-hjhcf              Pulling image "nginx:stable-alpine"
+5m15s                   Normal    Pulling                        Pod/web-68c5dfcd67-s2f5r              Pulling image "nginx:stable-alpine"
+5m13s                   Normal    Pulled                         Pod/web-68c5dfcd67-hjhcf              Successfully pulled image "nginx:stable-alpine" in 2.218s (2.409s including waiting). Image size: 26098628 bytes.
+5m13s                   Normal    Created                        Pod/web-68c5dfcd67-hjhcf              Container created
+5m13s                   Normal    Started                        Pod/web-68c5dfcd67-hjhcf              Container started
+5m12s                   Normal    Pulled                         Pod/web-68c5dfcd67-tfw9b              Container image "nginx:stable-alpine" already present on machine and can be accessed by the pod
+5m12s                   Normal    Pulled                         Pod/web-68c5dfcd67-s2f5r              Successfully pulled image "nginx:stable-alpine" in 431ms (2.832s including waiting). Image size: 26098628 bytes.
+5m12s                   Normal    Created                        Pod/web-68c5dfcd67-s2f5r              Container created
+5m12s                   Normal    SuccessfulCreate               ReplicaSet/web-68c5dfcd67             Created pod: web-68c5dfcd67-tfw9b
+5m12s                   Normal    Started                        Pod/web-68c5dfcd67-s2f5r              Container started
+5m12s                   Normal    Scheduled                      Pod/web-68c5dfcd67-tfw9b              Successfully assigned coursework/web-68c5dfcd67-tfw9b to coursework
+5m12s                   Normal    Started                        Pod/web-68c5dfcd67-tfw9b              Container started
+5m12s                   Normal    Created                        Pod/web-68c5dfcd67-tfw9b              Container created
+5m11s                   Normal    Killing                        Pod/web-68c5dfcd67-hjhcf              Stopping container web
+5m10s                   Normal    Started                        Pod/web-68c5dfcd67-54m6g              Container started
+5m10s                   Normal    Pulled                         Pod/web-68c5dfcd67-54m6g              Container image "nginx:stable-alpine" already present on machine and can be accessed by the pod
+5m10s                   Normal    Created                        Pod/web-68c5dfcd67-54m6g              Container created
+5m10s                   Normal    SuccessfulCreate               ReplicaSet/web-68c5dfcd67             Created pod: web-68c5dfcd67-54m6g
+5m10s                   Normal    Scheduled                      Pod/web-68c5dfcd67-54m6g              Successfully assigned coursework/web-68c5dfcd67-54m6g to coursework
+5m9s                    Normal    SuccessfulCreate               ReplicaSet/web-75577cb44f             Created pod: web-75577cb44f-hpcf6
+5m9s                    Normal    Scheduled                      Pod/web-75577cb44f-hpcf6              Successfully assigned coursework/web-75577cb44f-hpcf6 to coursework
+5m9s                    Normal    ScalingReplicaSet              Deployment/web                        Scaled up replica set web-75577cb44f from 0 to 1
+5m9s                    Normal    Pulling                        Pod/web-75577cb44f-hpcf6              Pulling image "nginx:alpine"
+5m7s                    Normal    ScalingReplicaSet              Deployment/web                        Scaled up replica set web-75577cb44f from 1 to 2
+5m7s                    Normal    SuccessfulCreate               ReplicaSet/web-75577cb44f             Created pod: web-75577cb44f-rjdfx
+5m7s                    Normal    SuccessfulDelete               ReplicaSet/web-68c5dfcd67             Deleted pod: web-68c5dfcd67-54m6g
+5m7s                    Normal    ScalingReplicaSet              Deployment/web                        Scaled down replica set web-68c5dfcd67 from 3 to 2
+5m7s                    Normal    Pulled                         Pod/web-75577cb44f-hpcf6              Successfully pulled image "nginx:alpine" in 1.957s (1.957s including waiting). Image size: 26335715 bytes.
+5m7s                    Normal    Created                        Pod/web-75577cb44f-hpcf6              Container created
+5m7s                    Normal    Started                        Pod/web-75577cb44f-hpcf6              Container started
+5m7s                    Normal    Killing                        Pod/web-68c5dfcd67-54m6g              Stopping container web
+5m7s                    Normal    Created                        Pod/web-75577cb44f-rjdfx              Container created
+5m7s                    Normal    Pulled                         Pod/web-75577cb44f-rjdfx              Container image "nginx:alpine" already present on machine and can be accessed by the pod
+5m7s                    Normal    Scheduled                      Pod/web-75577cb44f-rjdfx              Successfully assigned coursework/web-75577cb44f-rjdfx to coursework
+5m6s                    Normal    SuccessfulDelete               ReplicaSet/web-68c5dfcd67             Deleted pod: web-68c5dfcd67-tfw9b
+5m6s                    Normal    ScalingReplicaSet              Deployment/web                        Scaled up replica set web-68c5dfcd67 from 0 to 1
+5m6s                    Normal    Started                        Pod/web-75577cb44f-rjdfx              Container started
+5m6s                    Normal    SuccessfulCreate               ReplicaSet/web-75577cb44f             Created pod: web-75577cb44f-ctt95
+5m6s                    Normal    Started                        Pod/web-75577cb44f-ctt95              Container started
+5m6s                    Normal    Created                        Pod/web-75577cb44f-ctt95              Container created
+5m6s                    Normal    Pulled                         Pod/web-75577cb44f-ctt95              Container image "nginx:alpine" already present on machine and can be accessed by the pod
+5m6s                    Normal    Scheduled                      Pod/web-75577cb44f-ctt95              Successfully assigned coursework/web-75577cb44f-ctt95 to coursework
+5m6s                    Normal    SuccessfulCreate               ReplicaSet/web-68c5dfcd67             Created pod: web-68c5dfcd67-qhwdd
+5m6s                    Normal    SuccessfulDelete               ReplicaSet/web-68c5dfcd67             Deleted pod: web-68c5dfcd67-s2f5r
+5m6s                    Normal    Killing                        Pod/web-68c5dfcd67-tfw9b              Stopping container web
+5m6s                    Normal    Killing                        Pod/web-68c5dfcd67-s2f5r              Stopping container web
+5m6s                    Normal    Scheduled                      Pod/web-68c5dfcd67-qhwdd              Successfully assigned coursework/web-68c5dfcd67-qhwdd to coursework
+5m6s                    Normal    ScalingReplicaSet              Deployment/web                        Scaled down replica set web-68c5dfcd67 from 2 to 1
+5m6s                    Normal    ScalingReplicaSet              Deployment/web                        Scaled up replica set web-75577cb44f from 2 to 3
+5m6s                    Normal    ScalingReplicaSet              Deployment/web                        Scaled down replica set web-68c5dfcd67 from 1 to 0
+5m5s                    Normal    Pulled                         Pod/web-68c5dfcd67-qhwdd              Container image "nginx:stable-alpine" already present on machine and can be accessed by the pod
+5m5s                    Normal    Scheduled                      Pod/web-68c5dfcd67-m4fw9              Successfully assigned coursework/web-68c5dfcd67-m4fw9 to coursework
+5m5s                    Normal    Started                        Pod/web-68c5dfcd67-m4fw9              Container started
+5m5s                    Normal    Killing                        Pod/web-75577cb44f-ctt95              Stopping container web
+5m5s                    Normal    SuccessfulCreate               ReplicaSet/web-68c5dfcd67             Created pod: web-68c5dfcd67-m4fw9
+5m5s                    Normal    Scheduled                      Pod/web-68c5dfcd67-fzf2k              Successfully assigned coursework/web-68c5dfcd67-fzf2k to coursework
+5m5s                    Normal    SuccessfulDelete               ReplicaSet/web-75577cb44f             Deleted pod: web-75577cb44f-ctt95
+5m5s                    Normal    Created                        Pod/web-68c5dfcd67-qhwdd              Container created
+5m5s                    Normal    SuccessfulCreate               ReplicaSet/web-68c5dfcd67             Created pod: web-68c5dfcd67-fzf2k
+5m5s                    Normal    SuccessfulDelete               ReplicaSet/web-75577cb44f             Deleted pod: web-75577cb44f-rjdfx
+5m5s                    Normal    Killing                        Pod/web-75577cb44f-rjdfx              Stopping container web
+5m5s                    Normal    Started                        Pod/web-68c5dfcd67-qhwdd              Container started
+5m5s                    Normal    Created                        Pod/web-68c5dfcd67-m4fw9              Container created
+5m5s (x2 over 5m10s)    Normal    ScalingReplicaSet              Deployment/web                        Scaled up replica set web-68c5dfcd67 from 2 to 3
+5m5s                    Normal    Pulled                         Pod/web-68c5dfcd67-m4fw9              Container image "nginx:stable-alpine" already present on machine and can be accessed by the pod
+5m4s                    Normal    Started                        Pod/web-68c5dfcd67-fzf2k              Container started
+5m4s                    Normal    ScalingReplicaSet              Deployment/blue                       Scaled up replica set blue-6b66bb585 from 0 to 1
+5m4s                    Normal    Scheduled                      Pod/blue-6b66bb585-ftxmd              Successfully assigned coursework/blue-6b66bb585-ftxmd to coursework
+5m4s                    Normal    SuccessfulCreate               ReplicaSet/blue-6b66bb585             Created pod: blue-6b66bb585-ftxmd
+5m4s                    Normal    SuccessfulDelete               ReplicaSet/web-75577cb44f             Deleted pod: web-75577cb44f-hpcf6
+5m4s                    Normal    Pulled                         Pod/web-68c5dfcd67-fzf2k              Container image "nginx:stable-alpine" already present on machine and can be accessed by the pod
+5m4s                    Normal    Created                        Pod/web-68c5dfcd67-fzf2k              Container created
+5m4s                    Normal    Scheduled                      Pod/green-649d4984f7-bhtjv            Successfully assigned coursework/green-649d4984f7-bhtjv to coursework
+5m4s                    Normal    Killing                        Pod/web-75577cb44f-hpcf6              Stopping container web
+5m4s                    Normal    ScalingReplicaSet              Deployment/green                      Scaled up replica set green-649d4984f7 from 0 to 1
+5m4s                    Normal    SuccessfulCreate               ReplicaSet/green-649d4984f7           Created pod: green-649d4984f7-bhtjv
+5m3s                    Normal    Pulling                        Pod/blue-6b66bb585-ftxmd              Pulling image "hashicorp/http-echo"
+5m3s                    Normal    Pulling                        Pod/green-649d4984f7-bhtjv            Pulling image "hashicorp/http-echo"
+5m2s                    Normal    Created                        Pod/blue-6b66bb585-ftxmd              Container created
+5m2s                    Normal    Started                        Pod/blue-6b66bb585-ftxmd              Container started
+5m2s                    Normal    Pulled                         Pod/blue-6b66bb585-ftxmd              Successfully pulled image "hashicorp/http-echo" in 1.73s (1.73s including waiting). Image size: 4631705 bytes.
+5m1s                    Normal    Created                        Pod/green-649d4984f7-bhtjv            Container created
+5m1s                    Normal    Started                        Pod/green-649d4984f7-bhtjv            Container started
+5m1s                    Normal    Scheduled                      Pod/client                            Successfully assigned coursework/client to coursework
+5m1s                    Normal    Pulling                        Pod/client                            Pulling image "alpine:3.22"
+5m1s                    Normal    Pulled                         Pod/green-649d4984f7-bhtjv            Successfully pulled image "hashicorp/http-echo" in 464ms (2.114s including waiting). Image size: 4631705 bytes.
+4m59s                   Normal    SuccessfulCreate               ReplicaSet/green-876f7cc98            Created pod: green-876f7cc98-45w7d
+4m59s                   Normal    Started                        Pod/client                            Container started
+4m59s                   Normal    Scheduled                      Pod/blue-6b66bb585-tzzwd              Successfully assigned coursework/blue-6b66bb585-tzzwd to coursework
+4m59s                   Normal    Scheduled                      Pod/blue-79bf4fbb68-lq7b7             Successfully assigned coursework/blue-79bf4fbb68-lq7b7 to coursework
+4m59s                   Normal    SuccessfulCreate               ReplicaSet/blue-6b66bb585             Created pod: blue-6b66bb585-cfvlz
+4m59s                   Normal    SuccessfulCreate               ReplicaSet/blue-6b66bb585             Created pod: blue-6b66bb585-tzzwd
+4m59s                   Normal    SuccessfulCreate               ReplicaSet/blue-79bf4fbb68            Created pod: blue-79bf4fbb68-lq7b7
+4m59s                   Normal    Scheduled                      Pod/green-876f7cc98-45w7d             Successfully assigned coursework/green-876f7cc98-45w7d to coursework
+4m59s                   Normal    Created                        Pod/client                            Container created
+4m59s                   Normal    ScalingReplicaSet              Deployment/blue                       Scaled up replica set blue-6b66bb585 from 1 to 3
+4m59s                   Normal    Scheduled                      Pod/blue-6b66bb585-cfvlz              Successfully assigned coursework/blue-6b66bb585-cfvlz to coursework
+4m59s                   Normal    Pulled                         Pod/client                            Successfully pulled image "alpine:3.22" in 1.571s (1.571s including waiting). Image size: 3802926 bytes.
+4m59s                   Normal    ScalingReplicaSet              Deployment/blue                       Scaled up replica set blue-79bf4fbb68 from 0 to 1
+4m59s                   Normal    ScalingReplicaSet              Deployment/green                      Scaled up replica set green-876f7cc98 from 0 to 1
+4m58s                   Normal    Pulling                        Pod/blue-79bf4fbb68-lq7b7             Pulling image "hashicorp/http-echo"
+4m58s                   Normal    Pulling                        Pod/green-876f7cc98-45w7d             Pulling image "hashicorp/http-echo"
+4m58s                   Normal    Pulling                        Pod/blue-6b66bb585-cfvlz              Pulling image "hashicorp/http-echo"
+4m58s                   Normal    Started                        Pod/blue-6b66bb585-tzzwd              Container started
+4m58s                   Normal    Created                        Pod/blue-6b66bb585-tzzwd              Container created
+4m58s                   Normal    Pulled                         Pod/blue-6b66bb585-tzzwd              Successfully pulled image "hashicorp/http-echo" in 456ms (457ms including waiting). Image size: 4631705 bytes.
+4m58s                   Normal    Pulling                        Pod/blue-6b66bb585-tzzwd              Pulling image "hashicorp/http-echo"
+4m57s                   Normal    SuccessfulCreate               ReplicaSet/blue-79bf4fbb68            Created pod: blue-79bf4fbb68-w9xv9
+4m57s                   Normal    Scheduled                      Pod/blue-79bf4fbb68-w9xv9             Successfully assigned coursework/blue-79bf4fbb68-w9xv9 to coursework
+4m57s                   Normal    Started                        Pod/blue-79bf4fbb68-lq7b7             Container started
+4m57s                   Normal    ScalingReplicaSet              Deployment/blue                       Scaled up replica set blue-79bf4fbb68 from 1 to 2
+4m57s                   Normal    Created                        Pod/blue-79bf4fbb68-lq7b7             Container created
+4m57s                   Normal    Pulled                         Pod/blue-79bf4fbb68-lq7b7             Successfully pulled image "hashicorp/http-echo" in 464ms (1.341s including waiting). Image size: 4631705 bytes.
+4m57s                   Normal    Started                        Pod/blue-6b66bb585-cfvlz              Container started
+4m57s                   Normal    Created                        Pod/blue-6b66bb585-cfvlz              Container created
+4m57s                   Normal    Pulled                         Pod/blue-6b66bb585-cfvlz              Successfully pulled image "hashicorp/http-echo" in 473ms (899ms including waiting). Image size: 4631705 bytes.
+4m57s                   Normal    SuccessfulDelete               ReplicaSet/blue-6b66bb585             Deleted pod: blue-6b66bb585-cfvlz
+4m57s                   Normal    ScalingReplicaSet              Deployment/blue                       Scaled down replica set blue-6b66bb585 from 3 to 2
+4m56s                   Normal    Scheduled                      Pod/blue-79bf4fbb68-686bj             Successfully assigned coursework/blue-79bf4fbb68-686bj to coursework
+4m56s                   Normal    Killing                        Pod/green-649d4984f7-bhtjv            Stopping container http-echo
+4m56s                   Normal    Pulling                        Pod/blue-79bf4fbb68-w9xv9             Pulling image "hashicorp/http-echo"
+4m56s                   Normal    Created                        Pod/blue-79bf4fbb68-w9xv9             Container created
+4m56s                   Normal    Killing                        Pod/blue-6b66bb585-tzzwd              Stopping container http-echo
+4m56s                   Normal    ScalingReplicaSet              Deployment/green                      Scaled down replica set green-649d4984f7 from 1 to 0
+4m56s                   Normal    Started                        Pod/blue-79bf4fbb68-w9xv9             Container started
+4m56s                   Normal    Started                        Pod/green-876f7cc98-45w7d             Container started
+4m56s                   Normal    Pulled                         Pod/blue-79bf4fbb68-w9xv9             Successfully pulled image "hashicorp/http-echo" in 489ms (489ms including waiting). Image size: 4631705 bytes.
+4m56s                   Normal    Created                        Pod/green-876f7cc98-45w7d             Container created
+4m56s                   Normal    SuccessfulCreate               ReplicaSet/blue-79bf4fbb68            Created pod: blue-79bf4fbb68-686bj
+4m56s                   Normal    Pulled                         Pod/green-876f7cc98-45w7d             Successfully pulled image "hashicorp/http-echo" in 455ms (1.776s including waiting). Image size: 4631705 bytes.
+4m56s                   Normal    SuccessfulDelete               ReplicaSet/blue-6b66bb585             Deleted pod: blue-6b66bb585-tzzwd
+4m56s                   Normal    ScalingReplicaSet              Deployment/blue                       Scaled up replica set blue-79bf4fbb68 from 2 to 3
+4m56s                   Normal    ScalingReplicaSet              Deployment/blue                       Scaled down replica set blue-6b66bb585 from 2 to 1
+4m56s                   Normal    SuccessfulDelete               ReplicaSet/green-649d4984f7           Deleted pod: green-649d4984f7-bhtjv
+4m55s                   Normal    Killing                        Pod/blue-6b66bb585-cfvlz              Stopping container http-echo
+4m55s                   Normal    Started                        Pod/blue-79bf4fbb68-686bj             Container started
+4m55s                   Normal    SuccessfulDelete               ReplicaSet/blue-6b66bb585             Deleted pod: blue-6b66bb585-ftxmd
+4m55s                   Normal    Killing                        Pod/blue-6b66bb585-ftxmd              Stopping container http-echo
+4m55s                   Normal    Pulling                        Pod/blue-79bf4fbb68-686bj             Pulling image "hashicorp/http-echo"
+4m55s                   Normal    ScalingReplicaSet              Deployment/blue                       Scaled down replica set blue-6b66bb585 from 1 to 0
+4m55s                   Normal    Pulled                         Pod/blue-79bf4fbb68-686bj             Successfully pulled image "hashicorp/http-echo" in 468ms (468ms including waiting). Image size: 4631705 bytes.
+4m55s                   Normal    Created                        Pod/blue-79bf4fbb68-686bj             Container created
+4m53s                   Normal    Killing                        Pod/web-68c5dfcd67-m4fw9              Stopping container web
+4m53s                   Normal    SuccessfulDelete               ReplicaSet/web-68c5dfcd67             Deleted pod: web-68c5dfcd67-fzf2k
+4m53s (x6 over 5m5s)    Normal    ScalingReplicaSet              Deployment/web                        (combined from similar events): Scaled up replica set web-75577cb44f from 0 to 3
+4m53s                   Normal    SuccessfulCreate               ReplicaSet/web-75577cb44f             Created pod: web-75577cb44f-mxgr4
+4m53s                   Normal    SuccessfulCreate               ReplicaSet/web-75577cb44f             Created pod: web-75577cb44f-htrtk
+4m53s                   Normal    SuccessfulCreate               ReplicaSet/web-75577cb44f             Created pod: web-75577cb44f-hqtmn
+4m53s                   Normal    Scheduled                      Pod/web-75577cb44f-htrtk              Successfully assigned coursework/web-75577cb44f-htrtk to coursework
+4m53s                   Normal    Scheduled                      Pod/web-75577cb44f-mxgr4              Successfully assigned coursework/web-75577cb44f-mxgr4 to coursework
+4m53s                   Normal    Scheduled                      Pod/web-75577cb44f-hqtmn              Successfully assigned coursework/web-75577cb44f-hqtmn to coursework
+4m53s                   Normal    Killing                        Pod/web-68c5dfcd67-qhwdd              Stopping container web
+4m53s                   Normal    Killing                        Pod/web-68c5dfcd67-fzf2k              Stopping container web
+4m53s                   Normal    SuccessfulDelete               ReplicaSet/web-68c5dfcd67             Deleted pod: web-68c5dfcd67-qhwdd
+4m53s                   Normal    SuccessfulDelete               ReplicaSet/web-68c5dfcd67             Deleted pod: web-68c5dfcd67-m4fw9
+4m52s                   Normal    Scheduled                      Pod/lifecycle-08-liveness             Successfully assigned coursework/lifecycle-08-liveness to coursework
+4m52s                   Normal    Scheduled                      Pod/lifecycle-03-succeeded            Successfully assigned coursework/lifecycle-03-succeeded to coursework
+4m52s                   Normal    Scheduled                      Pod/lifecycle-10-init-container       Successfully assigned coursework/lifecycle-10-init-container to coursework
+4m52s                   Normal    Pulled                         Pod/web-75577cb44f-htrtk              Container image "nginx:alpine" already present on machine and can be accessed by the pod
+4m52s                   Normal    Scheduled                      Pod/lifecycle-06-imagepullbackoff     Successfully assigned coursework/lifecycle-06-imagepullbackoff to coursework
+4m52s                   Normal    Scheduled                      Pod/lifecycle-01-running              Successfully assigned coursework/lifecycle-01-running to coursework
+4m52s                   Normal    Scheduled                      Pod/lifecycle-12-termination          Successfully assigned coursework/lifecycle-12-termination to coursework
+4m52s                   Warning   FailedScheduling               Pod/lifecycle-02-pending              0/1 nodes are available: 1 node(s) didn't match Pod's node affinity/selector. preemption: 0/1 nodes are available: 1 Preemption is not helpful for scheduling.
+4m52s                   Normal    Scheduled                      Pod/lifecycle-09-startup              Successfully assigned coursework/lifecycle-09-startup to coursework
+4m52s                   Normal    Scheduled                      Pod/lifecycle-11-multi-container      Successfully assigned coursework/lifecycle-11-multi-container to coursework
+4m52s                   Normal    Started                        Pod/web-75577cb44f-mxgr4              Container started
+4m52s                   Normal    Scheduled                      Pod/lifecycle-07-readiness            Successfully assigned coursework/lifecycle-07-readiness to coursework
+4m52s                   Normal    Pulled                         Pod/web-75577cb44f-hqtmn              Container image "nginx:alpine" already present on machine and can be accessed by the pod
+4m52s                   Normal    Created                        Pod/web-75577cb44f-hqtmn              Container created
+4m52s                   Normal    Started                        Pod/web-75577cb44f-hqtmn              Container started
+4m52s                   Normal    Created                        Pod/web-75577cb44f-mxgr4              Container created
+4m52s                   Normal    Pulled                         Pod/web-75577cb44f-mxgr4              Container image "nginx:alpine" already present on machine and can be accessed by the pod
+4m52s                   Normal    Scheduled                      Pod/lifecycle-04-failed               Successfully assigned coursework/lifecycle-04-failed to coursework
+4m52s                   Normal    Started                        Pod/web-75577cb44f-htrtk              Container started
+4m52s                   Normal    Created                        Pod/web-75577cb44f-htrtk              Container created
+4m52s                   Normal    Scheduled                      Pod/lifecycle-05-crashloopbackoff     Successfully assigned coursework/lifecycle-05-crashloopbackoff to coursework
+4m51s                   Normal    Created                        Pod/lifecycle-11-multi-container      Container created
+4m51s                   Normal    Started                        Pod/lifecycle-04-failed               Container started
+4m51s                   Normal    Pulled                         Pod/lifecycle-01-running              Container image "nginx:stable-alpine" already present on machine and can be accessed by the pod
+4m51s                   Normal    Created                        Pod/lifecycle-01-running              Container created
+4m51s                   Normal    Started                        Pod/lifecycle-01-running              Container started
+4m51s                   Normal    Pulled                         Pod/lifecycle-03-succeeded            Container image "alpine:3.22" already present on machine and can be accessed by the pod
+4m51s                   Normal    Created                        Pod/lifecycle-03-succeeded            Container created
+4m51s                   Normal    Started                        Pod/lifecycle-03-succeeded            Container started
+4m51s                   Normal    Pulled                         Pod/lifecycle-04-failed               Container image "alpine:3.22" already present on machine and can be accessed by the pod
+4m51s                   Normal    Created                        Pod/lifecycle-04-failed               Container created
+4m51s                   Normal    Pulled                         Pod/lifecycle-07-readiness            Container image "nginx:stable-alpine" already present on machine and can be accessed by the pod
+4m51s                   Normal    Created                        Pod/lifecycle-07-readiness            Container created
+4m51s                   Normal    Started                        Pod/lifecycle-07-readiness            Container started
+4m51s                   Warning   Unhealthy                      Pod/lifecycle-07-readiness            Readiness probe failed: Get "http://10.244.0.35:80/": dial tcp 10.244.0.35:80: connect: connection refused
+4m51s                   Normal    Pulled                         Pod/lifecycle-08-liveness             Container image "nginx:stable-alpine" already present on machine and can be accessed by the pod
+4m51s                   Normal    Created                        Pod/lifecycle-08-liveness             Container created
+4m51s                   Normal    Started                        Pod/lifecycle-08-liveness             Container started
+4m51s                   Normal    Pulled                         Pod/lifecycle-09-startup              Container image "nginx:stable-alpine" already present on machine and can be accessed by the pod
+4m51s                   Normal    Created                        Pod/lifecycle-09-startup              Container created
+4m51s                   Normal    Started                        Pod/lifecycle-09-startup              Container started
+4m51s                   Normal    Pulled                         Pod/lifecycle-10-init-container       Container image "alpine:3.22" already present on machine and can be accessed by the pod
+4m51s                   Normal    Created                        Pod/lifecycle-10-init-container       Container created
+4m51s                   Normal    Started                        Pod/lifecycle-10-init-container       Container started
+4m51s                   Normal    Pulled                         Pod/lifecycle-11-multi-container      Container image "nginx:stable-alpine" already present on machine and can be accessed by the pod
+4m51s                   Normal    Created                        Pod/lifecycle-11-multi-container      Container created
+4m51s                   Normal    Started                        Pod/lifecycle-11-multi-container      Container started
+4m51s                   Normal    Pulled                         Pod/lifecycle-11-multi-container      Container image "alpine:3.22" already present on machine and can be accessed by the pod
+4m51s                   Normal    Started                        Pod/lifecycle-11-multi-container      Container started
+4m51s                   Normal    Pulled                         Pod/lifecycle-12-termination          Container image "alpine:3.22" already present on machine and can be accessed by the pod
+4m51s                   Normal    Created                        Pod/lifecycle-12-termination          Container created
+4m51s                   Normal    Started                        Pod/lifecycle-12-termination          Container started
+4m50s                   Normal    Started                        Pod/lifecycle-10-init-container       Container started
+4m50s                   Normal    Created                        Pod/lifecycle-10-init-container       Container created
+4m50s                   Normal    Pulled                         Pod/lifecycle-10-init-container       Container image "nginx:stable-alpine" already present on machine and can be accessed by the pod
+4m24s                   Normal    Scheduled                      Pod/config-reader                     Successfully assigned coursework/config-reader to coursework
+4m23s                   Normal    Pulled                         Pod/config-reader                     Container image "alpine:3.22" already present on machine and can be accessed by the pod
+4m23s                   Normal    Created                        Pod/config-reader                     Container created
+4m23s                   Normal    Started                        Pod/config-reader                     Container started
+4m22s                   Normal    Killing                        Pod/config-reader                     Stopping container reader
+4m16s (x2 over 4m24s)   Normal    Sync                           Ingress/coursework                    Scheduled for sync
+3m51s                   Normal    Scheduled                      Pod/config-reader                     Successfully assigned coursework/config-reader to coursework
+3m51s                   Normal    Started                        Pod/config-reader                     Container started
+3m51s                   Normal    Created                        Pod/config-reader                     Container created
+3m51s                   Normal    Pulled                         Pod/config-reader                     Container image "alpine:3.22" already present on machine and can be accessed by the pod
+3m50s                   Warning   FailedScheduling               Pod/storage-web-5b46f8d54b-cn8l9      0/1 nodes are available: pod has unbound immediate PersistentVolumeClaims. not found
+3m50s                   Normal    Started                        Pod/storage-web-5b46f8d54b-cn8l9      Container started
+3m50s                   Normal    ProvisioningSucceeded          PersistentVolumeClaim/web-data        Successfully provisioned volume pvc-2286b395-6b6a-4cbd-8db8-09734769ed09
+3m50s                   Normal    Provisioning                   PersistentVolumeClaim/web-data        External provisioner is provisioning volume for claim "coursework/web-data"
+3m50s (x2 over 3m50s)   Normal    ExternalProvisioning           PersistentVolumeClaim/web-data        Waiting for a volume to be created either by the external provisioner 'k8s.io/minikube-hostpath' or manually by the system administrator. If volume creation is delayed, please verify that the provisioner is running and correctly registered.
+3m50s                   Normal    ScalingReplicaSet              Deployment/storage-web                Scaled up replica set storage-web-5b46f8d54b from 0 to 2
+3m50s                   Normal    Scheduled                      Pod/storage-web-5b46f8d54b-cn8l9      Successfully assigned coursework/storage-web-5b46f8d54b-cn8l9 to coursework
+3m50s                   Normal    SuccessfulCreate               ReplicaSet/storage-web-5b46f8d54b     Created pod: storage-web-5b46f8d54b-cn8l9
+3m50s                   Normal    SuccessfulCreate               ReplicaSet/storage-web-5b46f8d54b     Created pod: storage-web-5b46f8d54b-x5bl6
+3m50s                   Normal    Pulled                         Pod/storage-web-5b46f8d54b-cn8l9      Container image "nginx:stable-alpine" already present on machine and can be accessed by the pod
+3m50s                   Normal    Started                        Pod/storage-web-5b46f8d54b-x5bl6      Container started
+3m50s                   Normal    Created                        Pod/storage-web-5b46f8d54b-x5bl6      Container created
+3m50s                   Normal    Pulled                         Pod/storage-web-5b46f8d54b-x5bl6      Container image "nginx:stable-alpine" already present on machine and can be accessed by the pod
+3m50s                   Normal    Scheduled                      Pod/storage-web-5b46f8d54b-x5bl6      Successfully assigned coursework/storage-web-5b46f8d54b-x5bl6 to coursework
+3m50s                   Warning   FailedScheduling               Pod/storage-web-5b46f8d54b-x5bl6      0/1 nodes are available: pod has unbound immediate PersistentVolumeClaims. not found
+3m50s                   Normal    Created                        Pod/storage-web-5b46f8d54b-cn8l9      Container created
+3m47s                   Normal    Scheduled                      Pod/storage-web-5b46f8d54b-g4zdw      Successfully assigned coursework/storage-web-5b46f8d54b-g4zdw to coursework
+3m47s                   Normal    SuccessfulCreate               ReplicaSet/storage-web-5b46f8d54b     Created pod: storage-web-5b46f8d54b-g4zdw
+3m47s                   Normal    Pulled                         Pod/storage-web-5b46f8d54b-g4zdw      Container image "nginx:stable-alpine" already present on machine and can be accessed by the pod
+3m47s                   Normal    Created                        Pod/storage-web-5b46f8d54b-g4zdw      Container created
+3m46s                   Normal    Started                        Pod/storage-web-5b46f8d54b-g4zdw      Container started
+3m45s                   Normal    Killing                        Pod/storage-web-5b46f8d54b-cn8l9      Stopping container web
+3m44s                   Normal    Scheduled                      Pod/load                              Successfully assigned coursework/load to coursework
+3m44s                   Normal    Pulled                         Pod/load                              Container image "alpine:3.22" already present on machine and can be accessed by the pod
+3m44s                   Normal    Created                        Pod/load                              Container created
+3m43s                   Normal    Started                        Pod/load                              Container started
+2m20s (x4 over 3m5s)    Warning   FailedGetResourceMetric        HorizontalPodAutoscaler/storage-web   failed to get cpu utilization: did not receive metrics for targeted pods (pods might be unready)
+2m20s (x4 over 3m5s)    Warning   FailedComputeMetricsReplicas   HorizontalPodAutoscaler/storage-web   invalid metrics (1 invalid out of 1), first error is: failed to get cpu resource metric value: failed to get cpu utilization: did not receive metrics for targeted pods (pods might be unready)
+2m5s                    Normal    SuccessfulCreate               ReplicaSet/storage-web-5b46f8d54b     Created pod: storage-web-5b46f8d54b-9vnnj
+2m5s                    Normal    Scheduled                      Pod/storage-web-5b46f8d54b-9vnnj      Successfully assigned coursework/storage-web-5b46f8d54b-9vnnj to coursework
+2m5s                    Normal    SuccessfulCreate               ReplicaSet/storage-web-5b46f8d54b     Created pod: storage-web-5b46f8d54b-nv47w
+2m5s                    Normal    Scheduled                      Pod/storage-web-5b46f8d54b-nv47w      Successfully assigned coursework/storage-web-5b46f8d54b-nv47w to coursework
+2m5s                    Normal    ScalingReplicaSet              Deployment/storage-web                Scaled up replica set storage-web-5b46f8d54b from 2 to 4
+2m5s                    Normal    SuccessfulRescale              HorizontalPodAutoscaler/storage-web   New size: 4; reason: cpu resource utilization (percentage of request) above target
+2m4s                    Normal    Started                        Pod/storage-web-5b46f8d54b-9vnnj      Container started
+2m4s                    Normal    Created                        Pod/storage-web-5b46f8d54b-nv47w      Container created
+2m4s                    Normal    Pulled                         Pod/storage-web-5b46f8d54b-9vnnj      Container image "nginx:stable-alpine" already present on machine and can be accessed by the pod
+2m4s                    Normal    Created                        Pod/storage-web-5b46f8d54b-9vnnj      Container created
+2m4s                    Normal    Started                        Pod/storage-web-5b46f8d54b-nv47w      Container started
+2m4s                    Normal    Pulled                         Pod/storage-web-5b46f8d54b-nv47w      Container image "nginx:stable-alpine" already present on machine and can be accessed by the pod
+115s (x5 over 4m51s)    Normal    Pulling                        Pod/lifecycle-06-imagepullbackoff     Pulling image "nginx:kitledger-missing-tag"
+114s (x5 over 4m51s)    Warning   Failed                         Pod/lifecycle-06-imagepullbackoff     Error: ErrImagePull
+114s (x5 over 4m51s)    Warning   Failed                         Pod/lifecycle-06-imagepullbackoff     Failed to pull image "nginx:kitledger-missing-tag": rpc error: code = NotFound desc = failed to pull and unpack image "docker.io/library/nginx:kitledger-missing-tag": failed to resolve reference "docker.io/library/nginx:kitledger-missing-tag": docker.io/library/nginx:kitledger-missing-tag: not found
+110s                    Normal    SuccessfulCreate               ReplicaSet/storage-web-5b46f8d54b     Created pod: storage-web-5b46f8d54b-czkk4
+110s                    Normal    SuccessfulRescale              HorizontalPodAutoscaler/storage-web   New size: 5; reason: cpu resource utilization (percentage of request) above target
+110s (x6 over 4m51s)    Normal    Pulled                         Pod/lifecycle-05-crashloopbackoff     Container image "alpine:3.22" already present on machine and can be accessed by the pod
+110s                    Normal    Scheduled                      Pod/storage-web-5b46f8d54b-czkk4      Successfully assigned coursework/storage-web-5b46f8d54b-czkk4 to coursework
+109s (x6 over 4m51s)    Normal    Created                        Pod/lifecycle-05-crashloopbackoff     Container created
+109s                    Normal    Created                        Pod/storage-web-5b46f8d54b-czkk4      Container created
+109s (x6 over 4m51s)    Normal    Started                        Pod/lifecycle-05-crashloopbackoff     Container started
+109s                    Normal    Started                        Pod/storage-web-5b46f8d54b-czkk4      Container started
+109s                    Normal    Pulled                         Pod/storage-web-5b46f8d54b-czkk4      Container image "nginx:stable-alpine" already present on machine and can be accessed by the pod
+100s                    Normal    Killing                        Pod/load                              Stopping container load
+69s                     Normal    Pulled                         Pod/storage-web-7fb4856f79-jztkq      Container image "nginx:stable-alpine" already present on machine and can be accessed by the pod
+69s                     Normal    Scheduled                      Pod/storage-web-7fb4856f79-tcqk9      Successfully assigned coursework/storage-web-7fb4856f79-tcqk9 to coursework
+69s                     Normal    Created                        Pod/storage-web-7fb4856f79-tcqk9      Container created
+69s                     Normal    Pulled                         Pod/storage-web-7fb4856f79-tcqk9      Container image "nginx:stable-alpine" already present on machine and can be accessed by the pod
+69s                     Normal    SuccessfulCreate               ReplicaSet/storage-web-7fb4856f79     Created pod: storage-web-7fb4856f79-tcqk9
+69s                     Normal    SuccessfulCreate               ReplicaSet/storage-web-7fb4856f79     Created pod: storage-web-7fb4856f79-jztkq
+69s                     Normal    SuccessfulCreate               ReplicaSet/storage-web-7fb4856f79     Created pod: storage-web-7fb4856f79-444dx
+69s                     Normal    Started                        Pod/storage-web-7fb4856f79-jztkq      Container started
+69s                     Normal    Killing                        Pod/storage-web-5b46f8d54b-9vnnj      Stopping container web
+69s                     Normal    Started                        Pod/storage-web-7fb4856f79-tcqk9      Container started
+69s                     Normal    Pulled                         Pod/storage-web-7fb4856f79-444dx      Container image "nginx:stable-alpine" already present on machine and can be accessed by the pod
+69s                     Normal    Scheduled                      Pod/storage-web-7fb4856f79-jztkq      Successfully assigned coursework/storage-web-7fb4856f79-jztkq to coursework
+69s                     Normal    ScalingReplicaSet              Deployment/storage-web                Scaled up replica set storage-web-7fb4856f79 from 2 to 3
+69s                     Normal    Scheduled                      Pod/storage-web-7fb4856f79-444dx      Successfully assigned coursework/storage-web-7fb4856f79-444dx to coursework
+69s                     Normal    Created                        Pod/storage-web-7fb4856f79-jztkq      Container created
+69s                     Normal    ScalingReplicaSet              Deployment/storage-web                Scaled up replica set storage-web-7fb4856f79 from 0 to 2
+69s                     Normal    SuccessfulDelete               ReplicaSet/storage-web-5b46f8d54b     Deleted pod: storage-web-5b46f8d54b-9vnnj
+69s                     Normal    Created                        Pod/storage-web-7fb4856f79-444dx      Container created
+69s                     Normal    Started                        Pod/storage-web-7fb4856f79-444dx      Container started
+53s (x15 over 4m50s)    Warning   Failed                         Pod/lifecycle-06-imagepullbackoff     Error: ImagePullBackOff
+39s                     Normal    SuccessfulDelete               ReplicaSet/storage-web-7fb4856f79     Deleted pod: storage-web-7fb4856f79-jztkq
+39s                     Normal    SuccessfulDelete               ReplicaSet/storage-web-7fb4856f79     Deleted pod: storage-web-7fb4856f79-444dx
+39s                     Normal    ScalingReplicaSet              Deployment/storage-web                Scaled down replica set storage-web-7fb4856f79 from 3 to 0
+39s (x11 over 66s)      Warning   Unhealthy                      Pod/storage-web-7fb4856f79-444dx      Readiness probe failed: HTTP probe failed with statuscode: 404
+39s                     Normal    SuccessfulCreate               ReplicaSet/storage-web-5b46f8d54b     Created pod: storage-web-5b46f8d54b-cjccg
+39s (x2 over 110s)      Normal    ScalingReplicaSet              Deployment/storage-web                Scaled up replica set storage-web-5b46f8d54b from 4 to 5
+39s                     Normal    Killing                        Pod/storage-web-7fb4856f79-444dx      Stopping container web
+39s                     Normal    Created                        Pod/storage-web-5b46f8d54b-cjccg      Container created
+39s (x11 over 66s)      Warning   Unhealthy                      Pod/storage-web-7fb4856f79-jztkq      Readiness probe failed: HTTP probe failed with statuscode: 404
+39s                     Normal    Killing                        Pod/storage-web-7fb4856f79-jztkq      Stopping container web
+39s (x11 over 66s)      Warning   Unhealthy                      Pod/storage-web-7fb4856f79-tcqk9      Readiness probe failed: HTTP probe failed with statuscode: 404
+39s                     Normal    Killing                        Pod/storage-web-7fb4856f79-tcqk9      Stopping container web
+39s                     Normal    Pulled                         Pod/storage-web-5b46f8d54b-cjccg      Container image "nginx:stable-alpine" already present on machine and can be accessed by the pod
+39s                     Normal    SuccessfulDelete               ReplicaSet/storage-web-7fb4856f79     Deleted pod: storage-web-7fb4856f79-tcqk9
+39s                     Normal    Scheduled                      Pod/storage-web-5b46f8d54b-cjccg      Successfully assigned coursework/storage-web-5b46f8d54b-cjccg to coursework
+38s                     Normal    Started                        Pod/storage-web-5b46f8d54b-cjccg      Container started
+36s                     Normal    SuccessfulCreate               ReplicaSet/storage-web-6b9db6987b     Created pod: storage-web-6b9db6987b-rmq2l
+36s                     Normal    Scheduled                      Pod/storage-web-6b9db6987b-rmq2l      Successfully assigned coursework/storage-web-6b9db6987b-rmq2l to coursework
+36s                     Normal    Scheduled                      Pod/storage-web-6b9db6987b-qpsv2      Successfully assigned coursework/storage-web-6b9db6987b-qpsv2 to coursework
+36s                     Normal    Scheduled                      Pod/storage-web-6b9db6987b-tqmd9      Successfully assigned coursework/storage-web-6b9db6987b-tqmd9 to coursework
+36s                     Normal    SuccessfulCreate               ReplicaSet/storage-web-6b9db6987b     Created pod: storage-web-6b9db6987b-tqmd9
+36s                     Normal    SuccessfulCreate               ReplicaSet/storage-web-6b9db6987b     Created pod: storage-web-6b9db6987b-qpsv2
+36s                     Normal    ScalingReplicaSet              Deployment/storage-web                Scaled up replica set storage-web-6b9db6987b from 0 to 2
+36s (x2 over 69s)       Normal    ScalingReplicaSet              Deployment/storage-web                Scaled down replica set storage-web-5b46f8d54b from 5 to 4
+36s                     Normal    SuccessfulDelete               ReplicaSet/storage-web-5b46f8d54b     Deleted pod: storage-web-5b46f8d54b-cjccg
+36s                     Normal    ScalingReplicaSet              Deployment/storage-web                Scaled up replica set storage-web-6b9db6987b from 2 to 3
+36s (x7 over 4m49s)     Warning   BackOff                        Pod/lifecycle-05-crashloopbackoff     Back-off restarting failed container app in pod lifecycle-05-crashloopbackoff_coursework(df7d4cd8-182e-417c-be01-1c6091132174)
+34s                     Normal    Killing                        Pod/storage-web-5b46f8d54b-cjccg      Stopping container web
+33s                     Normal    Killing                        Pod/storage-web-5b46f8d54b-czkk4      Stopping container web
+33s                     Normal    SuccessfulDelete               ReplicaSet/storage-web-5b46f8d54b     Deleted pod: storage-web-5b46f8d54b-x5bl6
+33s                     Normal    Killing                        Pod/storage-web-5b46f8d54b-x5bl6      Stopping container web
+33s                     Normal    Killing                        Pod/storage-web-5b46f8d54b-nv47w      Stopping container web
+33s                     Normal    Scheduled                      Pod/storage-web-6b9db6987b-g2n7n      Successfully assigned coursework/storage-web-6b9db6987b-g2n7n to coursework
+33s                     Normal    SuccessfulDelete               ReplicaSet/storage-web-5b46f8d54b     Deleted pod: storage-web-5b46f8d54b-czkk4
+33s                     Normal    SuccessfulDelete               ReplicaSet/storage-web-5b46f8d54b     Deleted pod: storage-web-5b46f8d54b-nv47w
+33s                     Normal    SuccessfulCreate               ReplicaSet/storage-web-6b9db6987b     Created pod: storage-web-6b9db6987b-5mv4c
+33s                     Normal    Scheduled                      Pod/storage-web-6b9db6987b-5mv4c      Successfully assigned coursework/storage-web-6b9db6987b-5mv4c to coursework
+33s                     Normal    SuccessfulCreate               ReplicaSet/storage-web-6b9db6987b     Created pod: storage-web-6b9db6987b-g2n7n
+30s                     Normal    SuccessfulDelete               ReplicaSet/storage-web-5b46f8d54b     Deleted pod: storage-web-5b46f8d54b-g4zdw
+30s                     Normal    Killing                        Pod/storage-web-5b46f8d54b-g4zdw      Stopping container web
+13s (x2 over 23s)       Normal    Killing                        Pod/storage-web-6b9db6987b-5mv4c      Container web failed liveness probe, will be restarted
+13s (x3 over 33s)       Normal    Pulled                         Pod/storage-web-6b9db6987b-5mv4c      Container image "nginx:stable-alpine" already present on machine and can be accessed by the pod
+13s (x3 over 33s)       Normal    Created                        Pod/storage-web-6b9db6987b-5mv4c      Container created
+13s (x3 over 33s)       Normal    Started                        Pod/storage-web-6b9db6987b-5mv4c      Container started
+8s (x5 over 28s)        Warning   Unhealthy                      Pod/storage-web-6b9db6987b-5mv4c      Liveness probe failed: HTTP probe failed with statuscode: 404
+6s (x4 over 36s)        Normal    Pulled                         Pod/storage-web-6b9db6987b-qpsv2      Container image "nginx:stable-alpine" already present on machine and can be accessed by the pod
+6s (x4 over 36s)        Normal    Started                        Pod/storage-web-6b9db6987b-rmq2l      Container started
+6s                      Normal    Killing                        Pod/storage-web-6b9db6987b-5mv4c      Stopping container web
+6s                      Normal    SuccessfulDelete               ReplicaSet/storage-web-6b9db6987b     Deleted pod: storage-web-6b9db6987b-5mv4c
+6s (x3 over 26s)        Warning   Unhealthy                      Pod/storage-web-6b9db6987b-tqmd9      Readiness probe failed: Get "http://10.244.0.54:80/": dial tcp 10.244.0.54:80: connect: connection refused
+6s (x3 over 26s)        Normal    Killing                        Pod/storage-web-6b9db6987b-tqmd9      Container web failed liveness probe, will be restarted
+6s (x6 over 31s)        Warning   Unhealthy                      Pod/storage-web-6b9db6987b-tqmd9      Liveness probe failed: HTTP probe failed with statuscode: 404
+6s (x4 over 36s)        Normal    Started                        Pod/storage-web-6b9db6987b-tqmd9      Container started
+6s                      Normal    SuccessfulCreate               ReplicaSet/storage-web-5b46f8d54b     Created pod: storage-web-5b46f8d54b-rh7vx
+6s                      Normal    SuccessfulCreate               ReplicaSet/storage-web-5b46f8d54b     Created pod: storage-web-5b46f8d54b-twmh8
+6s (x4 over 36s)        Normal    Created                        Pod/storage-web-6b9db6987b-tqmd9      Container created
+6s (x4 over 36s)        Normal    Pulled                         Pod/storage-web-6b9db6987b-tqmd9      Container image "nginx:stable-alpine" already present on machine and can be accessed by the pod
+6s (x4 over 36s)        Normal    Created                        Pod/storage-web-6b9db6987b-qpsv2      Container created
+6s (x4 over 36s)        Normal    Started                        Pod/storage-web-6b9db6987b-qpsv2      Container started
+6s (x6 over 31s)        Warning   Unhealthy                      Pod/storage-web-6b9db6987b-qpsv2      Liveness probe failed: HTTP probe failed with statuscode: 404
+6s (x3 over 26s)        Normal    Killing                        Pod/storage-web-6b9db6987b-qpsv2      Container web failed liveness probe, will be restarted
+6s (x3 over 26s)        Warning   Unhealthy                      Pod/storage-web-6b9db6987b-qpsv2      Readiness probe failed: Get "http://10.244.0.55:80/": dial tcp 10.244.0.55:80: connect: connection refused
+6s (x3 over 26s)        Warning   Unhealthy                      Pod/storage-web-6b9db6987b-rmq2l      Readiness probe failed: Get "http://10.244.0.53:80/": dial tcp 10.244.0.53:80: connect: connection refused
+6s (x4 over 36s)        Normal    Pulled                         Pod/storage-web-6b9db6987b-rmq2l      Container image "nginx:stable-alpine" already present on machine and can be accessed by the pod
+6s (x3 over 26s)        Normal    Killing                        Pod/storage-web-6b9db6987b-rmq2l      Container web failed liveness probe, will be restarted
+6s (x6 over 31s)        Warning   Unhealthy                      Pod/storage-web-6b9db6987b-rmq2l      Liveness probe failed: HTTP probe failed with statuscode: 404
+6s (x3 over 23s)        Warning   Unhealthy                      Pod/storage-web-6b9db6987b-5mv4c      Readiness probe failed: Get "http://10.244.0.56:80/": dial tcp 10.244.0.56:80: connect: connection refused
+6s                      Normal    Scheduled                      Pod/storage-web-5b46f8d54b-twmh8      Successfully assigned coursework/storage-web-5b46f8d54b-twmh8 to coursework
+6s                      Normal    Scheduled                      Pod/storage-web-5b46f8d54b-jd5m8      Successfully assigned coursework/storage-web-5b46f8d54b-jd5m8 to coursework
+6s (x4 over 36s)        Normal    Created                        Pod/storage-web-6b9db6987b-rmq2l      Container created
+6s                      Normal    Scheduled                      Pod/storage-web-5b46f8d54b-rh7vx      Successfully assigned coursework/storage-web-5b46f8d54b-rh7vx to coursework
+5s                      Normal    Pulled                         Pod/storage-web-5b46f8d54b-rh7vx      Container image "nginx:stable-alpine" already present on machine and can be accessed by the pod
+5s                      Normal    Created                        Pod/storage-web-5b46f8d54b-rh7vx      Container created
+5s                      Normal    Started                        Pod/storage-web-5b46f8d54b-jd5m8      Container started
+5s                      Normal    Created                        Pod/storage-web-5b46f8d54b-jd5m8      Container created
+5s                      Normal    Pulled                         Pod/storage-web-5b46f8d54b-jd5m8      Container image "nginx:stable-alpine" already present on machine and can be accessed by the pod
+5s                      Normal    Started                        Pod/storage-web-5b46f8d54b-rh7vx      Container started
+5s                      Normal    Pulled                         Pod/storage-web-5b46f8d54b-twmh8      Container image "nginx:stable-alpine" already present on machine and can be accessed by the pod
+5s                      Normal    Created                        Pod/storage-web-5b46f8d54b-twmh8      Container created
+5s                      Normal    Started                        Pod/storage-web-5b46f8d54b-twmh8      Container started
+5s (x5 over 3m50s)      Warning   FailedGetResourceMetric        HorizontalPodAutoscaler/storage-web   failed to get cpu utilization: unable to get metrics for resource cpu: no metrics returned from resource metrics API
+5s (x5 over 3m50s)      Warning   FailedComputeMetricsReplicas   HorizontalPodAutoscaler/storage-web   invalid metrics (1 invalid out of 1), first error is: failed to get cpu resource metric value: failed to get cpu utilization: unable to get metrics for resource cpu: no metrics returned from resource metrics API
+5s (x19 over 4m50s)     Normal    BackOff                        Pod/lifecycle-06-imagepullbackoff     Back-off pulling image "nginx:kitledger-missing-tag"
+3s                      Normal    Pulled                         Pod/storage-web-5b46f8d54b-2h7q9      Container image "nginx:stable-alpine" already present on machine and can be accessed by the pod
+3s                      Normal    Started                        Pod/storage-web-5b46f8d54b-2h7q9      Container started
+3s                      Normal    Killing                        Pod/storage-web-6b9db6987b-rmq2l      Stopping container web
+3s                      Normal    SuccessfulDelete               ReplicaSet/storage-web-6b9db6987b     Deleted pod: storage-web-6b9db6987b-tqmd9
+3s                      Normal    SuccessfulDelete               ReplicaSet/storage-web-6b9db6987b     Deleted pod: storage-web-6b9db6987b-rmq2l
+3s                      Normal    Scheduled                      Pod/storage-web-5b46f8d54b-2h7q9      Successfully assigned coursework/storage-web-5b46f8d54b-2h7q9 to coursework
+3s (x3 over 6s)         Normal    SuccessfulCreate               ReplicaSet/storage-web-5b46f8d54b     (combined from similar events): Created pod: storage-web-5b46f8d54b-9w2pt
+3s                      Normal    Pulled                         Pod/storage-web-5b46f8d54b-9w2pt      Container image "nginx:stable-alpine" already present on machine and can be accessed by the pod
+3s                      Normal    Scheduled                      Pod/storage-web-5b46f8d54b-9w2pt      Successfully assigned coursework/storage-web-5b46f8d54b-9w2pt to coursework
+3s                      Normal    Created                        Pod/storage-web-5b46f8d54b-2h7q9      Container created
+2s                      Normal    Created                        Pod/storage-web-5b46f8d54b-9w2pt      Container created
+2s                      Normal    Killing                        Pod/storage-web-6b9db6987b-tqmd9      Stopping container web
+2s (x3 over 22s)        Normal    Killing                        Pod/storage-web-6b9db6987b-g2n7n      Container web failed liveness probe, will be restarted
+2s                      Normal    Started                        Pod/storage-web-5b46f8d54b-9w2pt      Container started
+2s (x4 over 32s)        Normal    Pulled                         Pod/storage-web-6b9db6987b-g2n7n      Container image "nginx:stable-alpine" already present on machine and can be accessed by the pod
+2s (x4 over 32s)        Normal    Created                        Pod/storage-web-6b9db6987b-g2n7n      Container created
+2s (x3 over 22s)        Warning   Unhealthy                      Pod/storage-web-6b9db6987b-g2n7n      Readiness probe failed: Get "http://10.244.0.57:80/": dial tcp 10.244.0.57:80: connect: connection refused
+2s (x14 over 33s)       Normal    ScalingReplicaSet              Deployment/storage-web                (combined from similar events): Scaled down replica set storage-web-6b9db6987b from 2 to 1
+2s (x4 over 32s)        Normal    Started                        Pod/storage-web-6b9db6987b-g2n7n      Container started
+2s                      Normal    SuccessfulDelete               ReplicaSet/storage-web-6b9db6987b     Deleted pod: storage-web-6b9db6987b-qpsv2
+2s (x6 over 27s)        Warning   Unhealthy                      Pod/storage-web-6b9db6987b-g2n7n      Liveness probe failed: HTTP probe failed with statuscode: 404
+2s                      Normal    Killing                        Pod/storage-web-6b9db6987b-qpsv2      Stopping container web
+0s                      Normal    SuccessfulDelete               ReplicaSet/storage-web-6b9db6987b     Deleted pod: storage-web-6b9db6987b-g2n7n
++ kubectl explain pod.spec.containers
+KIND:       Pod
+VERSION:    v1
+
+FIELD: containers <[]Container>
+
+
+DESCRIPTION:
+    List of containers belonging to the pod. Containers cannot currently be
+    added or removed. There must be at least one container in a Pod. Cannot be
+    updated.
+    A single application container that you want to run within a pod.
+    
+FIELDS:
+  args	<[]string>
+    Arguments to the entrypoint. The container image's CMD is used if this is
+    not provided. Variable references $(VAR_NAME) are expanded using the
+    container's environment. If a variable cannot be resolved, the reference in
+    the input string will be unchanged. Double $$ are reduced to a single $,
+    which allows for escaping the $(VAR_NAME) syntax: i.e. "$$(VAR_NAME)" will
+    produce the string literal "$(VAR_NAME)". Escaped references will never be
+    expanded, regardless of whether the variable exists or not. Cannot be
+    updated. More info:
+    https://kubernetes.io/docs/tasks/inject-data-application/define-command-argument-container/#running-a-command-in-a-shell
+
+  command	<[]string>
+    Entrypoint array. Not executed within a shell. The container image's
+    ENTRYPOINT is used if this is not provided. Variable references $(VAR_NAME)
+    are expanded using the container's environment. If a variable cannot be
+    resolved, the reference in the input string will be unchanged. Double $$ are
+    reduced to a single $, which allows for escaping the $(VAR_NAME) syntax:
+    i.e. "$$(VAR_NAME)" will produce the string literal "$(VAR_NAME)". Escaped
+    references will never be expanded, regardless of whether the variable exists
+    or not. Cannot be updated. More info:
+    https://kubernetes.io/docs/tasks/inject-data-application/define-command-argument-container/#running-a-command-in-a-shell
+
+  env	<[]EnvVar>
+    List of environment variables to set in the container. Cannot be updated.
+
+  envFrom	<[]EnvFromSource>
+    List of sources to populate environment variables in the container. The keys
+    defined within a source may consist of any printable ASCII characters except
+    '='. When a key exists in multiple sources, the value associated with the
+    last source will take precedence. Values defined by an Env with a duplicate
+    key will take precedence. Cannot be updated.
+
+  image	<string>
+    Container image name. More info:
+    https://kubernetes.io/docs/concepts/containers/images This field is optional
+    to allow higher level config management to default or override container
+    images in workload controllers like Deployments and StatefulSets.
+
+  imagePullPolicy	<string>
+  enum: Always, IfNotPresent, Never
+    Image pull policy. One of Always, Never, IfNotPresent. Defaults to Always if
+    :latest tag is specified, or IfNotPresent otherwise. Cannot be updated. More
+    info: https://kubernetes.io/docs/concepts/containers/images#updating-images
+    
+    Possible enum values:
+     - `"Always"` means that kubelet always attempts to pull the latest image.
+    Container will fail If the pull fails.
+     - `"IfNotPresent"` means that kubelet pulls if the image isn't present on
+    disk. Container will fail if the image isn't present and the pull fails.
+     - `"Never"` means that kubelet never pulls an image, but only uses a local
+    image. Container will fail if the image isn't present
+
+  lifecycle	<Lifecycle>
+    Actions that the management system should take in response to container
+    lifecycle events. Cannot be updated.
+
+  livenessProbe	<Probe>
+    Periodic probe of container liveness. Container will be restarted if the
+    probe fails. Cannot be updated. More info:
+    https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle#container-probes
+
+  name	<string> -required-
+    Name of the container specified as a DNS_LABEL. Each container in a pod must
+    have a unique name (DNS_LABEL). Cannot be updated.
+
+  ports	<[]ContainerPort>
+    List of ports to expose from the container. Not specifying a port here DOES
+    NOT prevent that port from being exposed. Any port which is listening on the
+    default "0.0.0.0" address inside a container will be accessible from the
+    network. Modifying this array with strategic merge patch may corrupt the
+    data. For more information See
+    https://github.com/kubernetes/kubernetes/issues/108255. Cannot be updated.
+
+  readinessProbe	<Probe>
+    Periodic probe of container service readiness. Container will be removed
+    from service endpoints if the probe fails. Cannot be updated. More info:
+    https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle#container-probes
+
+  resizePolicy	<[]ContainerResizePolicy>
+    Resources resize policy for the container. This field cannot be set on
+    ephemeral containers.
+
+  resources	<ResourceRequirements>
+    Compute Resources required by this container. Cannot be updated. More info:
+    https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/
+
+  restartPolicy	<string>
+    RestartPolicy defines the restart behavior of individual containers in a
+    pod. This overrides the pod-level restart policy. When this field is not
+    specified, the restart behavior is defined by the Pod's restart policy and
+    the container type. Additionally, setting the RestartPolicy as "Always" for
+    the init container will have the following effect: this init container will
+    be continually restarted on exit until all regular containers have
+    terminated. Once all regular containers have completed, all init containers
+    with restartPolicy "Always" will be shut down. This lifecycle differs from
+    normal init containers and is often referred to as a "sidecar" container.
+    Although this init container still starts in the init container sequence, it
+    does not wait for the container to complete before proceeding to the next
+    init container. Instead, the next init container starts immediately after
+    this init container is started, or after any startupProbe has successfully
+    completed.
+
+  restartPolicyRules	<[]ContainerRestartRule>
+    Represents a list of rules to be checked to determine if the container
+    should be restarted on exit. The rules are evaluated in order. Once a rule
+    matches a container exit condition, the remaining rules are ignored. If no
+    rule matches the container exit condition, the Container-level restart
+    policy determines the whether the container is restarted or not. Constraints
+    on the rules: - At most 20 rules are allowed. - Rules can have the same
+    action. - Identical rules are not forbidden in validations. When rules are
+    specified, container MUST set RestartPolicy explicitly even it if matches
+    the Pod's RestartPolicy.
+
+  securityContext	<SecurityContext>
+    SecurityContext defines the security options the container should be run
+    with. If set, the fields of SecurityContext override the equivalent fields
+    of PodSecurityContext. More info:
+    https://kubernetes.io/docs/tasks/configure-pod-container/security-context/
+
+  startupProbe	<Probe>
+    StartupProbe indicates that the Pod has successfully initialized. If
+    specified, no other probes are executed until this completes successfully.
+    If this probe fails, the Pod will be restarted, just as if the livenessProbe
+    failed. This can be used to provide different probe parameters at the
+    beginning of a Pod's lifecycle, when it might take a long time to load data
+    or warm a cache, than during steady-state operation. This cannot be updated.
+    More info:
+    https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle#container-probes
+
+  stdin	<boolean>
+    Whether this container should allocate a buffer for stdin in the container
+    runtime. If this is not set, reads from stdin in the container will always
+    result in EOF. Default is false.
+
+  stdinOnce	<boolean>
+    Whether the container runtime should close the stdin channel after it has
+    been opened by a single attach. When stdin is true the stdin stream will
+    remain open across multiple attach sessions. If stdinOnce is set to true,
+    stdin is opened on container start, is empty until the first client attaches
+    to stdin, and then remains open and accepts data until the client
+    disconnects, at which time stdin is closed and remains closed until the
+    container is restarted. If this flag is false, a container processes that
+    reads from stdin will never receive an EOF. Default is false
+
+  terminationMessagePath	<string>
+    Optional: Path at which the file to which the container's termination
+    message will be written is mounted into the container's filesystem. Message
+    written is intended to be brief final status, such as an assertion failure
+    message. Will be truncated by the node if greater than 4096 bytes. The total
+    message length across all containers will be limited to 12kb. Defaults to
+    /dev/termination-log. Cannot be updated.
+
+  terminationMessagePolicy	<string>
+  enum: FallbackToLogsOnError, File
+    Indicate how the termination message should be populated. File will use the
+    contents of terminationMessagePath to populate the container status message
+    on both success and failure. FallbackToLogsOnError will use the last chunk
+    of container log output if the termination message file is empty and the
+    container exited with an error. The log output is limited to 2048 bytes or
+    80 lines, whichever is smaller. Defaults to File. Cannot be updated.
+    
+    Possible enum values:
+     - `"FallbackToLogsOnError"` will read the most recent contents of the
+    container logs for the container status message when the container exits
+    with an error and the terminationMessagePath has no contents.
+     - `"File"` is the default behavior and will set the container status
+    message to the contents of the container's terminationMessagePath when the
+    container exits.
+
+  tty	<boolean>
+    Whether this container should allocate a TTY for itself, also requires
+    'stdin' to be true. Default is false.
+
+  volumeDevices	<[]VolumeDevice>
+    volumeDevices is the list of block devices to be used by the container.
+
+  volumeMounts	<[]VolumeMount>
+    Pod volumes to mount into the container's filesystem. Cannot be updated.
+
+  workingDir	<string>
+    Container's working directory. If not specified, the container runtime's
+    default will be used, which might be configured in the container image.
+    Cannot be updated.
+
+
++ kubectl top pods -n coursework
+NAME                           CPU(cores)   MEMORY(bytes)   
+blue-79bf4fbb68-686bj          1m           4Mi             
+blue-79bf4fbb68-lq7b7          1m           2Mi             
+blue-79bf4fbb68-w9xv9          1m           4Mi             
+client                         0m           0Mi             
+config-reader                  0m           0Mi             
+green-876f7cc98-45w7d          1m           2Mi             
+lifecycle-01-running           0m           4Mi             
+lifecycle-07-readiness         1m           4Mi             
+lifecycle-08-liveness          1m           4Mi             
+lifecycle-09-startup           0m           4Mi             
+lifecycle-10-init-container    0m           4Mi             
+lifecycle-11-multi-container   1m           4Mi             
+lifecycle-12-termination       1m           0Mi             
+web-75577cb44f-hqtmn           0m           4Mi             
+web-75577cb44f-htrtk           0m           4Mi             
+web-75577cb44f-mxgr4           0m           4Mi             
++ kubectl run bad-image -n coursework --image=nginx:kitledger-intentional-missing-tag --restart=Never
+pod/bad-image created
++ sleep 20
++ kubectl describe pod bad-image -n coursework
+Name:             bad-image
+Namespace:        coursework
+Priority:         0
+Service Account:  default
+Node:             coursework/192.168.49.2
+Start Time:       Tue, 13 Oct 2026 18:58:36 +0000
+Labels:           run=bad-image
+Annotations:      <none>
+Status:           Pending
+IP:               10.244.0.63
+IPs:
+  IP:  10.244.0.63
+Containers:
+  bad-image:
+    Container ID:   
+    Image:          nginx:kitledger-intentional-missing-tag
+    Image ID:       
+    Port:           <none>
+    Host Port:      <none>
+    State:          Waiting
+      Reason:       ImagePullBackOff
+    Ready:          False
+    Restart Count:  0
+    Environment:    <none>
+    Mounts:
+      /var/run/secrets/kubernetes.io/serviceaccount from kube-api-access-7h58f (ro)
+Conditions:
+  Type                        Status
+  PodReadyToStartContainers   True 
+  Initialized                 True 
+  Ready                       False 
+  ContainersReady             False 
+  PodScheduled                True 
+Volumes:
+  kube-api-access-7h58f:
+    Type:                    Projected (a volume that contains injected data from multiple sources)
+    TokenExpirationSeconds:  3607
+    ConfigMapName:           kube-root-ca.crt
+    Optional:                false
+    DownwardAPI:             true
+QoS Class:                   BestEffort
+Node-Selectors:              <none>
+Tolerations:                 node.kubernetes.io/not-ready:NoExecute op=Exists for 300s
+                             node.kubernetes.io/unreachable:NoExecute op=Exists for 300s
+Events:
+  Type     Reason     Age               From               Message
+  ----     ------     ----              ----               -------
+  Normal   Scheduled  20s               default-scheduler  Successfully assigned coursework/bad-image to coursework
+  Normal   BackOff    19s               kubelet            spec.containers{bad-image}: Back-off pulling image "nginx:kitledger-intentional-missing-tag"
+  Warning  Failed     19s               kubelet            spec.containers{bad-image}: Error: ImagePullBackOff
+  Normal   Pulling    9s (x2 over 20s)  kubelet            spec.containers{bad-image}: Pulling image "nginx:kitledger-intentional-missing-tag"
+  Warning  Failed     8s (x2 over 20s)  kubelet            spec.containers{bad-image}: Failed to pull image "nginx:kitledger-intentional-missing-tag": rpc error: code = NotFound desc = failed to pull and unpack image "docker.io/library/nginx:kitledger-intentional-missing-tag": failed to resolve reference "docker.io/library/nginx:kitledger-intentional-missing-tag": docker.io/library/nginx:kitledger-intentional-missing-tag: not found
+  Warning  Failed     8s (x2 over 20s)  kubelet            spec.containers{bad-image}: Error: ErrImagePull
++ kubectl set image pod/bad-image -n coursework bad-image=nginx:stable-alpine
+pod/bad-image image updated
++ kubectl wait -n coursework --for=condition=Ready pod/bad-image --timeout=180s
+pod/bad-image condition met
++ kubectl run crash -n coursework --image=alpine:3.22 --restart=Always -- sh -c 'echo deliberate-exit; exit 1'
+pod/crash created
++ sleep 20
++ kubectl logs crash -n coursework
+deliberate-exit
++ kubectl describe pod crash -n coursework
+Name:             crash
+Namespace:        coursework
+Priority:         0
+Service Account:  default
+Node:             coursework/192.168.49.2
+Start Time:       Tue, 13 Oct 2026 18:58:56 +0000
+Labels:           run=crash
+Annotations:      <none>
+Status:           Running
+IP:               10.244.0.64
+IPs:
+  IP:  10.244.0.64
+Containers:
+  crash:
+    Container ID:  containerd://f16f89ccd9514d5c9092efcf1c9da5033e7b6a05b3e022cd485cd9653b3253da
+    Image:         alpine:3.22
+    Image ID:      docker.io/library/alpine@sha256:5291449c3df73caf6ed85e649dec1b9e818b39a5d8c871e97afc13e9cd5e8fa8
+    Port:          <none>
+    Host Port:     <none>
+    Args:
+      sh
+      -c
+      echo deliberate-exit; exit 1
+    State:          Terminated
+      Reason:       Error
+      Exit Code:    1
+      Started:      Tue, 13 Oct 2026 18:59:11 +0000
+      Finished:     Tue, 13 Oct 2026 18:59:11 +0000
+    Last State:     Terminated
+      Reason:       Error
+      Exit Code:    1
+      Started:      Tue, 13 Oct 2026 18:58:57 +0000
+      Finished:     Tue, 13 Oct 2026 18:58:57 +0000
+    Ready:          False
+    Restart Count:  2
+    Environment:    <none>
+    Mounts:
+      /var/run/secrets/kubernetes.io/serviceaccount from kube-api-access-ckdgm (ro)
+Conditions:
+  Type                        Status
+  PodReadyToStartContainers   True 
+  Initialized                 True 
+  Ready                       False 
+  ContainersReady             False 
+  PodScheduled                True 
+Volumes:
+  kube-api-access-ckdgm:
+    Type:                    Projected (a volume that contains injected data from multiple sources)
+    TokenExpirationSeconds:  3607
+    ConfigMapName:           kube-root-ca.crt
+    Optional:                false
+    DownwardAPI:             true
+QoS Class:                   BestEffort
+Node-Selectors:              <none>
+Tolerations:                 node.kubernetes.io/not-ready:NoExecute op=Exists for 300s
+                             node.kubernetes.io/unreachable:NoExecute op=Exists for 300s
+Events:
+  Type     Reason     Age               From               Message
+  ----     ------     ----              ----               -------
+  Normal   Scheduled  20s               default-scheduler  Successfully assigned coursework/crash to coursework
+  Normal   Pulled     6s (x3 over 20s)  kubelet            spec.containers{crash}: Container image "alpine:3.22" already present on machine and can be accessed by the pod
+  Normal   Created    6s (x3 over 20s)  kubelet            spec.containers{crash}: Container created
+  Normal   Started    5s (x3 over 20s)  kubelet            spec.containers{crash}: Container started
+  Warning  BackOff    5s (x2 over 18s)  kubelet            spec.containers{crash}: Back-off restarting failed container crash in pod crash_coursework(124cf927-b5b5-462a-8c1a-3d7d5b9e290b)
++ kubectl delete pod crash -n coursework
+pod "crash" deleted from coursework namespace
++ kubectl run crash -n coursework --image=alpine:3.22 --restart=Never -- sleep 3600
+pod/crash created
++ kubectl wait -n coursework --for=condition=Ready pod/crash --timeout=120s
+pod/crash condition met
++ kubectl patch service web -n coursework -p '{"spec":{"selector":{"app":"wrong"}}}'
+service/web patched
++ kubectl get endpointslices -n coursework -l kubernetes.io/service-name=web
+NAME        ADDRESSTYPE   PORTS     ENDPOINTS   AGE
+web-nl7nf   IPv4          <unset>   <unset>     5m59s
++ kubectl get pods -n coursework --show-labels
+NAME                            READY   STATUS             RESTARTS        AGE     LABELS
+bad-image                       1/1     Running            0               42s     run=bad-image
+blue-79bf4fbb68-686bj           1/1     Running            0               5m39s   app=blue,pod-template-hash=79bf4fbb68,track=canary-demo
+blue-79bf4fbb68-lq7b7           1/1     Running            0               5m42s   app=blue,pod-template-hash=79bf4fbb68,track=canary-demo
+blue-79bf4fbb68-w9xv9           1/1     Running            0               5m40s   app=blue,pod-template-hash=79bf4fbb68,track=canary-demo
+client                          1/1     Running            0               5m44s   run=client
+config-reader                   1/1     Running            0               4m34s   run=config-reader
+crash                           1/1     Running            0               1s      run=crash
+green-876f7cc98-45w7d           1/1     Running            0               5m42s   app=green,pod-template-hash=876f7cc98,track=canary-demo
+lifecycle-01-running            1/1     Running            0               5m35s   exercise=lifecycle
+lifecycle-02-pending            0/1     Pending            0               5m35s   exercise=lifecycle
+lifecycle-03-succeeded          0/1     Completed          0               5m35s   exercise=lifecycle
+lifecycle-04-failed             0/1     Error              0               5m35s   exercise=lifecycle
+lifecycle-05-crashloopbackoff   0/1     CrashLoopBackOff   5 (2m32s ago)   5m35s   exercise=lifecycle
+lifecycle-06-imagepullbackoff   0/1     ImagePullBackOff   0               5m35s   exercise=lifecycle
+lifecycle-07-readiness          1/1     Running            0               5m35s   exercise=lifecycle
+lifecycle-08-liveness           1/1     Running            0               5m35s   exercise=lifecycle
+lifecycle-09-startup            1/1     Running            0               5m35s   exercise=lifecycle
+lifecycle-10-init-container     1/1     Running            0               5m35s   exercise=lifecycle
+lifecycle-11-multi-container    2/2     Running            0               5m35s   exercise=lifecycle
+lifecycle-12-termination        1/1     Running            0               5m35s   exercise=lifecycle
+storage-web-5b46f8d54b-2h7q9    1/1     Running            0               46s     app=storage-web,pod-template-hash=5b46f8d54b
+storage-web-5b46f8d54b-9w2pt    1/1     Running            0               46s     app=storage-web,pod-template-hash=5b46f8d54b
+storage-web-5b46f8d54b-jd5m8    1/1     Running            0               49s     app=storage-web,pod-template-hash=5b46f8d54b
+storage-web-5b46f8d54b-rh7vx    1/1     Running            0               49s     app=storage-web,pod-template-hash=5b46f8d54b
+storage-web-5b46f8d54b-twmh8    1/1     Running            0               49s     app=storage-web,pod-template-hash=5b46f8d54b
+web-75577cb44f-hqtmn            1/1     Running            0               5m36s   app=web,pod-template-hash=75577cb44f
+web-75577cb44f-htrtk            1/1     Running            0               5m36s   app=web,pod-template-hash=75577cb44f
+web-75577cb44f-mxgr4            1/1     Running            0               5m36s   app=web,pod-template-hash=75577cb44f
++ kubectl describe service web -n coursework
+Name:                     web
+Namespace:                coursework
+Labels:                   <none>
+Annotations:              <none>
+Selector:                 app=wrong
+Type:                     ClusterIP
+IP Family Policy:         SingleStack
+IP Families:              IPv4
+IP:                       10.100.249.4
+IPs:                      10.100.249.4
+Port:                     <unset>  80/TCP
+TargetPort:               80/TCP
+Endpoints:                
+Session Affinity:         None
+Internal Traffic Policy:  Cluster
+Events:                   <none>
++ kubectl patch service web -n coursework -p '{"spec":{"selector":{"app":"web"}}}'
+service/web patched
++ kubectl exec -n coursework client -- wget -qO- http://web
+<!DOCTYPE html>
+<html>
+<head>
+<title>Welcome to nginx!</title>
+<style>
+html { color-scheme: light dark; }
+body { width: 35em; margin: 0 auto;
+font-family: Tahoma, Verdana, Arial, sans-serif; }
+</style>
+</head>
+<body>
+<h1>Welcome to nginx!</h1>
+<p>If you see this page, nginx is successfully installed and working.
+Further configuration is required for the web server, reverse proxy, 
+API gateway, load balancer, content cache, or other features.</p>
+
+<p>For online documentation and support please refer to
+<a href="https://nginx.org/">nginx.org</a>.<br/>
+To engage with the community please visit
+<a href="https://community.nginx.org/">community.nginx.org</a>.<br/>
+For enterprise grade support, professional services, additional 
+security features and capabilities please refer to
+<a href="https://f5.com/nginx">f5.com/nginx</a>.</p>
+
+<p><em>Thank you for using nginx.</em></p>
+</body>
+</html>
++ kubectl run dns-broken -n coursework --image=alpine:3.22 --restart=Never '--overrides={"spec":{"dnsPolicy":"None","dnsConfig":{"nameservers":["192.0.2.1"]}}}' -- sleep 3600
+pod/dns-broken created
++ kubectl wait -n coursework --for=condition=Ready pod/dns-broken --timeout=120s
+pod/dns-broken condition met
++ kubectl exec -n coursework dns-broken -- nslookup kubernetes.default
+;; connection timed out; no servers could be reached
+
+command terminated with exit code 1
++ true
++ kubectl get pod dns-broken -n coursework -o yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  creationTimestamp: "2026-10-13T18:59:19Z"
+  generation: 1
+  labels:
+    run: dns-broken
+  name: dns-broken
+  namespace: coursework
+  resourceVersion: "3112"
+  uid: 4f21d03c-2b6e-403f-835a-2f2397415285
+spec:
+  containers:
+  - args:
+    - sleep
+    - "3600"
+    image: alpine:3.22
+    imagePullPolicy: IfNotPresent
+    name: dns-broken
+    resources: {}
+    terminationMessagePath: /dev/termination-log
+    terminationMessagePolicy: File
+    volumeMounts:
+    - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+      name: kube-api-access-rqwm4
+      readOnly: true
+  dnsConfig:
+    nameservers:
+    - 192.0.2.1
+  dnsPolicy: None
+  enableServiceLinks: true
+  nodeName: coursework
+  preemptionPolicy: PreemptLowerPriority
+  priority: 0
+  restartPolicy: Never
+  schedulerName: default-scheduler
+  securityContext: {}
+  serviceAccount: default
+  serviceAccountName: default
+  terminationGracePeriodSeconds: 30
+  tolerations:
+  - effect: NoExecute
+    key: node.kubernetes.io/not-ready
+    operator: Exists
+    tolerationSeconds: 300
+  - effect: NoExecute
+    key: node.kubernetes.io/unreachable
+    operator: Exists
+    tolerationSeconds: 300
+  volumes:
+  - name: kube-api-access-rqwm4
+    projected:
+      defaultMode: 420
+      sources:
+      - serviceAccountToken:
+          expirationSeconds: 3607
+          path: token
+      - configMap:
+          items:
+          - key: ca.crt
+            path: ca.crt
+          name: kube-root-ca.crt
+      - downwardAPI:
+          items:
+          - fieldRef:
+              apiVersion: v1
+              fieldPath: metadata.namespace
+            path: namespace
+status:
+  conditions:
+  - lastProbeTime: null
+    lastTransitionTime: "2026-10-13T18:59:19Z"
+    observedGeneration: 1
+    status: "True"
+    type: PodReadyToStartContainers
+  - lastProbeTime: null
+    lastTransitionTime: "2026-10-13T18:59:19Z"
+    observedGeneration: 1
+    status: "True"
+    type: Initialized
+  - lastProbeTime: null
+    lastTransitionTime: "2026-10-13T18:59:20Z"
+    observedGeneration: 1
+    status: "True"
+    type: Ready
+  - lastProbeTime: null
+    lastTransitionTime: "2026-10-13T18:59:20Z"
+    observedGeneration: 1
+    status: "True"
+    type: ContainersReady
+  - lastProbeTime: null
+    lastTransitionTime: "2026-10-13T18:59:19Z"
+    observedGeneration: 1
+    status: "True"
+    type: PodScheduled
+  containerStatuses:
+  - containerID: containerd://8b7e79ae9ed9734ae9b5069851428374610a484d2e8318f40063126f298a8adb
+    image: docker.io/library/alpine:3.22
+    imageID: docker.io/library/alpine@sha256:5291449c3df73caf6ed85e649dec1b9e818b39a5d8c871e97afc13e9cd5e8fa8
+    lastState: {}
+    name: dns-broken
+    ready: true
+    resources: {}
+    restartCount: 0
+    started: true
+    state:
+      running:
+        startedAt: "2026-10-13T18:59:20Z"
+    user:
+      linux:
+        gid: 0
+        supplementalGroups:
+        - 0
+        - 1
+        - 2
+        - 3
+        - 4
+        - 6
+        - 10
+        - 11
+        - 20
+        - 26
+        - 27
+        uid: 0
+    volumeMounts:
+    - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+      name: kube-api-access-rqwm4
+      readOnly: true
+      recursiveReadOnly: Disabled
+  hostIP: 192.168.49.2
+  hostIPs:
+  - ip: 192.168.49.2
+  observedGeneration: 1
+  phase: Running
+  podIP: 10.244.0.66
+  podIPs:
+  - ip: 10.244.0.66
+  qosClass: BestEffort
+  resources: {}
+  startTime: "2026-10-13T18:59:19Z"
++ kubectl delete pod dns-broken -n coursework
+pod "dns-broken" deleted from coursework namespace
++ kubectl run dns-broken -n coursework --image=alpine:3.22 --restart=Never -- sleep 3600
+pod/dns-broken created
++ kubectl wait -n coursework --for=condition=Ready pod/dns-broken --timeout=120s
+pod/dns-broken condition met
++ kubectl exec -n coursework dns-broken -- nslookup kubernetes.default.svc.cluster.local
+Server:		10.96.0.10
+Address:	10.96.0.10:53
+
+Name:	kubernetes.default.svc.cluster.local
+Address: 10.96.0.1
+
+
++ kubectl run pending-demo -n coursework --image=alpine:3.22 --restart=Never '--overrides={"spec":{"nodeSelector":{"kitledger-nonexistent-node":"deliberate"}}}' -- sleep 3600
+pod/pending-demo created
++ sleep 10
++ kubectl describe pod pending-demo -n coursework
+Name:             pending-demo
+Namespace:        coursework
+Priority:         0
+Service Account:  default
+Node:             <none>
+Labels:           run=pending-demo
+Annotations:      <none>
+Status:           Pending
+IP:               
+IPs:              <none>
+Containers:
+  pending-demo:
+    Image:      alpine:3.22
+    Port:       <none>
+    Host Port:  <none>
+    Args:
+      sleep
+      3600
+    Environment:  <none>
+    Mounts:
+      /var/run/secrets/kubernetes.io/serviceaccount from kube-api-access-fqjdj (ro)
+Conditions:
+  Type           Status
+  PodScheduled   False 
+Volumes:
+  kube-api-access-fqjdj:
+    Type:                    Projected (a volume that contains injected data from multiple sources)
+    TokenExpirationSeconds:  3607
+    ConfigMapName:           kube-root-ca.crt
+    Optional:                false
+    DownwardAPI:             true
+QoS Class:                   BestEffort
+Node-Selectors:              kitledger-nonexistent-node=deliberate
+Tolerations:                 node.kubernetes.io/not-ready:NoExecute op=Exists for 300s
+                             node.kubernetes.io/unreachable:NoExecute op=Exists for 300s
+Events:
+  Type     Reason            Age   From               Message
+  ----     ------            ----  ----               -------
+  Warning  FailedScheduling  10s   default-scheduler  0/1 nodes are available: 1 node(s) didn't match Pod's node affinity/selector. preemption: 0/1 nodes are available: 1 Preemption is not helpful for scheduling.
++ kubectl delete pod pending-demo -n coursework
+pod "pending-demo" deleted from coursework namespace
++ kubectl run pending-demo -n coursework --image=alpine:3.22 --restart=Never -- sleep 3600
+pod/pending-demo created
++ kubectl wait -n coursework --for=condition=Ready pod/pending-demo --timeout=120s
+pod/pending-demo condition met
++ kubectl run missing-volume -n coursework --image=alpine:3.22 --restart=Never '--overrides={"spec":{"volumes":[{"name":"settings","configMap":{"name":"lab-missing-settings"}}],"containers":[{"name":"app","image":"alpine:3.22","command":["sleep","3600"],"volumeMounts":[{"name":"settings","mountPath":"/settings"}]}]}}'
+pod/missing-volume created
++ sleep 12
++ kubectl describe pod missing-volume -n coursework
+Name:             missing-volume
+Namespace:        coursework
+Priority:         0
+Service Account:  default
+Node:             coursework/192.168.49.2
+Start Time:       Tue, 13 Oct 2026 19:00:07 +0000
+Labels:           run=missing-volume
+Annotations:      <none>
+Status:           Pending
+IP:               
+IPs:              <none>
+Containers:
+  app:
+    Container ID:  
+    Image:         alpine:3.22
+    Image ID:      
+    Port:          <none>
+    Host Port:     <none>
+    Command:
+      sleep
+      3600
+    State:          Waiting
+      Reason:       ContainerCreating
+    Ready:          False
+    Restart Count:  0
+    Environment:    <none>
+    Mounts:
+      /settings from settings (rw)
+      /var/run/secrets/kubernetes.io/serviceaccount from kube-api-access-f74g6 (ro)
+Conditions:
+  Type                        Status
+  PodReadyToStartContainers   False 
+  Initialized                 True 
+  Ready                       False 
+  ContainersReady             False 
+  PodScheduled                True 
+Volumes:
+  settings:
+    Type:      ConfigMap (a volume populated by a ConfigMap)
+    Name:      lab-missing-settings
+    Optional:  false
+  kube-api-access-f74g6:
+    Type:                    Projected (a volume that contains injected data from multiple sources)
+    TokenExpirationSeconds:  3607
+    ConfigMapName:           kube-root-ca.crt
+    Optional:                false
+    DownwardAPI:             true
+QoS Class:                   BestEffort
+Node-Selectors:              <none>
+Tolerations:                 node.kubernetes.io/not-ready:NoExecute op=Exists for 300s
+                             node.kubernetes.io/unreachable:NoExecute op=Exists for 300s
+Events:
+  Type     Reason       Age               From               Message
+  ----     ------       ----              ----               -------
+  Normal   Scheduled    12s               default-scheduler  Successfully assigned coursework/missing-volume to coursework
+  Warning  FailedMount  5s (x5 over 12s)  kubelet            MountVolume.SetUp failed for volume "settings" : configmap "lab-missing-settings" not found
++ kubectl create configmap lab-missing-settings -n coursework --from-literal=mode=classroom
+configmap/lab-missing-settings created
++ kubectl wait -n coursework --for=condition=Ready pod/missing-volume --timeout=120s
+pod/missing-volume condition met
++ kubectl exec -n coursework missing-volume -- cat /settings/mode
+classroom+ kubectl run oom-demo -n coursework --image=python:3.13-alpine --restart=Never '--overrides={"spec":{"containers":[{"name":"oom-demo","image":"python:3.13-alpine","command":["python","-c","import time; data=bytearray(100*1024*1024); time.sleep(3600)"],"resources":{"limits":{"memory":"32Mi"}}}]}}'
+pod/oom-demo created
++ sleep 30
++ kubectl describe pod oom-demo -n coursework
+Name:             oom-demo
+Namespace:        coursework
+Priority:         0
+Service Account:  default
+Node:             coursework/192.168.49.2
+Start Time:       Tue, 13 Oct 2026 19:00:23 +0000
+Labels:           run=oom-demo
+Annotations:      <none>
+Status:           Failed
+IP:               10.244.0.70
+IPs:
+  IP:  10.244.0.70
+Containers:
+  oom-demo:
+    Container ID:  containerd://49cd1ffc489c00a04bdfbed80f9d39d955a6e5c1decafd866e7d3b7fe49bcfde
+    Image:         python:3.13-alpine
+    Image ID:      docker.io/library/python@sha256:2d9aefe2fef018a7eb2c13064c89c71929800fd2e5dccdbf52ea5da5bb8d929a
+    Port:          <none>
+    Host Port:     <none>
+    Command:
+      python
+      -c
+      import time; data=bytearray(100*1024*1024); time.sleep(3600)
+    State:          Terminated
+      Reason:       OOMKilled
+      Exit Code:    137
+      Started:      Tue, 13 Oct 2026 19:00:25 +0000
+      Finished:     Tue, 13 Oct 2026 19:00:25 +0000
+    Ready:          False
+    Restart Count:  0
+    Limits:
+      memory:  32Mi
+    Requests:
+      memory:     32Mi
+    Environment:  <none>
+    Mounts:
+      /var/run/secrets/kubernetes.io/serviceaccount from kube-api-access-2vhnp (ro)
+Conditions:
+  Type                        Status
+  PodReadyToStartContainers   False 
+  Initialized                 True 
+  Ready                       False 
+  ContainersReady             False 
+  PodScheduled                True 
+Volumes:
+  kube-api-access-2vhnp:
+    Type:                    Projected (a volume that contains injected data from multiple sources)
+    TokenExpirationSeconds:  3607
+    ConfigMapName:           kube-root-ca.crt
+    Optional:                false
+    DownwardAPI:             true
+QoS Class:                   Burstable
+Node-Selectors:              <none>
+Tolerations:                 node.kubernetes.io/not-ready:NoExecute op=Exists for 300s
+                             node.kubernetes.io/unreachable:NoExecute op=Exists for 300s
+Events:
+  Type    Reason     Age   From               Message
+  ----    ------     ----  ----               -------
+  Normal  Scheduled  30s   default-scheduler  Successfully assigned coursework/oom-demo to coursework
+  Normal  Pulling    30s   kubelet            spec.containers{oom-demo}: Pulling image "python:3.13-alpine"
+  Normal  Pulled     28s   kubelet            spec.containers{oom-demo}: Successfully pulled image "python:3.13-alpine" in 2.118s (2.119s including waiting). Image size: 19523394 bytes.
+  Normal  Created    28s   kubelet            spec.containers{oom-demo}: Container created
+  Normal  Started    28s   kubelet            spec.containers{oom-demo}: Container started
++ kubectl get pod oom-demo -n coursework -o 'jsonpath={.status.containerStatuses[0].state.terminated.reason}'
+OOMKilled+ kubectl delete pod oom-demo -n coursework
+pod "oom-demo" deleted from coursework namespace
++ kubectl run oom-demo -n coursework --image=python:3.13-alpine --restart=Never '--overrides={"spec":{"containers":[{"name":"oom-demo","image":"python:3.13-alpine","command":["python","-c","import time; data=bytearray(100*1024*1024); time.sleep(3600)"],"resources":{"limits":{"memory":"256Mi"}}}]}}'
+pod/oom-demo created
++ kubectl wait -n coursework --for=condition=Ready pod/oom-demo --timeout=120s
+pod/oom-demo condition met
++ kubectl exec -n coursework oom-demo -- python -c 'print("Process responds with adequate memory")'
+Process responds with adequate memory
++ kubectl delete pod oom-demo -n coursework
+pod "oom-demo" deleted from coursework namespace
++ kubectl get events -n coursework --sort-by=.lastTimestamp
+LAST SEEN   TYPE      REASON                         OBJECT                                MESSAGE
+8m6s        Normal    ScalingReplicaSet              deployment/web                        Scaled up replica set web-68c5dfcd67 from 0 to 2
+8m6s        Normal    Scheduled                      pod/web-68c5dfcd67-hjhcf              Successfully assigned coursework/web-68c5dfcd67-hjhcf to coursework
+8m6s        Normal    SuccessfulCreate               replicaset/web-68c5dfcd67             Created pod: web-68c5dfcd67-hjhcf
+8m6s        Normal    SuccessfulCreate               replicaset/web-68c5dfcd67             Created pod: web-68c5dfcd67-s2f5r
+8m6s        Normal    Scheduled                      pod/web-68c5dfcd67-s2f5r              Successfully assigned coursework/web-68c5dfcd67-s2f5r to coursework
+8m5s        Normal    Pulling                        pod/web-68c5dfcd67-s2f5r              Pulling image "nginx:stable-alpine"
+8m5s        Normal    Pulling                        pod/web-68c5dfcd67-hjhcf              Pulling image "nginx:stable-alpine"
+8m3s        Normal    Created                        pod/web-68c5dfcd67-hjhcf              Container created
+8m3s        Normal    Pulled                         pod/web-68c5dfcd67-hjhcf              Successfully pulled image "nginx:stable-alpine" in 2.218s (2.409s including waiting). Image size: 26098628 bytes.
+8m3s        Normal    Started                        pod/web-68c5dfcd67-hjhcf              Container started
+8m2s        Normal    Created                        pod/web-68c5dfcd67-tfw9b              Container created
+8m2s        Normal    Started                        pod/web-68c5dfcd67-tfw9b              Container started
+8m2s        Normal    SuccessfulCreate               replicaset/web-68c5dfcd67             Created pod: web-68c5dfcd67-tfw9b
+8m2s        Normal    Pulled                         pod/web-68c5dfcd67-s2f5r              Successfully pulled image "nginx:stable-alpine" in 431ms (2.832s including waiting). Image size: 26098628 bytes.
+8m2s        Normal    Created                        pod/web-68c5dfcd67-s2f5r              Container created
+8m2s        Normal    Started                        pod/web-68c5dfcd67-s2f5r              Container started
+8m2s        Normal    Scheduled                      pod/web-68c5dfcd67-tfw9b              Successfully assigned coursework/web-68c5dfcd67-tfw9b to coursework
+8m2s        Normal    Pulled                         pod/web-68c5dfcd67-tfw9b              Container image "nginx:stable-alpine" already present on machine and can be accessed by the pod
+8m1s        Normal    Killing                        pod/web-68c5dfcd67-hjhcf              Stopping container web
+8m          Normal    Pulled                         pod/web-68c5dfcd67-54m6g              Container image "nginx:stable-alpine" already present on machine and can be accessed by the pod
+8m          Normal    Created                        pod/web-68c5dfcd67-54m6g              Container created
+8m          Normal    Scheduled                      pod/web-68c5dfcd67-54m6g              Successfully assigned coursework/web-68c5dfcd67-54m6g to coursework
+8m          Normal    SuccessfulCreate               replicaset/web-68c5dfcd67             Created pod: web-68c5dfcd67-54m6g
+8m          Normal    Started                        pod/web-68c5dfcd67-54m6g              Container started
+7m59s       Normal    ScalingReplicaSet              deployment/web                        Scaled up replica set web-75577cb44f from 0 to 1
+7m59s       Normal    Scheduled                      pod/web-75577cb44f-hpcf6              Successfully assigned coursework/web-75577cb44f-hpcf6 to coursework
+7m59s       Normal    Pulling                        pod/web-75577cb44f-hpcf6              Pulling image "nginx:alpine"
+7m59s       Normal    SuccessfulCreate               replicaset/web-75577cb44f             Created pod: web-75577cb44f-hpcf6
+7m57s       Normal    Pulled                         pod/web-75577cb44f-rjdfx              Container image "nginx:alpine" already present on machine and can be accessed by the pod
+7m57s       Normal    ScalingReplicaSet              deployment/web                        Scaled up replica set web-75577cb44f from 1 to 2
+7m57s       Normal    Pulled                         pod/web-75577cb44f-hpcf6              Successfully pulled image "nginx:alpine" in 1.957s (1.957s including waiting). Image size: 26335715 bytes.
+7m57s       Normal    Created                        pod/web-75577cb44f-hpcf6              Container created
+7m57s       Normal    Started                        pod/web-75577cb44f-hpcf6              Container started
+7m57s       Normal    Created                        pod/web-75577cb44f-rjdfx              Container created
+7m57s       Normal    ScalingReplicaSet              deployment/web                        Scaled down replica set web-68c5dfcd67 from 3 to 2
+7m57s       Normal    Killing                        pod/web-68c5dfcd67-54m6g              Stopping container web
+7m57s       Normal    SuccessfulDelete               replicaset/web-68c5dfcd67             Deleted pod: web-68c5dfcd67-54m6g
+7m57s       Normal    Scheduled                      pod/web-75577cb44f-rjdfx              Successfully assigned coursework/web-75577cb44f-rjdfx to coursework
+7m57s       Normal    SuccessfulCreate               replicaset/web-75577cb44f             Created pod: web-75577cb44f-rjdfx
+7m56s       Normal    SuccessfulCreate               replicaset/web-68c5dfcd67             Created pod: web-68c5dfcd67-qhwdd
+7m56s       Normal    Killing                        pod/web-68c5dfcd67-tfw9b              Stopping container web
+7m56s       Normal    Pulled                         pod/web-75577cb44f-ctt95              Container image "nginx:alpine" already present on machine and can be accessed by the pod
+7m56s       Normal    SuccessfulDelete               replicaset/web-68c5dfcd67             Deleted pod: web-68c5dfcd67-s2f5r
+7m56s       Normal    ScalingReplicaSet              deployment/web                        Scaled down replica set web-68c5dfcd67 from 2 to 1
+7m56s       Normal    SuccessfulDelete               replicaset/web-68c5dfcd67             Deleted pod: web-68c5dfcd67-tfw9b
+7m56s       Normal    Created                        pod/web-75577cb44f-ctt95              Container created
+7m56s       Normal    Scheduled                      pod/web-75577cb44f-ctt95              Successfully assigned coursework/web-75577cb44f-ctt95 to coursework
+7m56s       Normal    Killing                        pod/web-68c5dfcd67-s2f5r              Stopping container web
+7m56s       Normal    ScalingReplicaSet              deployment/web                        Scaled up replica set web-75577cb44f from 2 to 3
+7m56s       Normal    ScalingReplicaSet              deployment/web                        Scaled down replica set web-68c5dfcd67 from 1 to 0
+7m56s       Normal    ScalingReplicaSet              deployment/web                        Scaled up replica set web-68c5dfcd67 from 0 to 1
+7m56s       Normal    Started                        pod/web-75577cb44f-ctt95              Container started
+7m56s       Normal    Started                        pod/web-75577cb44f-rjdfx              Container started
+7m56s       Normal    Scheduled                      pod/web-68c5dfcd67-qhwdd              Successfully assigned coursework/web-68c5dfcd67-qhwdd to coursework
+7m56s       Normal    SuccessfulCreate               replicaset/web-75577cb44f             Created pod: web-75577cb44f-ctt95
+7m55s       Normal    Started                        pod/web-68c5dfcd67-m4fw9              Container started
+7m55s       Normal    ScalingReplicaSet              deployment/web                        Scaled up replica set web-68c5dfcd67 from 2 to 3
+7m55s       Normal    Scheduled                      pod/web-68c5dfcd67-m4fw9              Successfully assigned coursework/web-68c5dfcd67-m4fw9 to coursework
+7m55s       Normal    SuccessfulDelete               replicaset/web-75577cb44f             Deleted pod: web-75577cb44f-rjdfx
+7m55s       Normal    SuccessfulDelete               replicaset/web-75577cb44f             Deleted pod: web-75577cb44f-ctt95
+7m55s       Normal    Killing                        pod/web-75577cb44f-ctt95              Stopping container web
+7m55s       Normal    SuccessfulCreate               replicaset/web-68c5dfcd67             Created pod: web-68c5dfcd67-fzf2k
+7m55s       Normal    Pulled                         pod/web-68c5dfcd67-qhwdd              Container image "nginx:stable-alpine" already present on machine and can be accessed by the pod
+7m55s       Normal    Killing                        pod/web-75577cb44f-rjdfx              Stopping container web
+7m55s       Normal    SuccessfulCreate               replicaset/web-68c5dfcd67             Created pod: web-68c5dfcd67-m4fw9
+7m55s       Normal    Pulled                         pod/web-68c5dfcd67-m4fw9              Container image "nginx:stable-alpine" already present on machine and can be accessed by the pod
+7m55s       Normal    Created                        pod/web-68c5dfcd67-m4fw9              Container created
+7m55s       Normal    Scheduled                      pod/web-68c5dfcd67-fzf2k              Successfully assigned coursework/web-68c5dfcd67-fzf2k to coursework
+7m55s       Normal    Started                        pod/web-68c5dfcd67-qhwdd              Container started
+7m55s       Normal    Created                        pod/web-68c5dfcd67-qhwdd              Container created
+7m54s       Normal    SuccessfulCreate               replicaset/blue-6b66bb585             Created pod: blue-6b66bb585-ftxmd
+7m54s       Normal    ScalingReplicaSet              deployment/blue                       Scaled up replica set blue-6b66bb585 from 0 to 1
+7m54s       Normal    Scheduled                      pod/blue-6b66bb585-ftxmd              Successfully assigned coursework/blue-6b66bb585-ftxmd to coursework
+7m54s       Normal    Pulled                         pod/web-68c5dfcd67-fzf2k              Container image "nginx:stable-alpine" already present on machine and can be accessed by the pod
+7m54s       Normal    Created                        pod/web-68c5dfcd67-fzf2k              Container created
+7m54s       Normal    Started                        pod/web-68c5dfcd67-fzf2k              Container started
+7m54s       Normal    SuccessfulDelete               replicaset/web-75577cb44f             Deleted pod: web-75577cb44f-hpcf6
+7m54s       Normal    Scheduled                      pod/green-649d4984f7-bhtjv            Successfully assigned coursework/green-649d4984f7-bhtjv to coursework
+7m54s       Normal    Killing                        pod/web-75577cb44f-hpcf6              Stopping container web
+7m54s       Normal    SuccessfulCreate               replicaset/green-649d4984f7           Created pod: green-649d4984f7-bhtjv
+7m54s       Normal    ScalingReplicaSet              deployment/green                      Scaled up replica set green-649d4984f7 from 0 to 1
+7m53s       Normal    Pulling                        pod/blue-6b66bb585-ftxmd              Pulling image "hashicorp/http-echo"
+7m53s       Normal    Pulling                        pod/green-649d4984f7-bhtjv            Pulling image "hashicorp/http-echo"
+7m52s       Normal    Pulled                         pod/blue-6b66bb585-ftxmd              Successfully pulled image "hashicorp/http-echo" in 1.73s (1.73s including waiting). Image size: 4631705 bytes.
+7m52s       Normal    Created                        pod/blue-6b66bb585-ftxmd              Container created
+7m52s       Normal    Started                        pod/blue-6b66bb585-ftxmd              Container started
+7m51s       Normal    Pulling                        pod/client                            Pulling image "alpine:3.22"
+7m51s       Normal    Pulled                         pod/green-649d4984f7-bhtjv            Successfully pulled image "hashicorp/http-echo" in 464ms (2.114s including waiting). Image size: 4631705 bytes.
+7m51s       Normal    Scheduled                      pod/client                            Successfully assigned coursework/client to coursework
+7m51s       Normal    Started                        pod/green-649d4984f7-bhtjv            Container started
+7m51s       Normal    Created                        pod/green-649d4984f7-bhtjv            Container created
+7m49s       Normal    SuccessfulCreate               replicaset/green-876f7cc98            Created pod: green-876f7cc98-45w7d
+7m49s       Normal    ScalingReplicaSet              deployment/green                      Scaled up replica set green-876f7cc98 from 0 to 1
+7m49s       Normal    SuccessfulCreate               replicaset/blue-6b66bb585             Created pod: blue-6b66bb585-tzzwd
+7m49s       Normal    ScalingReplicaSet              deployment/blue                       Scaled up replica set blue-6b66bb585 from 1 to 3
+7m49s       Normal    Pulled                         pod/client                            Successfully pulled image "alpine:3.22" in 1.571s (1.571s including waiting). Image size: 3802926 bytes.
+7m49s       Normal    Created                        pod/client                            Container created
+7m49s       Normal    ScalingReplicaSet              deployment/blue                       Scaled up replica set blue-79bf4fbb68 from 0 to 1
+7m49s       Normal    Started                        pod/client                            Container started
+7m49s       Normal    SuccessfulCreate               replicaset/blue-79bf4fbb68            Created pod: blue-79bf4fbb68-lq7b7
+7m49s       Normal    Scheduled                      pod/green-876f7cc98-45w7d             Successfully assigned coursework/green-876f7cc98-45w7d to coursework
+7m49s       Normal    SuccessfulCreate               replicaset/blue-6b66bb585             Created pod: blue-6b66bb585-cfvlz
+7m49s       Normal    Scheduled                      pod/blue-6b66bb585-cfvlz              Successfully assigned coursework/blue-6b66bb585-cfvlz to coursework
+7m49s       Normal    Scheduled                      pod/blue-6b66bb585-tzzwd              Successfully assigned coursework/blue-6b66bb585-tzzwd to coursework
+7m49s       Normal    Scheduled                      pod/blue-79bf4fbb68-lq7b7             Successfully assigned coursework/blue-79bf4fbb68-lq7b7 to coursework
+7m48s       Normal    Started                        pod/blue-6b66bb585-tzzwd              Container started
+7m48s       Normal    Created                        pod/blue-6b66bb585-tzzwd              Container created
+7m48s       Normal    Pulled                         pod/blue-6b66bb585-tzzwd              Successfully pulled image "hashicorp/http-echo" in 456ms (457ms including waiting). Image size: 4631705 bytes.
+7m48s       Normal    Pulling                        pod/blue-6b66bb585-tzzwd              Pulling image "hashicorp/http-echo"
+7m48s       Normal    Pulling                        pod/blue-79bf4fbb68-lq7b7             Pulling image "hashicorp/http-echo"
+7m48s       Normal    Pulling                        pod/blue-6b66bb585-cfvlz              Pulling image "hashicorp/http-echo"
+7m48s       Normal    Pulling                        pod/green-876f7cc98-45w7d             Pulling image "hashicorp/http-echo"
+7m47s       Normal    SuccessfulDelete               replicaset/blue-6b66bb585             Deleted pod: blue-6b66bb585-cfvlz
+7m47s       Normal    SuccessfulCreate               replicaset/blue-79bf4fbb68            Created pod: blue-79bf4fbb68-w9xv9
+7m47s       Normal    Started                        pod/blue-79bf4fbb68-lq7b7             Container started
+7m47s       Normal    ScalingReplicaSet              deployment/blue                       Scaled up replica set blue-79bf4fbb68 from 1 to 2
+7m47s       Normal    ScalingReplicaSet              deployment/blue                       Scaled down replica set blue-6b66bb585 from 3 to 2
+7m47s       Normal    Created                        pod/blue-79bf4fbb68-lq7b7             Container created
+7m47s       Normal    Started                        pod/blue-6b66bb585-cfvlz              Container started
+7m47s       Normal    Pulled                         pod/blue-79bf4fbb68-lq7b7             Successfully pulled image "hashicorp/http-echo" in 464ms (1.341s including waiting). Image size: 4631705 bytes.
+7m47s       Normal    Scheduled                      pod/blue-79bf4fbb68-w9xv9             Successfully assigned coursework/blue-79bf4fbb68-w9xv9 to coursework
+7m47s       Normal    Created                        pod/blue-6b66bb585-cfvlz              Container created
+7m47s       Normal    Pulled                         pod/blue-6b66bb585-cfvlz              Successfully pulled image "hashicorp/http-echo" in 473ms (899ms including waiting). Image size: 4631705 bytes.
+7m46s       Normal    Pulling                        pod/blue-79bf4fbb68-w9xv9             Pulling image "hashicorp/http-echo"
+7m46s       Normal    Started                        pod/blue-79bf4fbb68-w9xv9             Container started
+7m46s       Normal    SuccessfulDelete               replicaset/blue-6b66bb585             Deleted pod: blue-6b66bb585-tzzwd
+7m46s       Normal    ScalingReplicaSet              deployment/green                      Scaled down replica set green-649d4984f7 from 1 to 0
+7m46s       Normal    Scheduled                      pod/blue-79bf4fbb68-686bj             Successfully assigned coursework/blue-79bf4fbb68-686bj to coursework
+7m46s       Normal    Created                        pod/blue-79bf4fbb68-w9xv9             Container created
+7m46s       Normal    ScalingReplicaSet              deployment/blue                       Scaled up replica set blue-79bf4fbb68 from 2 to 3
+7m46s       Normal    Started                        pod/green-876f7cc98-45w7d             Container started
+7m46s       Normal    ScalingReplicaSet              deployment/blue                       Scaled down replica set blue-6b66bb585 from 2 to 1
+7m46s       Normal    Killing                        pod/blue-6b66bb585-tzzwd              Stopping container http-echo
+7m46s       Normal    Killing                        pod/green-649d4984f7-bhtjv            Stopping container http-echo
+7m46s       Normal    SuccessfulCreate               replicaset/blue-79bf4fbb68            Created pod: blue-79bf4fbb68-686bj
+7m46s       Normal    SuccessfulDelete               replicaset/green-649d4984f7           Deleted pod: green-649d4984f7-bhtjv
+7m46s       Normal    Pulled                         pod/blue-79bf4fbb68-w9xv9             Successfully pulled image "hashicorp/http-echo" in 489ms (489ms including waiting). Image size: 4631705 bytes.
+7m46s       Normal    Pulled                         pod/green-876f7cc98-45w7d             Successfully pulled image "hashicorp/http-echo" in 455ms (1.776s including waiting). Image size: 4631705 bytes.
+7m46s       Normal    Created                        pod/green-876f7cc98-45w7d             Container created
+7m45s       Normal    Killing                        pod/blue-6b66bb585-ftxmd              Stopping container http-echo
+7m45s       Normal    Killing                        pod/blue-6b66bb585-cfvlz              Stopping container http-echo
+7m45s       Normal    Started                        pod/blue-79bf4fbb68-686bj             Container started
+7m45s       Normal    Created                        pod/blue-79bf4fbb68-686bj             Container created
+7m45s       Normal    Pulled                         pod/blue-79bf4fbb68-686bj             Successfully pulled image "hashicorp/http-echo" in 468ms (468ms including waiting). Image size: 4631705 bytes.
+7m45s       Normal    ScalingReplicaSet              deployment/blue                       Scaled down replica set blue-6b66bb585 from 1 to 0
+7m45s       Normal    Pulling                        pod/blue-79bf4fbb68-686bj             Pulling image "hashicorp/http-echo"
+7m45s       Normal    SuccessfulDelete               replicaset/blue-6b66bb585             Deleted pod: blue-6b66bb585-ftxmd
+7m43s       Normal    Killing                        pod/web-68c5dfcd67-m4fw9              Stopping container web
+7m43s       Normal    SuccessfulDelete               replicaset/web-68c5dfcd67             Deleted pod: web-68c5dfcd67-fzf2k
+7m43s       Normal    SuccessfulCreate               replicaset/web-75577cb44f             Created pod: web-75577cb44f-htrtk
+7m43s       Normal    SuccessfulCreate               replicaset/web-75577cb44f             Created pod: web-75577cb44f-mxgr4
+7m43s       Normal    Scheduled                      pod/web-75577cb44f-mxgr4              Successfully assigned coursework/web-75577cb44f-mxgr4 to coursework
+7m43s       Normal    Killing                        pod/web-68c5dfcd67-fzf2k              Stopping container web
+7m43s       Normal    Scheduled                      pod/web-75577cb44f-hqtmn              Successfully assigned coursework/web-75577cb44f-hqtmn to coursework
+7m43s       Normal    Scheduled                      pod/web-75577cb44f-htrtk              Successfully assigned coursework/web-75577cb44f-htrtk to coursework
+7m43s       Normal    SuccessfulCreate               replicaset/web-75577cb44f             Created pod: web-75577cb44f-hqtmn
+7m43s       Normal    Killing                        pod/web-68c5dfcd67-qhwdd              Stopping container web
+7m43s       Normal    ScalingReplicaSet              deployment/web                        (combined from similar events): Scaled up replica set web-75577cb44f from 0 to 3
+7m43s       Normal    SuccessfulDelete               replicaset/web-68c5dfcd67             Deleted pod: web-68c5dfcd67-qhwdd
+7m43s       Normal    SuccessfulDelete               replicaset/web-68c5dfcd67             Deleted pod: web-68c5dfcd67-m4fw9
+7m42s       Normal    Created                        pod/web-75577cb44f-mxgr4              Container created
+7m42s       Normal    Pulled                         pod/web-75577cb44f-htrtk              Container image "nginx:alpine" already present on machine and can be accessed by the pod
+7m42s       Normal    Created                        pod/web-75577cb44f-htrtk              Container created
+7m42s       Normal    Scheduled                      pod/lifecycle-07-readiness            Successfully assigned coursework/lifecycle-07-readiness to coursework
+7m42s       Normal    Scheduled                      pod/lifecycle-04-failed               Successfully assigned coursework/lifecycle-04-failed to coursework
+7m42s       Normal    Started                        pod/web-75577cb44f-htrtk              Container started
+7m42s       Normal    Scheduled                      pod/lifecycle-05-crashloopbackoff     Successfully assigned coursework/lifecycle-05-crashloopbackoff to coursework
+7m42s       Normal    Scheduled                      pod/lifecycle-10-init-container       Successfully assigned coursework/lifecycle-10-init-container to coursework
+7m42s       Normal    Started                        pod/web-75577cb44f-mxgr4              Container started
+7m42s       Normal    Scheduled                      pod/lifecycle-12-termination          Successfully assigned coursework/lifecycle-12-termination to coursework
+7m42s       Normal    Scheduled                      pod/lifecycle-08-liveness             Successfully assigned coursework/lifecycle-08-liveness to coursework
+7m42s       Normal    Started                        pod/web-75577cb44f-hqtmn              Container started
+7m42s       Normal    Created                        pod/web-75577cb44f-hqtmn              Container created
+7m42s       Normal    Pulled                         pod/web-75577cb44f-hqtmn              Container image "nginx:alpine" already present on machine and can be accessed by the pod
+7m42s       Normal    Scheduled                      pod/lifecycle-11-multi-container      Successfully assigned coursework/lifecycle-11-multi-container to coursework
+7m42s       Normal    Scheduled                      pod/lifecycle-06-imagepullbackoff     Successfully assigned coursework/lifecycle-06-imagepullbackoff to coursework
+7m42s       Normal    Scheduled                      pod/lifecycle-03-succeeded            Successfully assigned coursework/lifecycle-03-succeeded to coursework
+7m42s       Normal    Pulled                         pod/web-75577cb44f-mxgr4              Container image "nginx:alpine" already present on machine and can be accessed by the pod
+7m42s       Normal    Scheduled                      pod/lifecycle-09-startup              Successfully assigned coursework/lifecycle-09-startup to coursework
+7m42s       Normal    Scheduled                      pod/lifecycle-01-running              Successfully assigned coursework/lifecycle-01-running to coursework
+7m41s       Normal    Created                        pod/lifecycle-01-running              Container created
+7m41s       Normal    Pulled                         pod/lifecycle-07-readiness            Container image "nginx:stable-alpine" already present on machine and can be accessed by the pod
+7m41s       Normal    Pulled                         pod/lifecycle-01-running              Container image "nginx:stable-alpine" already present on machine and can be accessed by the pod
+7m41s       Normal    Started                        pod/lifecycle-01-running              Container started
+7m41s       Normal    Pulled                         pod/lifecycle-03-succeeded            Container image "alpine:3.22" already present on machine and can be accessed by the pod
+7m41s       Normal    Created                        pod/lifecycle-03-succeeded            Container created
+7m41s       Normal    Started                        pod/lifecycle-12-termination          Container started
+7m41s       Normal    Created                        pod/lifecycle-12-termination          Container created
+7m41s       Normal    Pulled                         pod/lifecycle-12-termination          Container image "alpine:3.22" already present on machine and can be accessed by the pod
+7m41s       Normal    Started                        pod/lifecycle-11-multi-container      Container started
+7m41s       Normal    Created                        pod/lifecycle-11-multi-container      Container created
+7m41s       Normal    Pulled                         pod/lifecycle-11-multi-container      Container image "alpine:3.22" already present on machine and can be accessed by the pod
+7m41s       Normal    Started                        pod/lifecycle-11-multi-container      Container started
+7m41s       Normal    Started                        pod/lifecycle-03-succeeded            Container started
+7m41s       Normal    Created                        pod/lifecycle-11-multi-container      Container created
+7m41s       Normal    Pulled                         pod/lifecycle-04-failed               Container image "alpine:3.22" already present on machine and can be accessed by the pod
+7m41s       Normal    Pulled                         pod/lifecycle-11-multi-container      Container image "nginx:stable-alpine" already present on machine and can be accessed by the pod
+7m41s       Normal    Created                        pod/lifecycle-04-failed               Container created
+7m41s       Normal    Started                        pod/lifecycle-04-failed               Container started
+7m41s       Normal    Created                        pod/lifecycle-07-readiness            Container created
+7m41s       Normal    Started                        pod/lifecycle-07-readiness            Container started
+7m41s       Normal    Started                        pod/lifecycle-10-init-container       Container started
+7m41s       Warning   Unhealthy                      pod/lifecycle-07-readiness            Readiness probe failed: Get "http://10.244.0.35:80/": dial tcp 10.244.0.35:80: connect: connection refused
+7m41s       Normal    Pulled                         pod/lifecycle-08-liveness             Container image "nginx:stable-alpine" already present on machine and can be accessed by the pod
+7m41s       Normal    Created                        pod/lifecycle-08-liveness             Container created
+7m41s       Normal    Started                        pod/lifecycle-08-liveness             Container started
+7m41s       Normal    Pulled                         pod/lifecycle-09-startup              Container image "nginx:stable-alpine" already present on machine and can be accessed by the pod
+7m41s       Normal    Created                        pod/lifecycle-09-startup              Container created
+7m41s       Normal    Started                        pod/lifecycle-09-startup              Container started
+7m41s       Normal    Pulled                         pod/lifecycle-10-init-container       Container image "alpine:3.22" already present on machine and can be accessed by the pod
+7m41s       Normal    Created                        pod/lifecycle-10-init-container       Container created
+7m40s       Normal    Started                        pod/lifecycle-10-init-container       Container started
+7m40s       Normal    Created                        pod/lifecycle-10-init-container       Container created
+7m40s       Normal    Pulled                         pod/lifecycle-10-init-container       Container image "nginx:stable-alpine" already present on machine and can be accessed by the pod
+7m14s       Normal    Scheduled                      pod/config-reader                     Successfully assigned coursework/config-reader to coursework
+7m13s       Normal    Created                        pod/config-reader                     Container created
+7m13s       Normal    Pulled                         pod/config-reader                     Container image "alpine:3.22" already present on machine and can be accessed by the pod
+7m13s       Normal    Started                        pod/config-reader                     Container started
+7m12s       Normal    Killing                        pod/config-reader                     Stopping container reader
+7m6s        Normal    Sync                           ingress/coursework                    Scheduled for sync
+6m41s       Normal    Scheduled                      pod/config-reader                     Successfully assigned coursework/config-reader to coursework
+6m41s       Normal    Pulled                         pod/config-reader                     Container image "alpine:3.22" already present on machine and can be accessed by the pod
+6m41s       Normal    Created                        pod/config-reader                     Container created
+6m41s       Normal    Started                        pod/config-reader                     Container started
+6m40s       Normal    Started                        pod/storage-web-5b46f8d54b-cn8l9      Container started
+6m40s       Normal    Created                        pod/storage-web-5b46f8d54b-x5bl6      Container created
+6m40s       Normal    Scheduled                      pod/storage-web-5b46f8d54b-cn8l9      Successfully assigned coursework/storage-web-5b46f8d54b-cn8l9 to coursework
+6m40s       Normal    ProvisioningSucceeded          persistentvolumeclaim/web-data        Successfully provisioned volume pvc-2286b395-6b6a-4cbd-8db8-09734769ed09
+6m40s       Normal    SuccessfulCreate               replicaset/storage-web-5b46f8d54b     Created pod: storage-web-5b46f8d54b-cn8l9
+6m40s       Normal    SuccessfulCreate               replicaset/storage-web-5b46f8d54b     Created pod: storage-web-5b46f8d54b-x5bl6
+6m40s       Normal    Provisioning                   persistentvolumeclaim/web-data        External provisioner is provisioning volume for claim "coursework/web-data"
+6m40s       Normal    Created                        pod/storage-web-5b46f8d54b-cn8l9      Container created
+6m40s       Normal    Started                        pod/storage-web-5b46f8d54b-x5bl6      Container started
+6m40s       Warning   FailedScheduling               pod/storage-web-5b46f8d54b-cn8l9      0/1 nodes are available: pod has unbound immediate PersistentVolumeClaims. not found
+6m40s       Normal    Pulled                         pod/storage-web-5b46f8d54b-cn8l9      Container image "nginx:stable-alpine" already present on machine and can be accessed by the pod
+6m40s       Normal    Pulled                         pod/storage-web-5b46f8d54b-x5bl6      Container image "nginx:stable-alpine" already present on machine and can be accessed by the pod
+6m40s       Normal    Scheduled                      pod/storage-web-5b46f8d54b-x5bl6      Successfully assigned coursework/storage-web-5b46f8d54b-x5bl6 to coursework
+6m40s       Warning   FailedScheduling               pod/storage-web-5b46f8d54b-x5bl6      0/1 nodes are available: pod has unbound immediate PersistentVolumeClaims. not found
+6m40s       Normal    ScalingReplicaSet              deployment/storage-web                Scaled up replica set storage-web-5b46f8d54b from 0 to 2
+6m40s       Normal    ExternalProvisioning           persistentvolumeclaim/web-data        Waiting for a volume to be created either by the external provisioner 'k8s.io/minikube-hostpath' or manually by the system administrator. If volume creation is delayed, please verify that the provisioner is running and correctly registered.
+6m37s       Normal    Scheduled                      pod/storage-web-5b46f8d54b-g4zdw      Successfully assigned coursework/storage-web-5b46f8d54b-g4zdw to coursework
+6m37s       Normal    Pulled                         pod/storage-web-5b46f8d54b-g4zdw      Container image "nginx:stable-alpine" already present on machine and can be accessed by the pod
+6m37s       Normal    Created                        pod/storage-web-5b46f8d54b-g4zdw      Container created
+6m37s       Normal    SuccessfulCreate               replicaset/storage-web-5b46f8d54b     Created pod: storage-web-5b46f8d54b-g4zdw
+6m36s       Normal    Started                        pod/storage-web-5b46f8d54b-g4zdw      Container started
+6m35s       Normal    Killing                        pod/storage-web-5b46f8d54b-cn8l9      Stopping container web
+6m34s       Normal    Created                        pod/load                              Container created
+6m34s       Normal    Pulled                         pod/load                              Container image "alpine:3.22" already present on machine and can be accessed by the pod
+6m34s       Normal    Scheduled                      pod/load                              Successfully assigned coursework/load to coursework
+6m33s       Normal    Started                        pod/load                              Container started
+5m10s       Warning   FailedComputeMetricsReplicas   horizontalpodautoscaler/storage-web   invalid metrics (1 invalid out of 1), first error is: failed to get cpu resource metric value: failed to get cpu utilization: did not receive metrics for targeted pods (pods might be unready)
+4m55s       Normal    SuccessfulCreate               replicaset/storage-web-5b46f8d54b     Created pod: storage-web-5b46f8d54b-nv47w
+4m55s       Normal    Scheduled                      pod/storage-web-5b46f8d54b-nv47w      Successfully assigned coursework/storage-web-5b46f8d54b-nv47w to coursework
+4m55s       Normal    Scheduled                      pod/storage-web-5b46f8d54b-9vnnj      Successfully assigned coursework/storage-web-5b46f8d54b-9vnnj to coursework
+4m55s       Normal    SuccessfulCreate               replicaset/storage-web-5b46f8d54b     Created pod: storage-web-5b46f8d54b-9vnnj
+4m55s       Normal    ScalingReplicaSet              deployment/storage-web                Scaled up replica set storage-web-5b46f8d54b from 2 to 4
+4m55s       Normal    SuccessfulRescale              horizontalpodautoscaler/storage-web   New size: 4; reason: cpu resource utilization (percentage of request) above target
+4m54s       Normal    Pulled                         pod/storage-web-5b46f8d54b-nv47w      Container image "nginx:stable-alpine" already present on machine and can be accessed by the pod
+4m54s       Normal    Started                        pod/storage-web-5b46f8d54b-9vnnj      Container started
+4m54s       Normal    Created                        pod/storage-web-5b46f8d54b-nv47w      Container created
+4m54s       Normal    Started                        pod/storage-web-5b46f8d54b-nv47w      Container started
+4m54s       Normal    Created                        pod/storage-web-5b46f8d54b-9vnnj      Container created
+4m54s       Normal    Pulled                         pod/storage-web-5b46f8d54b-9vnnj      Container image "nginx:stable-alpine" already present on machine and can be accessed by the pod
+4m45s       Normal    Pulling                        pod/lifecycle-06-imagepullbackoff     Pulling image "nginx:kitledger-missing-tag"
+4m44s       Warning   Failed                         pod/lifecycle-06-imagepullbackoff     Failed to pull image "nginx:kitledger-missing-tag": rpc error: code = NotFound desc = failed to pull and unpack image "docker.io/library/nginx:kitledger-missing-tag": failed to resolve reference "docker.io/library/nginx:kitledger-missing-tag": docker.io/library/nginx:kitledger-missing-tag: not found
+4m44s       Warning   Failed                         pod/lifecycle-06-imagepullbackoff     Error: ErrImagePull
+4m40s       Normal    SuccessfulRescale              horizontalpodautoscaler/storage-web   New size: 5; reason: cpu resource utilization (percentage of request) above target
+4m40s       Normal    Scheduled                      pod/storage-web-5b46f8d54b-czkk4      Successfully assigned coursework/storage-web-5b46f8d54b-czkk4 to coursework
+4m40s       Normal    SuccessfulCreate               replicaset/storage-web-5b46f8d54b     Created pod: storage-web-5b46f8d54b-czkk4
+4m39s       Normal    Pulled                         pod/storage-web-5b46f8d54b-czkk4      Container image "nginx:stable-alpine" already present on machine and can be accessed by the pod
+4m39s       Normal    Created                        pod/storage-web-5b46f8d54b-czkk4      Container created
+4m39s       Normal    Started                        pod/storage-web-5b46f8d54b-czkk4      Container started
+4m30s       Normal    Killing                        pod/load                              Stopping container load
+3m59s       Normal    Pulled                         pod/storage-web-7fb4856f79-jztkq      Container image "nginx:stable-alpine" already present on machine and can be accessed by the pod
+3m59s       Normal    Started                        pod/storage-web-7fb4856f79-444dx      Container started
+3m59s       Normal    SuccessfulCreate               replicaset/storage-web-7fb4856f79     Created pod: storage-web-7fb4856f79-tcqk9
+3m59s       Normal    SuccessfulCreate               replicaset/storage-web-7fb4856f79     Created pod: storage-web-7fb4856f79-jztkq
+3m59s       Normal    Killing                        pod/storage-web-5b46f8d54b-9vnnj      Stopping container web
+3m59s       Normal    Started                        pod/storage-web-7fb4856f79-jztkq      Container started
+3m59s       Normal    Created                        pod/storage-web-7fb4856f79-jztkq      Container created
+3m59s       Normal    Scheduled                      pod/storage-web-7fb4856f79-tcqk9      Successfully assigned coursework/storage-web-7fb4856f79-tcqk9 to coursework
+3m59s       Normal    Scheduled                      pod/storage-web-7fb4856f79-jztkq      Successfully assigned coursework/storage-web-7fb4856f79-jztkq to coursework
+3m59s       Normal    Started                        pod/storage-web-7fb4856f79-tcqk9      Container started
+3m59s       Normal    Created                        pod/storage-web-7fb4856f79-444dx      Container created
+3m59s       Normal    Pulled                         pod/storage-web-7fb4856f79-444dx      Container image "nginx:stable-alpine" already present on machine and can be accessed by the pod
+3m59s       Normal    SuccessfulCreate               replicaset/storage-web-7fb4856f79     Created pod: storage-web-7fb4856f79-444dx
+3m59s       Normal    Scheduled                      pod/storage-web-7fb4856f79-444dx      Successfully assigned coursework/storage-web-7fb4856f79-444dx to coursework
+3m59s       Normal    Created                        pod/storage-web-7fb4856f79-tcqk9      Container created
+3m59s       Normal    Pulled                         pod/storage-web-7fb4856f79-tcqk9      Container image "nginx:stable-alpine" already present on machine and can be accessed by the pod
+3m59s       Normal    ScalingReplicaSet              deployment/storage-web                Scaled up replica set storage-web-7fb4856f79 from 2 to 3
+3m59s       Normal    ScalingReplicaSet              deployment/storage-web                Scaled up replica set storage-web-7fb4856f79 from 0 to 2
+3m59s       Normal    SuccessfulDelete               replicaset/storage-web-5b46f8d54b     Deleted pod: storage-web-5b46f8d54b-9vnnj
+3m29s       Warning   Unhealthy                      pod/storage-web-7fb4856f79-jztkq      Readiness probe failed: HTTP probe failed with statuscode: 404
+3m29s       Normal    SuccessfulDelete               replicaset/storage-web-7fb4856f79     Deleted pod: storage-web-7fb4856f79-jztkq
+3m29s       Normal    Killing                        pod/storage-web-7fb4856f79-444dx      Stopping container web
+3m29s       Normal    SuccessfulDelete               replicaset/storage-web-7fb4856f79     Deleted pod: storage-web-7fb4856f79-tcqk9
+3m29s       Normal    Killing                        pod/storage-web-7fb4856f79-tcqk9      Stopping container web
+3m29s       Warning   Unhealthy                      pod/storage-web-7fb4856f79-tcqk9      Readiness probe failed: HTTP probe failed with statuscode: 404
+3m29s       Warning   Unhealthy                      pod/storage-web-7fb4856f79-444dx      Readiness probe failed: HTTP probe failed with statuscode: 404
+3m29s       Normal    ScalingReplicaSet              deployment/storage-web                Scaled up replica set storage-web-5b46f8d54b from 4 to 5
+3m29s       Normal    Created                        pod/storage-web-5b46f8d54b-cjccg      Container created
+3m29s       Normal    Pulled                         pod/storage-web-5b46f8d54b-cjccg      Container image "nginx:stable-alpine" already present on machine and can be accessed by the pod
+3m29s       Normal    SuccessfulCreate               replicaset/storage-web-5b46f8d54b     Created pod: storage-web-5b46f8d54b-cjccg
+3m29s       Normal    ScalingReplicaSet              deployment/storage-web                Scaled down replica set storage-web-7fb4856f79 from 3 to 0
+3m29s       Normal    Scheduled                      pod/storage-web-5b46f8d54b-cjccg      Successfully assigned coursework/storage-web-5b46f8d54b-cjccg to coursework
+3m29s       Normal    SuccessfulDelete               replicaset/storage-web-7fb4856f79     Deleted pod: storage-web-7fb4856f79-444dx
+3m29s       Normal    Killing                        pod/storage-web-7fb4856f79-jztkq      Stopping container web
+3m28s       Normal    Started                        pod/storage-web-5b46f8d54b-cjccg      Container started
+3m26s       Normal    SuccessfulCreate               replicaset/storage-web-6b9db6987b     Created pod: storage-web-6b9db6987b-qpsv2
+3m26s       Normal    ScalingReplicaSet              deployment/storage-web                Scaled up replica set storage-web-6b9db6987b from 2 to 3
+3m26s       Normal    ScalingReplicaSet              deployment/storage-web                Scaled up replica set storage-web-6b9db6987b from 0 to 2
+3m26s       Normal    SuccessfulCreate               replicaset/storage-web-6b9db6987b     Created pod: storage-web-6b9db6987b-tqmd9
+3m26s       Normal    Scheduled                      pod/storage-web-6b9db6987b-qpsv2      Successfully assigned coursework/storage-web-6b9db6987b-qpsv2 to coursework
+3m26s       Normal    Scheduled                      pod/storage-web-6b9db6987b-rmq2l      Successfully assigned coursework/storage-web-6b9db6987b-rmq2l to coursework
+3m26s       Normal    ScalingReplicaSet              deployment/storage-web                Scaled down replica set storage-web-5b46f8d54b from 5 to 4
+3m26s       Normal    SuccessfulCreate               replicaset/storage-web-6b9db6987b     Created pod: storage-web-6b9db6987b-rmq2l
+3m26s       Normal    Scheduled                      pod/storage-web-6b9db6987b-tqmd9      Successfully assigned coursework/storage-web-6b9db6987b-tqmd9 to coursework
+3m26s       Normal    SuccessfulDelete               replicaset/storage-web-5b46f8d54b     Deleted pod: storage-web-5b46f8d54b-cjccg
+3m24s       Normal    Killing                        pod/storage-web-5b46f8d54b-cjccg      Stopping container web
+3m23s       Normal    Killing                        pod/storage-web-5b46f8d54b-x5bl6      Stopping container web
+3m23s       Normal    SuccessfulDelete               replicaset/storage-web-5b46f8d54b     Deleted pod: storage-web-5b46f8d54b-nv47w
+3m23s       Normal    SuccessfulDelete               replicaset/storage-web-5b46f8d54b     Deleted pod: storage-web-5b46f8d54b-czkk4
+3m23s       Normal    Scheduled                      pod/storage-web-6b9db6987b-g2n7n      Successfully assigned coursework/storage-web-6b9db6987b-g2n7n to coursework
+3m23s       Normal    SuccessfulCreate               replicaset/storage-web-6b9db6987b     Created pod: storage-web-6b9db6987b-g2n7n
+3m23s       Normal    SuccessfulDelete               replicaset/storage-web-5b46f8d54b     Deleted pod: storage-web-5b46f8d54b-x5bl6
+3m23s       Normal    Scheduled                      pod/storage-web-6b9db6987b-5mv4c      Successfully assigned coursework/storage-web-6b9db6987b-5mv4c to coursework
+3m23s       Normal    SuccessfulCreate               replicaset/storage-web-6b9db6987b     Created pod: storage-web-6b9db6987b-5mv4c
+3m23s       Normal    Killing                        pod/storage-web-5b46f8d54b-nv47w      Stopping container web
+3m23s       Normal    Killing                        pod/storage-web-5b46f8d54b-czkk4      Stopping container web
+3m20s       Normal    SuccessfulDelete               replicaset/storage-web-5b46f8d54b     Deleted pod: storage-web-5b46f8d54b-g4zdw
+3m20s       Normal    Killing                        pod/storage-web-5b46f8d54b-g4zdw      Stopping container web
+3m3s        Normal    Killing                        pod/storage-web-6b9db6987b-5mv4c      Container web failed liveness probe, will be restarted
+3m3s        Normal    Pulled                         pod/storage-web-6b9db6987b-5mv4c      Container image "nginx:stable-alpine" already present on machine and can be accessed by the pod
+3m3s        Normal    Created                        pod/storage-web-6b9db6987b-5mv4c      Container created
+3m3s        Normal    Started                        pod/storage-web-6b9db6987b-5mv4c      Container started
+2m58s       Warning   Unhealthy                      pod/storage-web-6b9db6987b-5mv4c      Liveness probe failed: HTTP probe failed with statuscode: 404
+2m56s       Warning   Unhealthy                      pod/storage-web-6b9db6987b-rmq2l      Readiness probe failed: Get "http://10.244.0.53:80/": dial tcp 10.244.0.53:80: connect: connection refused
+2m56s       Normal    SuccessfulCreate               replicaset/storage-web-5b46f8d54b     Created pod: storage-web-5b46f8d54b-rh7vx
+2m56s       Normal    SuccessfulCreate               replicaset/storage-web-5b46f8d54b     Created pod: storage-web-5b46f8d54b-twmh8
+2m56s       Warning   Unhealthy                      pod/storage-web-6b9db6987b-5mv4c      Readiness probe failed: Get "http://10.244.0.56:80/": dial tcp 10.244.0.56:80: connect: connection refused
+2m56s       Normal    Killing                        pod/storage-web-6b9db6987b-5mv4c      Stopping container web
+2m56s       Normal    Pulled                         pod/storage-web-6b9db6987b-qpsv2      Container image "nginx:stable-alpine" already present on machine and can be accessed by the pod
+2m56s       Normal    Created                        pod/storage-web-6b9db6987b-qpsv2      Container created
+2m56s       Normal    Started                        pod/storage-web-6b9db6987b-qpsv2      Container started
+2m56s       Warning   Unhealthy                      pod/storage-web-6b9db6987b-qpsv2      Liveness probe failed: HTTP probe failed with statuscode: 404
+2m56s       Normal    Killing                        pod/storage-web-6b9db6987b-qpsv2      Container web failed liveness probe, will be restarted
+2m56s       Warning   Unhealthy                      pod/storage-web-6b9db6987b-qpsv2      Readiness probe failed: Get "http://10.244.0.55:80/": dial tcp 10.244.0.55:80: connect: connection refused
+2m56s       Normal    Pulled                         pod/storage-web-6b9db6987b-rmq2l      Container image "nginx:stable-alpine" already present on machine and can be accessed by the pod
+2m56s       Normal    Created                        pod/storage-web-6b9db6987b-rmq2l      Container created
+2m56s       Normal    Started                        pod/storage-web-6b9db6987b-rmq2l      Container started
+2m56s       Warning   Unhealthy                      pod/storage-web-6b9db6987b-rmq2l      Liveness probe failed: HTTP probe failed with statuscode: 404
+2m56s       Normal    SuccessfulDelete               replicaset/storage-web-6b9db6987b     Deleted pod: storage-web-6b9db6987b-5mv4c
+2m56s       Normal    Killing                        pod/storage-web-6b9db6987b-rmq2l      Container web failed liveness probe, will be restarted
+2m56s       Warning   Unhealthy                      pod/storage-web-6b9db6987b-tqmd9      Readiness probe failed: Get "http://10.244.0.54:80/": dial tcp 10.244.0.54:80: connect: connection refused
+2m56s       Normal    Scheduled                      pod/storage-web-5b46f8d54b-twmh8      Successfully assigned coursework/storage-web-5b46f8d54b-twmh8 to coursework
+2m56s       Normal    Killing                        pod/storage-web-6b9db6987b-tqmd9      Container web failed liveness probe, will be restarted
+2m56s       Warning   Unhealthy                      pod/storage-web-6b9db6987b-tqmd9      Liveness probe failed: HTTP probe failed with statuscode: 404
+2m56s       Normal    Scheduled                      pod/storage-web-5b46f8d54b-rh7vx      Successfully assigned coursework/storage-web-5b46f8d54b-rh7vx to coursework
+2m56s       Normal    Started                        pod/storage-web-6b9db6987b-tqmd9      Container started
+2m56s       Normal    Scheduled                      pod/storage-web-5b46f8d54b-jd5m8      Successfully assigned coursework/storage-web-5b46f8d54b-jd5m8 to coursework
+2m56s       Normal    Created                        pod/storage-web-6b9db6987b-tqmd9      Container created
+2m56s       Normal    Pulled                         pod/storage-web-6b9db6987b-tqmd9      Container image "nginx:stable-alpine" already present on machine and can be accessed by the pod
+2m55s       Normal    Created                        pod/storage-web-5b46f8d54b-jd5m8      Container created
+2m55s       Normal    Pulled                         pod/storage-web-5b46f8d54b-jd5m8      Container image "nginx:stable-alpine" already present on machine and can be accessed by the pod
+2m55s       Normal    Started                        pod/storage-web-5b46f8d54b-twmh8      Container started
+2m55s       Normal    Created                        pod/storage-web-5b46f8d54b-twmh8      Container created
+2m55s       Normal    Pulled                         pod/storage-web-5b46f8d54b-twmh8      Container image "nginx:stable-alpine" already present on machine and can be accessed by the pod
+2m55s       Normal    Started                        pod/storage-web-5b46f8d54b-rh7vx      Container started
+2m55s       Normal    Created                        pod/storage-web-5b46f8d54b-rh7vx      Container created
+2m55s       Normal    Pulled                         pod/storage-web-5b46f8d54b-rh7vx      Container image "nginx:stable-alpine" already present on machine and can be accessed by the pod
+2m55s       Normal    Started                        pod/storage-web-5b46f8d54b-jd5m8      Container started
+2m53s       Normal    Started                        pod/storage-web-5b46f8d54b-2h7q9      Container started
+2m53s       Normal    Killing                        pod/storage-web-6b9db6987b-rmq2l      Stopping container web
+2m53s       Normal    Pulled                         pod/storage-web-5b46f8d54b-9w2pt      Container image "nginx:stable-alpine" already present on machine and can be accessed by the pod
+2m53s       Normal    SuccessfulDelete               replicaset/storage-web-6b9db6987b     Deleted pod: storage-web-6b9db6987b-rmq2l
+2m53s       Normal    SuccessfulDelete               replicaset/storage-web-6b9db6987b     Deleted pod: storage-web-6b9db6987b-tqmd9
+2m53s       Normal    Scheduled                      pod/storage-web-5b46f8d54b-9w2pt      Successfully assigned coursework/storage-web-5b46f8d54b-9w2pt to coursework
+2m53s       Normal    SuccessfulCreate               replicaset/storage-web-5b46f8d54b     (combined from similar events): Created pod: storage-web-5b46f8d54b-9w2pt
+2m53s       Normal    Created                        pod/storage-web-5b46f8d54b-2h7q9      Container created
+2m53s       Normal    Pulled                         pod/storage-web-5b46f8d54b-2h7q9      Container image "nginx:stable-alpine" already present on machine and can be accessed by the pod
+2m53s       Normal    Scheduled                      pod/storage-web-5b46f8d54b-2h7q9      Successfully assigned coursework/storage-web-5b46f8d54b-2h7q9 to coursework
+2m52s       Normal    Created                        pod/storage-web-6b9db6987b-g2n7n      Container created
+2m52s       Normal    Created                        pod/storage-web-5b46f8d54b-9w2pt      Container created
+2m52s       Normal    ScalingReplicaSet              deployment/storage-web                (combined from similar events): Scaled down replica set storage-web-6b9db6987b from 2 to 1
+2m52s       Normal    Started                        pod/storage-web-6b9db6987b-g2n7n      Container started
+2m52s       Warning   Unhealthy                      pod/storage-web-6b9db6987b-g2n7n      Liveness probe failed: HTTP probe failed with statuscode: 404
+2m52s       Normal    Killing                        pod/storage-web-6b9db6987b-g2n7n      Container web failed liveness probe, will be restarted
+2m52s       Warning   Unhealthy                      pod/storage-web-6b9db6987b-g2n7n      Readiness probe failed: Get "http://10.244.0.57:80/": dial tcp 10.244.0.57:80: connect: connection refused
+2m52s       Normal    SuccessfulDelete               replicaset/storage-web-6b9db6987b     Deleted pod: storage-web-6b9db6987b-qpsv2
+2m52s       Normal    Killing                        pod/storage-web-6b9db6987b-tqmd9      Stopping container web
+2m52s       Normal    Killing                        pod/storage-web-6b9db6987b-qpsv2      Stopping container web
+2m52s       Normal    Started                        pod/storage-web-5b46f8d54b-9w2pt      Container started
+2m52s       Normal    Pulled                         pod/storage-web-6b9db6987b-g2n7n      Container image "nginx:stable-alpine" already present on machine and can be accessed by the pod
+2m50s       Normal    SuccessfulDelete               replicaset/storage-web-6b9db6987b     Deleted pod: storage-web-6b9db6987b-g2n7n
+2m49s       Normal    Scheduled                      pod/bad-image                         Successfully assigned coursework/bad-image to coursework
+2m49s       Normal    Killing                        pod/storage-web-6b9db6987b-g2n7n      Stopping container web
+2m48s       Normal    BackOff                        pod/bad-image                         Back-off pulling image "nginx:kitledger-intentional-missing-tag"
+2m48s       Warning   Failed                         pod/bad-image                         Error: ImagePullBackOff
+2m38s       Normal    Pulling                        pod/bad-image                         Pulling image "nginx:kitledger-intentional-missing-tag"
+2m37s       Warning   Failed                         pod/bad-image                         Failed to pull image "nginx:kitledger-intentional-missing-tag": rpc error: code = NotFound desc = failed to pull and unpack image "docker.io/library/nginx:kitledger-intentional-missing-tag": failed to resolve reference "docker.io/library/nginx:kitledger-intentional-missing-tag": docker.io/library/nginx:kitledger-intentional-missing-tag: not found
+2m37s       Warning   Failed                         pod/bad-image                         Error: ErrImagePull
+2m33s       Normal    BackOff                        pod/lifecycle-06-imagepullbackoff     Back-off pulling image "nginx:kitledger-missing-tag"
+2m33s       Warning   Failed                         pod/lifecycle-06-imagepullbackoff     Error: ImagePullBackOff
+2m30s       Warning   FailedScheduling               pod/lifecycle-02-pending              0/1 nodes are available: 1 node(s) didn't match Pod's node affinity/selector. preemption: 0/1 nodes are available: 1 Preemption is not helpful for scheduling.
+2m29s       Normal    Pulled                         pod/bad-image                         Container image "nginx:stable-alpine" already present on machine and can be accessed by the pod
+2m29s       Normal    Created                        pod/bad-image                         Container created
+2m29s       Normal    Started                        pod/bad-image                         Container started
+2m29s       Normal    Scheduled                      pod/crash                             Successfully assigned coursework/crash to coursework
+2m15s       Normal    Pulled                         pod/crash                             Container image "alpine:3.22" already present on machine and can be accessed by the pod
+2m15s       Normal    Created                        pod/crash                             Container created
+2m14s       Normal    Started                        pod/crash                             Container started
+2m14s       Warning   BackOff                        pod/crash                             Back-off restarting failed container crash in pod crash_coursework(124cf927-b5b5-462a-8c1a-3d7d5b9e290b)
+2m10s       Warning   FailedComputeMetricsReplicas   horizontalpodautoscaler/storage-web   invalid metrics (1 invalid out of 1), first error is: failed to get cpu resource metric value: failed to get cpu utilization: unable to get metrics for resource cpu: no metrics returned from resource metrics API
+2m10s       Warning   FailedGetResourceMetric        horizontalpodautoscaler/storage-web   failed to get cpu utilization: unable to get metrics for resource cpu: no metrics returned from resource metrics API
+2m8s        Normal    Scheduled                      pod/crash                             Successfully assigned coursework/crash to coursework
+2m7s        Normal    Created                        pod/crash                             Container created
+2m7s        Normal    Started                        pod/crash                             Container started
+2m7s        Normal    Pulled                         pod/crash                             Container image "alpine:3.22" already present on machine and can be accessed by the pod
+2m6s        Normal    Scheduled                      pod/dns-broken                        Successfully assigned coursework/dns-broken to coursework
+2m6s        Normal    Pulled                         pod/dns-broken                        Container image "alpine:3.22" already present on machine and can be accessed by the pod
+2m6s        Normal    Created                        pod/dns-broken                        Container created
+2m5s        Normal    Started                        pod/dns-broken                        Container started
+2m          Normal    Killing                        pod/dns-broken                        Stopping container dns-broken
+118s        Normal    Created                        pod/lifecycle-05-crashloopbackoff     Container created
+118s        Normal    Pulled                         pod/lifecycle-05-crashloopbackoff     Container image "alpine:3.22" already present on machine and can be accessed by the pod
+117s        Normal    Started                        pod/lifecycle-05-crashloopbackoff     Container started
+100s        Warning   FailedGetResourceMetric        horizontalpodautoscaler/storage-web   failed to get cpu utilization: did not receive metrics for targeted pods (pods might be unready)
+90s         Normal    Scheduled                      pod/dns-broken                        Successfully assigned coursework/dns-broken to coursework
+89s         Normal    Created                        pod/dns-broken                        Container created
+89s         Normal    Started                        pod/dns-broken                        Container started
+89s         Warning   FailedScheduling               pod/pending-demo                      0/1 nodes are available: 1 node(s) didn't match Pod's node affinity/selector. preemption: 0/1 nodes are available: 1 Preemption is not helpful for scheduling.
+89s         Normal    Pulled                         pod/dns-broken                        Container image "alpine:3.22" already present on machine and can be accessed by the pod
+79s         Normal    Created                        pod/pending-demo                      Container created
+79s         Normal    Scheduled                      pod/pending-demo                      Successfully assigned coursework/pending-demo to coursework
+79s         Normal    Pulled                         pod/pending-demo                      Container image "alpine:3.22" already present on machine and can be accessed by the pod
+78s         Normal    Started                        pod/pending-demo                      Container started
+78s         Normal    Scheduled                      pod/missing-volume                    Successfully assigned coursework/missing-volume to coursework
+71s         Warning   FailedMount                    pod/missing-volume                    MountVolume.SetUp failed for volume "settings" : configmap "lab-missing-settings" not found
+62s         Normal    Pulled                         pod/missing-volume                    Container image "alpine:3.22" already present on machine and can be accessed by the pod
+62s         Normal    Pulling                        pod/oom-demo                          Pulling image "python:3.13-alpine"
+62s         Normal    Scheduled                      pod/oom-demo                          Successfully assigned coursework/oom-demo to coursework
+62s         Normal    Started                        pod/missing-volume                    Container started
+62s         Normal    Created                        pod/missing-volume                    Container created
+60s         Normal    Created                        pod/oom-demo                          Container created
+60s         Normal    Started                        pod/oom-demo                          Container started
+60s         Normal    Pulled                         pod/oom-demo                          Successfully pulled image "python:3.13-alpine" in 2.118s (2.119s including waiting). Image size: 19523394 bytes.
+37s         Warning   BackOff                        pod/lifecycle-05-crashloopbackoff     Back-off restarting failed container app in pod lifecycle-05-crashloopbackoff_coursework(df7d4cd8-182e-417c-be01-1c6091132174)
+32s         Normal    Created                        pod/oom-demo                          Container created
+32s         Normal    Started                        pod/oom-demo                          Container started
+32s         Normal    Pulled                         pod/oom-demo                          Container image "python:3.13-alpine" already present on machine and can be accessed by the pod
+32s         Normal    Scheduled                      pod/oom-demo                          Successfully assigned coursework/oom-demo to coursework
+31s         Normal    Killing                        pod/oom-demo                          Stopping container oom-demo

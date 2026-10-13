@@ -1,0 +1,17 @@
+{
+  "timestamp_utc": "2026-10-13T18:20:28.789133+00:00",
+  "revision": "10e215b73fc3b66b7b44fc24add482e750bb7a8e",
+  "dirty": true,
+  "environment": "Windows-11-10.0.26200-SP0",
+  "cwd": "C:\\Users\\yasha\\OneDrive\\Desktop\\bigones\\devops-assignment\\session21-python\\backend",
+  "command": [
+    ".venv\\Scripts\\python.exe",
+    "-m",
+    "bandit",
+    "-r",
+    "app",
+    "-ll"
+  ],
+  "exit_code": 0,
+  "output": "[main]\tINFO\tprofile include tests: None\n[main]\tINFO\tprofile exclude tests: None\n[main]\tINFO\tcli include tests: None\n[main]\tINFO\tcli exclude tests: None\n[main]\tINFO\trunning on Python 3.13.15\nRun started:2026-10-13 18:20:29.411217+00:00\n\nTest results:\n\tNo issues identified.\n\nCode scanned:\n\tTotal lines of code: 333\n\tTotal lines skipped (#nosec): 0\n\tTotal potential issues skipped due to specifically being disabled (e.g., #nosec BXXX): 0\n\nRun metrics:\n\tTotal issues (by severity):\n\t\tUndefined: 0\n\t\tLow: 0\n\t\tMedium: 0\n\t\tHigh: 0\n\tTotal issues (by confidence):\n\t\tUndefined: 0\n\t\tLow: 0\n\t\tMedium: 0\n\t\tHigh: 0\nFiles skipped (0):\n"
+}

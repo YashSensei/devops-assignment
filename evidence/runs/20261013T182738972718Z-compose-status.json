@@ -1,0 +1,14 @@
+{
+  "timestamp_utc": "2026-10-13T18:27:38.972718+00:00",
+  "revision": "85d89bd93889582377c0b6b0d06aac7e46a99050",
+  "dirty": true,
+  "environment": "Windows-11-10.0.26200-SP0",
+  "cwd": "C:\\Users\\yasha\\OneDrive\\Desktop\\bigones\\devops-assignment\\session21-python",
+  "command": [
+    "docker",
+    "compose",
+    "ps"
+  ],
+  "exit_code": 0,
+  "output": "NAME                              IMAGE                           COMMAND                  SERVICE    CREATED         STATUS                   PORTS\nkitledger-24bcs10164-backend-1    kitledger-24bcs10164-backend    \"sh -c 'python -m ap\u2026\"   backend    4 minutes ago   Up 4 minutes (healthy)   127.0.0.1:8000->8000/tcp\nkitledger-24bcs10164-frontend-1   kitledger-24bcs10164-frontend   \"/docker-entrypoint.\u2026\"   frontend   4 minutes ago   Up 4 minutes             127.0.0.1:3000->8080/tcp\nkitledger-24bcs10164-postgres-1   postgres:17-alpine              \"docker-entrypoint.s\u2026\"   postgres   4 minutes ago   Up 4 minutes (healthy)   5432/tcp\n"
+}

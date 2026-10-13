@@ -1,0 +1,14 @@
+{
+  "timestamp_utc": "2026-10-13T18:45:09.403315+00:00",
+  "revision": "316fb8cad374b5b6b44b8e700e2edbc35fed02e2",
+  "dirty": true,
+  "environment": "Windows-11-10.0.26200-SP0",
+  "cwd": "C:\\Users\\yasha\\OneDrive\\Desktop\\bigones\\devops-assignment\\session21-python\\frontend",
+  "command": [
+    "npx.cmd",
+    "playwright",
+    "test"
+  ],
+  "exit_code": 0,
+  "output": "\nRunning 1 test using 1 worker\n\n(node:10532) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.\n(Use `node --trace-warnings ...` to show where the warning was created)\n  \u2713  1 tests\\ledger.spec.js:3:1 \u203a equipment lifecycle, loan rules, persistence, filters, and mobile layout (18.1s)\n\n  1 passed (19.7s)\n"
+}

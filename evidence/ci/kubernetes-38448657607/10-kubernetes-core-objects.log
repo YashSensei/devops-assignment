@@ -1,0 +1,847 @@
++ kubectl apply -n coursework -f submissions/10-kubernetes-core-objects/app.yaml
+deployment.apps/web created
+service/web created
++ kubectl rollout status -n coursework deployment/web --timeout=180s
+Waiting for deployment "web" rollout to finish: 0 of 2 updated replicas are available...
+Waiting for deployment "web" rollout to finish: 1 of 2 updated replicas are available...
+deployment "web" successfully rolled out
+++ kubectl get pod -n coursework -l app=web -o 'jsonpath={.items[0].metadata.name}'
++ old=web-68c5dfcd67-6vgjp
++ kubectl delete pod -n coursework web-68c5dfcd67-6vgjp
+pod "web-68c5dfcd67-6vgjp" deleted from coursework namespace
++ kubectl rollout status -n coursework deployment/web --timeout=180s
+deployment "web" successfully rolled out
++ kubectl get rs,pods -n coursework -o wide
+NAME                             DESIRED   CURRENT   READY   AGE   CONTAINERS   IMAGES                SELECTOR
+replicaset.apps/web-68c5dfcd67   2         2         2       7s    web          nginx:stable-alpine   app=web,pod-template-hash=68c5dfcd67
+
+NAME                       READY   STATUS    RESTARTS   AGE   IP           NODE         NOMINATED NODE   READINESS GATES
+pod/web-68c5dfcd67-8m59k   1/1     Running   0          7s    10.244.0.7   coursework   <none>           <none>
+pod/web-68c5dfcd67-fjwhw   1/1     Running   0          3s    10.244.0.9   coursework   <none>           <none>
++ kubectl scale deployment/web -n coursework --replicas=3
+deployment.apps/web scaled
++ kubectl rollout status -n coursework deployment/web --timeout=180s
+Waiting for deployment "web" rollout to finish: 2 of 3 updated replicas are available...
+deployment "web" successfully rolled out
++ kubectl set image deployment/web -n coursework web=nginx:alpine
+deployment.apps/web image updated
++ kubectl rollout status -n coursework deployment/web --timeout=180s
+Waiting for deployment "web" rollout to finish: 1 out of 3 new replicas have been updated...
+Waiting for deployment "web" rollout to finish: 1 out of 3 new replicas have been updated...
+Waiting for deployment "web" rollout to finish: 1 out of 3 new replicas have been updated...
+Waiting for deployment "web" rollout to finish: 2 out of 3 new replicas have been updated...
+Waiting for deployment "web" rollout to finish: 2 out of 3 new replicas have been updated...
+Waiting for deployment "web" rollout to finish: 2 out of 3 new replicas have been updated...
+Waiting for deployment "web" rollout to finish: 2 out of 3 new replicas have been updated...
+Waiting for deployment "web" rollout to finish: 1 old replicas are pending termination...
+Waiting for deployment "web" rollout to finish: 1 old replicas are pending termination...
+Waiting for deployment "web" rollout to finish: 1 old replicas are pending termination...
+deployment "web" successfully rolled out
++ kubectl rollout history deployment/web -n coursework
+deployment.apps/web 
+REVISION  CHANGE-CAUSE
+1         <none>
+2         <none>
+
++ kubectl rollout undo deployment/web -n coursework
+Warning: resource deployments/web was previously managed with 'kubectl apply'. Rolling back will not update the kubectl.kubernetes.io/last-applied-configuration annotation, which may cause unexpected behavior on future 'kubectl apply' operations. Consider using 'kubectl apply' with your previous configuration file instead.
+deployment.apps/web rolled back
++ kubectl rollout status -n coursework deployment/web --timeout=180s
+Waiting for deployment "web" rollout to finish: 1 out of 3 new replicas have been updated...
+Waiting for deployment "web" rollout to finish: 1 out of 3 new replicas have been updated...
+Waiting for deployment "web" rollout to finish: 1 out of 3 new replicas have been updated...
+Waiting for deployment "web" rollout to finish: 2 out of 3 new replicas have been updated...
+Waiting for deployment "web" rollout to finish: 2 out of 3 new replicas have been updated...
+Waiting for deployment "web" rollout to finish: 2 out of 3 new replicas have been updated...
+Waiting for deployment "web" rollout to finish: 2 out of 3 new replicas have been updated...
+Waiting for deployment "web" rollout to finish: 1 old replicas are pending termination...
+Waiting for deployment "web" rollout to finish: 1 old replicas are pending termination...
+Waiting for deployment "web" rollout to finish: 1 old replicas are pending termination...
+deployment "web" successfully rolled out
++ kubectl create deployment blue -n coursework --image=hashicorp/http-echo -- /http-echo -text=blue
+deployment.apps/blue created
++ kubectl create deployment green -n coursework --image=hashicorp/http-echo -- /http-echo -text=green
+deployment.apps/green created
++ kubectl expose deployment blue -n coursework --name=colour --port=80 --target-port=5678
+service/colour exposed
++ kubectl rollout status deployment/blue -n coursework --timeout=180s
+Waiting for deployment "blue" rollout to finish: 0 of 1 updated replicas are available...
+deployment "blue" successfully rolled out
++ kubectl rollout status deployment/green -n coursework --timeout=180s
+Waiting for deployment "green" rollout to finish: 0 of 1 updated replicas are available...
+deployment "green" successfully rolled out
++ kubectl run client -n coursework --image=alpine:3.22 --restart=Never --command -- sleep 3600
+pod/client created
++ kubectl wait -n coursework --for=condition=Ready pod/client --timeout=120s
+pod/client condition met
++ kubectl exec -n coursework client -- wget -qO- http://colour
+blue
++ kubectl patch service colour -n coursework -p '{"spec":{"selector":{"app":"green"}}}'
+service/colour patched
++ kubectl exec -n coursework client -- wget -qO- http://colour
+green
++ kubectl label pods -n coursework -l app=blue track=canary-demo
+pod/blue-6b66bb585-268ft labeled
++ kubectl label pods -n coursework -l app=green track=canary-demo
+pod/green-649d4984f7-ftcqd labeled
++ kubectl patch service colour -n coursework -p '{"spec":{"selector":{"app":null,"track":"canary-demo"}}}'
+service/colour patched
+++ seq 1 20
++ for i in $(seq 1 20)
++ kubectl exec -n coursework client -- wget -qO- http://colour
+green
++ for i in $(seq 1 20)
++ kubectl exec -n coursework client -- wget -qO- http://colour
+green
++ for i in $(seq 1 20)
++ kubectl exec -n coursework client -- wget -qO- http://colour
+green
++ for i in $(seq 1 20)
++ kubectl exec -n coursework client -- wget -qO- http://colour
+green
++ for i in $(seq 1 20)
++ kubectl exec -n coursework client -- wget -qO- http://colour
+green
++ for i in $(seq 1 20)
++ kubectl exec -n coursework client -- wget -qO- http://colour
+green
++ for i in $(seq 1 20)
++ kubectl exec -n coursework client -- wget -qO- http://colour
+green
++ for i in $(seq 1 20)
++ kubectl exec -n coursework client -- wget -qO- http://colour
+green
++ for i in $(seq 1 20)
++ kubectl exec -n coursework client -- wget -qO- http://colour
+green
++ for i in $(seq 1 20)
++ kubectl exec -n coursework client -- wget -qO- http://colour
+green
++ for i in $(seq 1 20)
++ kubectl exec -n coursework client -- wget -qO- http://colour
+green
++ for i in $(seq 1 20)
++ kubectl exec -n coursework client -- wget -qO- http://colour
+green
++ for i in $(seq 1 20)
++ kubectl exec -n coursework client -- wget -qO- http://colour
+green
++ for i in $(seq 1 20)
++ kubectl exec -n coursework client -- wget -qO- http://colour
+blue
++ for i in $(seq 1 20)
++ kubectl exec -n coursework client -- wget -qO- http://colour
+blue
++ for i in $(seq 1 20)
++ kubectl exec -n coursework client -- wget -qO- http://colour
+blue
++ for i in $(seq 1 20)
++ kubectl exec -n coursework client -- wget -qO- http://colour
+blue
++ for i in $(seq 1 20)
++ kubectl exec -n coursework client -- wget -qO- http://colour
+blue
++ for i in $(seq 1 20)
++ kubectl exec -n coursework client -- wget -qO- http://colour
+blue
++ for i in $(seq 1 20)
++ kubectl exec -n coursework client -- wget -qO- http://colour
+blue
++ kubectl patch deployment web -n coursework --type=merge -p '{"spec":{"strategy":{"type":"Recreate","rollingUpdate":null}}}'
+deployment.apps/web patched
++ watcher=9324
++ kubectl set image deployment/web -n coursework web=nginx:alpine
++ kubectl get pods -n coursework -l app=web --watch
+deployment.apps/web image updated
++ kubectl rollout status deployment/web -n coursework --timeout=180s
+Waiting for deployment "web" rollout to finish: 0 out of 3 new replicas have been updated...
+Waiting for deployment "web" rollout to finish: 0 out of 3 new replicas have been updated...
+Waiting for deployment "web" rollout to finish: 0 out of 3 new replicas have been updated...
+Waiting for deployment "web" rollout to finish: 0 out of 3 new replicas have been updated...
+Waiting for deployment "web" rollout to finish: 0 of 3 updated replicas are available...
+Waiting for deployment "web" rollout to finish: 1 of 3 updated replicas are available...
+Waiting for deployment "web" rollout to finish: 2 of 3 updated replicas are available...
+deployment "web" successfully rolled out
++ kill 9324
++ cat /tmp/recreate-observed.log
+NAME                   READY   STATUS    RESTARTS   AGE
+web-68c5dfcd67-ckblt   1/1     Running   0          7s
+web-68c5dfcd67-jwnqh   1/1     Running   0          7s
+web-68c5dfcd67-znsgm   1/1     Running   0          6s
+web-68c5dfcd67-znsgm   1/1     Terminating   0          6s
+web-68c5dfcd67-ckblt   1/1     Terminating   0          7s
+web-68c5dfcd67-jwnqh   1/1     Terminating   0          7s
+web-68c5dfcd67-znsgm   1/1     Terminating   0          6s
+web-68c5dfcd67-jwnqh   1/1     Terminating   0          7s
+web-68c5dfcd67-ckblt   1/1     Terminating   0          7s
+web-68c5dfcd67-jwnqh   0/1     Completed     0          7s
+web-68c5dfcd67-ckblt   0/1     Completed     0          7s
+web-68c5dfcd67-znsgm   0/1     Completed     0          6s
+web-75577cb44f-zqjq8   0/1     Pending       0          0s
+web-75577cb44f-zqjq8   0/1     Pending       0          0s
+web-75577cb44f-bj46v   0/1     Pending       0          0s
+web-75577cb44f-vxn29   0/1     Pending       0          0s
+web-75577cb44f-zqjq8   0/1     ContainerCreating   0          0s
+web-75577cb44f-bj46v   0/1     Pending             0          0s
+web-75577cb44f-vxn29   0/1     Pending             0          0s
+web-75577cb44f-bj46v   0/1     ContainerCreating   0          0s
+web-75577cb44f-vxn29   0/1     ContainerCreating   0          0s
+web-75577cb44f-zqjq8   0/1     ContainerCreating   0          0s
+web-75577cb44f-bj46v   0/1     ContainerCreating   0          0s
+web-75577cb44f-vxn29   0/1     ContainerCreating   0          1s
+web-68c5dfcd67-znsgm   0/1     Completed           0          7s
+web-68c5dfcd67-znsgm   0/1     Completed           0          7s
+web-75577cb44f-zqjq8   1/1     Running             0          1s
+web-68c5dfcd67-jwnqh   0/1     Completed           0          8s
+web-68c5dfcd67-jwnqh   0/1     Completed           0          8s
+web-68c5dfcd67-ckblt   0/1     Completed           0          8s
+web-68c5dfcd67-ckblt   0/1     Completed           0          8s
+web-75577cb44f-bj46v   1/1     Running             0          1s
+web-75577cb44f-vxn29   1/1     Running             0          1s
++ kubectl apply -n coursework -f submissions/10-kubernetes-core-objects/pod-lifecycle
+pod/lifecycle-01-running created
+pod/lifecycle-02-pending created
+pod/lifecycle-03-succeeded created
+pod/lifecycle-04-failed created
+pod/lifecycle-05-crashloopbackoff created
+pod/lifecycle-06-imagepullbackoff created
+pod/lifecycle-07-readiness created
+pod/lifecycle-08-liveness created
+pod/lifecycle-09-startup created
+pod/lifecycle-10-init-container created
+pod/lifecycle-11-multi-container created
+pod/lifecycle-12-termination created
++ sleep 20
++ kubectl get pods -n coursework -o wide
+NAME                            READY   STATUS             RESTARTS      AGE   IP            NODE         NOMINATED NODE   READINESS GATES
+blue-6b66bb585-268ft            1/1     Running            0             27s   10.244.0.17   coursework   <none>           <none>
+client                          1/1     Running            0             25s   10.244.0.19   coursework   <none>           <none>
+green-649d4984f7-ftcqd          1/1     Running            0             27s   10.244.0.18   coursework   <none>           <none>
+lifecycle-01-running            1/1     Running            0             20s   10.244.0.23   coursework   <none>           <none>
+lifecycle-02-pending            0/1     Pending            0             20s   <none>        <none>       <none>           <none>
+lifecycle-03-succeeded          0/1     Completed          0             20s   10.244.0.24   coursework   <none>           <none>
+lifecycle-04-failed             0/1     Error              0             20s   10.244.0.25   coursework   <none>           <none>
+lifecycle-05-crashloopbackoff   0/1     Error              2 (18s ago)   20s   10.244.0.26   coursework   <none>           <none>
+lifecycle-06-imagepullbackoff   0/1     ImagePullBackOff   0             20s   10.244.0.27   coursework   <none>           <none>
+lifecycle-07-readiness          1/1     Running            0             20s   10.244.0.28   coursework   <none>           <none>
+lifecycle-08-liveness           1/1     Running            0             20s   10.244.0.29   coursework   <none>           <none>
+lifecycle-09-startup            1/1     Running            0             20s   10.244.0.30   coursework   <none>           <none>
+lifecycle-10-init-container     1/1     Running            0             20s   10.244.0.31   coursework   <none>           <none>
+lifecycle-11-multi-container    2/2     Running            0             20s   10.244.0.32   coursework   <none>           <none>
+lifecycle-12-termination        1/1     Running            0             20s   10.244.0.33   coursework   <none>           <none>
+web-75577cb44f-bj46v            1/1     Running            0             21s   10.244.0.21   coursework   <none>           <none>
+web-75577cb44f-vxn29            1/1     Running            0             21s   10.244.0.22   coursework   <none>           <none>
+web-75577cb44f-zqjq8            1/1     Running            0             21s   10.244.0.20   coursework   <none>           <none>
++ kubectl describe pods -n coursework -l exercise=lifecycle
+Name:             lifecycle-01-running
+Namespace:        coursework
+Priority:         0
+Service Account:  default
+Node:             coursework/192.168.49.2
+Start Time:       Tue, 13 Oct 2026 18:42:02 +0000
+Labels:           exercise=lifecycle
+Annotations:      <none>
+Status:           Running
+IP:               10.244.0.23
+IPs:
+  IP:  10.244.0.23
+Containers:
+  app:
+    Container ID:   containerd://107892107ae607e2362240a99787d6b55ab6d7ecec61ada34120fe66548ccc53
+    Image:          nginx:stable-alpine
+    Image ID:       docker.io/library/nginx@sha256:0985e772fb9f729e6fa0980da05fca5d9c468e870eed43071545afa9d2e27d94
+    Port:           <none>
+    Host Port:      <none>
+    State:          Running
+      Started:      Tue, 13 Oct 2026 18:42:02 +0000
+    Ready:          True
+    Restart Count:  0
+    Environment:    <none>
+    Mounts:
+      /var/run/secrets/kubernetes.io/serviceaccount from kube-api-access-rz2jv (ro)
+Conditions:
+  Type                        Status
+  PodReadyToStartContainers   True 
+  Initialized                 True 
+  Ready                       True 
+  ContainersReady             True 
+  PodScheduled                True 
+Volumes:
+  kube-api-access-rz2jv:
+    Type:                    Projected (a volume that contains injected data from multiple sources)
+    TokenExpirationSeconds:  3607
+    ConfigMapName:           kube-root-ca.crt
+    Optional:                false
+    DownwardAPI:             true
+QoS Class:                   BestEffort
+Node-Selectors:              <none>
+Tolerations:                 node.kubernetes.io/not-ready:NoExecute op=Exists for 300s
+                             node.kubernetes.io/unreachable:NoExecute op=Exists for 300s
+
+
+Name:             lifecycle-02-pending
+Namespace:        coursework
+Priority:         0
+Service Account:  default
+Node:             <none>
+Labels:           exercise=lifecycle
+Annotations:      <none>
+Status:           Pending
+IP:               
+IPs:              <none>
+Containers:
+  app:
+    Image:      alpine:3.22
+    Port:       <none>
+    Host Port:  <none>
+    Command:
+      sleep
+      3600
+    Environment:  <none>
+    Mounts:
+      /var/run/secrets/kubernetes.io/serviceaccount from kube-api-access-7ggh9 (ro)
+Conditions:
+  Type           Status
+  PodScheduled   False 
+Volumes:
+  kube-api-access-7ggh9:
+    Type:                    Projected (a volume that contains injected data from multiple sources)
+    TokenExpirationSeconds:  3607
+    ConfigMapName:           kube-root-ca.crt
+    Optional:                false
+    DownwardAPI:             true
+QoS Class:                   BestEffort
+Node-Selectors:              nonexistent-lab-node=deliberate
+Tolerations:                 node.kubernetes.io/not-ready:NoExecute op=Exists for 300s
+                             node.kubernetes.io/unreachable:NoExecute op=Exists for 300s
+
+
+Name:             lifecycle-03-succeeded
+Namespace:        coursework
+Priority:         0
+Service Account:  default
+Node:             coursework/192.168.49.2
+Start Time:       Tue, 13 Oct 2026 18:42:02 +0000
+Labels:           exercise=lifecycle
+Annotations:      <none>
+Status:           Succeeded
+IP:               10.244.0.24
+IPs:
+  IP:  10.244.0.24
+Containers:
+  app:
+    Container ID:  containerd://19d182d10b712f59f7da7ef436c925599e43aea53f2961b959e1a231a1104d5d
+    Image:         alpine:3.22
+    Image ID:      docker.io/library/alpine@sha256:5291449c3df73caf6ed85e649dec1b9e818b39a5d8c871e97afc13e9cd5e8fa8
+    Port:          <none>
+    Host Port:     <none>
+    Command:
+      sh
+      -c
+      echo completed
+    State:          Terminated
+      Reason:       Completed
+      Exit Code:    0
+      Started:      Tue, 13 Oct 2026 18:42:02 +0000
+      Finished:     Tue, 13 Oct 2026 18:42:02 +0000
+    Ready:          False
+    Restart Count:  0
+    Environment:    <none>
+    Mounts:
+      /var/run/secrets/kubernetes.io/serviceaccount from kube-api-access-qxlk9 (ro)
+Conditions:
+  Type                        Status
+  PodReadyToStartContainers   False 
+  Initialized                 True 
+  Ready                       False 
+  ContainersReady             False 
+  PodScheduled                True 
+Volumes:
+  kube-api-access-qxlk9:
+    Type:                    Projected (a volume that contains injected data from multiple sources)
+    TokenExpirationSeconds:  3607
+    ConfigMapName:           kube-root-ca.crt
+    Optional:                false
+    DownwardAPI:             true
+QoS Class:                   BestEffort
+Node-Selectors:              <none>
+Tolerations:                 node.kubernetes.io/not-ready:NoExecute op=Exists for 300s
+                             node.kubernetes.io/unreachable:NoExecute op=Exists for 300s
+
+
+Name:             lifecycle-04-failed
+Namespace:        coursework
+Priority:         0
+Service Account:  default
+Node:             coursework/192.168.49.2
+Start Time:       Tue, 13 Oct 2026 18:42:02 +0000
+Labels:           exercise=lifecycle
+Annotations:      <none>
+Status:           Failed
+IP:               10.244.0.25
+IPs:
+  IP:  10.244.0.25
+Containers:
+  app:
+    Container ID:  containerd://85d8a241cb40fc1ee1fa03c0034db836030eae16e5eb43935adcbe140f4386b8
+    Image:         alpine:3.22
+    Image ID:      docker.io/library/alpine@sha256:5291449c3df73caf6ed85e649dec1b9e818b39a5d8c871e97afc13e9cd5e8fa8
+    Port:          <none>
+    Host Port:     <none>
+    Command:
+      sh
+      -c
+      exit 1
+    State:          Terminated
+      Reason:       Error
+      Exit Code:    1
+      Started:      Tue, 13 Oct 2026 18:42:02 +0000
+      Finished:     Tue, 13 Oct 2026 18:42:02 +0000
+    Ready:          False
+    Restart Count:  0
+    Environment:    <none>
+    Mounts:
+      /var/run/secrets/kubernetes.io/serviceaccount from kube-api-access-mjx87 (ro)
+Conditions:
+  Type                        Status
+  PodReadyToStartContainers   False 
+  Initialized                 True 
+  Ready                       False 
+  ContainersReady             False 
+  PodScheduled                True 
+Volumes:
+  kube-api-access-mjx87:
+    Type:                    Projected (a volume that contains injected data from multiple sources)
+    TokenExpirationSeconds:  3607
+    ConfigMapName:           kube-root-ca.crt
+    Optional:                false
+    DownwardAPI:             true
+QoS Class:                   BestEffort
+Node-Selectors:              <none>
+Tolerations:                 node.kubernetes.io/not-ready:NoExecute op=Exists for 300s
+                             node.kubernetes.io/unreachable:NoExecute op=Exists for 300s
+
+
+Name:             lifecycle-05-crashloopbackoff
+Namespace:        coursework
+Priority:         0
+Service Account:  default
+Node:             coursework/192.168.49.2
+Start Time:       Tue, 13 Oct 2026 18:42:02 +0000
+Labels:           exercise=lifecycle
+Annotations:      <none>
+Status:           Running
+IP:               10.244.0.26
+IPs:
+  IP:  10.244.0.26
+Containers:
+  app:
+    Container ID:  containerd://bff9829c9ef3928cdd62882c6a7136d472f4ad5c9914a628e24c433302d881e5
+    Image:         alpine:3.22
+    Image ID:      docker.io/library/alpine@sha256:5291449c3df73caf6ed85e649dec1b9e818b39a5d8c871e97afc13e9cd5e8fa8
+    Port:          <none>
+    Host Port:     <none>
+    Command:
+      sh
+      -c
+      exit 1
+    State:          Terminated
+      Reason:       Error
+      Exit Code:    1
+      Started:      Tue, 13 Oct 2026 18:42:17 +0000
+      Finished:     Tue, 13 Oct 2026 18:42:17 +0000
+    Last State:     Terminated
+      Reason:       Error
+      Exit Code:    1
+      Started:      Tue, 13 Oct 2026 18:42:04 +0000
+      Finished:     Tue, 13 Oct 2026 18:42:04 +0000
+    Ready:          False
+    Restart Count:  2
+    Environment:    <none>
+    Mounts:
+      /var/run/secrets/kubernetes.io/serviceaccount from kube-api-access-vxx25 (ro)
+Conditions:
+  Type                        Status
+  PodReadyToStartContainers   True 
+  Initialized                 True 
+  Ready                       False 
+  ContainersReady             False 
+  PodScheduled                True 
+Volumes:
+  kube-api-access-vxx25:
+    Type:                    Projected (a volume that contains injected data from multiple sources)
+    TokenExpirationSeconds:  3607
+    ConfigMapName:           kube-root-ca.crt
+    Optional:                false
+    DownwardAPI:             true
+QoS Class:                   BestEffort
+Node-Selectors:              <none>
+Tolerations:                 node.kubernetes.io/not-ready:NoExecute op=Exists for 300s
+                             node.kubernetes.io/unreachable:NoExecute op=Exists for 300s
+
+
+Name:             lifecycle-06-imagepullbackoff
+Namespace:        coursework
+Priority:         0
+Service Account:  default
+Node:             coursework/192.168.49.2
+Start Time:       Tue, 13 Oct 2026 18:42:02 +0000
+Labels:           exercise=lifecycle
+Annotations:      <none>
+Status:           Pending
+IP:               10.244.0.27
+IPs:
+  IP:  10.244.0.27
+Containers:
+  app:
+    Container ID:   
+    Image:          nginx:kitledger-missing-tag
+    Image ID:       
+    Port:           <none>
+    Host Port:      <none>
+    State:          Waiting
+      Reason:       ImagePullBackOff
+    Ready:          False
+    Restart Count:  0
+    Environment:    <none>
+    Mounts:
+      /var/run/secrets/kubernetes.io/serviceaccount from kube-api-access-crxbx (ro)
+Conditions:
+  Type                        Status
+  PodReadyToStartContainers   True 
+  Initialized                 True 
+  Ready                       False 
+  ContainersReady             False 
+  PodScheduled                True 
+Volumes:
+  kube-api-access-crxbx:
+    Type:                    Projected (a volume that contains injected data from multiple sources)
+    TokenExpirationSeconds:  3607
+    ConfigMapName:           kube-root-ca.crt
+    Optional:                false
+    DownwardAPI:             true
+QoS Class:                   BestEffort
+Node-Selectors:              <none>
+Tolerations:                 node.kubernetes.io/not-ready:NoExecute op=Exists for 300s
+                             node.kubernetes.io/unreachable:NoExecute op=Exists for 300s
+
+
+Name:             lifecycle-07-readiness
+Namespace:        coursework
+Priority:         0
+Service Account:  default
+Node:             coursework/192.168.49.2
+Start Time:       Tue, 13 Oct 2026 18:42:02 +0000
+Labels:           exercise=lifecycle
+Annotations:      <none>
+Status:           Running
+IP:               10.244.0.28
+IPs:
+  IP:  10.244.0.28
+Containers:
+  app:
+    Container ID:   containerd://af29d323a59c6fe16f7fb509ec46b423565aeffb1c2ef71d2ded09997aa48d0b
+    Image:          nginx:stable-alpine
+    Image ID:       docker.io/library/nginx@sha256:0985e772fb9f729e6fa0980da05fca5d9c468e870eed43071545afa9d2e27d94
+    Port:           <none>
+    Host Port:      <none>
+    State:          Running
+      Started:      Tue, 13 Oct 2026 18:42:03 +0000
+    Ready:          True
+    Restart Count:  0
+    Readiness:      http-get http://:80/ delay=0s timeout=1s period=3s successThreshold=1 failureThreshold=3
+    Environment:    <none>
+    Mounts:
+      /var/run/secrets/kubernetes.io/serviceaccount from kube-api-access-hx65p (ro)
+Conditions:
+  Type                        Status
+  PodReadyToStartContainers   True 
+  Initialized                 True 
+  Ready                       True 
+  ContainersReady             True 
+  PodScheduled                True 
+Volumes:
+  kube-api-access-hx65p:
+    Type:                    Projected (a volume that contains injected data from multiple sources)
+    TokenExpirationSeconds:  3607
+    ConfigMapName:           kube-root-ca.crt
+    Optional:                false
+    DownwardAPI:             true
+QoS Class:                   BestEffort
+Node-Selectors:              <none>
+Tolerations:                 node.kubernetes.io/not-ready:NoExecute op=Exists for 300s
+                             node.kubernetes.io/unreachable:NoExecute op=Exists for 300s
+
+
+Name:             lifecycle-08-liveness
+Namespace:        coursework
+Priority:         0
+Service Account:  default
+Node:             coursework/192.168.49.2
+Start Time:       Tue, 13 Oct 2026 18:42:02 +0000
+Labels:           exercise=lifecycle
+Annotations:      <none>
+Status:           Running
+IP:               10.244.0.29
+IPs:
+  IP:  10.244.0.29
+Containers:
+  app:
+    Container ID:   containerd://c7393f8d160d1b22afc478e997451961a0094a39785b84024542a72a5b2478cf
+    Image:          nginx:stable-alpine
+    Image ID:       docker.io/library/nginx@sha256:0985e772fb9f729e6fa0980da05fca5d9c468e870eed43071545afa9d2e27d94
+    Port:           <none>
+    Host Port:      <none>
+    State:          Running
+      Started:      Tue, 13 Oct 2026 18:42:03 +0000
+    Ready:          True
+    Restart Count:  0
+    Liveness:       http-get http://:80/ delay=0s timeout=1s period=3s successThreshold=1 failureThreshold=3
+    Environment:    <none>
+    Mounts:
+      /var/run/secrets/kubernetes.io/serviceaccount from kube-api-access-tjlpf (ro)
+Conditions:
+  Type                        Status
+  PodReadyToStartContainers   True 
+  Initialized                 True 
+  Ready                       True 
+  ContainersReady             True 
+  PodScheduled                True 
+Volumes:
+  kube-api-access-tjlpf:
+    Type:                    Projected (a volume that contains injected data from multiple sources)
+    TokenExpirationSeconds:  3607
+    ConfigMapName:           kube-root-ca.crt
+    Optional:                false
+    DownwardAPI:             true
+QoS Class:                   BestEffort
+Node-Selectors:              <none>
+Tolerations:                 node.kubernetes.io/not-ready:NoExecute op=Exists for 300s
+                             node.kubernetes.io/unreachable:NoExecute op=Exists for 300s
+
+
+Name:             lifecycle-09-startup
+Namespace:        coursework
+Priority:         0
+Service Account:  default
+Node:             coursework/192.168.49.2
+Start Time:       Tue, 13 Oct 2026 18:42:02 +0000
+Labels:           exercise=lifecycle
+Annotations:      <none>
+Status:           Running
+IP:               10.244.0.30
+IPs:
+  IP:  10.244.0.30
+Containers:
+  app:
+    Container ID:   containerd://84bab64200fcbb01c9caf37cc9eb5828d7e26e1e1b206677e19330554267d3b7
+    Image:          nginx:stable-alpine
+    Image ID:       docker.io/library/nginx@sha256:0985e772fb9f729e6fa0980da05fca5d9c468e870eed43071545afa9d2e27d94
+    Port:           <none>
+    Host Port:      <none>
+    State:          Running
+      Started:      Tue, 13 Oct 2026 18:42:03 +0000
+    Ready:          True
+    Restart Count:  0
+    Startup:        http-get http://:80/ delay=0s timeout=1s period=3s successThreshold=1 failureThreshold=3
+    Environment:    <none>
+    Mounts:
+      /var/run/secrets/kubernetes.io/serviceaccount from kube-api-access-b98xd (ro)
+Conditions:
+  Type                        Status
+  PodReadyToStartContainers   True 
+  Initialized                 True 
+  Ready                       True 
+  ContainersReady             True 
+  PodScheduled                True 
+Volumes:
+  kube-api-access-b98xd:
+    Type:                    Projected (a volume that contains injected data from multiple sources)
+    TokenExpirationSeconds:  3607
+    ConfigMapName:           kube-root-ca.crt
+    Optional:                false
+    DownwardAPI:             true
+QoS Class:                   BestEffort
+Node-Selectors:              <none>
+Tolerations:                 node.kubernetes.io/not-ready:NoExecute op=Exists for 300s
+                             node.kubernetes.io/unreachable:NoExecute op=Exists for 300s
+
+
+Name:             lifecycle-10-init-container
+Namespace:        coursework
+Priority:         0
+Service Account:  default
+Node:             coursework/192.168.49.2
+Start Time:       Tue, 13 Oct 2026 18:42:02 +0000
+Labels:           exercise=lifecycle
+Annotations:      <none>
+Status:           Running
+IP:               10.244.0.31
+IPs:
+  IP:  10.244.0.31
+Init Containers:
+  init:
+    Container ID:  containerd://98125a29bf8748f7ea913c76f8bcf7946bcbe276d238b784b7c7ecc1fb72c4f2
+    Image:         alpine:3.22
+    Image ID:      docker.io/library/alpine@sha256:5291449c3df73caf6ed85e649dec1b9e818b39a5d8c871e97afc13e9cd5e8fa8
+    Port:          <none>
+    Host Port:     <none>
+    Command:
+      sh
+      -c
+      echo init-complete
+    State:          Terminated
+      Reason:       Completed
+      Exit Code:    0
+      Started:      Tue, 13 Oct 2026 18:42:03 +0000
+      Finished:     Tue, 13 Oct 2026 18:42:03 +0000
+    Ready:          True
+    Restart Count:  0
+    Environment:    <none>
+    Mounts:
+      /var/run/secrets/kubernetes.io/serviceaccount from kube-api-access-x7zqj (ro)
+Containers:
+  app:
+    Container ID:   containerd://89b282d40d2ec5d7b95b1847abccf26bfaf764f05a2a29b84ae6c516043f2e57
+    Image:          nginx:stable-alpine
+    Image ID:       docker.io/library/nginx@sha256:0985e772fb9f729e6fa0980da05fca5d9c468e870eed43071545afa9d2e27d94
+    Port:           <none>
+    Host Port:      <none>
+    State:          Running
+      Started:      Tue, 13 Oct 2026 18:42:04 +0000
+    Ready:          True
+    Restart Count:  0
+    Environment:    <none>
+    Mounts:
+      /var/run/secrets/kubernetes.io/serviceaccount from kube-api-access-x7zqj (ro)
+Conditions:
+  Type                        Status
+  PodReadyToStartContainers   True 
+  Initialized                 True 
+  Ready                       True 
+  ContainersReady             True 
+  PodScheduled                True 
+Volumes:
+  kube-api-access-x7zqj:
+    Type:                    Projected (a volume that contains injected data from multiple sources)
+    TokenExpirationSeconds:  3607
+    ConfigMapName:           kube-root-ca.crt
+    Optional:                false
+    DownwardAPI:             true
+QoS Class:                   BestEffort
+Node-Selectors:              <none>
+Tolerations:                 node.kubernetes.io/not-ready:NoExecute op=Exists for 300s
+                             node.kubernetes.io/unreachable:NoExecute op=Exists for 300s
+
+
+Name:             lifecycle-11-multi-container
+Namespace:        coursework
+Priority:         0
+Service Account:  default
+Node:             coursework/192.168.49.2
+Start Time:       Tue, 13 Oct 2026 18:42:02 +0000
+Labels:           exercise=lifecycle
+Annotations:      <none>
+Status:           Running
+IP:               10.244.0.32
+IPs:
+  IP:  10.244.0.32
+Containers:
+  app:
+    Container ID:   containerd://d35649943db2d26daf260d6c844d5192d2317f0a12f02c749bcd14a3c553a55d
+    Image:          nginx:stable-alpine
+    Image ID:       docker.io/library/nginx@sha256:0985e772fb9f729e6fa0980da05fca5d9c468e870eed43071545afa9d2e27d94
+    Port:           <none>
+    Host Port:      <none>
+    State:          Running
+      Started:      Tue, 13 Oct 2026 18:42:03 +0000
+    Ready:          True
+    Restart Count:  0
+    Environment:    <none>
+    Mounts:
+      /var/run/secrets/kubernetes.io/serviceaccount from kube-api-access-6n5k4 (ro)
+  sidecar:
+    Container ID:  containerd://e5ff339430e42978c403eb1dfd4fa15c1e00b7e8c6621c3f9fad75128cc3b75d
+    Image:         alpine:3.22
+    Image ID:      docker.io/library/alpine@sha256:5291449c3df73caf6ed85e649dec1b9e818b39a5d8c871e97afc13e9cd5e8fa8
+    Port:          <none>
+    Host Port:     <none>
+    Command:
+      sh
+      -c
+      while true; do echo sidecar-alive; sleep 10; done
+    State:          Running
+      Started:      Tue, 13 Oct 2026 18:42:03 +0000
+    Ready:          True
+    Restart Count:  0
+    Environment:    <none>
+    Mounts:
+      /var/run/secrets/kubernetes.io/serviceaccount from kube-api-access-6n5k4 (ro)
+Conditions:
+  Type                        Status
+  PodReadyToStartContainers   True 
+  Initialized                 True 
+  Ready                       True 
+  ContainersReady             True 
+  PodScheduled                True 
+Volumes:
+  kube-api-access-6n5k4:
+    Type:                    Projected (a volume that contains injected data from multiple sources)
+    TokenExpirationSeconds:  3607
+    ConfigMapName:           kube-root-ca.crt
+    Optional:                false
+    DownwardAPI:             true
+QoS Class:                   BestEffort
+Node-Selectors:              <none>
+Tolerations:                 node.kubernetes.io/not-ready:NoExecute op=Exists for 300s
+                             node.kubernetes.io/unreachable:NoExecute op=Exists for 300s
+
+
+Name:             lifecycle-12-termination
+Namespace:        coursework
+Priority:         0
+Service Account:  default
+Node:             coursework/192.168.49.2
+Start Time:       Tue, 13 Oct 2026 18:42:02 +0000
+Labels:           exercise=lifecycle
+Annotations:      <none>
+Status:           Running
+IP:               10.244.0.33
+IPs:
+  IP:  10.244.0.33
+Containers:
+  app:
+    Container ID:  containerd://4402ed9b1c13e7dd73064b7080f60ed71c71372ce802769880c1a0854c243e75
+    Image:         alpine:3.22
+    Image ID:      docker.io/library/alpine@sha256:5291449c3df73caf6ed85e649dec1b9e818b39a5d8c871e97afc13e9cd5e8fa8
+    Port:          <none>
+    Host Port:     <none>
+    Command:
+      sh
+      -c
+      trap 'echo TERM; exit 0' TERM; while true; do sleep 1; done
+    State:          Running
+      Started:      Tue, 13 Oct 2026 18:42:03 +0000
+    Ready:          True
+    Restart Count:  0
+    Environment:    <none>
+    Mounts:
+      /var/run/secrets/kubernetes.io/serviceaccount from kube-api-access-9sr8r (ro)
+Conditions:
+  Type                        Status
+  PodReadyToStartContainers   True 
+  Initialized                 True 
+  Ready                       True 
+  ContainersReady             True 
+  PodScheduled                True 
+Volumes:
+  kube-api-access-9sr8r:
+    Type:                    Projected (a volume that contains injected data from multiple sources)
+    TokenExpirationSeconds:  3607
+    ConfigMapName:           kube-root-ca.crt
+    Optional:                false
+    DownwardAPI:             true
+QoS Class:                   BestEffort
+Node-Selectors:              <none>
+Tolerations:                 node.kubernetes.io/not-ready:NoExecute op=Exists for 300s
+                             node.kubernetes.io/unreachable:NoExecute op=Exists for 300s

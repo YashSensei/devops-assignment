@@ -1,0 +1,144 @@
++ test true = true
+++ mktemp -d /tmp/kitledger-cheats.XXXXXX
++ lab=/tmp/kitledger-cheats.cz8riP
++ touch /tmp/kitledger-cheats.cz8riP/example.txt
++ printf 'Yash Agrawal\n24bcs10164\n'
++ cp /tmp/kitledger-cheats.cz8riP/example.txt /tmp/kitledger-cheats.cz8riP/copy.txt
++ mv /tmp/kitledger-cheats.cz8riP/copy.txt /tmp/kitledger-cheats.cz8riP/renamed.txt
++ cat /tmp/kitledger-cheats.cz8riP/renamed.txt
+Yash Agrawal
+24bcs10164
++ more /tmp/kitledger-cheats.cz8riP/renamed.txt
+::::::::::::::
+/tmp/kitledger-cheats.cz8riP/renamed.txt
+::::::::::::::
+Yash Agrawal
+24bcs10164
++ head -n 1 /tmp/kitledger-cheats.cz8riP/renamed.txt
+Yash Agrawal
++ tail -n 1 /tmp/kitledger-cheats.cz8riP/renamed.txt
+24bcs10164
++ grep -n Yash /tmp/kitledger-cheats.cz8riP/renamed.txt
+1:Yash Agrawal
++ file /tmp/kitledger-cheats.cz8riP/renamed.txt
+/tmp/kitledger-cheats.cz8riP/renamed.txt: ASCII text
++ stat /tmp/kitledger-cheats.cz8riP/renamed.txt
+  File: /tmp/kitledger-cheats.cz8riP/renamed.txt
+  Size: 24        	Blocks: 8          IO Block: 4096   regular file
+Device: 8,1	Inode: 9176026     Links: 1
+Access: (0644/-rw-r--r--)  Uid: ( 1001/  runner)   Gid: ( 1001/  runner)
+Access: 2026-10-13 18:52:19.170300704 +0000
+Modify: 2026-10-13 18:52:19.168707119 +0000
+Change: 2026-10-13 18:52:19.169300722 +0000
+ Birth: 2026-10-13 18:52:19.167300758 +0000
++ umask
+0022
++ chmod 640 /tmp/kitledger-cheats.cz8riP/renamed.txt
+++ id -u
+++ id -g
++ chown 1001:1001 /tmp/kitledger-cheats.cz8riP/renamed.txt
++ top -b -n 1
++ head -n 20 /tmp/kitledger-cheats.cz8riP/top.txt
+top - 18:52:19 up 1 min,  0 user,  load average: 0.35, 0.15, 0.05
+Tasks: 164 total,   1 running, 163 sleeping,   0 stopped,   0 zombie
+%Cpu(s):  0.0 us,  0.0 sy,  0.0 ni, 97.7 id,  2.3 wa,  0.0 hi,  0.0 si,  0.0 st 
+MiB Mem :  15989.7 total,  11919.9 free,    993.7 used,   3456.8 buff/cache     
+MiB Swap:   3072.0 total,   3072.0 free,      0.0 used.  14996.0 avail Mem 
+
+    PID USER      PR  NI    VIRT    RES    SHR S  %CPU  %MEM     TIME+ COMMAND
+   2172 runner    20   0  261.7g 121548  81800 S  90.9   0.7   0:01.46 Runner.+
+      1 root      20   0   22908  14408   9856 S   0.0   0.1   0:03.34 systemd
+      2 root      20   0       0      0      0 S   0.0   0.0   0:00.00 kthreadd
+      3 root      20   0       0      0      0 S   0.0   0.0   0:00.00 pool_wo+
+      4 root       0 -20       0      0      0 I   0.0   0.0   0:00.00 kworker+
+      5 root       0 -20       0      0      0 I   0.0   0.0   0:00.00 kworker+
+      6 root       0 -20       0      0      0 I   0.0   0.0   0:00.00 kworker+
+      7 root       0 -20       0      0      0 I   0.0   0.0   0:00.00 kworker+
+      8 root       0 -20       0      0      0 I   0.0   0.0   0:00.00 kworker+
+      9 root      20   0       0      0      0 I   0.0   0.0   0:00.00 kworker+
+     10 root       0 -20       0      0      0 I   0.0   0.0   0:00.01 kworker+
+     11 root      20   0       0      0      0 I   0.0   0.0   0:00.25 kworker+
+     12 root      20   0       0      0      0 I   0.0   0.0   0:00.58 kworker+
++ free -h
+               total        used        free      shared  buff/cache   available
+Mem:            15Gi       996Mi        11Gi        41Mi       3.4Gi        14Gi
+Swap:          3.0Gi          0B       3.0Gi
++ vmstat 1 2
+procs -----------memory---------- ---swap-- -----io---- -system-- -------cpu-------
+ r  b   swpd   free   buff  cache   si   so    bi    bo   in   cs us sy id wa st gu
+ 4  0      0 12202912  97180 3443536    0    0  9727 48710 2366    7  6  4 87  3  0  0
+ 0  0      0 12203352  97180 3444780    0    0     0     0  800  753  7  1 92  0  0  0
++ uptime
+ 18:52:20 up 1 min,  0 user,  load average: 0.35, 0.15, 0.05
++ hostname
+runnervmmprz5
++ whoami
+runner
++ who
++ w
+ 18:52:20 up 1 min,  0 user,  load average: 0.35, 0.15, 0.05
+USER     TTY      FROM             LOGIN@   IDLE   JCPU   PCPU  WHAT
++ date --iso-8601=seconds
+2026-10-13T18:52:20+00:00
++ lsblk
+NAME    MAJ:MIN RM  SIZE RO TYPE MOUNTPOINTS
+sda       8:0    0  150G  0 disk 
+├─sda1    8:1    0  149G  0 part /
+├─sda14   8:14   0    4M  0 part 
+├─sda15   8:15   0  106M  0 part /boot/efi
+└─sda16 259:0    0  913M  0 part /boot
++ mount
++ head -n 20
+/dev/sda1 on / type ext4 (rw,relatime,discard,journal_async_commit,nobarrier,errors=remount-ro,commit=30,data=writeback)
+devtmpfs on /dev type devtmpfs (rw,nosuid,noexec,relatime,size=8181664k,nr_inodes=2045416,mode=755,inode64)
+proc on /proc type proc (rw,nosuid,nodev,noexec,relatime)
+sysfs on /sys type sysfs (rw,nosuid,nodev,noexec,relatime)
+securityfs on /sys/kernel/security type securityfs (rw,nosuid,nodev,noexec,relatime)
+tmpfs on /dev/shm type tmpfs (rw,nosuid,nodev,inode64)
+devpts on /dev/pts type devpts (rw,nosuid,noexec,relatime,gid=5,mode=620,ptmxmode=000)
+tmpfs on /run type tmpfs (rw,nosuid,nodev,size=3274692k,nr_inodes=819200,mode=755,inode64)
+tmpfs on /run/lock type tmpfs (rw,nosuid,nodev,noexec,relatime,size=5120k,inode64)
+cgroup2 on /sys/fs/cgroup type cgroup2 (rw,nosuid,nodev,noexec,relatime,nsdelegate,memory_recursiveprot)
+none on /sys/fs/pstore type pstore (rw,nosuid,nodev,noexec,relatime)
+efivarfs on /sys/firmware/efi/efivars type efivarfs (rw,nosuid,nodev,noexec,relatime)
+bpf on /sys/fs/bpf type bpf (rw,nosuid,nodev,noexec,relatime,mode=700)
+systemd-1 on /proc/sys/fs/binfmt_misc type autofs (rw,relatime,fd=32,pgrp=1,timeout=0,minproto=5,maxproto=5,direct,pipe_ino=2304)
+hugetlbfs on /dev/hugepages type hugetlbfs (rw,nosuid,nodev,relatime,pagesize=2M)
+mqueue on /dev/mqueue type mqueue (rw,nosuid,nodev,noexec,relatime)
+debugfs on /sys/kernel/debug type debugfs (rw,nosuid,nodev,noexec,relatime)
+tracefs on /sys/kernel/tracing type tracefs (rw,nosuid,nodev,noexec,relatime)
+fusectl on /sys/fs/fuse/connections type fusectl (rw,nosuid,nodev,noexec,relatime)
+configfs on /sys/kernel/config type configfs (rw,nosuid,nodev,noexec,relatime)
++ child=2367
++ nice -n 10 sleep 60
++ renice -n 15 -p 2367
+2367 (process ID) old priority 0, new priority 15
++ ps -p 2367 -o pid,ni,args
+    PID  NI COMMAND
+   2367  10 sleep 60
++ kill 2367
++ wait 2367
++ true
++ wait
++ nohup sleep 1
++ du -sh /tmp/kitledger-cheats.cz8riP
+28K	/tmp/kitledger-cheats.cz8riP
++ df -h /tmp/kitledger-cheats.cz8riP
+Filesystem      Size  Used Avail Use% Mounted on
+/dev/root       145G   60G   86G  41% /
++ ls -ltr /tmp/kitledger-cheats.cz8riP
+total 24
+-rw-r--r-- 1 runner runner    24 Oct 13 18:52 example.txt
+-rw-r----- 1 runner runner    24 Oct 13 18:52 renamed.txt
+-rw-r--r-- 1 runner runner 13515 Oct 13 18:52 top.txt
+-rw-r--r-- 1 runner runner     0 Oct 13 18:52 nohup.txt
++ printf '%s\n' /tmp/kitledger-cheats.cz8riP/example.txt /tmp/kitledger-cheats.cz8riP/renamed.txt
++ xargs wc -l
+ 2 /tmp/kitledger-cheats.cz8riP/example.txt
+ 2 /tmp/kitledger-cheats.cz8riP/renamed.txt
+ 4 total
++ alias 'll=ls -alF'
++ alias ll
+alias ll='ls -alF'
++ rm /tmp/kitledger-cheats.cz8riP/example.txt /tmp/kitledger-cheats.cz8riP/renamed.txt /tmp/kitledger-cheats.cz8riP/top.txt /tmp/kitledger-cheats.cz8riP/nohup.txt
++ rmdir /tmp/kitledger-cheats.cz8riP

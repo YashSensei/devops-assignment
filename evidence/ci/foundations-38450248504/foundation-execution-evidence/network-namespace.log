@@ -1,0 +1,56 @@
++ test true = true
++ namespace=kitledger-network-lab
++ sudo ip netns add kitledger-network-lab
++ trap 'sudo ip netns delete kitledger-network-lab' EXIT
++ sudo ip -n kitledger-network-lab link add demo0 type dummy
++ sudo ip -n kitledger-network-lab addr add 192.0.2.10/24 dev demo0
++ sudo ip -n kitledger-network-lab link set demo0 up
++ sudo ip -n kitledger-network-lab link set demo0 mtu 1400
++ sudo ip -n kitledger-network-lab -s link
+1: lo: <LOOPBACK> mtu 65536 qdisc noop state DOWN mode DEFAULT group default qlen 1000
+    link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
+    RX:  bytes packets errors dropped  missed   mcast           
+             0       0      0       0       0       0 
+    TX:  bytes packets errors dropped carrier collsns           
+             0       0      0       0       0       0 
+2: demo0: <BROADCAST,NOARP,UP,LOWER_UP> mtu 1400 qdisc noqueue state UNKNOWN mode DEFAULT group default qlen 1000
+    link/ether 3e:f8:4a:b3:e4:12 brd ff:ff:ff:ff:ff:ff
+    RX:  bytes packets errors dropped  missed   mcast           
+             0       0      0       0       0       0 
+    TX:  bytes packets errors dropped carrier collsns           
+            70       1      0       0       0       0 
++ sudo ip -n kitledger-network-lab addr
+1: lo: <LOOPBACK> mtu 65536 qdisc noop state DOWN group default qlen 1000
+    link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
+2: demo0: <BROADCAST,NOARP,UP,LOWER_UP> mtu 1400 qdisc noqueue state UNKNOWN group default qlen 1000
+    link/ether 3e:f8:4a:b3:e4:12 brd ff:ff:ff:ff:ff:ff
+    inet 192.0.2.10/24 scope global demo0
+       valid_lft forever preferred_lft forever
+    inet6 fe80::3cf8:4aff:feb3:e412/64 scope link 
+       valid_lft forever preferred_lft forever
++ sudo ip -n kitledger-network-lab route
+192.0.2.0/24 dev demo0 proto kernel scope link src 192.0.2.10 
++ sudo ip -n kitledger-network-lab route add 198.51.100.0/24 via 192.0.2.1 dev demo0
++ sudo ip -n kitledger-network-lab route get 198.51.100.10
+198.51.100.10 via 192.0.2.1 dev demo0 src 192.0.2.10 uid 0 
+    cache 
++ sudo ip -n kitledger-network-lab route replace 198.51.100.0/24 dev demo0
++ sudo ip -n kitledger-network-lab neigh add 192.0.2.1 lladdr 02:00:00:00:00:01 dev demo0
++ sudo ip -n kitledger-network-lab neigh
+192.0.2.1 dev demo0 lladdr 02:00:00:00:00:01 PERMANENT 
++ sudo ip -n kitledger-network-lab neigh replace 192.0.2.1 lladdr 02:00:00:00:00:02 dev demo0
++ sudo ip -n kitledger-network-lab neigh del 192.0.2.1 dev demo0
++ sudo ip -n kitledger-network-lab maddr
+1:	lo
+	inet6 ff02::1
+	inet6 ff01::1
+2:	demo0
+	link  33:33:00:00:00:01
+	link  01:00:5e:00:00:01
+	inet  224.0.0.1
+	inet6 ff02::1
+	inet6 ff01::1
++ sudo ip -n kitledger-network-lab route del 198.51.100.0/24 dev demo0
++ sudo ip -n kitledger-network-lab addr del 192.0.2.10/24 dev demo0
++ sudo ip -n kitledger-network-lab link set demo0 down
++ sudo ip netns delete kitledger-network-lab

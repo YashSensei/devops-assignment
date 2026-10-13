@@ -17,14 +17,13 @@ this work. Automated test video is not a narrated student presentation.
 8. Explain namespace, replicas, Services, Ingress controller, PVC, probes and HPA.
 9. Generate traffic; show actual /metrics, Prometheus Targets UP and a populated
    Grafana panel. Explain what a clean scan does and does not establish.
-10. Explain Terraform VPC/EKS/node group and storage identity. Capture authenticated
-    AWS Console screenshots while approved resources still exist.
+10. Explain Terraform VPC/EKS/node group and storage identity. Disclose that AWS
+    execution was omitted at the student's request; validation is not deployment.
 11. Break and diagnose an image or Service selector, then show repaired traffic.
 12. Suspend GitOps and demonstrate scoped cleanup. Keep destroy evidence.
 
-Before paid labs: schedule the console screenshots and presentation recording;
-confirm account, region, resource counts, hourly/total estimate and runtime.
-After teardown there is no permanent cloud website to promise.
+AWS is not being provisioned. Seek instructor acceptance of missing cloud runtime
+evidence. Disposable CI teardown leaves no permanent hosted website to promise.
 
 Suggested narration: 8–12 minutes, followed by questions. Explain in your own
 words why returning equipment preserves history, why migrations are serialized,

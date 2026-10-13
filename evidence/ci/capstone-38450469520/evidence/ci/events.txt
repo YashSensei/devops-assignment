@@ -1,0 +1,50 @@
+LAST SEEN   TYPE      REASON                  OBJECT                                  MESSAGE
+3m8s        Normal    SuccessfulCreate        replicaset/frontend-5c56df57f           Created pod: frontend-5c56df57f-g6zm4
+3m8s        Normal    Scheduled               pod/postgres-0                          Successfully assigned kitledger/postgres-0 to kitledger-ci
+3m8s        Normal    SuccessfulCreate        statefulset/postgres                    Create Pod postgres-0 in StatefulSet postgres successful
+3m8s        Normal    SuccessfulCreate        statefulset/postgres                    Create Claim data-postgres-0 Pod postgres-0 in StatefulSet postgres success
+3m8s        Normal    Pulling                 pod/postgres-0                          Pulling image "postgres:17-alpine"
+3m8s        Warning   FailedScheduling        pod/postgres-0                          0/1 nodes are available: pod has unbound immediate PersistentVolumeClaims. not found
+3m8s        Normal    Scheduled               pod/backend-6cff9f59cb-x8694            Successfully assigned kitledger/backend-6cff9f59cb-x8694 to kitledger-ci
+3m8s        Normal    ScalingReplicaSet       deployment/frontend                     Scaled up replica set frontend-5c56df57f from 0 to 2
+3m8s        Normal    SuccessfulCreate        replicaset/frontend-5c56df57f           Created pod: frontend-5c56df57f-lggjb
+3m8s        Normal    Scheduled               pod/backend-6cff9f59cb-74g8c            Successfully assigned kitledger/backend-6cff9f59cb-74g8c to kitledger-ci
+3m8s        Normal    Pulling                 pod/frontend-5c56df57f-lggjb            Pulling image "busybox:1.37"
+3m8s        Normal    Scheduled               pod/frontend-5c56df57f-lggjb            Successfully assigned kitledger/frontend-5c56df57f-lggjb to kitledger-ci
+3m8s        Normal    SuccessfulCreate        replicaset/backend-6cff9f59cb           Created pod: backend-6cff9f59cb-x8694
+3m8s        Normal    SuccessfulCreate        replicaset/backend-6cff9f59cb           Created pod: backend-6cff9f59cb-74g8c
+3m8s        Normal    ScalingReplicaSet       deployment/backend                      Scaled up replica set backend-6cff9f59cb from 0 to 2
+3m8s        Normal    Provisioning            persistentvolumeclaim/data-postgres-0   External provisioner is provisioning volume for claim "kitledger/data-postgres-0"
+3m8s        Normal    ExternalProvisioning    persistentvolumeclaim/data-postgres-0   Waiting for a volume to be created either by the external provisioner 'k8s.io/minikube-hostpath' or manually by the system administrator. If volume creation is delayed, please verify that the provisioner is running and correctly registered.
+3m8s        Normal    ProvisioningSucceeded   persistentvolumeclaim/data-postgres-0   Successfully provisioned volume pvc-5b1f9f82-fc09-45af-9b29-20858322bfdd
+3m8s        Normal    Scheduled               pod/frontend-5c56df57f-g6zm4            Successfully assigned kitledger/frontend-5c56df57f-g6zm4 to kitledger-ci
+3m8s        Normal    Pulling                 pod/frontend-5c56df57f-g6zm4            Pulling image "busybox:1.37"
+3m7s        Normal    Pulled                  pod/frontend-5c56df57f-g6zm4            Successfully pulled image "busybox:1.37" in 1.042s (1.042s including waiting). Image size: 2222118 bytes.
+3m7s        Normal    Created                 pod/frontend-5c56df57f-g6zm4            Container created
+3m7s        Normal    Started                 pod/frontend-5c56df57f-g6zm4            Container started
+3m7s        Normal    Pulled                  pod/frontend-5c56df57f-lggjb            Successfully pulled image "busybox:1.37" in 357ms (1.376s including waiting). Image size: 2222118 bytes.
+3m7s        Normal    Created                 pod/frontend-5c56df57f-lggjb            Container created
+3m6s        Normal    Started                 pod/frontend-5c56df57f-lggjb            Container started
+3m2s        Normal    Pulled                  pod/postgres-0                          Successfully pulled image "postgres:17-alpine" in 4.802s (5.861s including waiting). Image size: 117212703 bytes.
+3m2s        Normal    Started                 pod/postgres-0                          Container started
+3m2s        Normal    Created                 pod/postgres-0                          Container created
+3m1s        Warning   Unhealthy               pod/postgres-0                          Readiness probe failed: /var/run/postgresql:5432 - no response
+2m58s       Warning   BackOff                 pod/backend-6cff9f59cb-74g8c            Back-off restarting failed container backend in pod backend-6cff9f59cb-74g8c_kitledger(9113e3df-5fe5-4f7f-be53-3c453c5e8aea)
+2m58s       Warning   BackOff                 pod/backend-6cff9f59cb-x8694            Back-off restarting failed container backend in pod backend-6cff9f59cb-x8694_kitledger(1e70879f-4ec7-47cc-b93a-c8e618d81669)
+2m51s       Normal    Pulled                  pod/backend-6cff9f59cb-x8694            Container image "ghcr.io/yashsensei/kitledger-backend:78c9dc0a78584735c8c96be11b79697fc2036075" already present on machine and can be accessed by the pod
+2m51s       Normal    Created                 pod/backend-6cff9f59cb-74g8c            Container created
+2m51s       Normal    Started                 pod/backend-6cff9f59cb-74g8c            Container started
+2m51s       Normal    Started                 pod/backend-6cff9f59cb-x8694            Container started
+2m51s       Normal    Created                 pod/backend-6cff9f59cb-x8694            Container created
+2m51s       Normal    Pulled                  pod/backend-6cff9f59cb-74g8c            Container image "ghcr.io/yashsensei/kitledger-backend:78c9dc0a78584735c8c96be11b79697fc2036075" already present on machine and can be accessed by the pod
+2m50s       Warning   Unhealthy               pod/backend-6cff9f59cb-x8694            Startup probe failed: Get "http://10.244.0.7:8000/health": dial tcp 10.244.0.7:8000: connect: connection refused
+2m50s       Warning   Unhealthy               pod/backend-6cff9f59cb-74g8c            Startup probe failed: Get "http://10.244.0.8:8000/health": dial tcp 10.244.0.8:8000: connect: connection refused
+2m45s       Normal    Started                 pod/frontend-5c56df57f-g6zm4            Container started
+2m45s       Normal    Created                 pod/frontend-5c56df57f-g6zm4            Container created
+2m45s       Warning   Unhealthy               pod/frontend-5c56df57f-g6zm4            Readiness probe failed: Get "http://10.244.0.6:8080/": dial tcp 10.244.0.6:8080: connect: connection refused
+2m45s       Normal    Pulled                  pod/frontend-5c56df57f-g6zm4            Container image "ghcr.io/yashsensei/kitledger-frontend:78c9dc0a78584735c8c96be11b79697fc2036075" already present on machine and can be accessed by the pod
+2m24s       Normal    Sync                    ingress/kitledger                       Scheduled for sync
+31s         Warning   Unhealthy               pod/frontend-5c56df57f-lggjb            Readiness probe failed: Get "http://10.244.0.9:8080/": dial tcp 10.244.0.9:8080: connect: connection refused
+31s         Normal    Started                 pod/frontend-5c56df57f-lggjb            Container started
+31s         Normal    Created                 pod/frontend-5c56df57f-lggjb            Container created
+31s         Normal    Pulled                  pod/frontend-5c56df57f-lggjb            Container image "ghcr.io/yashsensei/kitledger-frontend:78c9dc0a78584735c8c96be11b79697fc2036075" already present on machine and can be accessed by the pod

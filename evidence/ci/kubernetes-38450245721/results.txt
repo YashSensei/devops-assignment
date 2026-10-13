@@ -1,0 +1,6 @@
+10-kubernetes-core-objects exit=0
+11-kubernetes-services exit=0
+12-kubernetes-config-ingress exit=0
+13-storage-hpa-probes exit=0
+14-troubleshooting exit=0
+15-helm exit=0

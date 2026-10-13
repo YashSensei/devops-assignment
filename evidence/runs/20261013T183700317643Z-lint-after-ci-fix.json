@@ -1,0 +1,16 @@
+{
+  "timestamp_utc": "2026-10-13T18:37:00.317643+00:00",
+  "revision": "8897516a4129add5e4f7c322396ab0e089377924",
+  "dirty": true,
+  "environment": "Windows-11-10.0.26200-SP0",
+  "cwd": "C:\\Users\\yasha\\OneDrive\\Desktop\\bigones\\devops-assignment\\session21-python\\backend",
+  "command": [
+    "C:\\Users\\yasha\\OneDrive\\Desktop\\bigones\\devops-assignment\\session21-python\\backend\\.venv\\Scripts\\ruff.exe",
+    "check",
+    "app",
+    "tests",
+    "alembic"
+  ],
+  "exit_code": 0,
+  "output": "All checks passed!\n"
+}

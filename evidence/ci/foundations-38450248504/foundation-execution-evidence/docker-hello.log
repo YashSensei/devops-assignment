@@ -1,0 +1,698 @@
+++ dirname session6-7-docker/verify.sh
++ cd session6-7-docker
++ apps=(nodejs-app python-app java-app Apache-app React-app nginx-app multi-stage-dockerfile)
++ for i in "${!apps[@]}"
++ app=nodejs-app
++ port=8101
++ inner=8080
++ '[' nodejs-app '!=' Apache-app ']'
++ '[' nodejs-app '!=' multi-stage-dockerfile ']'
++ name=yash-24bcs10164-hello-0
++ docker build -t yash-24bcs10164-hello-0:lab nodejs-app
+#0 building with "default" instance using docker driver
+
+#1 [internal] load build definition from Dockerfile
+#1 transferring dockerfile: 134B 0.0s done
+#1 DONE 0.0s
+
+#2 [internal] load metadata for docker.io/library/node:22-alpine
+#2 ...
+
+#3 [auth] library/node:pull token for registry-1.docker.io
+#3 DONE 0.0s
+
+#2 [internal] load metadata for docker.io/library/node:22-alpine
+#2 DONE 0.9s
+
+#4 [internal] load .dockerignore
+#4 transferring context: 2B done
+#4 DONE 0.0s
+
+#5 [internal] load build context
+#5 transferring context: 254B done
+#5 DONE 0.0s
+
+#6 [1/3] FROM docker.io/library/node:22-alpine@sha256:0a7108bf6c7bf5de370ffb1a3ed6be93d405b43ff159f681a8d18c0e2bc2e402
+#6 resolve docker.io/library/node:22-alpine@sha256:0a7108bf6c7bf5de370ffb1a3ed6be93d405b43ff159f681a8d18c0e2bc2e402 done
+#6 sha256:0a7108bf6c7bf5de370ffb1a3ed6be93d405b43ff159f681a8d18c0e2bc2e402 6.41kB / 6.41kB done
+#6 sha256:2c752226d477b4a886378baa95b9af252be59301b725fdb0b7e15208131505a8 1.72kB / 1.72kB done
+#6 sha256:7c3b093add7c43400ee83b815ab2cda98794a10045bcf76ce9bb2f89b97cbc5c 6.48kB / 6.48kB done
+#6 sha256:f7f2d304681aaa935c9cfd180850cf616ae843efce7682873d6521ded7268937 0B / 55.59MB 0.1s
+#6 sha256:e554276b05e6306c5ad33cd85bfa7f0693083e21f6114db5abf60a20fb413039 0B / 1.26MB 0.1s
+#6 sha256:d39db1cf9caa4f49c5a2e67111fbe6e0d5eea8ede550cb82f3dc2b79712688d6 447B / 447B 0.1s done
+#6 sha256:f7f2d304681aaa935c9cfd180850cf616ae843efce7682873d6521ded7268937 24.12MB / 55.59MB 0.3s
+#6 sha256:e554276b05e6306c5ad33cd85bfa7f0693083e21f6114db5abf60a20fb413039 1.26MB / 1.26MB 0.2s done
+#6 sha256:f7f2d304681aaa935c9cfd180850cf616ae843efce7682873d6521ded7268937 46.14MB / 55.59MB 0.4s
+#6 sha256:f7f2d304681aaa935c9cfd180850cf616ae843efce7682873d6521ded7268937 55.59MB / 55.59MB 0.5s done
+#6 extracting sha256:f7f2d304681aaa935c9cfd180850cf616ae843efce7682873d6521ded7268937
+#6 extracting sha256:f7f2d304681aaa935c9cfd180850cf616ae843efce7682873d6521ded7268937 1.3s done
+#6 extracting sha256:e554276b05e6306c5ad33cd85bfa7f0693083e21f6114db5abf60a20fb413039
+#6 extracting sha256:e554276b05e6306c5ad33cd85bfa7f0693083e21f6114db5abf60a20fb413039 0.0s done
+#6 extracting sha256:d39db1cf9caa4f49c5a2e67111fbe6e0d5eea8ede550cb82f3dc2b79712688d6 done
+#6 DONE 2.1s
+
+#7 [2/3] WORKDIR /app
+#7 DONE 0.0s
+
+#8 [3/3] COPY server.js .
+#8 DONE 0.0s
+
+#9 exporting to image
+#9 exporting layers
+#9 exporting layers 0.3s done
+#9 writing image sha256:52a645050dbc14a5d736fad7f94251139bc3ac5ba697689e7bf1c1be9c664455 done
+#9 naming to docker.io/library/yash-24bcs10164-hello-0:lab done
+#9 DONE 0.3s
++ docker run -d --name yash-24bcs10164-hello-0 -p 127.0.0.1:8101:8080 yash-24bcs10164-hello-0:lab
+567830f205356f40755b0a9f9e7e4752164ea8f0910a2686dc8f02d4c1fe4481
++ ready=false
+++ seq 1 30
++ for attempt in $(seq 1 30)
++ curl -fsS http://127.0.0.1:8101/
+curl: (56) Recv failure: Connection reset by peer
++ sleep 2
++ for attempt in $(seq 1 30)
++ curl -fsS http://127.0.0.1:8101/
++ ready=true
++ break
++ docker ps --filter name=yash-24bcs10164-hello-0
+CONTAINER ID   IMAGE                         COMMAND                  CREATED         STATUS         PORTS                      NAMES
+567830f20535   yash-24bcs10164-hello-0:lab   "docker-entrypoint.s…"   2 seconds ago   Up 2 seconds   127.0.0.1:8101->8080/tcp   yash-24bcs10164-hello-0
++ docker logs yash-24bcs10164-hello-0
++ cat /tmp/yash-24bcs10164-hello-0.html
+<h1>Hello World from Node.js</h1><p>Yash Agrawal · 24bcs10164</p>+ test true = true
++ '[' nodejs-app = React-app ']'
++ '[' nodejs-app = multi-stage-dockerfile ']'
++ grep -q 'Hello World' /tmp/yash-24bcs10164-hello-0.html
++ docker rm -f yash-24bcs10164-hello-0
+yash-24bcs10164-hello-0
++ for i in "${!apps[@]}"
++ app=python-app
++ port=8102
++ inner=8080
++ '[' python-app '!=' Apache-app ']'
++ '[' python-app '!=' multi-stage-dockerfile ']'
++ name=yash-24bcs10164-hello-1
++ docker build -t yash-24bcs10164-hello-1:lab python-app
+#0 building with "default" instance using docker driver
+
+#1 [internal] load build definition from Dockerfile
+#1 transferring dockerfile: 183B done
+#1 DONE 0.0s
+
+#2 [internal] load metadata for docker.io/library/python:3.13-alpine
+#2 ...
+
+#3 [auth] library/python:pull token for registry-1.docker.io
+#3 DONE 0.0s
+
+#2 [internal] load metadata for docker.io/library/python:3.13-alpine
+#2 DONE 0.9s
+
+#4 [internal] load .dockerignore
+#4 transferring context: 2B done
+#4 DONE 0.0s
+
+#5 [internal] load build context
+#5 transferring context: 103B done
+#5 DONE 0.0s
+
+#6 [1/3] FROM docker.io/library/python:3.13-alpine@sha256:2d9aefe2fef018a7eb2c13064c89c71929800fd2e5dccdbf52ea5da5bb8d929a
+#6 resolve docker.io/library/python:3.13-alpine@sha256:2d9aefe2fef018a7eb2c13064c89c71929800fd2e5dccdbf52ea5da5bb8d929a done
+#6 extracting sha256:48f6a258842734fe23e0e4c69db9996cbaefd41c1cde2372b95449f9fc5601eb
+#6 extracting sha256:48f6a258842734fe23e0e4c69db9996cbaefd41c1cde2372b95449f9fc5601eb 0.1s done
+#6 sha256:050f6d1f4e5f89af62e03f6fcd1c06be2a401339b3694adc4c0a2850d9d8b1e7 5.29kB / 5.29kB done
+#6 sha256:48f6a258842734fe23e0e4c69db9996cbaefd41c1cde2372b95449f9fc5601eb 416.27kB / 416.27kB 0.1s done
+#6 sha256:6f4c23997e2db272b9d27917c421c0322c90ce90f0b4eeecd39ce268bdb688d0 15.24MB / 15.24MB 0.2s
+#6 sha256:82c48d7f22df9ea2f3393a3daf83a7abb5e933e5fb7f4d1b701dc8f71ebff248 0B / 247B 0.2s
+#6 sha256:2d9aefe2fef018a7eb2c13064c89c71929800fd2e5dccdbf52ea5da5bb8d929a 10.30kB / 10.30kB done
+#6 sha256:ba27df8b6499cc3756cff167690f3fcb5321faa1703b3a914df5f4fdadb32f05 1.74kB / 1.74kB done
+#6 sha256:6f4c23997e2db272b9d27917c421c0322c90ce90f0b4eeecd39ce268bdb688d0 15.24MB / 15.24MB 0.2s done
+#6 sha256:82c48d7f22df9ea2f3393a3daf83a7abb5e933e5fb7f4d1b701dc8f71ebff248 247B / 247B 0.2s done
+#6 extracting sha256:6f4c23997e2db272b9d27917c421c0322c90ce90f0b4eeecd39ce268bdb688d0 0.1s
+#6 extracting sha256:6f4c23997e2db272b9d27917c421c0322c90ce90f0b4eeecd39ce268bdb688d0 0.6s done
+#6 extracting sha256:82c48d7f22df9ea2f3393a3daf83a7abb5e933e5fb7f4d1b701dc8f71ebff248 done
+#6 DONE 1.0s
+
+#7 [2/3] WORKDIR /app
+#7 DONE 0.0s
+
+#8 [3/3] COPY index.html .
+#8 DONE 0.0s
+
+#9 exporting to image
+#9 exporting layers
+#9 exporting layers 0.2s done
+#9 writing image sha256:98608cb5fd2b60e6fa1da8a721b08e9a84b338565c4faae7fab6c17497e23e1e done
+#9 naming to docker.io/library/yash-24bcs10164-hello-1:lab done
+#9 DONE 0.2s
++ docker run -d --name yash-24bcs10164-hello-1 -p 127.0.0.1:8102:8080 yash-24bcs10164-hello-1:lab
+340f63d729079c1a3f2e740a8677a98b9292d4cf284c69632be40679a7e29d4f
++ ready=false
+++ seq 1 30
++ for attempt in $(seq 1 30)
++ curl -fsS http://127.0.0.1:8102/
+curl: (56) Recv failure: Connection reset by peer
++ sleep 2
++ for attempt in $(seq 1 30)
++ curl -fsS http://127.0.0.1:8102/
++ ready=true
++ break
++ docker ps --filter name=yash-24bcs10164-hello-1
+CONTAINER ID   IMAGE                         COMMAND                  CREATED         STATUS         PORTS                      NAMES
+340f63d72907   yash-24bcs10164-hello-1:lab   "python -m http.serv…"   2 seconds ago   Up 2 seconds   127.0.0.1:8102->8080/tcp   yash-24bcs10164-hello-1
++ docker logs yash-24bcs10164-hello-1
+172.17.0.1 - - [13/Oct/2026 18:53:21] "GET / HTTP/1.1" 200 -
++ cat /tmp/yash-24bcs10164-hello-1.html
+<h1>Hello World from Python</h1><p>Yash Agrawal · 24bcs10164</p>
++ test true = true
++ '[' python-app = React-app ']'
++ '[' python-app = multi-stage-dockerfile ']'
++ grep -q 'Hello World' /tmp/yash-24bcs10164-hello-1.html
++ docker rm -f yash-24bcs10164-hello-1
+yash-24bcs10164-hello-1
++ for i in "${!apps[@]}"
++ app=java-app
++ port=8103
++ inner=8080
++ '[' java-app '!=' Apache-app ']'
++ '[' java-app '!=' multi-stage-dockerfile ']'
++ name=yash-24bcs10164-hello-2
++ docker build -t yash-24bcs10164-hello-2:lab java-app
+#0 building with "default" instance using docker driver
+
+#1 [internal] load build definition from Dockerfile
+#1 transferring dockerfile: 266B done
+#1 DONE 0.0s
+
+#2 [internal] load metadata for docker.io/library/eclipse-temurin:21-jdk-alpine
+#2 ...
+
+#3 [auth] library/eclipse-temurin:pull token for registry-1.docker.io
+#3 DONE 0.0s
+
+#4 [internal] load metadata for docker.io/library/eclipse-temurin:21-jre-alpine
+#4 DONE 0.8s
+
+#2 [internal] load metadata for docker.io/library/eclipse-temurin:21-jdk-alpine
+#2 DONE 0.8s
+
+#5 [internal] load .dockerignore
+#5 transferring context: 2B done
+#5 DONE 0.0s
+
+#6 [internal] load build context
+#6 transferring context: 711B done
+#6 DONE 0.0s
+
+#7 [build 1/4] FROM docker.io/library/eclipse-temurin:21-jdk-alpine@sha256:0bfc69a4758a86710e5c474032d28400a8bd00874766f9e8b1642ac2fd293159
+#7 resolve docker.io/library/eclipse-temurin:21-jdk-alpine@sha256:0bfc69a4758a86710e5c474032d28400a8bd00874766f9e8b1642ac2fd293159 done
+#7 sha256:9ececb44042a7cc91e4e6bca525c678e811c1602330a80b5f2d2fcfa0aa97c4e 1.95kB / 1.95kB done
+#7 sha256:d5d7904924e075ef70ed3d3163f60ce6c5ca716b511fa6733d38ce82d4534743 4.51kB / 4.51kB done
+#7 sha256:8e0e05dd51e5ffe47d317144d69de9a3946dc8d83750c639d76c40e723b3b608 21.44MB / 21.44MB 0.2s done
+#7 sha256:802e35573aa7ee42b46fd9714582af48caf0f6aebbf2992311da030c8ff5a423 42.99MB / 158.33MB 0.2s
+#7 sha256:0aeafda7b1fad5c53a3b22b763dd94158c78503c46b440abd39af469e9184f21 130B / 130B 0.2s done
+#7 sha256:0bfc69a4758a86710e5c474032d28400a8bd00874766f9e8b1642ac2fd293159 2.69kB / 2.69kB done
+#7 extracting sha256:8e0e05dd51e5ffe47d317144d69de9a3946dc8d83750c639d76c40e723b3b608 0.1s
+#7 sha256:f75bb0de4136d37b665782e892fb7132a0c4d32a3d4bf6989609487696b5e32f 0B / 2.46kB 0.2s
+#7 sha256:802e35573aa7ee42b46fd9714582af48caf0f6aebbf2992311da030c8ff5a423 79.69MB / 158.33MB 0.3s
+#7 sha256:f75bb0de4136d37b665782e892fb7132a0c4d32a3d4bf6989609487696b5e32f 2.46kB / 2.46kB 0.2s done
+#7 sha256:802e35573aa7ee42b46fd9714582af48caf0f6aebbf2992311da030c8ff5a423 113.25MB / 158.33MB 0.4s
+#7 sha256:802e35573aa7ee42b46fd9714582af48caf0f6aebbf2992311da030c8ff5a423 147.85MB / 158.33MB 0.5s
+#7 sha256:802e35573aa7ee42b46fd9714582af48caf0f6aebbf2992311da030c8ff5a423 158.33MB / 158.33MB 0.7s
+#7 sha256:802e35573aa7ee42b46fd9714582af48caf0f6aebbf2992311da030c8ff5a423 158.33MB / 158.33MB 0.7s done
+#7 extracting sha256:8e0e05dd51e5ffe47d317144d69de9a3946dc8d83750c639d76c40e723b3b608 0.8s done
+#7 extracting sha256:802e35573aa7ee42b46fd9714582af48caf0f6aebbf2992311da030c8ff5a423
+#7 extracting sha256:802e35573aa7ee42b46fd9714582af48caf0f6aebbf2992311da030c8ff5a423 1.6s done
+#7 extracting sha256:0aeafda7b1fad5c53a3b22b763dd94158c78503c46b440abd39af469e9184f21 done
+#7 extracting sha256:f75bb0de4136d37b665782e892fb7132a0c4d32a3d4bf6989609487696b5e32f done
+#7 DONE 3.0s
+
+#8 [stage-1 1/3] FROM docker.io/library/eclipse-temurin:21-jre-alpine@sha256:51ab5e3302e7141ce665ca3ea85e8b5cd648eafbc3c0c90dd79d6537684e4555
+#8 resolve docker.io/library/eclipse-temurin:21-jre-alpine@sha256:51ab5e3302e7141ce665ca3ea85e8b5cd648eafbc3c0c90dd79d6537684e4555 done
+#8 sha256:51ab5e3302e7141ce665ca3ea85e8b5cd648eafbc3c0c90dd79d6537684e4555 2.69kB / 2.69kB done
+#8 sha256:bec16bceecb1a89defa333c77ac76d29a6b0d59fcb4f50218b476efa68e30bb4 1.95kB / 1.95kB done
+#8 sha256:d0f52469e5e279b0b7e90685b22ac3345d22eec3fa1be0583e39df18282b344c 4.12kB / 4.12kB done
+#8 sha256:8d3daccf082f0d6dd742c035c3462b3d39cf08cfd1ab9f511c1d592fa15d8d96 16.97MB / 16.97MB 0.3s done
+#8 sha256:2242b49db9769393ae8d0d9f9742407ad40a7611accc1c189f0ffac0a0530221 53.26MB / 53.26MB 0.5s done
+#8 extracting sha256:8d3daccf082f0d6dd742c035c3462b3d39cf08cfd1ab9f511c1d592fa15d8d96 0.6s done
+#8 sha256:b3405c83ad56324f504856a713a1a5d6c28d82a78170a4dd4097c209f8517c18 128B / 128B 0.4s done
+#8 sha256:5abc2579d091ef7359d2654aa76115280a45a0c81c04e644017e6cb1ef45295b 2.46kB / 2.46kB 0.5s done
+#8 extracting sha256:2242b49db9769393ae8d0d9f9742407ad40a7611accc1c189f0ffac0a0530221 0.9s done
+#8 extracting sha256:b3405c83ad56324f504856a713a1a5d6c28d82a78170a4dd4097c209f8517c18 done
+#8 extracting sha256:5abc2579d091ef7359d2654aa76115280a45a0c81c04e644017e6cb1ef45295b done
+#8 DONE 3.0s
+
+#9 [stage-1 2/3] WORKDIR /app
+#9 DONE 0.0s
+
+#10 [build 2/4] WORKDIR /app
+#10 DONE 0.0s
+
+#11 [build 3/4] COPY Main.java .
+#11 DONE 0.0s
+
+#12 [build 4/4] RUN javac Main.java
+#12 DONE 0.8s
+
+#13 [stage-1 3/3] COPY --from=build /app/Main.class .
+#13 DONE 0.0s
+
+#14 exporting to image
+#14 exporting layers
+#14 exporting layers 0.9s done
+#14 writing image sha256:d632fda74e2399798d0d0e4bc4ac4e1dcfb37e5dcd7e808a54042c077e13e30b done
+#14 naming to docker.io/library/yash-24bcs10164-hello-2:lab done
+#14 DONE 0.9s
++ docker run -d --name yash-24bcs10164-hello-2 -p 127.0.0.1:8103:8080 yash-24bcs10164-hello-2:lab
+db0c6e1cccf59935a7b40d31b743b7e57dcbc3a4783a380258d9abbc5d0ad27c
++ ready=false
+++ seq 1 30
++ for attempt in $(seq 1 30)
++ curl -fsS http://127.0.0.1:8103/
+curl: (56) Recv failure: Connection reset by peer
++ sleep 2
++ for attempt in $(seq 1 30)
++ curl -fsS http://127.0.0.1:8103/
++ ready=true
++ break
++ docker ps --filter name=yash-24bcs10164-hello-2
+CONTAINER ID   IMAGE                         COMMAND                  CREATED         STATUS         PORTS                      NAMES
+db0c6e1cccf5   yash-24bcs10164-hello-2:lab   "/__cacert_entrypoin…"   2 seconds ago   Up 2 seconds   127.0.0.1:8103->8080/tcp   yash-24bcs10164-hello-2
++ docker logs yash-24bcs10164-hello-2
++ cat /tmp/yash-24bcs10164-hello-2.html
+<h1>Hello World from Java</h1><p>Yash Agrawal - 24bcs10164</p>+ test true = true
++ '[' java-app = React-app ']'
++ '[' java-app = multi-stage-dockerfile ']'
++ grep -q 'Hello World' /tmp/yash-24bcs10164-hello-2.html
++ docker rm -f yash-24bcs10164-hello-2
+yash-24bcs10164-hello-2
++ for i in "${!apps[@]}"
++ app=Apache-app
++ port=8104
++ inner=8080
++ '[' Apache-app '!=' Apache-app ']'
++ inner=80
++ '[' Apache-app '!=' multi-stage-dockerfile ']'
++ name=yash-24bcs10164-hello-3
++ docker build -t yash-24bcs10164-hello-3:lab Apache-app
+#0 building with "default" instance using docker driver
+
+#1 [internal] load build definition from Dockerfile
+#1 transferring dockerfile: 122B done
+#1 DONE 0.0s
+
+#2 [internal] load metadata for docker.io/library/httpd:2.4-alpine
+#2 ...
+
+#3 [auth] library/httpd:pull token for registry-1.docker.io
+#3 DONE 0.0s
+
+#2 [internal] load metadata for docker.io/library/httpd:2.4-alpine
+#2 DONE 0.8s
+
+#4 [internal] load .dockerignore
+#4 transferring context: 2B done
+#4 DONE 0.0s
+
+#5 [internal] load build context
+#5 transferring context: 103B done
+#5 DONE 0.0s
+
+#6 [1/2] FROM docker.io/library/httpd:2.4-alpine@sha256:3440c39d8d6f54fa9ad2549e5a60c19ddd435faadc29c1ad28aa795f71888889
+#6 resolve docker.io/library/httpd:2.4-alpine@sha256:3440c39d8d6f54fa9ad2549e5a60c19ddd435faadc29c1ad28aa795f71888889 done
+#6 extracting sha256:269898e769d0265d6960f09acced623283a40480a04b6c4e789e264bde8bbebd done
+#6 sha256:77f4f7ea4ea4f8353e7648c4efac6f469dbd0c23feb5f2bf392f2dca7b86fc80 2.29kB / 2.29kB done
+#6 sha256:49c4a5d42d02391333a9d6a9caee6a46fa43fe3fd6fa381b89cd0601ff93bb82 8.01kB / 8.01kB done
+#6 sha256:269898e769d0265d6960f09acced623283a40480a04b6c4e789e264bde8bbebd 932B / 932B 0.1s done
+#6 sha256:4f4fb700ef54461cfa02571ae0db9a0dc1e0cdb5577484a6d75e68dc38e8acc1 0B / 32B 0.1s
+#6 sha256:db577887d90fccc89dea6cb7313d1ada178c2d115ff6a8a36812f86dd07b3857 0B / 11.03MB 0.1s
+#6 sha256:3440c39d8d6f54fa9ad2549e5a60c19ddd435faadc29c1ad28aa795f71888889 10.21kB / 10.21kB done
+#6 sha256:3c7c286fbbd5c96dc5245ed50b1cbd505d13fb7351fcbd588749ef72a5c67329 0B / 147B 0.1s
+#6 sha256:3c7c286fbbd5c96dc5245ed50b1cbd505d13fb7351fcbd588749ef72a5c67329 147B / 147B 0.1s done
+#6 extracting sha256:3c7c286fbbd5c96dc5245ed50b1cbd505d13fb7351fcbd588749ef72a5c67329 done
+#6 sha256:a61ab206ac8a5a4e9ac8826f1091588c3aa4a35536c3e752a9e4311d24d35b69 0B / 8.42MB 0.2s
+#6 sha256:4f4fb700ef54461cfa02571ae0db9a0dc1e0cdb5577484a6d75e68dc38e8acc1 32B / 32B 0.2s done
+#6 sha256:db577887d90fccc89dea6cb7313d1ada178c2d115ff6a8a36812f86dd07b3857 11.03MB / 11.03MB 0.3s done
+#6 sha256:a61ab206ac8a5a4e9ac8826f1091588c3aa4a35536c3e752a9e4311d24d35b69 8.42MB / 8.42MB 0.3s done
+#6 extracting sha256:4f4fb700ef54461cfa02571ae0db9a0dc1e0cdb5577484a6d75e68dc38e8acc1 done
+#6 extracting sha256:db577887d90fccc89dea6cb7313d1ada178c2d115ff6a8a36812f86dd07b3857 0.1s
+#6 sha256:8e97dd6176d7ad95a03527a95c49545e107c16bd82433ac3fb31ce345635f4cb 287B / 287B 0.3s done
+#6 extracting sha256:db577887d90fccc89dea6cb7313d1ada178c2d115ff6a8a36812f86dd07b3857 0.5s done
+#6 extracting sha256:a61ab206ac8a5a4e9ac8826f1091588c3aa4a35536c3e752a9e4311d24d35b69
+#6 extracting sha256:a61ab206ac8a5a4e9ac8826f1091588c3aa4a35536c3e752a9e4311d24d35b69 0.2s done
+#6 extracting sha256:8e97dd6176d7ad95a03527a95c49545e107c16bd82433ac3fb31ce345635f4cb done
+#6 DONE 1.2s
+
+#7 [2/2] COPY index.html /usr/local/apache2/htdocs/index.html
+#7 DONE 0.0s
+
+#8 exporting to image
+#8 exporting layers
+#8 exporting layers 0.4s done
+#8 writing image sha256:94da3e7159a48797407573bcf3db933ac5748f5e097a3c2c1ceeba7a1af7454b done
+#8 naming to docker.io/library/yash-24bcs10164-hello-3:lab done
+#8 DONE 0.4s
++ docker run -d --name yash-24bcs10164-hello-3 -p 127.0.0.1:8104:80 yash-24bcs10164-hello-3:lab
+472c85e38a67d4edd6b132eb2439190e0e01b9b79018d9008c57a1426d2da691
++ ready=false
+++ seq 1 30
++ for attempt in $(seq 1 30)
++ curl -fsS http://127.0.0.1:8104/
+curl: (56) Recv failure: Connection reset by peer
++ sleep 2
++ for attempt in $(seq 1 30)
++ curl -fsS http://127.0.0.1:8104/
++ ready=true
++ break
++ docker ps --filter name=yash-24bcs10164-hello-3
+CONTAINER ID   IMAGE                         COMMAND              CREATED         STATUS         PORTS                    NAMES
+472c85e38a67   yash-24bcs10164-hello-3:lab   "httpd-foreground"   2 seconds ago   Up 2 seconds   127.0.0.1:8104->80/tcp   yash-24bcs10164-hello-3
++ docker logs yash-24bcs10164-hello-3
+AH00558: httpd: Could not reliably determine the server's fully qualified domain name, using 172.17.0.2. Set the 'ServerName' directive globally to suppress this message
+AH00558: httpd: Could not reliably determine the server's fully qualified domain name, using 172.17.0.2. Set the 'ServerName' directive globally to suppress this message
+[Tue Oct 13 18:53:32.191934 2026] [mpm_event:notice] [pid 1:tid 1] AH00489: Apache/2.4.69 (Unix) configured -- resuming normal operations
+[Tue Oct 13 18:53:32.192004 2026] [core:notice] [pid 1:tid 1] AH00094: Command line: 'httpd -D FOREGROUND'
+172.17.0.1 - - [13/Oct/2026:18:53:34 +0000] "GET / HTTP/1.1" 200 66
++ cat /tmp/yash-24bcs10164-hello-3.html
+<h1>Hello World from Apache</h1><p>Yash Agrawal · 24bcs10164</p>
++ test true = true
++ '[' Apache-app = React-app ']'
++ '[' Apache-app = multi-stage-dockerfile ']'
++ grep -q 'Hello World' /tmp/yash-24bcs10164-hello-3.html
++ docker rm -f yash-24bcs10164-hello-3
+yash-24bcs10164-hello-3
++ for i in "${!apps[@]}"
++ app=React-app
++ port=8105
++ inner=8080
++ '[' React-app '!=' Apache-app ']'
++ '[' React-app '!=' multi-stage-dockerfile ']'
++ name=yash-24bcs10164-hello-4
++ docker build -t yash-24bcs10164-hello-4:lab React-app
+#0 building with "default" instance using docker driver
+
+#1 [internal] load build definition from Dockerfile
+#1 transferring dockerfile: 299B done
+#1 DONE 0.0s
+
+#2 [internal] load metadata for docker.io/library/node:22-alpine
+#2 DONE 0.1s
+
+#3 [internal] load metadata for docker.io/nginxinc/nginx-unprivileged:stable-alpine
+#3 ...
+
+#4 [auth] nginxinc/nginx-unprivileged:pull token for registry-1.docker.io
+#4 DONE 0.0s
+
+#3 [internal] load metadata for docker.io/nginxinc/nginx-unprivileged:stable-alpine
+#3 DONE 0.8s
+
+#5 [internal] load .dockerignore
+#5 transferring context: 2B done
+#5 DONE 0.0s
+
+#6 [build 1/6] FROM docker.io/library/node:22-alpine@sha256:0a7108bf6c7bf5de370ffb1a3ed6be93d405b43ff159f681a8d18c0e2bc2e402
+#6 DONE 0.0s
+
+#7 [build 2/6] WORKDIR /app
+#7 CACHED
+
+#8 [internal] load build context
+#8 transferring context: 35.40kB done
+#8 DONE 0.0s
+
+#9 [build 3/6] COPY package.json package-lock.json ./
+#9 DONE 0.0s
+
+#10 [stage-1 1/2] FROM docker.io/nginxinc/nginx-unprivileged:stable-alpine@sha256:56b8272e43a0525f67aed68d1e0794a712d10e3e45a563e118e9a77c817e6f86
+#10 resolve docker.io/nginxinc/nginx-unprivileged:stable-alpine@sha256:56b8272e43a0525f67aed68d1e0794a712d10e3e45a563e118e9a77c817e6f86 done
+#10 sha256:1b2acb0257b17213fe6a906abe69cf2914b8674ad1a2fd738eee4d6c0f9e26ee 14.04kB / 14.04kB done
+#10 sha256:0f5f7068c5f5bf7046dbf649a08810ec1693967a9f488b8ff3998be6dd34bf6c 2.61kB / 2.61kB done
+#10 sha256:655cdf110ce6cc8b81dc0bf0d471a4fb200eac950a7a108ed5335b91ed3ef07b 2.10MB / 4.36MB 0.1s
+#10 sha256:cb3dcaeaef3012c03cc5ba44f04289e06247ee28b0396073f0c1aa4667e08cd6 0B / 2.79kB 0.1s
+#10 sha256:c792e3f2c3b45eb2b0ab9ca191eb1c881394ef80dc9b03a728d4241709cfd309 0B / 626B 0.1s
+#10 sha256:56b8272e43a0525f67aed68d1e0794a712d10e3e45a563e118e9a77c817e6f86 6.79kB / 6.79kB done
+#10 sha256:655cdf110ce6cc8b81dc0bf0d471a4fb200eac950a7a108ed5335b91ed3ef07b 4.36MB / 4.36MB 0.1s done
+#10 sha256:cb3dcaeaef3012c03cc5ba44f04289e06247ee28b0396073f0c1aa4667e08cd6 2.79kB / 2.79kB 0.2s done
+#10 extracting sha256:655cdf110ce6cc8b81dc0bf0d471a4fb200eac950a7a108ed5335b91ed3ef07b 0.1s done
+#10 sha256:dfd17a001b4375f4b03069aa2c6c03e965543d91589d9f7399dae7c3798037bd 0B / 965B 0.2s
+#10 sha256:69146b4a52cfd86bdd87919b33fc3c6afd168c7911c27d3805d48212887b2e4f 0B / 404B 0.2s
+#10 sha256:c792e3f2c3b45eb2b0ab9ca191eb1c881394ef80dc9b03a728d4241709cfd309 626B / 626B 0.2s done
+#10 sha256:dfd17a001b4375f4b03069aa2c6c03e965543d91589d9f7399dae7c3798037bd 965B / 965B 0.2s done
+#10 sha256:69146b4a52cfd86bdd87919b33fc3c6afd168c7911c27d3805d48212887b2e4f 404B / 404B 0.2s done
+#10 sha256:db0e3cd9a4f71fb319f83c2b8da0c7ba756419e6d8a8671e117dcba315656b39 0B / 1.40kB 0.3s
+#10 sha256:ab0d6d0b8f06a2555ffb7e2777729ed4c2c656d62a2869414c9df71b527c4b41 0B / 17.33MB 0.3s
+#10 sha256:1f9e9a0fcad78d32ce75d315476a02e8c85818e0db3191e375796df6d1594dda 1.20kB / 1.20kB 0.3s done
+#10 extracting sha256:cb3dcaeaef3012c03cc5ba44f04289e06247ee28b0396073f0c1aa4667e08cd6
+#10 sha256:db0e3cd9a4f71fb319f83c2b8da0c7ba756419e6d8a8671e117dcba315656b39 1.40kB / 1.40kB 0.3s done
+#10 sha256:ab0d6d0b8f06a2555ffb7e2777729ed4c2c656d62a2869414c9df71b527c4b41 17.33MB / 17.33MB 0.4s done
+#10 extracting sha256:cb3dcaeaef3012c03cc5ba44f04289e06247ee28b0396073f0c1aa4667e08cd6 done
+#10 extracting sha256:c792e3f2c3b45eb2b0ab9ca191eb1c881394ef80dc9b03a728d4241709cfd309 done
+#10 extracting sha256:dfd17a001b4375f4b03069aa2c6c03e965543d91589d9f7399dae7c3798037bd done
+#10 extracting sha256:69146b4a52cfd86bdd87919b33fc3c6afd168c7911c27d3805d48212887b2e4f done
+#10 extracting sha256:1f9e9a0fcad78d32ce75d315476a02e8c85818e0db3191e375796df6d1594dda done
+#10 extracting sha256:db0e3cd9a4f71fb319f83c2b8da0c7ba756419e6d8a8671e117dcba315656b39 done
+#10 extracting sha256:ab0d6d0b8f06a2555ffb7e2777729ed4c2c656d62a2869414c9df71b527c4b41 0.1s
+#10 extracting sha256:ab0d6d0b8f06a2555ffb7e2777729ed4c2c656d62a2869414c9df71b527c4b41 0.4s done
+#10 DONE 1.0s
+
+#11 [build 4/6] RUN npm ci
+#11 1.606 
+#11 1.606 added 18 packages, and audited 19 packages in 1s
+#11 1.606 
+#11 1.606 5 packages are looking for funding
+#11 1.606   run `npm fund` for details
+#11 1.607 
+#11 1.607 found 0 vulnerabilities
+#11 1.608 npm notice
+#11 1.608 npm notice New major version of npm available! 10.9.9 -> 12.2.0
+#11 1.608 npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.0
+#11 1.608 npm notice To update run: npm install -g npm@12.2.0
+#11 1.608 npm notice
+#11 DONE 1.7s
+
+#12 [build 5/6] COPY index.html main.jsx ./
+#12 DONE 0.0s
+
+#13 [build 6/6] RUN npm run build
+#13 0.262 
+#13 0.262 > hello-react-lab@1.0.0 build
+#13 0.262 > vite build
+#13 0.262 
+#13 0.524 vite v7.3.7 building client environment for production...
+#13 0.610 transforming...
+#13 1.634 ✓ 22 modules transformed.
+#13 1.774 rendering chunks...
+#13 1.781 computing gzip size...
+#13 1.790 dist/index.html                  0.22 kB │ gzip:  0.19 kB
+#13 1.790 dist/assets/index-DzijQ6UC.js  222.23 kB │ gzip: 69.20 kB
+#13 1.791 ✓ built in 1.23s
+#13 DONE 1.8s
+
+#14 [stage-1 2/2] COPY --from=build /app/dist /usr/share/nginx/html
+#14 DONE 0.0s
+
+#15 exporting to image
+#15 exporting layers 0.1s done
+#15 writing image sha256:b953b2686e2371c23b63034c83f6101591d1a8eab2fb211672b71ae25f387e27 done
+#15 naming to docker.io/library/yash-24bcs10164-hello-4:lab done
+#15 DONE 0.1s
++ docker run -d --name yash-24bcs10164-hello-4 -p 127.0.0.1:8105:8080 yash-24bcs10164-hello-4:lab
+d6ec9f13afe5ee726392cc0c3d4335aad78e0d1a28fe25972ffb2c1f92f608c2
++ ready=false
+++ seq 1 30
++ for attempt in $(seq 1 30)
++ curl -fsS http://127.0.0.1:8105/
+curl: (56) Recv failure: Connection reset by peer
++ sleep 2
++ for attempt in $(seq 1 30)
++ curl -fsS http://127.0.0.1:8105/
++ ready=true
++ break
++ docker ps --filter name=yash-24bcs10164-hello-4
+CONTAINER ID   IMAGE                         COMMAND                  CREATED         STATUS         PORTS                      NAMES
+d6ec9f13afe5   yash-24bcs10164-hello-4:lab   "/docker-entrypoint.…"   2 seconds ago   Up 2 seconds   127.0.0.1:8105->8080/tcp   yash-24bcs10164-hello-4
++ docker logs yash-24bcs10164-hello-4
+/docker-entrypoint.sh: /docker-entrypoint.d/ is not empty, will attempt to perform configuration
+/docker-entrypoint.sh: Looking for shell scripts in /docker-entrypoint.d/
+/docker-entrypoint.sh: Launching /docker-entrypoint.d/10-listen-on-ipv6-by-default.sh
+10-listen-on-ipv6-by-default.sh: info: Getting the checksum of /etc/nginx/conf.d/default.conf
+10-listen-on-ipv6-by-default.sh: info: /etc/nginx/conf.d/default.conf differs from the packaged version
+/docker-entrypoint.sh: Sourcing /docker-entrypoint.d/15-local-resolvers.envsh
+/docker-entrypoint.sh: Launching /docker-entrypoint.d/20-envsubst-on-templates.sh
+/docker-entrypoint.sh: Launching /docker-entrypoint.d/30-tune-worker-processes.sh
+/docker-entrypoint.sh: Configuration complete; ready for start up
+2026/10/13 18:53:39 [notice] 1#1: using the "epoll" event method
+2026/10/13 18:53:39 [notice] 1#1: nginx/1.30.5
+2026/10/13 18:53:39 [notice] 1#1: built by gcc 15.2.0 (Alpine 15.2.0) 
+2026/10/13 18:53:39 [notice] 1#1: OS: Linux 6.17.0-1022-azure
+2026/10/13 18:53:39 [notice] 1#1: getrlimit(RLIMIT_NOFILE): 65536:65536
+2026/10/13 18:53:39 [notice] 1#1: start worker processes
+2026/10/13 18:53:39 [notice] 1#1: start worker process 29
+2026/10/13 18:53:39 [notice] 1#1: start worker process 30
+2026/10/13 18:53:39 [notice] 1#1: start worker process 31
+2026/10/13 18:53:39 [notice] 1#1: start worker process 32
+172.17.0.1 - - [13/Oct/2026:18:53:41 +0000] "GET / HTTP/1.1" 200 218 "-" "curl/8.5.0" "-"
++ cat /tmp/yash-24bcs10164-hello-4.html
+<!doctype html><html lang="en"><head><meta charset="utf-8"><title>React Hello World</title>  <script type="module" crossorigin src="/assets/index-DzijQ6UC.js"></script>
+</head><body><div id="root"></div></body></html>
++ test true = true
++ '[' React-app = React-app ']'
++ grep -q '<div id="root">' /tmp/yash-24bcs10164-hello-4.html
++ docker rm -f yash-24bcs10164-hello-4
+yash-24bcs10164-hello-4
++ for i in "${!apps[@]}"
++ app=nginx-app
++ port=8106
++ inner=8080
++ '[' nginx-app '!=' Apache-app ']'
++ '[' nginx-app '!=' multi-stage-dockerfile ']'
++ name=yash-24bcs10164-hello-5
++ docker build -t yash-24bcs10164-hello-5:lab nginx-app
+#0 building with "default" instance using docker driver
+
+#1 [internal] load build definition from Dockerfile
+#1 transferring dockerfile: 158B done
+#1 DONE 0.0s
+
+#2 [internal] load metadata for docker.io/nginxinc/nginx-unprivileged:stable-alpine
+#2 DONE 0.1s
+
+#3 [internal] load .dockerignore
+#3 transferring context: 2B done
+#3 DONE 0.0s
+
+#4 [1/2] FROM docker.io/nginxinc/nginx-unprivileged:stable-alpine@sha256:56b8272e43a0525f67aed68d1e0794a712d10e3e45a563e118e9a77c817e6f86
+#4 CACHED
+
+#5 [internal] load build context
+#5 transferring context: 102B done
+#5 DONE 0.0s
+
+#6 [2/2] COPY index.html /usr/share/nginx/html/index.html
+#6 DONE 0.0s
+
+#7 exporting to image
+#7 exporting layers
+#7 exporting layers 0.4s done
+#7 writing image sha256:f6b0e9185a8f9e258ada78109527ad041f8913328f2ee63b7cdf9e1df47c8937 done
+#7 naming to docker.io/library/yash-24bcs10164-hello-5:lab done
+#7 DONE 0.4s
++ docker run -d --name yash-24bcs10164-hello-5 -p 127.0.0.1:8106:8080 yash-24bcs10164-hello-5:lab
+40c7ef7c8b6c5af6d41756ac2b89bbff179f3f3c784f88ed9398745a9c951222
++ ready=false
+++ seq 1 30
++ for attempt in $(seq 1 30)
++ curl -fsS http://127.0.0.1:8106/
+curl: (56) Recv failure: Connection reset by peer
++ sleep 2
++ for attempt in $(seq 1 30)
++ curl -fsS http://127.0.0.1:8106/
++ ready=true
++ break
++ docker ps --filter name=yash-24bcs10164-hello-5
+CONTAINER ID   IMAGE                         COMMAND                  CREATED         STATUS         PORTS                      NAMES
+40c7ef7c8b6c   yash-24bcs10164-hello-5:lab   "/docker-entrypoint.…"   2 seconds ago   Up 2 seconds   127.0.0.1:8106->8080/tcp   yash-24bcs10164-hello-5
++ docker logs yash-24bcs10164-hello-5
+/docker-entrypoint.sh: /docker-entrypoint.d/ is not empty, will attempt to perform configuration
+/docker-entrypoint.sh: Looking for shell scripts in /docker-entrypoint.d/
+/docker-entrypoint.sh: Launching /docker-entrypoint.d/10-listen-on-ipv6-by-default.sh
+10-listen-on-ipv6-by-default.sh: info: Getting the checksum of /etc/nginx/conf.d/default.conf
+10-listen-on-ipv6-by-default.sh: info: /etc/nginx/conf.d/default.conf differs from the packaged version
+/docker-entrypoint.sh: Sourcing /docker-entrypoint.d/15-local-resolvers.envsh
+/docker-entrypoint.sh: Launching /docker-entrypoint.d/20-envsubst-on-templates.sh
+/docker-entrypoint.sh: Launching /docker-entrypoint.d/30-tune-worker-processes.sh
+/docker-entrypoint.sh: Configuration complete; ready for start up
+2026/10/13 18:53:42 [notice] 1#1: using the "epoll" event method
+2026/10/13 18:53:42 [notice] 1#1: nginx/1.30.5
+2026/10/13 18:53:42 [notice] 1#1: built by gcc 15.2.0 (Alpine 15.2.0) 
+2026/10/13 18:53:42 [notice] 1#1: OS: Linux 6.17.0-1022-azure
+2026/10/13 18:53:42 [notice] 1#1: getrlimit(RLIMIT_NOFILE): 65536:65536
+2026/10/13 18:53:42 [notice] 1#1: start worker processes
+2026/10/13 18:53:42 [notice] 1#1: start worker process 29
+2026/10/13 18:53:42 [notice] 1#1: start worker process 30
+2026/10/13 18:53:42 [notice] 1#1: start worker process 31
+2026/10/13 18:53:42 [notice] 1#1: start worker process 32
+172.17.0.1 - - [13/Oct/2026:18:53:44 +0000] "GET / HTTP/1.1" 200 65 "-" "curl/8.5.0" "-"
++ cat /tmp/yash-24bcs10164-hello-5.html
+<h1>Hello World from Nginx</h1><p>Yash Agrawal · 24bcs10164</p>
++ test true = true
++ '[' nginx-app = React-app ']'
++ '[' nginx-app = multi-stage-dockerfile ']'
++ grep -q 'Hello World' /tmp/yash-24bcs10164-hello-5.html
++ docker rm -f yash-24bcs10164-hello-5
+yash-24bcs10164-hello-5
++ for i in "${!apps[@]}"
++ app=multi-stage-dockerfile
++ port=8107
++ inner=8080
++ '[' multi-stage-dockerfile '!=' Apache-app ']'
++ '[' multi-stage-dockerfile '!=' multi-stage-dockerfile ']'
++ port=8080
++ name=yash-24bcs10164-hello-6
++ docker build -t yash-24bcs10164-hello-6:lab multi-stage-dockerfile
+#0 building with "default" instance using docker driver
+
+#1 [internal] load build definition from Dockerfile
+#1 transferring dockerfile: 244B done
+#1 DONE 0.0s
+
+#2 [internal] load metadata for docker.io/library/node:22-alpine
+#2 DONE 0.1s
+
+#3 [internal] load .dockerignore
+#3 transferring context: 2B done
+#3 DONE 0.0s
+
+#4 [build 1/4] FROM docker.io/library/node:22-alpine@sha256:0a7108bf6c7bf5de370ffb1a3ed6be93d405b43ff159f681a8d18c0e2bc2e402
+#4 CACHED
+
+#5 [internal] load build context
+#5 transferring context: 269B done
+#5 DONE 0.0s
+
+#6 [build 2/4] WORKDIR /build
+#6 DONE 0.0s
+
+#7 [build 3/4] COPY server.js .
+#7 DONE 0.0s
+
+#8 [build 4/4] RUN node --check server.js
+#8 DONE 0.2s
+
+#9 [stage-1 2/3] WORKDIR /app
+#9 CACHED
+
+#10 [stage-1 3/3] COPY --from=build /build/server.js .
+#10 DONE 0.0s
+
+#11 exporting to image
+#11 exporting layers
+#11 exporting layers 0.2s done
+#11 writing image sha256:d80adf58c1c525f8efd757febd2c4e03d8c5fd99040ac47653c59c9fc59af940 done
+#11 naming to docker.io/library/yash-24bcs10164-hello-6:lab done
+#11 DONE 0.2s
++ docker run -d --name yash-24bcs10164-hello-6 -p 127.0.0.1:8080:8080 yash-24bcs10164-hello-6:lab
+13a265a246ee78d511cbd48fa2cbc980a1296111571c72682213525d1b57b4f0
++ ready=false
+++ seq 1 30
++ for attempt in $(seq 1 30)
++ curl -fsS http://127.0.0.1:8080/
+curl: (56) Recv failure: Connection reset by peer
++ sleep 2
++ for attempt in $(seq 1 30)
++ curl -fsS http://127.0.0.1:8080/
++ ready=true
++ break
++ docker ps --filter name=yash-24bcs10164-hello-6
+CONTAINER ID   IMAGE                         COMMAND                  CREATED         STATUS         PORTS                      NAMES
+13a265a246ee   yash-24bcs10164-hello-6:lab   "docker-entrypoint.s…"   2 seconds ago   Up 2 seconds   127.0.0.1:8080->8080/tcp   yash-24bcs10164-hello-6
++ docker logs yash-24bcs10164-hello-6
++ cat /tmp/yash-24bcs10164-hello-6.html
+<h1>Hello World from Docker multi-stage build</h1><p>Yash Agrawal - 24bcs10164</p>+ test true = true
++ '[' multi-stage-dockerfile = React-app ']'
++ '[' multi-stage-dockerfile = multi-stage-dockerfile ']'
++ grep -q 'Hello World from Docker multi-stage build' /tmp/yash-24bcs10164-hello-6.html
++ docker rm -f yash-24bcs10164-hello-6
+yash-24bcs10164-hello-6

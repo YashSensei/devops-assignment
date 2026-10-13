@@ -1,0 +1,20 @@
+[pod/backend-6cff9f59cb-74g8c/backend] INFO:     10.244.0.5:52342 - "GET /api/loans HTTP/1.1" 200 OK
+[pod/backend-6cff9f59cb-74g8c/backend] INFO:     10.244.0.5:52346 - "GET /api/equipment HTTP/1.1" 200 OK
+[pod/backend-6cff9f59cb-74g8c/backend] INFO:     10.244.0.5:52346 - "GET /api/equipment HTTP/1.1" 200 OK
+[pod/backend-6cff9f59cb-74g8c/backend] INFO:     10.244.0.5:52342 - "GET /api/loans HTTP/1.1" 200 OK
+[pod/backend-6cff9f59cb-74g8c/backend] INFO:     10.244.0.5:52342 - "GET /api/summary HTTP/1.1" 200 OK
+[pod/backend-6cff9f59cb-74g8c/backend] INFO:     10.244.0.5:52342 - "POST /api/equipment HTTP/1.1" 201 Created
+[pod/backend-6cff9f59cb-74g8c/backend] INFO:     10.244.0.5:52346 - "GET /api/loans HTTP/1.1" 200 OK
+[pod/backend-6cff9f59cb-74g8c/backend] INFO:     10.244.0.5:52342 - "GET /api/summary HTTP/1.1" 200 OK
+[pod/backend-6cff9f59cb-74g8c/backend] INFO:     10.244.0.5:52342 - "GET /api/equipment HTTP/1.1" 200 OK
+[pod/backend-6cff9f59cb-74g8c/backend] INFO:     127.0.0.1:57124 - "GET /metrics HTTP/1.1" 200 OK
+[pod/backend-6cff9f59cb-x8694/backend] INFO:     10.244.0.5:36226 - "GET /api/summary HTTP/1.1" 200 OK
+[pod/backend-6cff9f59cb-x8694/backend] INFO:     10.244.0.5:36232 - "POST /api/loans/1/return HTTP/1.1" 200 OK
+[pod/backend-6cff9f59cb-x8694/backend] INFO:     10.244.0.5:36226 - "GET /api/summary HTTP/1.1" 200 OK
+[pod/backend-6cff9f59cb-x8694/backend] INFO:     10.244.0.5:36226 - "DELETE /api/equipment/1 HTTP/1.1" 409 Conflict
+[pod/backend-6cff9f59cb-x8694/backend] INFO:     10.244.0.5:36232 - "GET /api/loans HTTP/1.1" 200 OK
+[pod/backend-6cff9f59cb-x8694/backend] INFO:     10.244.0.5:36226 - "GET /api/equipment HTTP/1.1" 200 OK
+[pod/backend-6cff9f59cb-x8694/backend] INFO:     10.244.0.5:36226 - "GET /api/equipment HTTP/1.1" 200 OK
+[pod/backend-6cff9f59cb-x8694/backend] INFO:     10.244.0.5:36226 - "DELETE /api/equipment/2 HTTP/1.1" 204 No Content
+[pod/backend-6cff9f59cb-x8694/backend] INFO:     10.244.0.5:36226 - "GET /api/summary HTTP/1.1" 200 OK
+[pod/backend-6cff9f59cb-x8694/backend] INFO:     10.244.0.5:36232 - "GET /api/loans HTTP/1.1" 200 OK
