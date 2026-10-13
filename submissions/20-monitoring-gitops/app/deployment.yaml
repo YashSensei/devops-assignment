@@ -4,7 +4,7 @@ metadata:
   name: lending-info
   namespace: coursework-gitops
 spec:
-  replicas: 2
+  replicas: 3
   selector: {matchLabels: {app: lending-info}}
   template:
     metadata: {labels: {app: lending-info}}
