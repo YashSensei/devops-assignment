@@ -1,12 +1,14 @@
 import {test,expect} from '@playwright/test';
 import {writeFile} from 'node:fs/promises';
 test('Prometheus targets and Grafana application dashboard',async({page,request})=>{
-  const targets=await request.get('http://127.0.0.1:9090/api/v1/targets');
-  const payload=await targets.json();
-  const appTargets=payload.data.activeTargets.filter(t=>t.labels.namespace==='kitledger');
-  expect(appTargets.length).toBeGreaterThanOrEqual(2);
-  expect(appTargets.every(t=>t.health==='up')).toBeTruthy();
-  await writeFile('../../evidence/observability/browser-verified-targets.json',JSON.stringify(payload,null,2)+'\n');
+  let payload,appTargets;
+  await expect.poll(async()=>{
+    const targets=await request.get('http://127.0.0.1:9090/api/v1/targets');
+    payload=await targets.json();
+    appTargets=payload.data.activeTargets.filter(t=>t.labels.namespace==='kitledger');
+    await writeFile('../../evidence/observability/browser-verified-targets.json',JSON.stringify(payload,null,2)+'\n');
+    return appTargets.length>=2 && appTargets.every(t=>t.health==='up');
+  },{timeout:60000,intervals:[2000,5000]}).toBe(true);
   await page.goto('http://127.0.0.1:9090/targets');
   await expect(page.getByText(appTargets[0].scrapePool,{exact:false}).first()).toBeVisible({timeout:30000});
   await page.screenshot({path:'../../evidence/observability/prometheus-targets.png',fullPage:true});
