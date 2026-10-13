@@ -17,9 +17,11 @@ jobs:
           mkdir -p evidence/ci
           set -o pipefail
           bash session2-linux/links.sh 2>&1 | tee evidence/ci/linux-links.log
+          bash session2-linux/cheat-sheet.sh 2>&1 | tee evidence/ci/linux-cheat-sheet.log
           bash session2-linux/systemd-user.sh 2>&1 | tee evidence/ci/systemd-user.log
           printf 'GitHub Actions coursework\n' | bash session3-shell-scripting/system-info.sh 2>&1 | tee evidence/ci/system-info.log
           bash session4-networking/network.sh 2>&1 | tee evidence/ci/network.log
+          bash session4-networking/isolated-ip.sh 2>&1 | tee evidence/ci/network-namespace.log
           bash session5-git-github/demo.sh 2>&1 | tee evidence/ci/git.log
       - name: Build and request all seven images
         run: |
