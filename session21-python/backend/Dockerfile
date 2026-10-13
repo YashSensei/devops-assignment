@@ -1,4 +1,8 @@
 FROM python:3.13-alpine
+LABEL org.opencontainers.image.source="https://github.com/YashSensei/devops-assignment" \
+      org.opencontainers.image.title="KitLedger backend" \
+      org.opencontainers.image.description="Equipment lending API with availability, returns and maintenance rules" \
+      org.opencontainers.image.licenses="MIT"
 ENV PYTHONDONTWRITEBYTECODE=1 PYTHONUNBUFFERED=1
 WORKDIR /app
 COPY requirements.txt .

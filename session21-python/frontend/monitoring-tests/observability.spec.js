@@ -11,6 +11,9 @@ test('Prometheus targets and Grafana application dashboard',async({page,request}
   await page.getByRole('textbox',{name:/email or username/i}).fill('admin');
   await page.getByLabel('Password',{exact:true}).fill(process.env.GRAFANA_PASSWORD);
   await page.getByRole('button',{name:/log in/i}).click();
+  // Login redirects asynchronously; wait for its authenticated destination
+  // before starting dashboard navigation (the original run hit ERR_ABORTED).
+  await expect(page.getByRole('button',{name:'Profile',exact:true})).toBeVisible({timeout:30000});
   await page.goto('http://127.0.0.1:3001/d/kitledger');
   await expect(page.getByText('Requests served',{exact:true})).toBeVisible({timeout:30000});
   await expect(page.getByText('Requests by route',{exact:true})).toBeVisible();
