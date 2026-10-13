@@ -12,11 +12,9 @@ kubectl describe secret coursework-secret -n coursework
 kubectl patch configmap coursework-config -n coursework -p '{"data":{"ENVIRONMENT":"staging"}}'
 test "$(kubectl exec -n coursework config-reader -- printenv ENVIRONMENT)" = development
 kubectl delete pod config-reader -n coursework
-kubectl apply -n coursework -f submissions/12-kubernetes-config-ingress/config.yaml
-# Applying the manifest resets ConfigMap; patch again before restarting the consumer.
-kubectl patch configmap coursework-config -n coursework -p '{"data":{"ENVIRONMENT":"staging"}}'
-kubectl delete pod config-reader -n coursework
-kubectl apply -n coursework -f <(sed -n '/kind: Pod/,$p' submissions/12-kubernetes-config-ingress/config.yaml | sed '1i apiVersion: v1') || true
+kubectl run config-reader -n coursework --image=alpine:3.22 --restart=Never --overrides='{"spec":{"containers":[{"name":"reader","image":"alpine:3.22","command":["sleep","3600"],"envFrom":[{"configMapRef":{"name":"coursework-config"}}]}]}}'
+kubectl wait -n coursework --for=condition=Ready pod/config-reader --timeout=120s
+test "$(kubectl exec -n coursework config-reader -- printenv ENVIRONMENT)" = staging
 # Newline demonstration uses a public dummy string, not the runtime secret.
 printf 'demo-value\n' | base64
 printf 'demo-value' | base64

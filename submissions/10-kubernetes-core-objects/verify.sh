@@ -23,11 +23,13 @@ kubectl wait -n coursework --for=condition=Ready pod/client --timeout=120s
 kubectl exec -n coursework client -- wget -qO- http://colour
 kubectl patch service colour -n coursework -p '{"spec":{"selector":{"app":"green"}}}'
 kubectl exec -n coursework client -- wget -qO- http://colour
-kubectl label pods -n coursework -l app=blue track=canary-demo
-kubectl label pods -n coursework -l app=green track=canary-demo
+kubectl patch deployment blue -n coursework --type=merge -p '{"spec":{"replicas":3,"template":{"metadata":{"labels":{"track":"canary-demo"}}}}}'
+kubectl patch deployment green -n coursework --type=merge -p '{"spec":{"template":{"metadata":{"labels":{"track":"canary-demo"}}}}}'
+kubectl rollout status deployment/blue -n coursework --timeout=180s
+kubectl rollout status deployment/green -n coursework --timeout=180s
 kubectl patch service colour -n coursework -p '{"spec":{"selector":{"app":null,"track":"canary-demo"}}}'
 for i in $(seq 1 20); do kubectl exec -n coursework client -- wget -qO- http://colour; done
-# Equal replica count is a probability model, not a promised request split.
+# Three stable replicas and one canary approximate 25%; finite traffic is not an exact quota.
 kubectl patch deployment web -n coursework --type=merge -p '{"spec":{"strategy":{"type":"Recreate","rollingUpdate":null}}}'
 kubectl get pods -n coursework -l app=web --watch > /tmp/recreate-observed.log &
 watcher=$!
