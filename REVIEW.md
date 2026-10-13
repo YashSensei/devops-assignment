@@ -24,6 +24,7 @@ Earlier evidence remains historical; new checks do not rewrite it.
 | Local E2E screenshots overwrote historical tracked evidence | Default new captures to ignored test-results; CI explicitly selects its artifact directory |
 | Concurrent .env initialization could overwrite credentials | Atomic CreateNew and preservation of an existing file |
 | Modal keyboard focus escaped to background controls | Trap Tab/Shift+Tab, restore opener, preserve Escape/save behavior; browser regression |
+| GitOps waited only for Argo's server, hiding an unavailable Redis dependency | Verify Redis/repo/controller readiness and preserve Argo diagnostics. Run 38468314765 exposed ECR HTTP 429; a pinned Kustomize overlay uses the identical Redis manifest digest from Docker's official registry, without changing authentication or skipping sync checks |
 
 ## Verification
 
@@ -40,6 +41,14 @@ migrations. Without TEST_POSTGRES_URL these tests explicitly skip, never silentl
 substitute SQLite. The existing Ingress browser lifecycle runs separately against
 the deployed PostgreSQL application. Consult the exact revision's Actions run for
 results; a local skip is not a pass.
+
+The first review application run [38468246321](https://github.com/YashSensei/devops-assignment/actions/runs/38468246321)
+passed all 40 API tests (including all six PostgreSQL tests), three calculator tests,
+seven browser tests, security gates, publication, deployment and cluster cleanup.
+The [foundation run](https://github.com/YashSensei/devops-assignment/actions/runs/38468246470)
+also passed. Later workflow-only fixes require their own revision's CI result.
+The [failed GitOps run](https://github.com/YashSensei/devops-assignment/actions/runs/38468314765)
+retains the actual Redis ImagePullBackOff/429 events; its cluster cleanup succeeded.
 
 ## Upgrade note
 

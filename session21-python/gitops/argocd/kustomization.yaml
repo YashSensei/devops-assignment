@@ -1,0 +1,11 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+  - https://raw.githubusercontent.com/argoproj/argo-cd/v3.5.5/manifests/install.yaml
+images:
+  # The public ECR mirror returned HTTP 429 in run 38468314765. Docker's
+  # official Redis 8.2.3-alpine manifest has the exact same digest: change
+  # distribution endpoint, not software version or Redis authentication.
+  - name: public.ecr.aws/docker/library/redis
+    newName: docker.io/library/redis
+    digest: sha256:08ad0b1d280850169a790dba1393ff7a90aef951fc19632cf4d3ce4f78e679ba
