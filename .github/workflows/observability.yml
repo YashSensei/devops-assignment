@@ -6,6 +6,10 @@ on:
         description: Full commit SHA from a green KitLedger image pipeline
         required: true
         default: 78c9dc0a78584735c8c96be11b79697fc2036075
+      verify_gitops:
+        description: Also run the coordinated two-to-three-replica GitOps exercise
+        type: boolean
+        default: true
 permissions:
   contents: read
   packages: read
@@ -66,6 +70,7 @@ jobs:
           npx playwright install --with-deps chromium
           npx playwright test --config playwright-monitoring.config.js
       - name: Sync initial GitOps application
+        if: inputs.verify_gitops
         run: |
           # Monitoring evidence is captured. Phase out its memory before Argo CD.
           helm uninstall monitoring -n monitoring --wait --timeout 3m
@@ -81,6 +86,7 @@ jobs:
           test "$ready" = 2
           kubectl get applications -n argocd -o wide | tee evidence/observability/argocd-initial.txt
       - name: Wait for the committed replica change and verify self-healing
+        if: inputs.verify_gitops
         run: |
           for i in $(seq 1 96); do
             desired="$(kubectl get deployment lending-info -n coursework-gitops -o jsonpath='{.spec.replicas}')"
