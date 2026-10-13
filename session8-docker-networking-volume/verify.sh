@@ -9,7 +9,7 @@ docker compose up -d --wait --wait-timeout 240
 set -x
 docker compose ps
 docker network ls --filter name=yash-24bcs10164-network
-docker compose exec -T frontend wget -qO- http://backend:8080
+docker compose exec -T frontend wget -qO- http://backend:80
 docker compose exec -T backend nc -z -w 3 database 3306
 if docker compose exec -T frontend getent hosts database; then
   echo 'Unexpected frontend-to-database DNS access'; exit 1

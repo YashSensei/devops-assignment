@@ -1,0 +1,112 @@
+name: Observability and GitOps evidence
+on:
+  workflow_dispatch:
+    inputs:
+      image_tag:
+        description: Full commit SHA from a green KitLedger image pipeline
+        required: true
+        default: 316fb8c
+permissions:
+  contents: read
+  packages: read
+jobs:
+  observe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    env:
+      IMAGE_TAG: ${{ inputs.image_tag }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+      - name: Start isolated Minikube
+        run: |
+          curl -fsSL https://github.com/kubernetes/minikube/releases/download/v1.39.0/minikube-linux-amd64 -o minikube
+          sudo install minikube /usr/local/bin/minikube
+          curl -fsSL https://get.helm.sh/helm-v4.3.0-linux-amd64.tar.gz | tar xz
+          sudo install linux-amd64/helm /usr/local/bin/helm
+          minikube start -p observability --driver=docker --memory=4096 --cpus=2
+          for app in backend frontend; do
+            image="ghcr.io/yashsensei/kitledger-$app:$IMAGE_TAG"
+            docker pull "$image"
+            minikube -p observability image load "$image"
+          done
+          kubectl apply -f session21-python/k8s/namespace.yaml
+          password="$(openssl rand -hex 24)"
+          echo "::add-mask::$password"
+          kubectl -n kitledger create secret generic kitledger-db --from-literal=POSTGRES_PASSWORD="$password" --from-literal=DATABASE_URL="postgresql+psycopg://kitledger:$password@postgres:5432/kitledger"
+          helm upgrade --install kitledger session21-python/helm/kitledger -n kitledger --set backend.tag="$IMAGE_TAG",frontend.tag="$IMAGE_TAG",ingress.enabled=false --wait --timeout 6m
+      - name: Install monitoring and dashboard
+        run: |
+          helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
+          helm upgrade --install monitoring prometheus-community/kube-prometheus-stack --version 92.3.1 -n monitoring --create-namespace -f session21-python/monitoring/prometheus-values.yaml --wait --timeout 8m
+          helm upgrade kitledger session21-python/helm/kitledger -n kitledger --reuse-values --set monitoring.enabled=true --wait --timeout 3m
+          kubectl apply -f session21-python/monitoring/dashboard.yaml
+          kubectl -n kitledger port-forward svc/backend 8000:8000 >/tmp/backend-forward.log 2>&1 &
+          kubectl -n monitoring port-forward svc/monitoring-kube-prometheus-prometheus 9090:9090 >/tmp/prometheus-forward.log 2>&1 &
+          kubectl -n monitoring port-forward svc/monitoring-grafana 3001:80 >/tmp/grafana-forward.log 2>&1 &
+          for i in $(seq 1 30); do curl --fail -s http://127.0.0.1:8000/api/summary && break || sleep 2; done
+          for i in $(seq 1 100); do curl --fail -s http://127.0.0.1:8000/api/equipment >/dev/null; done
+          mkdir -p evidence/observability
+          curl --fail -s http://127.0.0.1:8000/metrics > evidence/observability/metrics.txt
+          sleep 45
+          curl --fail -s http://127.0.0.1:9090/api/v1/targets > evidence/observability/targets.json
+          password="$(kubectl get secret monitoring-grafana -n monitoring -o jsonpath='{.data.admin-password}' | base64 -d)"
+          echo "::add-mask::$password"
+          echo "GRAFANA_PASSWORD=$password" >> "$GITHUB_ENV"
+      - uses: actions/setup-node@v4
+        with: {node-version: '22'}
+      - name: Verify monitoring through the browser
+        working-directory: session21-python/frontend
+        run: |
+          npm ci
+          npx playwright install --with-deps chromium
+          npx playwright test --config playwright-monitoring.config.js
+      - name: Sync initial GitOps application
+        run: |
+          kubectl create namespace argocd
+          kubectl apply -n argocd --server-side -f https://raw.githubusercontent.com/argoproj/argo-cd/v3.5.5/manifests/install.yaml
+          kubectl rollout status deployment/argocd-server -n argocd --timeout=300s
+          kubectl apply -f submissions/20-monitoring-gitops/application.yaml
+          for i in $(seq 1 60); do
+            ready="$(kubectl get deployment lending-info -n coursework-gitops -o jsonpath='{.status.readyReplicas}' 2>/dev/null || true)"
+            [ "$ready" != 2 ] || break
+            sleep 5
+          done
+          test "$ready" = 2
+          kubectl get applications -n argocd -o wide | tee evidence/observability/argocd-initial.txt
+      - name: Wait for the committed replica change and verify self-healing
+        run: |
+          for i in $(seq 1 96); do
+            desired="$(kubectl get deployment lending-info -n coursework-gitops -o jsonpath='{.spec.replicas}')"
+            [ "$desired" != 3 ] || break
+            sleep 5
+          done
+          test "$desired" = 3
+          kubectl rollout status deployment/lending-info -n coursework-gitops --timeout=120s
+          kubectl get applications -n argocd -o yaml > evidence/observability/argocd-git-change.yaml
+          kubectl scale deployment lending-info -n coursework-gitops --replicas=1
+          kubectl get deployment lending-info -n coursework-gitops | tee evidence/observability/drift-before.txt
+          for i in $(seq 1 36); do
+            desired="$(kubectl get deployment lending-info -n coursework-gitops -o jsonpath='{.spec.replicas}')"
+            [ "$desired" != 3 ] || break
+            sleep 5
+          done
+          test "$desired" = 3
+          kubectl rollout status deployment/lending-info -n coursework-gitops --timeout=120s
+          kubectl get deployment lending-info -n coursework-gitops | tee evidence/observability/drift-healed.txt
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: observability-gitops-evidence
+          path: |
+            evidence/observability
+            session21-python/frontend/test-results
+      - name: Suspend GitOps and destroy the disposable environment
+        if: always()
+        run: |
+          kubectl delete application coursework-gitops -n argocd --ignore-not-found || true
+          minikube delete -p observability

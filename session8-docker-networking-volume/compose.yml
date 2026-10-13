@@ -5,8 +5,8 @@ services:
     networks: [edge, isolated]
     ports: ["127.0.0.1:8180:80"]
   backend:
-    image: alpine:3.22
-    command: ["sh", "-c", "mkdir -p /www; printf 'Network backend - Yash Agrawal 24bcs10164' > /www/index.html; exec httpd -f -p 8080 -h /www"]
+    image: nginx:stable-alpine
+    command: ["sh", "-c", "printf 'Network backend - Yash Agrawal 24bcs10164' > /usr/share/nginx/html/index.html; exec nginx -g 'daemon off;'"]
     networks: [edge, data]
   database:
     image: mysql:8.4

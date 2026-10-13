@@ -1,0 +1,18 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: lending-info
+  namespace: coursework-gitops
+spec:
+  replicas: 2
+  selector: {matchLabels: {app: lending-info}}
+  template:
+    metadata: {labels: {app: lending-info}}
+    spec:
+      containers:
+        - name: web
+          image: nginx:stable-alpine
+          ports: [{containerPort: 80}]
+          resources:
+            requests: {cpu: 10m, memory: 16Mi}
+            limits: {cpu: 100m, memory: 64Mi}
