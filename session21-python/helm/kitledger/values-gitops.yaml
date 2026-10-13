@@ -1,0 +1,6 @@
+# Replace local tags with a green CI commit SHA before an external deployment.
+# This file starts with local images for the isolated Minikube exercise.
+autoscaling:
+  enabled: true
+monitoring:
+  enabled: true

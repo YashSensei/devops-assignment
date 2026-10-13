@@ -1,0 +1,24 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: kitledger
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/YashSensei/devops-assignment.git
+    targetRevision: main
+    path: session21-python/helm/kitledger
+    helm:
+      valueFiles: [values.yaml, values-gitops.yaml]
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: kitledger
+  syncPolicy:
+    automated: {prune: true, selfHeal: true}
+    syncOptions: [CreateNamespace=true, RespectIgnoreDifferences=true]
+  ignoreDifferences:
+    - group: apps
+      kind: Deployment
+      name: backend
+      jsonPointers: [/spec/replicas]

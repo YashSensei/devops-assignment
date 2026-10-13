@@ -1,0 +1,60 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: backend
+spec:
+  {{- if not .Values.autoscaling.enabled }}
+  replicas: {{ .Values.backend.replicas }}
+  {{- end }}
+  selector:
+    matchLabels: {app: kitledger-backend}
+  template:
+    metadata:
+      labels: {app: kitledger-backend}
+    spec:
+      automountServiceAccountToken: false
+      {{- with .Values.imagePullSecrets }}
+      imagePullSecrets: {{ toYaml . | nindent 8 }}
+      {{- end }}
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 10001
+        runAsGroup: 10001
+        seccompProfile: {type: RuntimeDefault}
+      containers:
+        - name: backend
+          image: "{{ .Values.backend.repository }}:{{ .Values.backend.tag }}"
+          imagePullPolicy: {{ .Values.imagePullPolicy }}
+          ports: [{name: http, containerPort: 8000}]
+          envFrom:
+            - configMapRef: {name: "{{ .Release.Name }}-config"}
+          env:
+            - name: DATABASE_URL
+              valueFrom:
+                secretKeyRef: {name: "{{ .Values.database.existingSecret }}", key: DATABASE_URL}
+          securityContext:
+            allowPrivilegeEscalation: false
+            capabilities: {drop: ["ALL"]}
+          startupProbe:
+            httpGet: {path: /health, port: http}
+            failureThreshold: 60
+            periodSeconds: 3
+          readinessProbe:
+            httpGet: {path: /ready, port: http}
+            periodSeconds: 5
+          livenessProbe:
+            httpGet: {path: /health, port: http}
+            periodSeconds: 10
+          resources:
+            requests: {cpu: 100m, memory: 128Mi}
+            limits: {cpu: "1", memory: 384Mi}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: backend
+  labels: {app: kitledger-backend}
+spec:
+  type: ClusterIP
+  selector: {app: kitledger-backend}
+  ports: [{name: http, port: 8000, targetPort: http}]

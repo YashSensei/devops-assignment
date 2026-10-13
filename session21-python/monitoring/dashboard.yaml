@@ -1,0 +1,22 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: kitledger-dashboard
+  namespace: monitoring
+  labels: {grafana_dashboard: "1"}
+data:
+  kitledger.json: |
+    {
+      "uid":"kitledger","title":"KitLedger operations","schemaVersion":39,"version":1,
+      "refresh":"10s","time":{"from":"now-15m","to":"now"},
+      "panels":[
+        {"id":1,"title":"Requests by route","type":"timeseries","gridPos":{"x":0,"y":0,"w":12,"h":8},
+         "targets":[{"expr":"sum by (route) (rate(kitledger_http_requests_total{namespace=\"kitledger\"}[2m]))","legendFormat":"{{route}}"}]},
+        {"id":2,"title":"Requests served","type":"stat","gridPos":{"x":12,"y":0,"w":12,"h":8},
+         "targets":[{"expr":"sum(kitledger_http_requests_total{namespace=\"kitledger\"})"}]},
+        {"id":3,"title":"API latency p95 (seconds)","type":"timeseries","gridPos":{"x":0,"y":8,"w":12,"h":8},
+         "targets":[{"expr":"histogram_quantile(0.95,sum by(le)(rate(kitledger_http_duration_seconds_bucket{namespace=\"kitledger\"}[2m])))"}]},
+        {"id":4,"title":"5xx error rate","type":"timeseries","gridPos":{"x":12,"y":8,"w":12,"h":8},
+         "targets":[{"expr":"sum(rate(kitledger_http_requests_total{namespace=\"kitledger\",status=~\"5..\"}[2m])) or vector(0)"}]}
+      ]
+    }

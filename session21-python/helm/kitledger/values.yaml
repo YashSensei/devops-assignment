@@ -1,0 +1,26 @@
+backend:
+  repository: ghcr.io/yashsensei/kitledger-backend
+  tag: local
+  replicas: 2
+frontend:
+  repository: ghcr.io/yashsensei/kitledger-frontend
+  tag: local
+  replicas: 2
+imagePullPolicy: IfNotPresent
+imagePullSecrets: []
+database:
+  image: postgres:17-alpine
+  existingSecret: kitledger-db
+  storageClass: ""
+  size: 1Gi
+ingress:
+  enabled: true
+  className: nginx
+  host: kitledger.local
+autoscaling:
+  enabled: false
+  minReplicas: 2
+  maxReplicas: 5
+  targetCPU: 50
+monitoring:
+  enabled: false
