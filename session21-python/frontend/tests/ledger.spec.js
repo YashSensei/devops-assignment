@@ -60,4 +60,10 @@ test('equipment lifecycle, loan rules, persistence, filters, and mobile layout',
   await page.getByRole('button',{name:'Delete equipment',exact:true}).click();
   await expect(page.getByRole('status')).toContainText('Unused equipment deleted');
   await expect(page.getByText('Temporary tripod',{exact:true})).toHaveCount(0);
+  if(process.env.METRICS_URL){
+    const metrics=await page.context().newPage();
+    await metrics.goto(process.env.METRICS_URL);
+    await expect(metrics.locator('body')).toContainText('kitledger_http_requests_total');
+    await metrics.screenshot({path:'../../evidence/browser/metrics.png',fullPage:true});
+  }
 });
