@@ -16,6 +16,9 @@ args = parser.parse_args()
 command = args.command[1:] if args.command and args.command[0] == "--" else args.command
 if not command:
     parser.error("Supply a command after --")
+candidate = Path(args.cwd) / command[0]
+if candidate.is_file():
+    command[0] = str(candidate.resolve())
 root = Path(__file__).resolve().parent.parent
 now = datetime.datetime.now(datetime.timezone.utc)
 revision = subprocess.run(["git", "rev-parse", "HEAD"], cwd=root, capture_output=True, text=True).stdout.strip()

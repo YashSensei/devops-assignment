@@ -1,7 +1,6 @@
 """Equipment inventory and loan history, with one active loan per asset."""
 
 import sqlalchemy as sa
-
 from alembic import op
 
 revision = "0001"

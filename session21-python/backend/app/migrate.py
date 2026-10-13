@@ -2,10 +2,9 @@
 
 import os
 
+from alembic import command
 from alembic.config import Config
 from sqlalchemy import create_engine, text
-
-from alembic import command
 
 engine = create_engine(os.environ["DATABASE_URL"])
 with engine.connect() as connection:

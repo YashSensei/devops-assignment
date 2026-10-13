@@ -26,6 +26,7 @@ jobs:
         run: |
           pip install -r requirements-dev.txt
           pytest -v --junitxml=pytest.xml
+          pytest -v ../../submissions/16-cicd/tests
           ruff check app tests alembic
           bandit -r app -ll
           pip-audit -r requirements.txt
@@ -71,7 +72,12 @@ jobs:
       - uses: actions/upload-artifact@v4
         with:
           name: rendered-kubernetes
-          path: rendered.yaml
+          include-hidden-files: true
+          path: |
+            rendered.yaml
+            session21-python/terraform/.terraform.lock.hcl
+            submissions/18-terraform/terraform-s3-demo/.terraform.lock.hcl
+            submissions/19-cloud/terraform/.terraform.lock.hcl
   images-and-deployment:
     needs: [quality, infrastructure]
     runs-on: ubuntu-latest
