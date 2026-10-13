@@ -32,3 +32,5 @@ Thumbs.db
 .local/
 *.db
 *.sqlite*
+test-results/
+playwright-report/

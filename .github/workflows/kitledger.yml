@@ -1,0 +1,165 @@
+name: KitLedger quality, security, images, and Kubernetes
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: kitledger-${{ github.ref }}
+  cancel-in-progress: false
+jobs:
+  quality:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with: {fetch-depth: 0}
+      - uses: actions/setup-python@v5
+        with: {python-version: '3.13'}
+      - uses: actions/setup-node@v4
+        with: {node-version: '22'}
+      - name: Install and test
+        working-directory: session21-python/backend
+        run: |
+          pip install -r requirements-dev.txt
+          pytest -v --junitxml=pytest.xml
+          ruff check app tests alembic
+          bandit -r app -ll
+          pip-audit -r requirements.txt
+      - name: Frontend build and dependency audit
+        working-directory: session21-python/frontend
+        run: |
+          npm ci
+          npm run build
+          npm audit --audit-level=high
+      - name: Scan complete Git history for secrets
+        run: |
+          curl -fsSL https://github.com/gitleaks/gitleaks/releases/download/v8.30.1/gitleaks_8.30.1_linux_x64.tar.gz | tar xz gitleaks
+          ./gitleaks git --redact --no-banner .
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: test-and-frontend-build
+          path: |
+            session21-python/backend/pytest.xml
+            session21-python/frontend/dist
+  infrastructure:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: hashicorp/setup-terraform@v3
+        with: {terraform_version: '1.16.5'}
+      - name: Validate each isolated Terraform project
+        run: |
+          mkdir -p "$RUNNER_TEMP/terraform-cache"
+          export TF_PLUGIN_CACHE_DIR="$RUNNER_TEMP/terraform-cache"
+          for folder in session21-python/terraform submissions/18-terraform/terraform-s3-demo submissions/19-cloud/terraform; do
+            terraform -chdir="$folder" fmt -check
+            terraform -chdir="$folder" init -backend=false -input=false
+            terraform -chdir="$folder" validate
+          done
+      - name: Install Helm and validate chart
+        run: |
+          curl -fsSL https://get.helm.sh/helm-v4.3.0-linux-amd64.tar.gz | tar xz
+          sudo install linux-amd64/helm /usr/local/bin/helm
+          helm lint session21-python/helm/kitledger
+          helm template kitledger session21-python/helm/kitledger > rendered.yaml
+      - uses: actions/upload-artifact@v4
+        with:
+          name: rendered-kubernetes
+          path: rendered.yaml
+  images-and-deployment:
+    needs: [quality, infrastructure]
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    permissions:
+      contents: read
+      packages: write
+    env:
+      BACKEND: ghcr.io/yashsensei/kitledger-backend
+      FRONTEND: ghcr.io/yashsensei/kitledger-frontend
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build both application images
+        run: |
+          docker build -t "$BACKEND:$GITHUB_SHA" session21-python/backend
+          docker build -t "$FRONTEND:$GITHUB_SHA" session21-python/frontend
+      - name: Trivy backend HIGH and CRITICAL gate
+        uses: aquasecurity/trivy-action@0.35.0
+        with:
+          image-ref: ghcr.io/yashsensei/kitledger-backend:${{ github.sha }}
+          format: table
+          exit-code: '1'
+          severity: HIGH,CRITICAL
+          scanners: vuln
+      - name: Trivy frontend HIGH and CRITICAL gate
+        uses: aquasecurity/trivy-action@0.35.0
+        with:
+          image-ref: ghcr.io/yashsensei/kitledger-frontend:${{ github.sha }}
+          format: table
+          exit-code: '1'
+          severity: HIGH,CRITICAL
+          scanners: vuln
+      - uses: docker/login-action@v3
+        if: github.event_name != 'pull_request'
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+      - name: Publish SHA-tagged images after both security gates
+        if: github.event_name != 'pull_request'
+        run: |
+          docker push "$BACKEND:$GITHUB_SHA"
+          docker push "$FRONTEND:$GITHUB_SHA"
+      - name: Install Minikube and Helm
+        run: |
+          curl -fsSL https://github.com/kubernetes/minikube/releases/download/v1.39.0/minikube-linux-amd64 -o minikube
+          sudo install minikube /usr/local/bin/minikube
+          curl -fsSL https://get.helm.sh/helm-v4.3.0-linux-amd64.tar.gz | tar xz
+          sudo install linux-amd64/helm /usr/local/bin/helm
+      - name: Deploy tested images to disposable Minikube
+        run: |
+          minikube start -p kitledger-ci --driver=docker --cpus=2 --memory=4096
+          minikube -p kitledger-ci addons enable ingress
+          minikube -p kitledger-ci image load "$BACKEND:$GITHUB_SHA"
+          minikube -p kitledger-ci image load "$FRONTEND:$GITHUB_SHA"
+          kubectl apply -f session21-python/k8s/namespace.yaml
+          password="$(openssl rand -hex 24)"
+          echo "::add-mask::$password"
+          kubectl -n kitledger create secret generic kitledger-db --from-literal=POSTGRES_PASSWORD="$password" --from-literal=DATABASE_URL="postgresql+psycopg://kitledger:$password@postgres:5432/kitledger"
+          helm upgrade --install kitledger session21-python/helm/kitledger -n kitledger --set backend.tag="$GITHUB_SHA",frontend.tag="$GITHUB_SHA" --wait --timeout 6m
+          kubectl get pods,svc,ingress -n kitledger
+          helm list -n kitledger
+          kubectl wait --namespace ingress-nginx --for=condition=ready pod --selector=app.kubernetes.io/component=controller --timeout=180s
+          curl --fail --retry 10 --retry-all-errors -H 'Host: kitledger.local' "http://$(minikube -p kitledger-ci ip)/api/summary"
+          kubectl -n kitledger port-forward svc/frontend 3000:80 > /tmp/kitledger-forward.log 2>&1 &
+      - uses: actions/setup-node@v4
+        with: {node-version: '22'}
+      - name: Browser workflow with real database
+        working-directory: session21-python/frontend
+        run: |
+          npm ci
+          npx playwright install --with-deps chromium
+          npx playwright test
+      - name: Preserve deployment observations
+        if: always()
+        run: |
+          mkdir -p evidence/ci
+          kubectl get pods,svc,ingress -n kitledger -o wide > evidence/ci/kubernetes.txt 2>&1 || true
+          kubectl get events -n kitledger --sort-by=.lastTimestamp > evidence/ci/events.txt 2>&1 || true
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: minikube-and-browser-evidence
+          path: |
+            evidence/ci
+            evidence/browser
+            session21-python/frontend/test-results
+      - name: Destroy the disposable cluster
+        if: always()
+        run: |
+          if command -v minikube >/dev/null; then minikube delete -p kitledger-ci; fi

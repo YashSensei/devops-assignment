@@ -1,0 +1,32 @@
+name: Foundation labs
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: ['session2-linux/**', 'session3-shell-scripting/**', 'session4-networking/**', 'session5-git-github/**', 'session6-7-docker/**', '.github/workflows/foundations.yml']
+permissions:
+  contents: read
+jobs:
+  linux-git-docker:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - name: Linux and systemd exercises
+        run: |
+          mkdir -p evidence/ci
+          set -o pipefail
+          bash session2-linux/links.sh 2>&1 | tee evidence/ci/linux-links.log
+          bash session2-linux/systemd-user.sh 2>&1 | tee evidence/ci/systemd-user.log
+          printf 'GitHub Actions coursework\n' | bash session3-shell-scripting/system-info.sh 2>&1 | tee evidence/ci/system-info.log
+          bash session4-networking/network.sh 2>&1 | tee evidence/ci/network.log
+          bash session5-git-github/demo.sh 2>&1 | tee evidence/ci/git.log
+      - name: Build and request all seven images
+        run: |
+          set -o pipefail
+          bash session6-7-docker/verify.sh 2>&1 | tee evidence/ci/docker-hello.log
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: foundation-execution-evidence
+          path: evidence/ci

@@ -7,6 +7,7 @@ import platform
 import subprocess
 import sys
 
+sys.stdout.reconfigure(encoding="utf-8", errors="replace")
 parser = argparse.ArgumentParser()
 parser.add_argument("label")
 parser.add_argument("--cwd", default=".")
@@ -20,7 +21,7 @@ now = datetime.datetime.now(datetime.timezone.utc)
 revision = subprocess.run(["git", "rev-parse", "HEAD"], cwd=root, capture_output=True, text=True).stdout.strip()
 dirty = subprocess.run(["git", "status", "--porcelain"], cwd=root, capture_output=True, text=True).stdout.strip()
 result = subprocess.run(command, cwd=args.cwd, stdout=subprocess.PIPE, stderr=subprocess.STDOUT,
-                        text=True, errors="replace")
+                        text=True, encoding="utf-8", errors="replace")
 destination = root / "evidence" / "runs" / (now.strftime("%Y%m%dT%H%M%S%fZ") + "-" + args.label + ".json")
 destination.parent.mkdir(parents=True, exist_ok=True)
 destination.write_text(json.dumps({"timestamp_utc": now.isoformat(), "revision": revision,
