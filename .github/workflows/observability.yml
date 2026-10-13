@@ -81,14 +81,18 @@ jobs:
           kubectl create namespace argocd
           kubectl apply -n argocd --server-side -f https://raw.githubusercontent.com/argoproj/argo-cd/v3.5.5/manifests/install.yaml
           kubectl rollout status deployment/argocd-server -n argocd --timeout=300s
-          kubectl apply -f submissions/20-monitoring-gitops/application.yaml
-          kubectl patch application coursework-gitops -n argocd --type merge -p "{\"spec\":{\"source\":{\"targetRevision\":\"$INITIAL_GITOPS_REVISION\"}}}"
+          # Set the revision before creation; never briefly reconcile moving main.
+          kubectl patch --local -f submissions/20-monitoring-gitops/application.yaml --type merge -p "{\"spec\":{\"source\":{\"targetRevision\":\"$INITIAL_GITOPS_REVISION\"}}}" -o yaml | kubectl apply -f -
           for i in $(seq 1 60); do
             ready="$(kubectl get deployment lending-info -n coursework-gitops -o jsonpath='{.status.readyReplicas}' 2>/dev/null || true)"
-            [ "$ready" != 2 ] || break
+            revision="$(kubectl get application coursework-gitops -n argocd -o jsonpath='{.status.sync.revision}')"
+            sync="$(kubectl get application coursework-gitops -n argocd -o jsonpath='{.status.sync.status}')"
+            if [ "$ready" = 2 ] && [ "$revision" = "$INITIAL_GITOPS_REVISION" ] && [ "$sync" = Synced ]; then break; fi
             sleep 5
           done
           test "$ready" = 2
+          test "$revision" = "$INITIAL_GITOPS_REVISION"
+          test "$sync" = Synced
           kubectl get applications -n argocd -o wide | tee evidence/observability/argocd-initial.txt
       - name: Replay the committed replica change and verify self-healing
         if: inputs.verify_gitops
@@ -98,10 +102,12 @@ jobs:
           for i in $(seq 1 96); do
             desired="$(kubectl get deployment lending-info -n coursework-gitops -o jsonpath='{.spec.replicas}')"
             revision="$(kubectl get application coursework-gitops -n argocd -o jsonpath='{.status.sync.revision}')"
-            if [ "$desired" = 3 ] && [ "$revision" = "$GITHUB_SHA" ]; then break; fi
+            sync="$(kubectl get application coursework-gitops -n argocd -o jsonpath='{.status.sync.status}')"
+            if [ "$desired" = 3 ] && [ "$revision" = "$GITHUB_SHA" ] && [ "$sync" = Synced ]; then break; fi
             sleep 5
           done
           test "$desired" = 3
+          test "$sync" = Synced
           kubectl rollout status deployment/lending-info -n coursework-gitops --timeout=120s
           test "$(kubectl get application coursework-gitops -n argocd -o jsonpath='{.status.sync.revision}')" = "$GITHUB_SHA"
           kubectl get applications -n argocd -o yaml > evidence/observability/argocd-git-change.yaml
