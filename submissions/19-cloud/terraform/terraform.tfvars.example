@@ -1,0 +1,4 @@
+account_id     = "000000000000"
+region         = "ap-south-1"
+admin_cidr     = "192.0.2.1/32"
+create_compute = false
