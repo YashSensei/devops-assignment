@@ -194,7 +194,13 @@ def create_app(database_url=None):
     @api.get("/api/equipment/{asset_id}", response_model=EquipmentOutput)
     def get_equipment(asset_id: RecordID):
         with sessions() as db:
-            return equipment_json(db, asset_or_404(db, asset_id))
+            row = db.execute(
+                select(Equipment, is_available).where(Equipment.id == asset_id)
+            ).one_or_none()
+            if row is None:
+                raise HTTPException(404, "Equipment not found")
+            asset, available = row
+            return equipment_json(db, asset, available)
 
     @api.post("/api/equipment", response_model=EquipmentOutput, status_code=201)
     def create_equipment(payload: EquipmentInput):

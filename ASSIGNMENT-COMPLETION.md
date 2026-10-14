@@ -34,12 +34,12 @@ AWS execution was omitted at the student's request, not silently substituted.
 | 20 | Metrics/logs/alerts/CPU/memory/health, three observability pillars; Prometheus/Grafana; Argo CD two-replica mini-project, Git scale change, drift/self-heal | [README](submissions/20-monitoring-gitops/README.md) | gh workflow run observability.yml -f image_tag=FULL_SHA | [Run](https://github.com/YashSensei/devops-assignment/actions/runs/38449935009) | executed-and-passed: metrics/Targets UP/populated panels in run 38456443849; GitOps commit/drift recovery in run 38453774602; alert delivery not executed |
 | 21 | Original full-stack app, tests, Docker, CI/security/GHCR, Terraform EKS, Helm/Kubernetes, monitoring/GitOps, failure diagnosis, live-update presentation | [README](session21-python/README.md) | pytest -v; npm run build; root KitLedger workflow | [Run](https://github.com/YashSensei/devops-assignment/actions/runs/38450469520) | implemented and partly executed-and-passed; see individual rubric rows below |
 
-## Capstone rubric — verified weights
+## Capstone rubric: verified weights
 
 | Module | Exact criteria | Points | Current evidence / status |
 |---|---|---:|---|
 | M1 | FastAPI /health (2); CRUD (3); PostgreSQL/Alembic (2); API frontend (2); responsive UI (1) | 10 | executed-and-passed: PostgreSQL browser lifecycle, desktop/mobile and Ingress in [capstone run](https://github.com/YashSensei/devops-assignment/actions/runs/38450469520) |
-| M2 | pytest (3); five tests/three endpoints (4); isolation (2); pytest.ini/conftest (1) | 10 | executed-and-passed: 23 isolated tests; [actual local output](evidence/runs/20261013T181937583957Z-pytest.json); native pytest screenshot missing |
+| M2 | pytest (3); five tests/three endpoints (4); isolation (2); pytest.ini/conftest (1) | 10 | executed-and-passed: isolated API/migration tests and real PostgreSQL concurrency tests in [review CI](https://github.com/YashSensei/devops-assignment/actions/runs/38470107827); [earlier local output](evidence/runs/20261013T181937583957Z-pytest.json) is historical; native pytest screenshot missing |
 | M3 | Public/instructor-accessible repo (2); meaningful commits (2); gitignore (1) | 5 | executed-and-passed: public repository, meaningful history and [GitHub history screenshot](evidence/github/commit-history.png) |
 | M4 | Backend image (2); multi-stage frontend (3); non-root (2); Compose (3) | 10 | executed-and-passed: CI images/non-root; [local Compose](evidence/runs/20261013T182037035663Z-compose-start.json) became healthy; newest-image local rerun/localhost:3000 screenshot missing after Docker failure |
 | M5 | Workflow (1); main trigger (1); pytest gate (3); frontend (2); both images (3); GHCR (3); SHA tags (2) | 15 | executed-and-passed: green pipeline/SHA publication; [public package screenshots](evidence/github) and anonymous registry manifests verified |

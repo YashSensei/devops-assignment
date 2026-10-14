@@ -25,6 +25,6 @@ this work. Automated test video is not a narrated student presentation.
 AWS is not being provisioned. Seek instructor acceptance of missing cloud runtime
 evidence. Disposable CI teardown leaves no permanent hosted website to promise.
 
-Suggested narration: 8–12 minutes, followed by questions. Explain in your own
+Suggested narration: 8-12 minutes, followed by questions. Explain in your own
 words why returning equipment preserves history, why migrations are serialized,
 why readiness checks the DB, and why CI security failure prevents publication.

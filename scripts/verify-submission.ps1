@@ -4,6 +4,15 @@ $root = Split-Path -Parent $PSScriptRoot
 Push-Location $root
 try {
     $tree = @(git ls-files)
+    if ($LASTEXITCODE -ne 0) { throw 'Could not read the Git tracked tree.' }
+    $markdownPaths = @($tree | Where-Object { $_ -match '\.md$' })
+    foreach ($path in $markdownPaths) {
+        $markdown = Get-Content -LiteralPath $path -Raw -Encoding UTF8
+        if ($markdown -match '\u2014|&mdash;|&#(?:8212|x2014);') {
+            throw "Markdown contains an em dash: $path"
+        }
+    }
+    Write-Output "Verified $($markdownPaths.Count) Markdown files contain no em dashes."
     $guide = Get-Content -LiteralPath SUBMISSION-GUIDE.md -Raw -Encoding UTF8
     $pattern = 'https://github.com/YashSensei/devops-assignment/blob/main/([A-Za-z0-9_./-]+/README\.md)'
     $paths = @([regex]::Matches($guide, $pattern) | ForEach-Object { $_.Groups[1].Value } | Sort-Object -Unique)

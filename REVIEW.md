@@ -59,6 +59,14 @@ frontend needs a reload after this API change. Do not erase a database to migrat
 
 ## Remaining boundaries
 
+Follow-up review: single-equipment GET now reads equipment and availability in
+one statement, closing the remaining mixed-snapshot case. The API client also
+handles failed/timeout response bodies after headers arrive and malformed error
+JSON. One database-snapshot assertion and five client assertions reproduced the
+pre-fix failures; the corrected local suite passed. Eight Node client unit tests
+are now part of CI. Markdown prose no longer uses em dashes, and the submission
+guide distinguishes the homework README fields from the capstone repository field.
+
 - Lab-only application: no login/roles, public TLS termination, rate limiting,
   pagination, backup/restore automation or mutation idempotency keys. Do not expose
   it as a public multi-user production service or store sensitive borrower data.

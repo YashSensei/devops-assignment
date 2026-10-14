@@ -2,7 +2,8 @@
 
 Yash Agrawal | 24bcs10164 | yash.24bcs10164@sst.scaler.com
 
-[All 20 submission README links](SUBMISSION-GUIDE.md) ·
+[KitLedger capstone](session21-python/README.md) ·
+[Homework and capstone submission guide](SUBMISSION-GUIDE.md) ·
 [Requirement audit](ASSIGNMENT-COMPLETION.md) · [Evidence](evidence/README.md) ·
 [Sources and AI assistance](SOURCES.md)
 
@@ -30,7 +31,8 @@ architecture, tests, Kubernetes, troubleshooting and scoped cleanup.
 
 ## Verified work and limitations
 
-- 23 isolated API tests, React build, source/dependency/Git-history scans.
+- Isolated API and real PostgreSQL concurrency tests, React build, and
+  source/dependency/Git-history scans.
 - Both images, strict Trivy HIGH/CRITICAL gates, SHA-tagged GHCR publication,
   Helm deployment with PostgreSQL and 2 backend + 2 frontend replicas.
 - Automated browser equipment/loan lifecycle, validation, filters, reload and
@@ -45,6 +47,11 @@ The [evidence index](evidence/README.md) identifies exact runs and remaining gap
 The coursework is **not claimed 100% complete**. Required screenshots, some
 extended observations and the student's narrated live-update presentation remain
 independent obligations. Read the audit before submitting.
+
+The homework form takes 20 individual README links. The capstone form's shown
+GitHub URL field takes this repository URL:
+https://github.com/YashSensei/devops-assignment. Both forms are linked in the
+submission guide; neither has been submitted by the coding agent.
 
 ## Environment and cloud scope
 

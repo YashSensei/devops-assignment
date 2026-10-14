@@ -8,7 +8,7 @@ nodejs-app, python-app, java-app, Apache-app, React-app, nginx-app.
 bash session6-7-docker/verify.sh
 ```
 [Actual build/run/HTTP output](../evidence/ci/foundations-38448115326/docker-hello.log).
-The same script also checks Session 7. It assigns local host ports 8101–8106
+The same script also checks Session 7. It assigns local host ports 8101-8106
 and uses container port 8080 except Apache (80). Each container is named
 yash-24bcs10164-hello-N and is removed individually after verification.
 

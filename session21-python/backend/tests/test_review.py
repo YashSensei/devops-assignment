@@ -62,7 +62,9 @@ def test_unhandled_errors_are_counted(client):
         assert 'route="/test-failure",status="500"' in metrics
 
 
-@pytest.mark.parametrize("path", ["/api/equipment", "/api/summary", "/api/loans"])
+@pytest.mark.parametrize(
+    "path", ["/api/equipment", "/api/equipment/1", "/api/summary", "/api/loans"]
+)
 def test_list_queries_use_one_database_snapshot(client, path):
     for index in range(4):
         asset = client.post(

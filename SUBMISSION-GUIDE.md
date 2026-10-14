@@ -6,9 +6,23 @@ Yash Agrawal | 24bcs10164 | yash.24bcs10164@sst.scaler.com
 [Capstone](https://github.com/YashSensei/devops-assignment/blob/main/session21-python/README.md) ·
 [Evidence](evidence/README.md) · [Completion audit](ASSIGNMENT-COMPLETION.md)
 
-[Section B form](https://forms.gle/pAuXQaokwVzhRzit6) was fetched 2026-10-13.
-It requires student email plus 20 README file URLs; no separate batch field was
-found. Batch is omitted here. Use Section B if a compulsory section choice appears,
+## Two separate forms, one repository
+
+1. [Section B homework form](https://docs.google.com/forms/d/e/1FAIpQLScgSyxBswmgjHpTgygami8srGj5_EJ_7Cz5y1-DYVgF7GJY4w/viewform):
+   verified 2026-10-14; it explicitly requests README.md GitHub links for all 20
+   session fields. Paste the matching links from the table below. The previously
+   supplied [short link](https://forms.gle/pAuXQaokwVzhRzit6) is also retained.
+2. [Capstone form](https://docs.google.com/forms/d/e/1FAIpQLSfbGZg1L8cWSxTaOAtFIJIMPBS8oIFiWrf-LDzPYpZ2uCIIRA/viewform):
+   the student's screenshot shows a required **GitHub URL** field and warns that
+   only one submission is accepted, with no resubmissions. Paste:
+   **https://github.com/YashSensei/devops-assignment**.
+   KitLedger is in session21-python with its own README, application and infrastructure.
+   The shown field does not require a separate repository. Automated access to
+   the full form returned HTTP 401, so unseen fields/requirements are not claimed
+   verified. Check the complete signed-in form and rubric before submitting.
+
+Use your student email. No separate batch field was found in the homework form;
+batch is omitted here. Use Section B if a compulsory section choice appears,
 as instructed by the student. Confirm eligibility/current course instructions.
 
 The form shuffles fields between visits. **Match session labels, not row position.**
@@ -40,10 +54,11 @@ README paths, not directory URLs or placeholders.
 
 ## Real results and evidence
 
-- [Green PostgreSQL / Ingress / browser / security / image pipeline](https://github.com/YashSensei/devops-assignment/actions/runs/38450469520).
+- [Green review PostgreSQL / Ingress / browser / security / image pipeline](https://github.com/YashSensei/devops-assignment/actions/runs/38470107827), revision febc377.
 - [Green Linux, Git and Docker lab run](https://github.com/YashSensei/devops-assignment/actions/runs/38450248504).
-- [Green Kubernetes Sessions 10–15 run](https://github.com/YashSensei/devops-assignment/actions/runs/38450245721).
+- [Green Kubernetes Sessions 10-15 run](https://github.com/YashSensei/devops-assignment/actions/runs/38450245721).
 - [Verified GitOps commit and self-healing](https://github.com/YashSensei/devops-assignment/actions/runs/38453774602); [populated monitoring verification](https://github.com/YashSensei/devops-assignment/actions/runs/38456443849).
+- [Green review monitoring and pinned-revision GitOps replay](https://github.com/YashSensei/devops-assignment/actions/runs/38470105347), revision febc377. Replay is not a delivered student presentation.
 - [Desktop Ingress screenshot](evidence/ci/capstone-38450469520/evidence/browser/desktop-loan.png),
   [mobile](evidence/ci/capstone-38450469520/evidence/browser/mobile-library.png),
   [metrics](evidence/ci/capstone-38450469520/evidence/browser/metrics.png).
@@ -67,9 +82,12 @@ in the handoff and available directly in GitHub.
    some screenshot/presentation requirements remain unmet.
 2. All 20 README URLs and public package pages were verified without owner privileges;
    recheck before submitting in case access changes.
-3. Sign into the form with the student account; enter the student email above.
+3. Sign into the homework form with the student account; enter the student email above.
 4. Match each shuffled field's session number to this table and paste its full URL.
 5. Deliver the narrated presentation and visible commit/CI/deployment update;
    arrange instructor acceptance of cloud omissions/environment substitutions.
-6. Submit the form yourself and retain its receipt. No form has been submitted by
-   the coding agent; this guide is preparation, not proof of acceptance or a grade.
+6. In the separate capstone form, enter the repository URL given above, review all
+   required fields, and double-check the URL because resubmissions are not accepted.
+7. Submit each form yourself only when ready and retain both receipts. Neither
+   form has been submitted by the coding agent; this guide is preparation, not
+   proof of acceptance or a grade.

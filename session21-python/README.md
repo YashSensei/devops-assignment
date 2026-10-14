@@ -1,4 +1,4 @@
-# KitLedger — equipment loans
+# KitLedger: equipment loans
 
 Yash Agrawal | 24bcs10164 | yash.24bcs10164@sst.scaler.com
 
@@ -105,6 +105,7 @@ From frontend, after starting the isolated demo:
 
 ```sh
 npm ci
+npm test
 npm run build
 npm audit --audit-level=high
 npx playwright install chromium
@@ -118,6 +119,9 @@ production dataset. APP_URL selects the demo URL; PLAYWRIGHT_CHANNEL=chrome
 can select an installed Chrome for testing in a fresh isolated context.
 Local screenshots now go to ignored test-results/evidence; only CI sets
 EVIDENCE_DIR to its artifact directory, preserving committed historical captures.
+The Node unit suite covers network and response-body failures, malformed error
+payloads, validation messages, cancellation and empty responses. It uses controlled
+fixtures and does not replace the PostgreSQL browser workflow.
 
 Supplemental local browser evidence used an explicitly selected SQLite file
 after Docker failed. It is not labelled PostgreSQL or Kubernetes evidence.
